@@ -48,12 +48,18 @@ public final class CreateUserServlet extends HttpServlet{ //extends AbstractData
 		String name = null;
 		String surname = null;
 		String email = null;
+		String bdate;
+
+		int bday;
+		int bmonth;
+		int byear;
 
 		// model
 		User u  = null;
 		Message m = null;
 
-		//try{
+		try
+		{
 			// retrieves the request parameters
 			username = req.getParameter("username");
 			password = req.getParameter("password");
@@ -61,6 +67,11 @@ public final class CreateUserServlet extends HttpServlet{ //extends AbstractData
 			name = req.getParameter("name");
 			surname = req.getParameter("surname");
 			email = req.getParameter("email");
+			bdate = req.getParameter("bdate");
+			String[] split = bdate.split("-");
+			bday = Integer.parseInt(split[2]);
+			bmonth = Integer.parseInt(split[1]);
+			byear = Integer.parseInt(split[0]);
 
 			// creates a new user from the request parameters
 			if(!password2.equals(password))
@@ -71,11 +82,15 @@ public final class CreateUserServlet extends HttpServlet{ //extends AbstractData
 			{
 				m = new Message(String.format("User %s successfully created.", username));
 			}
-			String regDate = new Date(((long)System.currentTimeMillis()*1000)).toString();
-			u = new User(username, "", name, surname, email, regDate, null);
+			Date regDate = new Date(((long)System.currentTimeMillis()*1000));
+			u = new User(username, "", name, surname, email, regDate, null, new Date(byear,bmonth,bday));
 			// creates a new object for accessing the database and stores the user     <---------AGGIUNGERE!
 			//new CreateEmployeeDatabase(getDataSource().getConnection(), e).createEmployee();
-			
+		}
+		catch(NumberFormatException e)
+		{
+			m = new Message("Birthday not correct","E300", e.getMessage());
+		}
 		/*} catch (SQLException ex) {
 			if (ex.getSQLState().equals("23505")) {
 				m = new Message(String.format("Cannot create the user: user %s already exists.", username),

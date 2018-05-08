@@ -3,6 +3,7 @@ package project.resource;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import java.io.*;
+import java.util.Date;
 /**
  * Represents the data about an user.
  * 
@@ -20,8 +21,9 @@ public class User extends Resource
 	private final String name;
 	private final String surname;
 	private final String email;
-	private final String registrationDate;
+	private final Date registrationDate;
 	private final String profilePic;
+	private final Date birthday;
 
 	/**
 	 * Creates a new employee
@@ -41,7 +43,7 @@ public class User extends Resource
 	 * @param profilePic
 	 *            the directory of the user's profile picture
 	 */
-	public User(final String username, final String description, final String name, final String surname, final String email, final String registrationDate, final String profilePic)
+	public User(final String username, final String description, final String name, final String surname, final String email, final Date registrationDate, final String profilePic, final Date birthday)
 	{
 		this.username = username;
 		this.description = description;
@@ -50,6 +52,7 @@ public class User extends Resource
 		this.email = email;
 		this.registrationDate = registrationDate;
 		this.profilePic = profilePic;
+		this.birthday = birthday;
 	}
 
 	/**
@@ -107,7 +110,7 @@ public class User extends Resource
 	 * 
 	 * @return the registration date of the user.
 	 */
-	public final String getRegistrationDate()
+	public final Date getRegistrationDate()
 	{
 		return registrationDate;
 	}
@@ -119,6 +122,16 @@ public class User extends Resource
 	public final String getProfilePic()
 	{
 		return profilePic;
+	}
+
+	/**
+	 * Returns the birthday of the user.
+	 * 
+	 * @return the birthday of the user.
+	 */
+	public final Date getBirthday()
+	{
+		return birthday;
 	}
 
 	@Override

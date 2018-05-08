@@ -31,6 +31,9 @@
 		<label for="password2">Repeat Password:</label>
 		<input name="password2" type="password"/><br/><br/>
 
+		<label for="bdate">Birthday</label>
+		<input name="bdate" type="date"/><br/><br/>
+
 		<button type="submit">Submit</button><br/>
 		<button type="reset">Reset the form</button>
 	</form>

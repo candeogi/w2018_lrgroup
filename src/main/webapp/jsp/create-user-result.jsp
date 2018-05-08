@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,8 +22,8 @@
 				<li>Name: <c:out value="${user.name}"/></li>
 				<li>Surname: <c:out value="${user.surname}"/></li>
 				<li>Email: <c:out value="${user.email}"/></li>
-				<li>RegDate: <c:out value="${user.registrationDate}"/></li>
-
+				<li>RegDate: <fmt:formatDate pattern = "yyyy-MM-dd" dateStyle="short" value = "${user.registrationDate}" /></li>
+				<li>Birthday: <fmt:formatDate pattern = "yyyy-MM-dd" dateStyle="short" value = "${user.birthday}" /></li>
 			</ul>
 		</c:if>
 	</body>
