@@ -1,13 +1,27 @@
-CREATE TABLE User (
-    email VARCHAR(50) NOT NULL,
-    name VARCHAR(20) NOT NULL,                  
-    surname VARCHAR(20) NOT NULL,
+CREATE DATABASE  webapp ENCODING 'UTF-8';
+
+
+CREATE TYPE webSiteType AS ENUM (
+    'BitBucket','Github','Linkedin','OwnSite'
+);
+
+CREATE TYPE voteValue AS ENUM(
+ -1,0,1
+);
+
+
+/*creation of the user*/
+
+CREATE TABLE Utente (
+    email VARCHAR(300) NOT NULL,
+    name VARCHAR(30) NOT NULL,                  
+    surname VARCHAR(30) NOT NULL,
     username VARCHAR(20) NOT NULL,
-    profilePicture -- no idea 
-    password  VARCHAR(20) NOT NULL, -- not sure its the best data type
-    registrationDate DATE,
+    photoprofile VARCHAR(50) DEFAULT NULL,
+    password  VARCHAR(32) NOT NULL, -- not sure its the best data type
+    registrationDate DATE NOT NULL,
     birthday DATE,
-    description VARCHAR(300),   
+    description TEXT,   
  
     PRIMARY KEY(email) 
 );
@@ -82,7 +96,7 @@ CREATE TABLE Answer (
 CREATE TABLE VoteAnswer(
     answer INTEGER NOT NULL,
     user VARCHAR(50) NOT NULL,
-    vote INTEGER DEFAULT 0, --can be -1,0,1
+    vote voteValue DEFAULT 0, --can be -1,0,1
  
     PRIMARY KEY(answer,user),
  
