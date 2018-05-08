@@ -1,12 +1,12 @@
+
+DROP DATABASE IF EXIST webapp; 
+
 CREATE DATABASE  webapp ENCODING 'UTF-8';
 
+\c webapp;
 
 CREATE TYPE webSiteType AS ENUM (
     'BitBucket','Github','Linkedin','OwnSite'
-);
-
-CREATE TYPE voteValue AS ENUM(
- -1,0,1
 );
 
 
@@ -29,28 +29,28 @@ CREATE TABLE Utente (
 CREATE TABLE Question (
     id SERIAL,
     title VARCHAR(50),
-    user VARCHAR(50), --abbiamo scritto 0 sull'er
+    idUser VARCHAR(50), --abbiamo scritto 0 sull'er
     ts TIMESTAMP,
     lastModified TIMESTAMP,
     body VARCHAR,
  
     PRIMARY KEY(id),
      
-    FOREIGN KEY(user) REFERENCES User(email)
-    ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY(idUser) REFERENCES Utente(email)
+    ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
 CREATE TABLE VoteQuestion(
     question INTEGER NOT NULL,
-    user VARCHAR(50) NOT NULL,
+    idUser VARCHAR(50) NOT NULL,
     vote INTEGER DEFAULT 0, --can be -1,0,1
  
-    PRIMARY KEY(question,user),
+    PRIMARY KEY(question,idUser),
  
     FOREIGN KEY(question) REFERENCES Question(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(user) REFERENCES User(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(email)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
@@ -81,12 +81,12 @@ CREATE TABLE Answer (
     isFixed BOOLEAN DEFAULT FALSE,
     body VARCHAR,
     ts TIMESTAMP,
-    user VARCHAR(50), --abbiamo scritto 0 sull'er
+    idUser VARCHAR(50), --abbiamo scritto 0 sull'er
     parentId INTEGER, --if null it answer to the main question
  
     PRIMARY KEY(id),
  
-    FOREIGN KEY(user) REFERENCES User(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(email)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
     FOREIGN KEY(parentId) REFERENCES Answer(id)
@@ -95,15 +95,15 @@ CREATE TABLE Answer (
  
 CREATE TABLE VoteAnswer(
     answer INTEGER NOT NULL,
-    user VARCHAR(50) NOT NULL,
-    vote voteValue DEFAULT 0, --can be -1,0,1
+    idUser VARCHAR(50) NOT NULL,
+    vote INTEGER DEFAULT 0, --can be -1,0,1
  
-    PRIMARY KEY(answer,user),
+    PRIMARY KEY(answer,idUser),
  
     FOREIGN KEY(answer) REFERENCES Answer(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(user) REFERENCES User(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(email)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
@@ -122,14 +122,14 @@ CREATE TABLE Have(
  
 CREATE TABLE IsInterested(
     question INTEGER NOT NULL,
-    user VARCHAR(50) NOT NULL,
+    idUser VARCHAR(50) NOT NULL,
  
-    PRIMARY KEY(question,user),
+    PRIMARY KEY(question,idUser),
  
     FOREIGN KEY(question) REFERENCES Question(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(user) REFERENCES User(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(email)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
