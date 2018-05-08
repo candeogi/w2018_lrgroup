@@ -1,1 +1,1 @@
-![Placeholder](http://animalcrossing.wikia.com/wiki/File:Doge.jpg)
+![Placeholder](https://vignette.wikia.nocookie.net/animalcrossing/images/9/97/Doge.jpg)
