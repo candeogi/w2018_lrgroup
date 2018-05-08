@@ -14,8 +14,8 @@ CREATE TYPE webSiteType AS ENUM (
 
 CREATE TABLE Utente (
     email VARCHAR(300) NOT NULL,
-    name VARCHAR(30) NOT NULL,                  
-    surname VARCHAR(30) NOT NULL,
+    name VARCHAR(30),                  
+    surname VARCHAR(30),
     username VARCHAR(20) UNIQUE NOT NULL,
     photoprofile VARCHAR(50) DEFAULT NULL,
     password  VARCHAR(32) NOT NULL, -- not sure its the best data type
