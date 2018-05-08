@@ -75,7 +75,7 @@ public class User extends Resource
      */
     public User(final String email, final String username, final String password, final Date registrationDate){
 
-        new User(email, null, null, username, null, password, registrationDate,
+        this(email, null, null, username, null, password, registrationDate,
                 null, null);
     }
     /**

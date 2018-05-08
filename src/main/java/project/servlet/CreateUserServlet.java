@@ -88,10 +88,10 @@ public final class CreateUserServlet extends HttpServlet{ //extends AbstractData
 			* field "" are photo profile and description
 			* we should use the new constructor with only email, name, password and regdate. rest will be set to null
 			*/
-			u = new User(email, name, surname, username, null, password, regDate, bday, "");
+			//u = new User(email, name, surname, username, null, password, regDate, null, "");
 			
 			//new constructor would be
-			// u = new User(email, username, password, regDate);
+			u = new User(email, username, password, regDate);
 
 			// creates a new object for accessing the database and stores the user     <---------AGGIUNGERE!
 			//new CreateEmployeeDatabase(getDataSource().getConnection(), e).createEmployee();
