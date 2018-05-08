@@ -11,7 +11,8 @@
 		<c:import url="/jsp/include/show-message.jsp"/>
 		<c:if test='${not empty answer && !message.error}'>
 			<h2><c:out value="${answer.text}" /></h2>
-			<p><c:out value="${answer.answersToID}" /></p>
+			<p><c:out value="${answer.parentID}" /></p>
+			<p><c:out value="${answer.IDUser}" /></p>
 		</c:if>
 	</body>
 </html>

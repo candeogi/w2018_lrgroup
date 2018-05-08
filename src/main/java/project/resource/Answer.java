@@ -17,8 +17,9 @@ public class Answer extends Resource
 	private final int ID;
 	private final boolean fixed;
 	private final String text;
-	private final int answersToID;
+	private final int parentID; //Trasformare in Answer/Question?
 	private final String timestamp;
+	private final int IDUser;
 
 	/**
 	 * Creates a new answer.
@@ -32,13 +33,14 @@ public class Answer extends Resource
 	 *            the timestamp of the answer.
 	 */
 
-	public Answer(final int ID, final boolean fixed, final String text, final int answersToID ,final String timestamp)
+	public Answer(final int ID, final int IDUser ,final boolean fixed, final String text, final int parentID ,final String timestamp)
 	{
 		this.ID = ID;
 		this.fixed = fixed;
 		this.text = text;
-		this.answersToID = answersToID;
+		this.parentID = parentID;
 		this.timestamp = timestamp;
+		this.IDUser = IDUser;
 	}
 
 	/**
@@ -52,13 +54,14 @@ public class Answer extends Resource
 	 *            the timestamp of the answer.
 	 */
 
-	public Answer(final boolean fixed, final String text, final int answersToID, final String timestamp)
+	public Answer(final int IDUser, final boolean fixed, final String text, final int parentID, final String timestamp)
 	{
 		this.ID = -1;
 		this.fixed = fixed;
 		this.text = text;
-		this.answersToID = answersToID;
+		this.parentID = parentID;
 		this.timestamp = timestamp;
+		this.IDUser = IDUser;
 	}
 
 	/**
@@ -95,6 +98,16 @@ public class Answer extends Resource
 	}
 
 	/**
+	 * Returns the ID of the user who posted the answer.
+	 * 
+	 * @return the ID of the user who posted the answer.
+	 */
+	public final int getIDUser()
+	{
+		return IDUser;
+	}
+
+	/**
 	 * Returns the timestamp of the answer.
 	 * 
 	 * @return the timestamp of the answer.
@@ -105,9 +118,9 @@ public class Answer extends Resource
 		return timestamp;
 	}
 
-	public int getAnswersToID()
+	public int getParentID()
 	{
-		return answersToID;
+		return parentID;
 	}
 
 	@Override
@@ -125,6 +138,9 @@ public class Answer extends Resource
 		jg.writeStringField("text", text);
 		jg.writeBooleanField("fixed", fixed);
 		jg.writeStringField("timestamp", timestamp);
+		jg.writeNumberField("IDUser", IDUser);
+		jg.writeNumberField("parentID", parentID);
+
 
 		jg.writeEndObject();
 

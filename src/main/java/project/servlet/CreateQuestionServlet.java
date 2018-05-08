@@ -42,22 +42,29 @@ public final class CreateQuestionServlet extends HttpServlet{ //extends Abstract
 		// request parameters
 		String title = null;
 		String body = null;
+		int IDUser;
 
 		// model
 		Question q  = null;
 		Message m = null;
 
-		//try{
+		try
+		{
 			// retrieves the request parameters
 			title = req.getParameter("title");
 			body = req.getParameter("body");
+			IDUser = Integer.parseInt(req.getParameter("IDUser"));
 
 			// creates a new user from the request parameters
-			q = new Question(title, body, ((Long)System.currentTimeMillis()).toString());
+			q = new Question(IDUser, title, body, ((Long)System.currentTimeMillis()).toString());
 
 			// creates a new object for accessing the database and stores the user
 			//new CreateEmployeeDatabase(getDataSource().getConnection(), e).createEmployee();
-			
+		}
+		catch(NumberFormatException n)
+		{
+			m = new Message("Error, IDUser ID must be an integer", "Qualche codice errore", n.getMessage());
+		}
 		/*} catch (SQLException ex) {
 			if (ex.getSQLState().equals("23505")) {
 				m = new Message(String.format("Cannot create the user: user %s already exists.", username),

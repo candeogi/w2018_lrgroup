@@ -14,6 +14,9 @@
 	<form method="POST" action="<c:url value="/create-question"/>" id="questionForm">
 		<label for="title">Title:</label>
 		<input name="title" type="text"/><br/>
+
+		<label for="IDUser">IDUser:</label>
+		<input name="IDUser" type="text"/><br/>
 		
 		<textarea rows="4" cols="50" name="body" placeholder="Enter text..">
 		</textarea>

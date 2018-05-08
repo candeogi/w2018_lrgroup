@@ -12,8 +12,11 @@
 	<h1>Create Answer</h1>
 	
 	<form method="POST" action="<c:url value="/create-answer"/>" id="answerForm">
-		<label for="answersToID">Id della domanda a cui rispondo:</label>
-		<input name="answersToID" type="text"/><br/>
+		<label for="parentID">Id della domanda a cui rispondo:</label>
+		<input name="parentID" type="text"/><br/>
+
+		<label for="IDUser">IDUser:</label>
+		<input name="IDUser" type="text"/><br/>
 
 		<textarea rows="4" cols="50" name="text" placeholder="Enter text..">
 		</textarea>

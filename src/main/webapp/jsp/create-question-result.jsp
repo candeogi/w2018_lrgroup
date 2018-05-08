@@ -12,6 +12,7 @@
 		<c:if test='${not empty question && !message.error}'>
 			<h2><c:out value="${question.title}" /></h2>
 			<p><c:out value="${question.body}" /></p>
+			<p><c:out value="${question.IDUser}" /></p>
 		</c:if>
 	</body>
 </html>
