@@ -45,7 +45,7 @@ public final class CreateAnswerServlet extends HttpServlet{ //extends AbstractDa
 		// request parameters
 		String text = null;
 		int parentID;
-		int IDUser;
+		String IDUser;
 
 		// model
 		Answer a  = null;
@@ -56,7 +56,7 @@ public final class CreateAnswerServlet extends HttpServlet{ //extends AbstractDa
 			// retrieves the request parameters
 			text = req.getParameter("text");
 			parentID = Integer.parseInt(req.getParameter("parentID"));
-			IDUser = Integer.parseInt(req.getParameter("IDUser"));
+			IDUser = req.getParameter("IDUser");
 
 
 			m = new Message(String.format("Answer successfully created."));
@@ -67,7 +67,7 @@ public final class CreateAnswerServlet extends HttpServlet{ //extends AbstractDa
 		}
 		catch(NumberFormatException n)
 		{
-			m = new Message("Error, parentID/IDUser must be an integer", "Qualche codice errore", n.getMessage());
+			m = new Message("Error, parentID must be an integer", "Qualche codice errore", n.getMessage());
 		}
 			
 		/*} catch (SQLException ex) {

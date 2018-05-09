@@ -16,27 +16,7 @@ public class Question extends Resource
 	private final String body;
 	private final String timestamp;
 	private final String lastModified;
-	private final int IDUser; //Trasformare in tipo User?
-
-	/**
-	 * Creates a new question which is going to be inserted into the database
-	 * 
-	 * @param title
-	 *            the title of the question.
-	 * @param body
-	 *            the body of the question.
-	 * @param timestamp
-	 *            the timestamp of the question.
-	 */
-	public Question(final int IDUser, final String title, final String body, final String timestamp)
-	{
-		this.ID = -1; //Essendo auto increment come campo, se creo una nuova domanda essa non avrà un ID 
-		this.title = title;
-		this.body = body;
-		this.timestamp = timestamp;
-		this.IDUser = IDUser;
-		this.lastModified = "";
-	}
+	private final String IDUser; //Trasformare in tipo User?
 
 	/**
 	 * Creates a new question
@@ -52,7 +32,7 @@ public class Question extends Resource
 	 * @param lastModified
 	 *            the last modified timestamp of the question.
 	 */
-	public Question(final int ID, final int IDUser, final String title, final String body, final String timestamp ,final String lastModified)
+	public Question(final int ID, final String IDUser, final String title, final String body, final String timestamp ,final String lastModified)
 	{
 		this.ID = ID;
 		this.title = title;
@@ -60,6 +40,21 @@ public class Question extends Resource
 		this.IDUser = IDUser;
 		this.timestamp = timestamp;
 		this.lastModified = lastModified;
+	}
+
+	/**
+	 * Creates a new question which is going to be inserted into the database
+	 * 
+	 * @param title
+	 *            the title of the question.
+	 * @param body
+	 *            the body of the question.
+	 * @param timestamp
+	 *            the timestamp of the question.
+	 */
+	public Question(final String IDUser, final String title, final String body, final String timestamp)
+	{
+		this(-1,IDUser, title,body,timestamp,"");
 	}
 	
 	/**
@@ -77,7 +72,7 @@ public class Question extends Resource
 	 * 
 	 * @return the ID of the user who posted the question.
 	 */
-	public final int getIDUser()
+	public final String getIDUser()
 	{
 		return IDUser;
 	}
@@ -136,7 +131,7 @@ public class Question extends Resource
 		jg.writeStringField("body", body);
 		jg.writeStringField("timestamp", timestamp);
 		jg.writeStringField("lastModified",lastModified);
-		jg.writeNumberField("IDUser",IDUser);
+		jg.writeStringField("IDUser",IDUser);
 
 		jg.writeEndObject();
 

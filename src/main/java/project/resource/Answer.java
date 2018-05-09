@@ -19,7 +19,7 @@ public class Answer extends Resource
 	private final String text;
 	private final int parentID; //Trasformare in Answer/Question?
 	private final String timestamp;
-	private final int IDUser;
+	private final String IDUser;
 
 	/**
 	 * Creates a new answer.
@@ -33,7 +33,7 @@ public class Answer extends Resource
 	 *            the timestamp of the answer.
 	 */
 
-	public Answer(final int ID, final int IDUser ,final boolean fixed, final String text, final int parentID ,final String timestamp)
+	public Answer(final int ID, final String IDUser ,final boolean fixed, final String text, final int parentID ,final String timestamp)
 	{
 		this.ID = ID;
 		this.fixed = fixed;
@@ -54,14 +54,9 @@ public class Answer extends Resource
 	 *            the timestamp of the answer.
 	 */
 
-	public Answer(final int IDUser, final boolean fixed, final String text, final int parentID, final String timestamp)
+	public Answer(final String IDUser, final boolean fixed, final String text, final int parentID, final String timestamp)
 	{
-		this.ID = -1;
-		this.fixed = fixed;
-		this.text = text;
-		this.parentID = parentID;
-		this.timestamp = timestamp;
-		this.IDUser = IDUser;
+		this(-1,IDUser,fixed, text, parentID, timestamp);
 	}
 
 	/**
@@ -102,7 +97,7 @@ public class Answer extends Resource
 	 * 
 	 * @return the ID of the user who posted the answer.
 	 */
-	public final int getIDUser()
+	public final String getIDUser()
 	{
 		return IDUser;
 	}
@@ -138,7 +133,7 @@ public class Answer extends Resource
 		jg.writeStringField("text", text);
 		jg.writeBooleanField("fixed", fixed);
 		jg.writeStringField("timestamp", timestamp);
-		jg.writeNumberField("IDUser", IDUser);
+		jg.writeStringField("IDUser", IDUser);
 		jg.writeNumberField("parentID", parentID);
 
 

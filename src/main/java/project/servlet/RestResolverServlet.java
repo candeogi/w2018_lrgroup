@@ -36,6 +36,8 @@ public class RestResolverServlet extends HttpServlet
 		try
 		{
 			if(!checkMethodMediaType(req,res)) return;
+
+			//Controllare l'autenticazione
 			
 			String[] split = req.getRequestURI().split("/");
 			switch(split[1])
