@@ -16,15 +16,11 @@
 --  Version: 1.0
 --  Since: 1.0
 
--- HOMEPAGE QUERY
--- Displays Questions as id and title sorted by number of votes.
--- Shows number of answers related to a single question aswell.
-SELECT q.id as question_id, q.title as question_title, sum(v.vote) AS n_of_votes, count(q.id) as n_of_answers
-FROM (question AS q JOIN votequestion AS v ON q.id = v.question) JOIN have AS h on q.id = h.idquestion
-GROUP BY q.id
-ORDER BY n_of_answers;
+-- Insertion into have table
+INSERT INTO have VALUES (1,1);
+INSERT INTO have VALUES (1,2);
+INSERT INTO have VALUES (1,3);
+INSERT INTO have VALUES (1,4);
+INSERT INTO have VALUES (1,5);
+INSERT INTO have VALUES (1,6);
 
--- Display all answers related to a question
-SELECT *
-FROM have AS h JOIN answer AS a ON h.idanswer = a.id
-WHERE h.idquestion= 1;
