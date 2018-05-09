@@ -39,8 +39,7 @@ public final class CreateUserDatabase {
      */
     private static final String STATEMENT = "" +
             "INSERT INTO Utente (email, name, surname, username, photoProfile, password, registrationDate, birthday, description) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) " +
-            "RETURNING *";
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     /**
      * The connection to the database
