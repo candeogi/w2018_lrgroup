@@ -76,12 +76,12 @@ public final class CreateQuestionDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setString(1, question.getID());
-            pstmt.setString(2, user.getTitle());
-            pstmt.setString(3, user.getBody());
-            pstmt.setString(4, user.getIDUser());
-            pstmt.setString(5, user.getTimestamp());
-            pstmt.setString(6, user.getLastModified());
+            pstmt.setInt(1, question.getID());
+            pstmt.setString(2, question.getTitle());
+            pstmt.setString(3, question.getBody());
+            pstmt.setString(4, question.getIDUser());
+            pstmt.setString(5, question.getTimestamp());
+            pstmt.setString(6, question.getLastModified());
 
             pstmt.execute();
 

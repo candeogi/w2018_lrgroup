@@ -76,12 +76,12 @@ public final class CreateAnswerDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setString(1, user.getID());
-            pstmt.setString(2, user.getIDUser());
-            pstmt.setString(3, user.isFixed());
-            pstmt.setString(4, user.getText());
-            pstmt.setString(5, user.getParentID());
-            pstmt.setString(6, user.getTimestamp());
+            pstmt.setInt(1, answer.getID());
+            pstmt.setString(2, answer.getIDUser());
+            pstmt.setBoolean(3, answer.isFixed());
+            pstmt.setString(4, answer.getText());
+            pstmt.setInt(5, answer.getParentID());
+            pstmt.setString(6, answer.getTimestamp());
 
             pstmt.execute();
 
