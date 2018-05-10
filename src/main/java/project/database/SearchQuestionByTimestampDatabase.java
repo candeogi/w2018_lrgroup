@@ -33,7 +33,8 @@ import java.util.List;
  * @version 1.00
  * @since 1.00
  */
-public final class RecentQuestionsRetrival {
+public final class SearchQuestionByTimestampDatabase
+{
 
     /**
      * The SQL statement to be executed
@@ -54,7 +55,8 @@ public final class RecentQuestionsRetrival {
      * @param con
      *            the connection to the database.
      */
-    public RecentQuestionsRetrival(final Connection con) {
+    public SearchQuestionByTimestampDatabase(final Connection con)
+    {
         this.con = con;
     }
 
@@ -66,10 +68,11 @@ public final class RecentQuestionsRetrival {
      * @throws SQLException
      *             if any error occurs while retive the questions.
      */
-    public ArrayList<Question> findQuestion() throws SQLException {
+    public List<Question> SearchQuestionByTimestamp() throws SQLException
+    {
 
         PreparedStatement pstmt = null;
-        ArrayList<Question> questList = new ArrayList<>();
+        List<Question> questList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
