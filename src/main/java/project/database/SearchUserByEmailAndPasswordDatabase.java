@@ -1,0 +1,121 @@
+/*
+ * Copyright 2018 University of Padua, Italy
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package project.database;
+
+import project.resource.User;
+import project.resource.ResourceList;
+import project.resource.Resource;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Search user by email and password.
+ * Used for the login.
+ *
+ * @author Giovanni Candeo
+ * @version 1.00
+ * @since 1.00
+ */
+public final class SearchUserByEmailAndPasswordDatabase {
+
+    /**
+     * The SQL statement to be executed
+     */
+    private static final String STATEMENT = "" +
+            "SELECT *" +
+            "FROM Utente " +
+            "WHERE email='?' and password='?'";
+
+    /**
+     * The connection to the database
+     */
+    private final Connection con;
+
+    /**
+     * Email and Password of the User
+     */
+    //private final int salary;
+    private final String email;
+    private final String password;
+
+
+    /**
+     * Creates a new object for searching user by email and password.
+     *
+     * @param con
+     *            the connection to the database.
+     * @param email
+     *            the email of the user.
+     * @param password
+     *              the password of the user.
+     */
+    public SearchUserByEmailAndPasswordDatabase(final Connection con, final String email, final String password) {
+        this.con = con;
+        this.email = email;
+        this.password = password;
+    }
+
+    /**
+     * Searches user by email and password.
+     *
+     * @return a list of {@code User} object matching the email and password.
+     *
+     * @throws SQLException
+     *             if any error occurs while searching for users.
+     */
+    public List<User> searchUserByEmailAndPassword() throws SQLException {
+
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        // the results of the search
+        final List<User> users = new ArrayList<User>();
+
+        try {
+            pstmt = con.prepareStatement(STATEMENT);
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                users.add(new User(
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getDate("registrationdate")));
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (pstmt != null) {
+                pstmt.close();
+            }
+
+            con.close();
+        }
+
+        return users;
+    }
+}
