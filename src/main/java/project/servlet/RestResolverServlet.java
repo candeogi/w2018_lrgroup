@@ -130,7 +130,7 @@ public class RestResolverServlet extends HttpServlet
 
 			if (path.length() == 0 || path.equals("/"))
 			{
-				m = new Message("Wrong format for URI /answer/id/{questionID}: no {questionID} specified.",
+				m = new Message("Wrong format for URI /answer/id/{questionID} or /answer/user/{userid}",
 								"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
 				res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 				m.toJSON(res.getOutputStream());			}
@@ -138,7 +138,7 @@ public class RestResolverServlet extends HttpServlet
 			{
 				if(path.contains("id"))
 				{
-					//answer/id/{answerID}
+					// /answer/id/{answerID}
 					path = path.substring(path.lastIndexOf("id") + 2);
 					if (path.length() == 0 || path.equals("/"))
 					{
@@ -162,6 +162,22 @@ public class RestResolverServlet extends HttpServlet
 							res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 							m.toJSON(res.getOutputStream());
 						}
+					}
+				}
+				else if(path.contains("user"))
+				{
+					// /answer/user/{userid}
+					path = path.substring(path.lastIndexOf("user") + 2);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /answer/user/{userid}: no {userid} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						//new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID(); TODO AbstractDatabaseServlet
 					}
 				}
 			}

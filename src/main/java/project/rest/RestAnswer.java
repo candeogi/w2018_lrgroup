@@ -106,7 +106,52 @@ public final class RestAnswer extends RestResource
 
 
 			// creates a new object for accessing the database and search the answers
-			al = null; //new SearchEmployeeBySalaryDatabase(con, salary).searchEmployeeBySalary(); TODO Method
+			al = null; //new searchAnswerByQuestionIDDatabase(con, salary).searchAnswerByQuestionID()); TODO Method
+
+			if(al != null)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+				new ResourceList(al).toJSON(res.getOutputStream());
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot search answers: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t)
+		{
+			m = new Message("Cannot search answers: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
+	 * Searches answers by a user ID.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+	public void searchAnswerByUserID()  throws IOException
+	{
+
+		List<Answer> al  = null;
+		Message m = null;
+
+		try
+		{
+			// parse the URI path to extract the ID
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("user") +4);
+
+			final String userID = path.substring(1);
+
+
+			// creates a new object for accessing the database and search the answers
+			al = null; //new searchAnswerByUserIDDatabase(con, salary).searchAnswerByUserID()); TODO Method
 
 			if(al != null)
 			{
