@@ -130,8 +130,10 @@ public class RestResolverServlet extends HttpServlet
 
 			if (path.length() == 0 || path.equals("/"))
 			{
-				//chiamare funzione che lista le domande
-			}
+				m = new Message("Wrong format for URI /answer/id/{questionID}: no {questionID} specified.",
+								"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+				res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				m.toJSON(res.getOutputStream());			}
 			else
 			{
 				if(path.contains("id"))
@@ -150,8 +152,7 @@ public class RestResolverServlet extends HttpServlet
 						try
 						{
 							Integer.parseInt(path.substring(1));
-							//chiamare funzione che lista le risposte ad una domanda
-
+							//new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID(); TODO AbstractDatabaseServlet
 						}
 						catch (NumberFormatException e)
 						{
@@ -206,13 +207,12 @@ public class RestResolverServlet extends HttpServlet
 						{
 							Long time = (long) Long.parseLong(path.substring(1))*1000;
 							Date timestamp = new Date(time);
-							//chiamare funzione che lista le domande con timestamp <= di quello specificato, in ordine di timestamp
-
+							//new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByTimestamp(); TODO AbstractDatabaseServlet
 						}
 						catch (NumberFormatException e)
 						{
 							m = new Message(
-									"Wrong format for URI /question/timestamp/{unixTimeStamp}: {unixTimeStamp} is not an integer.",
+									"Wrong format for URI /question/timestamp/{unixTimestamp}: {unixTimestamp} is not an integer.",
 									"E4A7", e.getMessage());
 							res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 							m.toJSON(res.getOutputStream());
@@ -235,7 +235,7 @@ public class RestResolverServlet extends HttpServlet
 						try
 						{
 							Integer.parseInt(path.substring(1));
-							//chiamare funzione che ritorna la domanda 
+							//new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByTimestamp(); TODO AbstractDatabaseServlet
 						}
 						catch (NumberFormatException e)
 						{

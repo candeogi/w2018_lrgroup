@@ -1,6 +1,6 @@
 package project.resource;
 
-import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.*;
 import java.io.*;
 /**
  * Represents data about a question.
@@ -138,5 +138,76 @@ public class Question extends Resource
 		jg.writeEndObject();
 
 		jg.flush();
+	}
+
+	/**
+	 * Creates a {@code Question} from its JSON representation.
+	 *
+	 * @param in the input stream containing the JSON document.
+	 *
+	 * @return the {@code Question} created from the JSON representation.
+	 *
+	 * @throws IOException if something goes wrong while parsing.
+	 */
+	public static Question fromJSON(final InputStream in) throws IOException
+	{
+
+		// the fields read from JSON
+		int jID = -1;
+		String jBody = null;
+		String jTitle = null;
+		String jTimestamp = null;
+		String jLastModified = null;
+		String jIDUser = null;
+		
+
+		final JsonParser jp = JSON_FACTORY.createParser(in);
+
+		// I'm looking for the answer field
+		//i'll keep looping until i find a token which is a field name or until i find my resource token
+		while (jp.getCurrentToken() != JsonToken.FIELD_NAME || "question".equals(jp.getCurrentName()) == false)
+		{
+			// there are no more events
+			if (jp.nextToken() == null)
+			{
+				throw new IOException("Unable to parse JSON: no employee object found.");
+			}
+		}
+
+		while (jp.nextToken() != JsonToken.END_OBJECT)
+		{
+			if (jp.getCurrentToken() == JsonToken.FIELD_NAME)
+			{
+				switch (jp.getCurrentName())
+				{
+					case "ID":
+						jp.nextToken();
+						jID = jp.getIntValue();
+						break;
+					case "body":
+						jp.nextToken();
+						jBody = jp.getText();
+						break;
+					case "lastModified":
+						jp.nextToken();
+						jLastModified = jp.getText();
+						break;
+					case "timestamp":
+						jp.nextToken();
+						jTimestamp = jp.getText();
+						break;
+					case "IDUser":
+						jp.nextToken();
+						jIDUser= jp.getText();
+						break;
+					case "title":
+						jp.nextToken();
+						jTitle= jp.getText();
+						break;
+				}
+			}
+		}
+
+		return new Question(jID, jIDUser, jTitle, jBody, jTimestamp ,jLastModified);
 	}
 }

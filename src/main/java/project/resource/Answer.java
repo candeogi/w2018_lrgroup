@@ -1,6 +1,6 @@
 package project.resource;
 
-import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.*;
 import java.io.*;
 
 /**
@@ -142,5 +142,75 @@ public class Answer extends Resource
 		jg.writeEndObject();
 
 		jg.flush();
+	}
+
+	/**
+	 * Creates a {@code Answer} from its JSON representation.
+	 *
+	 * @param in the input stream containing the JSON document.
+	 *
+	 * @return the {@code Answer} created from the JSON representation.
+	 *
+	 * @throws IOException if something goes wrong while parsing.
+	 */
+	public static Answer fromJSON(final InputStream in) throws IOException
+	{
+
+		// the fields read from JSON
+		int jID = -1;
+		String jText = null;
+		boolean jFixed = false;
+		String jTimestamp = null;
+		String jIDUser = null;
+		int jParentID = -1;
+		
+
+		final JsonParser jp = JSON_FACTORY.createParser(in);
+
+		// I'm looking for the answer field
+		//i'll keep looping until i find a token which is a field name or until i find my resource token
+		while (jp.getCurrentToken() != JsonToken.FIELD_NAME || "answer".equals(jp.getCurrentName()) == false) {
+
+			// there are no more events
+			if (jp.nextToken() == null) {
+				throw new IOException("Unable to parse JSON: no employee object found.");
+			}
+		}
+
+		while (jp.nextToken() != JsonToken.END_OBJECT)
+		{
+			if (jp.getCurrentToken() == JsonToken.FIELD_NAME)
+			{
+				switch (jp.getCurrentName())
+				{
+					case "ID":
+						jp.nextToken();
+						jID = jp.getIntValue();
+						break;
+					case "text":
+						jp.nextToken();
+						jText = jp.getText();
+						break;
+					case "fixed":
+						jp.nextToken();
+						jFixed = jp.getBooleanValue();
+						break;
+					case "timestamp":
+						jp.nextToken();
+						jTimestamp = jp.getText();
+						break;
+					case "IDUser":
+						jp.nextToken();
+						jIDUser= jp.getText();
+						break;
+					case "parentID":
+						jp.nextToken();
+						jParentID = jp.getIntValue();
+						break;
+				}
+			}
+		}
+
+		return new Answer(jID, jIDUser, jFixed, jText, jParentID ,jTimestamp);
 	}
 }
