@@ -2,6 +2,11 @@ package project.resource;
 
 import com.fasterxml.jackson.core.*;
 import java.io.*;
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 /**
  * Represents data about a question.
  * 
@@ -14,8 +19,8 @@ public class Question extends Resource
 	private final int ID;
 	private final String title;
 	private final String body;
-	private final String timestamp;
-	private final String lastModified;
+	private final Timestamp timestamp;
+	private final Timestamp lastModified;
 	private final String IDUser; //Trasformare in tipo User?
 
 	/**
@@ -32,7 +37,7 @@ public class Question extends Resource
 	 * @param lastModified
 	 *            the last modified timestamp of the question.
 	 */
-	public Question(final int ID, final String IDUser, final String title, final String body, final String timestamp ,final String lastModified)
+	public Question(final int ID, final String IDUser, final String title, final String body, final Timestamp timestamp ,final Timestamp lastModified)
 	{
 		this.ID = ID;
 		this.title = title;
@@ -52,9 +57,9 @@ public class Question extends Resource
 	 * @param timestamp
 	 *            the timestamp of the question.
 	 */
-	public Question(final String IDUser, final String title, final String body, final String timestamp)
+	public Question(final String IDUser, final String title, final String body, final Timestamp timestamp)
 	{
-		this(-1,IDUser, title,body,timestamp,"");
+		this(-1,IDUser, title,body,timestamp,null);
 	}
 	
 	/**
@@ -101,7 +106,7 @@ public class Question extends Resource
 	 * 
 	 * @return the timestamp of the question.
 	 */
-	public final String getTimestamp()
+	public final Timestamp getTimestamp()
 	{
 		return timestamp;
 	}
@@ -110,7 +115,7 @@ public class Question extends Resource
 	 * 
 	 * @return the last modified timestamp of the question.
 	 */
-	public final String getLastModified()
+	public final Timestamp getLastModified()
 	{
 		return lastModified;
 	}
@@ -129,8 +134,8 @@ public class Question extends Resource
 		if(ID!=-1) jg.writeNumberField("ID",ID);
 		jg.writeStringField("title", title);
 		jg.writeStringField("body", body);
-		jg.writeStringField("timestamp", timestamp);
-		jg.writeStringField("lastModified",lastModified);
+		jg.writeStringField("timestamp", timestamp.toString());
+		jg.writeStringField("lastModified",lastModified.toString());
 		jg.writeStringField("IDUser",IDUser);
 
 		jg.writeEndObject();
@@ -148,8 +153,10 @@ public class Question extends Resource
 	 * @return the {@code Question} created from the JSON representation.
 	 *
 	 * @throws IOException if something goes wrong while parsing.
+	 *
+	 * @throws ParseException if date is not parsed correctly
 	 */
-	public static Question fromJSON(final InputStream in) throws IOException
+	public static Question fromJSON(final InputStream in) throws IOException, ParseException
 	{
 
 		// the fields read from JSON
@@ -208,6 +215,12 @@ public class Question extends Resource
 			}
 		}
 
-		return new Question(jID, jIDUser, jTitle, jBody, jTimestamp ,jLastModified);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    	Date parsedDate = dateFormat.parse(jTimestamp);
+    	Timestamp databaseTimestamp = new Timestamp(parsedDate.getTime());
+    	parsedDate = dateFormat.parse(jLastModified);
+    	Timestamp databaseLastModified = new Timestamp(parsedDate.getTime());
+		return new Question(jID, jIDUser, jTitle, jBody, databaseTimestamp ,databaseLastModified);
+		
 	}
 }

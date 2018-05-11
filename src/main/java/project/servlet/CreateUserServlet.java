@@ -2,12 +2,15 @@ package project.servlet;
 
 import project.resource.User;
 import project.resource.Message;
+import project.database.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 
 import javax.servlet.ServletException;
@@ -23,7 +26,8 @@ import javax.servlet.http.HttpServlet;
  * @version 1.00
  * @since 1.00
  */
-public final class CreateUserServlet extends HttpServlet{ //extends AbstractDatabaseServlet {
+public final class CreateUserServlet extends AbstractDatabaseServlet
+{
 
 	/**
 	 * Creates a new user into the database. 
@@ -68,10 +72,6 @@ public final class CreateUserServlet extends HttpServlet{ //extends AbstractData
 			surname = req.getParameter("surname");
 			email = req.getParameter("email");
 			bdate = req.getParameter("bdate");
-			String[] split = bdate.split("-");
-			bday = Integer.parseInt(split[2]);
-			bmonth = Integer.parseInt(split[1]);
-			byear = Integer.parseInt(split[0]);
 
 			// creates a new user from the request parameters
 			if(!password2.equals(password))
@@ -83,7 +83,9 @@ public final class CreateUserServlet extends HttpServlet{ //extends AbstractData
 				m = new Message(String.format("User %s successfully created.", username));
 			}
 			Date regDate = new Date(((long)System.currentTimeMillis()*1000));
-			/* old call for reference
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    		Date birthday = new Date(dateFormat.parse(bdate).getTime());
+    		/*
 			* u = new User(username, "", name, surname, email, regDate, null, new Date(byear,bmonth,bday));
 			* field "" are photo profile and description
 			* we should use the new constructor with only email, name, password and regdate. rest will be set to null
@@ -91,16 +93,17 @@ public final class CreateUserServlet extends HttpServlet{ //extends AbstractData
 			//u = new User(email, name, surname, username, null, password, regDate, null, "");
 			
 			//new constructor would be
-			u = new User(email, username, password, regDate);
+			u = new User(email, name, surname, username, "" ,password, regDate, birthday, "");
 
 			// creates a new object for accessing the database and stores the user     <---------AGGIUNGERE!
-			//new CreateEmployeeDatabase(getDataSource().getConnection(), e).createEmployee();
+			new CreateUserDatabase(getDataSource().getConnection(), u).createUser();
 		}
 		catch(NumberFormatException e)
 		{
 			m = new Message("Birthday not correct","E300", e.getMessage());
 		}
-		/*} catch (SQLException ex) {
+		catch (SQLException ex)
+		{
 			if (ex.getSQLState().equals("23505")) {
 				m = new Message(String.format("Cannot create the user: user %s already exists.", username),
 						"E300", ex.getMessage());
@@ -108,7 +111,12 @@ public final class CreateUserServlet extends HttpServlet{ //extends AbstractData
 				m = new Message("Cannot create the user: unexpected error while accessing the database.", 
 						"E200", ex.getMessage());
 			}
-		}*/
+		}
+		catch(ParseException pe)
+		{
+			//Should not happen
+			m = new Message("Birthday not correct","E300", pe.getMessage());
+		}
 		
 		// stores the user and the message as a request attribute
 		req.setAttribute("user", u);

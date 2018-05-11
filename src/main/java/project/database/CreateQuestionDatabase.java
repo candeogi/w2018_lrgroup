@@ -66,7 +66,6 @@ public final class CreateQuestionDatabase {
 
     /**
      * Creates a question in the database.
-
      * @throws SQLException
      *             if any error occurs while storing the question.
      */
@@ -80,8 +79,8 @@ public final class CreateQuestionDatabase {
             pstmt.setString(2, question.getTitle());
             pstmt.setString(3, question.getBody());
             pstmt.setString(4, question.getIDUser());
-            pstmt.setString(5, question.getTimestamp());
-            pstmt.setString(6, question.getLastModified());
+            pstmt.setTimestamp(5, question.getTimestamp());
+            pstmt.setTimestamp(6, question.getLastModified());
 
             pstmt.execute();
 

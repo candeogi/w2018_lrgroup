@@ -54,12 +54,7 @@
 		<servlet-name>RestResolverServlet</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
-	
+
 	<resource-ref>
       <description>Connection pool to the database</description>
       <res-ref-name>jdbc/user-webapp</res-ref-name>
