@@ -80,7 +80,7 @@ public final class SearchQuestionByTimestampDatabase
             ResultSet rs = pstmt.executeQuery();
             
             while(rs.next()){
-                Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getString("ts"), rs.getString("lastModified"));
+                Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
                 questList.add(q);
             }
 

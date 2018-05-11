@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Timestamp;
 
 
 import javax.servlet.ServletException;
@@ -24,7 +24,8 @@ import javax.servlet.http.HttpServlet;
  * @version 1.00
  * @since 1.00
  */
-public final class CreateAnswerServlet extends HttpServlet{ //extends AbstractDatabaseServlet {
+public final class CreateAnswerServlet extends AbstractDatabaseServlet
+{
 
 	/**
 	 * Creates a new answer into the database. 
@@ -60,8 +61,7 @@ public final class CreateAnswerServlet extends HttpServlet{ //extends AbstractDa
 
 
 			m = new Message(String.format("Answer successfully created."));
-			String now = new Date(((long)System.currentTimeMillis()*1000)).toString();
-			a = new Answer(IDUser,false, text, parentID,now);
+			a = new Answer(IDUser,false, text, parentID,new Timestamp((Long)System.currentTimeMillis()*1000));
 			// creates a new object for accessing the database and stores the user     <---------AGGIUNGERE!
 			//new CreateEmployeeDatabase(getDataSource().getConnection(), e).createEmployee();
 		}

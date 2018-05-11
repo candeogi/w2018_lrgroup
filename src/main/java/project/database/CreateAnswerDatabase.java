@@ -80,7 +80,7 @@ public final class CreateAnswerDatabase {
             pstmt.setBoolean(3, answer.isFixed());
             pstmt.setString(4, answer.getText());
             pstmt.setInt(5, answer.getParentID());
-            pstmt.setString(6, answer.getTimestamp());
+            pstmt.setTimestamp(6, answer.getTimestamp());
 
             pstmt.execute();
 

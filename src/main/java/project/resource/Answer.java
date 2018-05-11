@@ -2,6 +2,11 @@ package project.resource;
 
 import com.fasterxml.jackson.core.*;
 import java.io.*;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 
 /**
  * Represents data about an answer.
@@ -18,7 +23,7 @@ public class Answer extends Resource
 	private final boolean fixed;
 	private final String text;
 	private final int parentID; //Trasformare in Answer/Question?
-	private final String timestamp;
+	private final Timestamp timestamp;
 	private final String IDUser;
 
 	/**
@@ -33,7 +38,7 @@ public class Answer extends Resource
 	 *            the timestamp of the answer.
 	 */
 
-	public Answer(final int ID, final String IDUser ,final boolean fixed, final String text, final int parentID ,final String timestamp)
+	public Answer(final int ID, final String IDUser ,final boolean fixed, final String text, final int parentID ,final Timestamp timestamp)
 	{
 		this.ID = ID;
 		this.fixed = fixed;
@@ -54,7 +59,7 @@ public class Answer extends Resource
 	 *            the timestamp of the answer.
 	 */
 
-	public Answer(final String IDUser, final boolean fixed, final String text, final int parentID, final String timestamp)
+	public Answer(final String IDUser, final boolean fixed, final String text, final int parentID, final Timestamp timestamp)
 	{
 		this(-1,IDUser,fixed, text, parentID, timestamp);
 	}
@@ -108,7 +113,7 @@ public class Answer extends Resource
 	 * @return the timestamp of the answer.
 	 */
 
-	public String getTimestamp()
+	public Timestamp getTimestamp()
 	{
 		return timestamp;
 	}
@@ -119,7 +124,8 @@ public class Answer extends Resource
 	}
 
 	@Override
-	public final void toJSON(final OutputStream out) throws IOException {
+	public final void toJSON(final OutputStream out) throws IOException
+	{
 
 		final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
@@ -132,7 +138,7 @@ public class Answer extends Resource
 		if(ID!=-1) jg.writeNumberField("ID",ID);
 		jg.writeStringField("text", text);
 		jg.writeBooleanField("fixed", fixed);
-		jg.writeStringField("timestamp", timestamp);
+		jg.writeStringField("timestamp", timestamp.toString());
 		jg.writeStringField("IDUser", IDUser);
 		jg.writeNumberField("parentID", parentID);
 
@@ -152,8 +158,10 @@ public class Answer extends Resource
 	 * @return the {@code Answer} created from the JSON representation.
 	 *
 	 * @throws IOException if something goes wrong while parsing.
+	 *
+	 * @throws ParseException if date is not parsed correctly
 	 */
-	public static Answer fromJSON(final InputStream in) throws IOException
+	public static Answer fromJSON(final InputStream in) throws IOException, ParseException
 	{
 
 		// the fields read from JSON
@@ -211,6 +219,10 @@ public class Answer extends Resource
 			}
 		}
 
-		return new Answer(jID, jIDUser, jFixed, jText, jParentID ,jTimestamp);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    	Date parsedDate = dateFormat.parse(jTimestamp);
+    	Timestamp databaseTimestamp = new java.sql.Timestamp(parsedDate.getTime());
+
+		return new Answer(jID, jIDUser, jFixed, jText, jParentID ,databaseTimestamp);
 	}
 }

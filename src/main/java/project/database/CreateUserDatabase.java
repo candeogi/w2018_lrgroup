@@ -59,14 +59,14 @@ public final class CreateUserDatabase {
      * @param user
      *            the user to be created in the database.
      */
-    public CreateUserDatabase(final Connection con, final User user) {
+    public CreateUserDatabase(final Connection con, final User user)
+    {
         this.con = con;
         this.user = user;
     }
 
     /**
      * Creates a user in the database.
-
      * @throws SQLException
      *             if any error occurs while storing the user.
      */
@@ -82,8 +82,8 @@ public final class CreateUserDatabase {
             pstmt.setString(4, user.getUsername());
             pstmt.setString(5, user.getPhotoProfile());
             pstmt.setString(6, user.getPassword());
-            pstmt.setString(7, user.getRegistrationDate().toString()); //TODO check date format on database
-            pstmt.setString(8, user.getBirthday().toString()); //TODO check date format on database
+            pstmt.setDate(7, user.getRegistrationDate()); //TODO check date format on database
+            pstmt.setDate(8, user.getBirthday()); //TODO check date format on database
             pstmt.setString(9, user.getDescription());
 
             pstmt.execute();

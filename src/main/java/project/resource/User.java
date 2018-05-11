@@ -3,7 +3,7 @@ package project.resource;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import java.io.*;
-import java.util.Date;
+import java.sql.Date;
 /**
  * Represents the data about an user.
  * 
@@ -49,7 +49,8 @@ public class User extends Resource
      */
     public User(final String email, final String name, final String surname, final String username,
                 final String photoProfile, final String password, final Date registrationDate,
-                final Date birthday, final String description){
+                final Date birthday, final String description)
+    {
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -61,7 +62,7 @@ public class User extends Resource
         this.description = description;
     }
 
-
+    
     /**
      * Creates a new user: name, surname, photoProfile, birthday and description are set to null
      * @param email
@@ -73,11 +74,13 @@ public class User extends Resource
      * @param registrationDate
      *              the registration date of the user
      */
-    public User(final String email, final String username, final String password, final Date registrationDate){
+    public User(final String email,final String username, final String password, final Date registrationDate)
+    {
 
-        this(email, null, null, username, null, password, registrationDate,
-                null, null);
+        this(email, "", "", username, null, password, registrationDate,
+                null, "");
     }
+
     /**
      * Returns the email of the user.
      *
@@ -177,7 +180,14 @@ public class User extends Resource
 
 		jg.writeStartObject();
 
-		jg.writeStringField("username", username);
+		jg.writeStringField("email", email);
+        jg.writeStringField("name",name);
+        jg.writeStringField("surname",surname);
+        jg.writeStringField("username",username);
+        jg.writeStringField("photoProfile",photoProfile);
+        jg.writeStringField("registrationDate",registrationDate.toString());
+        jg.writeStringField("birthday",birthday.toString());
+        jg.writeStringField("description",description);
 
 		jg.writeEndObject();
 

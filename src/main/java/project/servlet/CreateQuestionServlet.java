@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,8 @@ import javax.servlet.http.HttpServlet;
  * @version 1.00
  * @since 1.00
  */
-public final class CreateQuestionServlet extends HttpServlet{ //extends AbstractDatabaseServlet {
+public final class CreateQuestionServlet extends AbstractDatabaseServlet
+{
 
 	/**
 	 * Creates a new answer into the database. 
@@ -53,7 +55,7 @@ public final class CreateQuestionServlet extends HttpServlet{ //extends Abstract
 		IDUser = req.getParameter("IDUser");
 
 		// creates a new user from the request parameters
-		q = new Question(IDUser, title, body, ((Long)System.currentTimeMillis()).toString());
+		q = new Question(IDUser, title, body, new Timestamp((Long)System.currentTimeMillis()*1000));
 
 		// creates a new object for accessing the database and stores the user
 		//new CreateEmployeeDatabase(getDataSource().getConnection(), e).createEmployee();

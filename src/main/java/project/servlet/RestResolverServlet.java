@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import java.util.Date;
 import java.io.*;
 
-public class RestResolverServlet extends HttpServlet
+public class RestResolverServlet extends AbstractDatabaseServlet
 {
 
 	/**

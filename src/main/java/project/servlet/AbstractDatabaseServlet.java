@@ -14,7 +14,8 @@ import javax.sql.DataSource;
  * @version 1.00
  * @since 1.00
  */
-public abstract class AbstractDatabaseServlet{ //extends HttpServlet {
+public abstract class AbstractDatabaseServlet extends HttpServlet
+{
 
 	/**
 	 * The connection pool to the database.
@@ -38,7 +39,7 @@ public abstract class AbstractDatabaseServlet{ //extends HttpServlet {
 
         try {
             cxt = new InitialContext();
-            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/employee-ferro");
+            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/user-webapp");
         } catch (NamingException e) {
             ds = null;
 
