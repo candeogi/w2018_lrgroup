@@ -23,13 +23,13 @@
 <!-- The contents of this file will be loaded for each web application -->
 <Context>
 
-   <Resource name="jdbc/employee-ferro"
+   <Resource name="jdbc/user-webapp"
           auth="Container"
           type="javax.sql.DataSource"
           factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
           driverClassName="org.postgresql.Driver"
-          url="jdbc:postgresql://localhost:5432/esami"
-          username="ferro"
+          url="jdbc:postgresql://localhost:5432/webapp"
+          username="webappuser"
           password="ferro"
           testOnBorrow="true"
           validationQuery="SELECT 1"

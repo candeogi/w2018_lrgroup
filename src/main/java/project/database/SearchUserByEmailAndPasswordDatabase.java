@@ -43,7 +43,7 @@ public final class SearchUserByEmailAndPasswordDatabase {
     private static final String STATEMENT = "" +
             "SELECT *" +
             "FROM Utente " +
-            "WHERE email='?' and password='?'";
+            "WHERE email=? and password=?";
 
     /**
      * The connection to the database
@@ -102,7 +102,7 @@ public final class SearchUserByEmailAndPasswordDatabase {
                         rs.getString("email"),
                         rs.getString("username"),
                         rs.getString("password"),
-                        rs.getDate("registrationdate")));
+                        rs.getDate("registrationDate")));
             }
         } finally {
             if (rs != null) {

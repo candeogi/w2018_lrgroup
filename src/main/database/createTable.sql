@@ -41,7 +41,7 @@ CREATE TABLE Utente (
     password  VARCHAR(32) NOT NULL, -- not sure its the best data type
     registrationDate DATE NOT NULL,
     birthday DATE,
-    description TEXT,   
+    description TEXT,
  
     PRIMARY KEY(email) 
 );

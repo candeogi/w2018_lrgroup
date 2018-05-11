@@ -7,7 +7,7 @@
 	<description>WebApplication Class Project</description>
 
 	<welcome-file-list>  
-   		<welcome-file>/jsp/create-user-form.jsp</welcome-file>   
+   		<welcome-file>/jsp/create-user-form.jsp</welcome-file>
   	</welcome-file-list>  
 	
 	<servlet>
@@ -29,6 +29,11 @@
 		<servlet-name>RestResolverServlet</servlet-name>
 		<servlet-class>project.servlet.RestResolverServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>project.servlet.LoginServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>CreateUserServlet</servlet-name>
@@ -49,10 +54,16 @@
 		<servlet-name>RestResolverServlet</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-	<!--<resource-ref>
+	
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<resource-ref>
       <description>Connection pool to the database</description>
-      <res-ref-name>jdbc/employee-ferro</res-ref-name>
+      <res-ref-name>jdbc/user-webapp</res-ref-name>
       <res-type>javax.sql.DataSource</res-type>
       <res-auth>Container</res-auth>
-  	</resource-ref>-->
+  	</resource-ref>
 </web-app>
