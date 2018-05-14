@@ -13,10 +13,7 @@
         <h1>Login</h1>
         <c:import url="/jsp/include/show-message.jsp"/>
         <form method="POST" action="<c:url value="/login"/>">
-
-            <%--<label for="username">Username:</label>--%>
-            <%--<input name="username" type="text"/><br/>--%>
-
+            <input type="hidden" name="from" value="${from}"/>
             <label for="email">Email:</label>
             <input name="email" type="email"/><br/>
 

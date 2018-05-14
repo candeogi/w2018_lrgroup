@@ -7,6 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * Allows site navigation and login request on protected resources
+ *
+ * @author Alberto Pontini
+ * @version 1.0.0
+ *
+ */
+
 public class NavServlet extends HttpServlet
 {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
@@ -22,15 +30,21 @@ public class NavServlet extends HttpServlet
 				if(req.getSession().getAttribute("loggedInUser") != null)
 					req.getRequestDispatcher("/jsp/create-question-form.jsp").forward(req, res);
 				else
+				{
+					req.setAttribute("from", "create-question");
 					req.getRequestDispatcher("/jsp/login-form.jsp").forward(req, res);
+				}
 
 				break;
 
 			case "create-answer":
 				if(req.getSession().getAttribute("loggedInUser") != null)
-					req.getRequestDispatcher("/jsp/create-question-form.jsp").forward(req, res);
+					req.getRequestDispatcher("/jsp/create-answer-form.jsp").forward(req, res);
 				else
+				{
+					req.setAttribute("from", "create-answer");
 					req.getRequestDispatcher("/jsp/login-form.jsp").forward(req, res);
+				}
 
 				break;
 

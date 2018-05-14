@@ -69,12 +69,14 @@ public final class LoginServlet extends AbstractDatabaseServlet {
                     .searchUserByEmailAndPassword();
 
             //if i find a Username with given email and password do
-            if(!userlist.isEmpty()){
-                m = new Message("Login success!");
+            if(!userlist.isEmpty())
+            {
+                //m = new Message("Login success!");
                 session.setAttribute("loggedInUser",userlist.get(0).getUsername());
             }
-            else{
-                m = new Message("Login failed!");
+            else
+            {
+                m = new Message("Login failed!", "SomeCode", "User/Password is not correct");
                 session.removeAttribute("loggedInUser");
             }
 
@@ -84,12 +86,27 @@ public final class LoginServlet extends AbstractDatabaseServlet {
         }
 
         // stores the user list and the message as a request attribute
-//      req.setAttribute("userList", userlist);
-        req.setAttribute("message", m);
+        //req.setAttribute("userList", userlist);
+        //req.setAttribute("message", m);
 
         // forwards the control to the search-employee-result JSP
-        req.getRequestDispatcher("/jsp/login-result.jsp").forward(req, res);
-
+        if(m==null || !m.isError())
+        {
+            String from = req.getParameter("from");
+            if(from != null || !from.equals(""))
+            {
+                res.sendRedirect(req.getContextPath() + "/?p=" + req.getParameter("from"));
+            }
+            else
+            {
+                res.sendRedirect(req.getContextPath() + "/");
+            }
+        }
+        else
+        {
+            req.setAttribute("message", m);
+            req.getRequestDispatcher("/jsp/login-result.jsp").forward(req,res);
+        }
     }
 
 }

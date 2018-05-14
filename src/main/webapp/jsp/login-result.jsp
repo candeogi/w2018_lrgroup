@@ -39,7 +39,7 @@ Since: 1.0
         <p>You're not logged in!</p>
     </c:when>
 </c:choose>
-<a href="/jsp/login-form.jsp">Retry Login</a>
+<a href="<c:url value="/jsp/login-form.jsp" /> ">Retry Login</a>
 
 <%--<c:if test="${not empty loggedInUser}">
     <p>You're logged as <c:out value='${loggedInUser}'/> </p>
