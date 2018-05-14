@@ -45,7 +45,7 @@ public class NavServlet extends HttpServlet
 				if(req.getSession().getAttribute("loggedInUser") != null)
 					req.getRequestDispatcher("/").forward(req, res);
 				else
-					req.getRequestDispatcher("/jsp/login-form.jsp").forward(req, res);
+					req.getRequestDispatcher("/jsp/create-user-form.jsp").forward(req, res);
 				break;
 
 			default:
