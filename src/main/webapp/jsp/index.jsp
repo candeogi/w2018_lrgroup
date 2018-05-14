@@ -18,7 +18,7 @@
             <p>Please <a href="<c:url value="/?p=create-user"/>">Register</a> or <a href="<c:url value="/?p=log-in"/>">Login</a></p>
         </c:when>
         <c:when test="${not empty sessionScope.loggedInUser}">
-            <p>Logged as: <c:out value='${sessionScope.loggedInUser}'/></p>
+            <p>Logged as: <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />"><c:out value='${sessionScope.loggedInUser}'/></a></p>
         </c:when>
     </c:choose>
     </body>

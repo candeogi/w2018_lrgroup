@@ -62,6 +62,21 @@ public class NavServlet extends HttpServlet
 					req.getRequestDispatcher("/jsp/create-user-form.jsp").forward(req, res);
 				break;
 
+			case "user":
+				if(req.getSession().getAttribute("loggedInUser") != null)
+				{
+					/*Per ora è banale, bisogna aggiungere funzione che cerca l'utente nel database e che visualizza
+					la pagina, anche se non si è loggati, in base all'URL, esempio:
+					.../?p=user;u=pincopallino controlla i dati di pincopallino nel DB e li visualizza nella pagina*/
+					req.getRequestDispatcher("/jsp/user-page.jsp").forward(req, res); //restituisce errore per ora
+				}
+				else
+				{
+					req.setAttribute("from", "create-answer");
+					req.getRequestDispatcher("/jsp/login-form.jsp").forward(req, res);
+				}
+				break;
+
 			default:
 				req.getRequestDispatcher("/jsp/index.jsp").forward(req, res);
 				break;
