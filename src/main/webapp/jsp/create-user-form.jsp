@@ -11,7 +11,9 @@
 
   <body>
 	<h1>Create User</h1>
-	
+	<c:if  test="${not empty sessionScope.loggedInUser}">
+		<c:redirect url="/" />
+	</c:if>
 	<form method="POST" action="<c:url value="/create-user"/>">
 		<label for="name">Name:</label>
 		<input name="name" type="text"/><br/>

@@ -4,27 +4,28 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Login Form</title>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <title>Login Form</title>
+    </head>
 
-<body>
-<h1>Login</h1>
+    <body>
+        <h1>Login</h1>
+        <c:import url="/jsp/include/show-message.jsp"/>
+        <form method="POST" action="<c:url value="/login"/>">
 
-<form method="POST" action="<c:url value="/login"/>">
+            <%--<label for="username">Username:</label>--%>
+            <%--<input name="username" type="text"/><br/>--%>
 
-    <%--<label for="username">Username:</label>--%>
-    <%--<input name="username" type="text"/><br/>--%>
+            <label for="email">Email:</label>
+            <input name="email" type="email"/><br/>
 
-    <label for="email">Email:</label>
-    <input name="email" type="email"/><br/>
+            <label for="password">Password:</label>
+            <input name="password" type="password"/><br/>
 
-    <label for="password">Password:</label>
-    <input name="password" type="password"/><br/>
-
-    <button type="submit">Login</button><br/>
-    <button type="reset">Reset the form</button>
-</form>
-</body>
+            <button type="submit">Login</button><br/>
+            <button type="reset">Reset the form</button>
+        </form>
+        <p>Not registered? <a href="<c:url value="/jsp/create-user-form.jsp"/>">Please reconsider your life decisions</a></p>
+    </body>
 </html>

@@ -7,7 +7,7 @@
 	<description>WebApplication Class Project</description>
 
 	<welcome-file-list>  
-   		<welcome-file>/jsp/create-user-form.jsp</welcome-file>
+   		<welcome-file>/jsp/create-question-form.jsp</welcome-file>
   	</welcome-file-list>  
 	
 	<servlet>
