@@ -85,14 +85,7 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 			Date regDate = new Date(((long)System.currentTimeMillis()*1000));
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     		Date birthday = new Date(dateFormat.parse(bdate).getTime());
-    		/*
-			* u = new User(username, "", name, surname, email, regDate, null, new Date(byear,bmonth,bday));
-			* field "" are photo profile and description
-			* we should use the new constructor with only email, name, password and regdate. rest will be set to null
-			*/
-			//u = new User(email, name, surname, username, null, password, regDate, null, "");
 			
-			//new constructor would be
 			u = new User(email, name, surname, username, "" ,password, regDate, birthday, "");
 
 			// creates a new object for accessing the database and stores the user     <---------AGGIUNGERE!

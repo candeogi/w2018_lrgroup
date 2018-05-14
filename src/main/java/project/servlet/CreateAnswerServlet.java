@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServlet;
  * @version 1.00
  * @since 1.00
  */
-public final class CreateAnswerServlet extends AbstractDatabaseServlet
+public final class CreateAnswerServlet extends SessionManagerServlet
 {
 
 	/**

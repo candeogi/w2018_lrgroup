@@ -11,14 +11,9 @@
   <body>
 	<h1>Create Answer</h1>
 	<c:import url="/jsp/include/show-message.jsp"/>
-	<c:choose>
-		<c:when test="${empty sessionScope.loggedInUser}">
-			<c:redirect url="/jsp/login-form.jsp" />
-		</c:when>
-		<c:when  test="${not empty sessionScope.loggedInUser}">
-			<p>Loggato come: <c:out value='${sessionScope.loggedInUser}'/></p>
-		</c:when>
-	</c:choose>	
+	<c:if  test="${not empty sessionScope.loggedInUser}">
+		<p>Logged as: <c:out value='${sessionScope.loggedInUser}'/></p>
+	</c:if>
 	<form method="POST" action="<c:url value="/create-answer"/>" id="answerForm">
 		<label for="parentID">Id della domanda a cui rispondo:</label>
 		<input name="parentID" type="text"/><br/>

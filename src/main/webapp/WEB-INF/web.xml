@@ -6,9 +6,10 @@
 	<display-name>WebApplication Class Project</display-name>
 	<description>WebApplication Class Project</description>
 
-	<welcome-file-list>  
-   		<welcome-file>/jsp/create-question-form.jsp</welcome-file>
-  	</welcome-file-list>  
+  	<servlet>
+		<servlet-name>NavServlet</servlet-name>
+		<servlet-class>project.servlet.NavServlet</servlet-class>
+	</servlet> 
 	
 	<servlet>
 		<servlet-name>CreateUserServlet</servlet-name>
@@ -34,6 +35,11 @@
 		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>project.servlet.LoginServlet</servlet-class>
 	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>NavServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>CreateUserServlet</servlet-name>
