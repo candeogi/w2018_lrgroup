@@ -6,6 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import project.database.SearchUserByUsernameDatabase;
+import project.resource.*;
 
 /**
  * Allows site navigation and login request on protected resources
@@ -15,7 +20,7 @@ import java.io.IOException;
  *
  */
 
-public class NavServlet extends HttpServlet
+public class NavServlet extends AbstractDatabaseServlet
 {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
 	{
@@ -65,14 +70,37 @@ public class NavServlet extends HttpServlet
 			case "user":
 				if(req.getSession().getAttribute("loggedInUser") != null)
 				{
-					/*Per ora è banale, bisogna aggiungere funzione che cerca l'utente nel database e che visualizza
-					la pagina, anche se non si è loggati, in base all'URL, esempio:
-					.../?p=user;u=pincopallino controlla i dati di pincopallino nel DB e li visualizza nella pagina*/
-					req.getRequestDispatcher("/jsp/user-page.jsp").forward(req, res); //restituisce errore per ora
+
+					String user = req.getParameter("u");
+					User u = null;
+					if(user!=null && !user.equals(""))
+					{
+						try
+						{
+							List<User> ul = new SearchUserByUsernameDatabase(getDataSource().getConnection(),user).searchUserByUsername();
+							if(ul!=null && ul.size() >= 1)
+							{
+								u = ul.get(0);
+								req.setAttribute("user",u);
+								req.getRequestDispatcher("/jsp/user-page.jsp").forward(req, res);
+							}
+						}
+						catch(SQLException sqle)
+						{
+							req.setAttribute("message",new Message("Error while retrieving user from database", 
+								"SomeCode", sqle.getMessage()));
+							req.getRequestDispatcher("/jsp/index.jsp").forward(req, res);
+						}
+					}
+					if(u==null || user==null || user.equals(""))
+					{
+						req.setAttribute("message",new Message("Resource not found", "E404", "User " + user + " not found"));
+						req.getRequestDispatcher("/jsp/404.jsp").forward(req, res);
+					}
 				}
 				else
 				{
-					req.setAttribute("from", "create-answer");
+					req.setAttribute("from", "user"); //bisogna passare anche u in qualche modo
 					req.getRequestDispatcher("/jsp/login-form.jsp").forward(req, res);
 				}
 				break;
