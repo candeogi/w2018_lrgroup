@@ -36,8 +36,8 @@ CREATE TABLE Utente (
     email VARCHAR(300) NOT NULL,
     name VARCHAR(30),                  
     surname VARCHAR(30),
-    username VARCHAR(20) UNIQUE NOT NULL,
-    photoprofile VARCHAR(50) DEFAULT NULL,
+    username VARCHAR(20) NOT NULL,
+    photoprofile BYTEA DEFAULT NULL,
     password  VARCHAR(32) NOT NULL, -- not sure its the best data type
     registrationDate DATE NOT NULL,
     birthday DATE,
