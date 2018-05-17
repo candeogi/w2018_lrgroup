@@ -43,26 +43,26 @@ CREATE TABLE Utente (
     birthday DATE,
     description TEXT,
  
-    PRIMARY KEY(email) 
+    PRIMARY KEY(username)
 );
  
 CREATE TABLE Question (
     id SERIAL,
     title VARCHAR(50),
-    idUser VARCHAR(50), --abbiamo scritto 0 sull'er
+    idUser VARCHAR(20), --abbiamo scritto 0 sull'er
     ts TIMESTAMP,
     lastModified TIMESTAMP,
     body VARCHAR,
  
     PRIMARY KEY(id),
      
-    FOREIGN KEY(idUser) REFERENCES Utente(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
 CREATE TABLE VoteQuestion(
     question INTEGER NOT NULL,
-    idUser VARCHAR(50) NOT NULL,
+    idUser VARCHAR(20) NOT NULL,
     vote INTEGER DEFAULT 0, --can be -1,0,1
  
     PRIMARY KEY(question,idUser),
@@ -70,7 +70,7 @@ CREATE TABLE VoteQuestion(
     FOREIGN KEY(question) REFERENCES Question(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(idUser) REFERENCES Utente(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
@@ -101,12 +101,12 @@ CREATE TABLE Answer (
     isFixed BOOLEAN DEFAULT FALSE,
     body VARCHAR,
     ts TIMESTAMP,
-    idUser VARCHAR(50), --abbiamo scritto 0 sull'er
+    idUser VARCHAR(20), --abbiamo scritto 0 sull'er
     parentId INTEGER, --if null it answer to the main question
  
     PRIMARY KEY(id),
  
-    FOREIGN KEY(idUser) REFERENCES Utente(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
     FOREIGN KEY(parentId) REFERENCES Answer(id)
@@ -115,7 +115,7 @@ CREATE TABLE Answer (
  
 CREATE TABLE VoteAnswer(
     answer INTEGER NOT NULL,
-    idUser VARCHAR(50) NOT NULL,
+    idUser VARCHAR(20) NOT NULL,
     vote INTEGER DEFAULT 0, --can be -1,0,1
  
     PRIMARY KEY(answer,idUser),
@@ -123,7 +123,7 @@ CREATE TABLE VoteAnswer(
     FOREIGN KEY(answer) REFERENCES Answer(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(idUser) REFERENCES Utente(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
@@ -149,7 +149,7 @@ CREATE TABLE IsInterested(
     FOREIGN KEY(question) REFERENCES Question(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(idUser) REFERENCES Utente(email)
+    FOREIGN KEY(idUser) REFERENCES Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
