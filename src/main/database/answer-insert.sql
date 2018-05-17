@@ -19,9 +19,9 @@
 --
 -- Insertion into the Answer table
 --
-INSERT INTO answer VALUES (1, FALSE,'i dont know man', '2016-06-22 19:10:25-07','lucarossi@gmail.com',null);
-INSERT INTO answer VALUES (2, FALSE, 'just do it lol',  '2016-06-22 19:10:25-07','ferronic@gmail.com',null);
-INSERT INTO answer VALUES (3, FALSE, 'google it',  '2016-06-22 19:10:25-07','lucarossi@gmail.com',null);
-INSERT INTO answer VALUES (4, TRUE, 'just add some numbers',  '2016-06-22 19:10:25-07','mauro@gmail.com',null);
-INSERT INTO answer VALUES (5, FALSE, 'how to google?', '2016-06-22 19:10:25-07', 'lucarossi@gmail.com', 3);
-INSERT INTO answer VALUES (6, FALSE, 'www.google.com',  '2016-06-22 19:10:25-07', 'lucarossi@gmail.com',5);
+INSERT INTO answer VALUES (1, FALSE,'i dont know man', '2016-06-22 19:10:25-07','lucarossi',null);
+INSERT INTO answer VALUES (2, FALSE, 'just do it lol',  '2016-06-22 19:10:25-07','nicolaferro',null);
+INSERT INTO answer VALUES (3, FALSE, 'google it',  '2016-06-22 19:10:25-07','lucarossi',null);
+INSERT INTO answer VALUES (4, TRUE, 'just add some numbers',  '2016-06-22 19:10:25-07','maurozopppo',null);
+INSERT INTO answer VALUES (5, FALSE, 'how to google?', '2016-06-22 19:10:25-07', 'lucarossi', 3);
+INSERT INTO answer VALUES (6, FALSE, 'www.google.com',  '2016-06-22 19:10:25-07', 'lucarossi',5);
