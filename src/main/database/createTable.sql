@@ -63,7 +63,9 @@ CREATE TABLE Question (
 CREATE TABLE VoteQuestion(
     question INTEGER NOT NULL,
     idUser VARCHAR(20) NOT NULL,
-    vote INTEGER DEFAULT 0, --can be -1,0,1
+    vote INTEGER
+      DEFAULT 0
+      CHECK (vote=0 OR vote=1 OR vote=-1), --can be -1,0,1
  
     PRIMARY KEY(question,idUser),
  
@@ -101,8 +103,8 @@ CREATE TABLE Answer (
     isFixed BOOLEAN DEFAULT FALSE,
     body VARCHAR,
     ts TIMESTAMP,
-    idUser VARCHAR(20), --abbiamo scritto 0 sull'er
-    parentId INTEGER, --if null it answer to the main question
+    idUser VARCHAR(20), 
+    parentId INTEGER,
  
     PRIMARY KEY(id),
  
@@ -116,7 +118,9 @@ CREATE TABLE Answer (
 CREATE TABLE VoteAnswer(
     answer INTEGER NOT NULL,
     idUser VARCHAR(20) NOT NULL,
-    vote INTEGER DEFAULT 0, --can be -1,0,1
+    vote INTEGER
+      DEFAULT 0
+      CHECK (vote=0 OR vote=1 OR vote=-1), --can be -1,0,1
  
     PRIMARY KEY(answer,idUser),
  
