@@ -14,8 +14,8 @@
         <c:import url="/jsp/include/show-message.jsp"/>
         <form method="POST" action="<c:url value="/login"/>">
             <input type="hidden" name="from" value="${from}"/>
-            <label for="email">Email:</label>
-            <input name="email" type="email"/><br/>
+            <label for="username">Username:</label>
+            <input name="username" type="text"/><br/>
 
             <label for="password">Password:</label>
             <input name="password" type="password"/><br/>

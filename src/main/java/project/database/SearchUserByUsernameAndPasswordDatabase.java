@@ -35,7 +35,7 @@ import java.util.List;
  * @version 1.00
  * @since 1.00
  */
-public final class SearchUserByEmailAndPasswordDatabase {
+public final class SearchUserByUsernameAndPasswordDatabase {
 
     /**
      * The SQL statement to be executed
@@ -43,7 +43,7 @@ public final class SearchUserByEmailAndPasswordDatabase {
     private static final String STATEMENT = "" +
             "SELECT *" +
             "FROM Utente " +
-            "WHERE email=? and password=?";
+            "WHERE username=? and password=?";
 
     /**
      * The connection to the database
@@ -51,38 +51,38 @@ public final class SearchUserByEmailAndPasswordDatabase {
     private final Connection con;
 
     /**
-     * Email and Password of the User
+     * Username and Password of the User
      */
     //private final int salary;
-    private final String email;
+    private final String username;
     private final String password;
 
 
     /**
-     * Creates a new object for searching user by email and password.
+     * Creates a new object for searching user by username and password.
      *
      * @param con
      *            the connection to the database.
-     * @param email
-     *            the email of the user.
+     * @param username
+     *            the username of the user.
      * @param password
      *              the password of the user.
      */
-    public SearchUserByEmailAndPasswordDatabase(final Connection con, final String email, final String password) {
+    public SearchUserByUsernameAndPasswordDatabase(final Connection con, final String username, final String password) {
         this.con = con;
-        this.email = email;
+        this.username = username;
         this.password = password;
     }
 
     /**
-     * Searches user by email and password.
+     * Searches user by username and password.
      *
-     * @return a list of {@code User} object matching the email and password.
+     * @return a list of {@code User} object matching the username and password.
      *
      * @throws SQLException
      *             if any error occurs while searching for users.
      */
-    public List<User> searchUserByEmailAndPassword() throws SQLException {
+    public List<User> searchUserByUsernameAndPassword() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -92,7 +92,7 @@ public final class SearchUserByEmailAndPasswordDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setString(1, email);
+            pstmt.setString(1, username);
             pstmt.setString(2, password);
 
             rs = pstmt.executeQuery();

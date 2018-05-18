@@ -2,7 +2,7 @@ package project.servlet;
 
 import project.resource.User;
 import project.resource.Message;
-import project.database.SearchUserByEmailAndPasswordDatabase;
+import project.database.SearchUserByUsernameAndPasswordDatabase;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,7 +47,7 @@ public final class LoginServlet extends AbstractDatabaseServlet {
             throws ServletException, IOException {
 
         // request parameter
-        String email;
+        String username;
         String password;
 
         // model
@@ -61,14 +61,14 @@ public final class LoginServlet extends AbstractDatabaseServlet {
         try {
 
             // retrieves the request parameters
-            email = req.getParameter("email");
+            username = req.getParameter("username");
             password = req.getParameter("password");
 
             // creates a new object for accessing the database and searching the employees
-            userlist = new SearchUserByEmailAndPasswordDatabase(getDataSource().getConnection(), email,password)
-                    .searchUserByEmailAndPassword();
+            userlist = new SearchUserByUsernameAndPasswordDatabase(getDataSource().getConnection(), username, password)
+                    .searchUserByUsernameAndPassword();
 
-            //if i find a Username with given email and password do
+            //if i find a Username with given username and password do
             if(!userlist.isEmpty())
             {
                 //m = new Message("Login success!");
