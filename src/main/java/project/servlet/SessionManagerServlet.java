@@ -42,7 +42,7 @@ public class SessionManagerServlet extends AbstractDatabaseServlet{
 
         session=req.getSession(false);  //returns null if not found
 
-        if(session!=null){              //if session is found
+        if(session.getAttribute("loggedInUser")!=null){              //if session is found
             super.service(req,res);
         }
         else{                           //if session NOT found
