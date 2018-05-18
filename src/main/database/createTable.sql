@@ -103,7 +103,7 @@ CREATE TABLE Answer (
     isFixed BOOLEAN DEFAULT FALSE,
     body VARCHAR,
     ts TIMESTAMP,
-    idUser VARCHAR(20), 
+    idUser VARCHAR(20),
     parentId INTEGER,
  
     PRIMARY KEY(id),

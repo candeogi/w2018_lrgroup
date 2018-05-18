@@ -97,7 +97,7 @@ public final class SearchUserByUsernameDatabase {
                         rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("username"),
-                        rs.getString("photoProfile"),
+                        rs.getBytes("photoProfile"),
                         rs.getString("password"),
                         rs.getDate("registrationDate"),
                         rs.getDate("birthday"),

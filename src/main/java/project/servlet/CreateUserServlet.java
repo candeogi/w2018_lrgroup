@@ -86,7 +86,7 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     		Date birthday = new Date(dateFormat.parse(bdate).getTime());
 			
-			u = new User(email, name, surname, username, "" ,password, regDate, birthday, "");
+			u = new User(email, name, surname, username, null ,password, regDate, birthday, "");
 
 			// creates a new object for accessing the database and stores the user     <---------AGGIUNGERE!
 			new CreateUserDatabase(getDataSource().getConnection(), u).createUser();

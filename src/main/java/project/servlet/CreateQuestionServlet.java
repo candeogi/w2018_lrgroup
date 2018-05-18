@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 
 
 /**
- * Creates a new user into the database. 
+ * Creates a new user into the database.
  * 
  * @author Alberto Pontini
  * @version 1.00

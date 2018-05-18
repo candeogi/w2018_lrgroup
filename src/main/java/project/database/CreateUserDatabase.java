@@ -18,6 +18,7 @@ package project.database;
 
 import project.resource.User;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -80,7 +81,7 @@ public final class CreateUserDatabase {
             pstmt.setString(2, user.getName());
             pstmt.setString(3, user.getSurname());
             pstmt.setString(4, user.getUsername());
-            pstmt.setString(5, user.getPhotoProfile());
+            pstmt.setBytes(5, user.getPhotoProfile());
             pstmt.setString(6, user.getPassword());
             pstmt.setDate(7, user.getRegistrationDate()); //TODO check date format on database
             pstmt.setDate(8, user.getBirthday()); //TODO check date format on database
