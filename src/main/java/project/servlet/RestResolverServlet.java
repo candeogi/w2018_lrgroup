@@ -41,7 +41,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 			//Controllare l'autenticazione
 			
 			String[] split = req.getRequestURI().split("/");
-			switch(split[1])
+			switch(split[3]) // split[3] -> a 0 è vuoto, poi web-app-unipd, poi rest, poi question/answer
 			{
 				case "question":
 					if (processQuestion(req, res))
@@ -195,6 +195,8 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 	private boolean processQuestion(HttpServletRequest req, HttpServletResponse res) throws IOException
 	{
 		OutputStream out = res.getOutputStream();
+		final String method = req.getMethod();
+
 		String path = req.getRequestURI();
 		Message m = null;
 		try {
@@ -203,7 +205,18 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 
 			if (path.length() == 0 || path.equals("/"))
 			{
-				new RestQuestion(req,res, getDataSource().getConnection()).listQuestions();
+				switch (method) {
+					case "GET":
+						new RestQuestion(req, res, getDataSource().getConnection()).listQuestions();
+						break;
+					default:
+						m = new Message("Unsupported operation for URI /question.",
+								"E4A5", String.format("Requested operation %s.", method));
+						res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+						m.toJSON(res.getOutputStream());
+						break;
+				}
+
 			}
 			else
 			{
