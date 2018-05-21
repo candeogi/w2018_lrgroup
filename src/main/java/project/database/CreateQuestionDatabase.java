@@ -38,8 +38,8 @@ public final class CreateQuestionDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO Question (ID, title, body, IDUser, timestamp, lastModified) " +
-            "VALUES (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO Question (id, title, idUser, ts, lastModified, body) " +
+            "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
 
     /**
      * The connection to the database
@@ -75,12 +75,12 @@ public final class CreateQuestionDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, question.getID());
-            pstmt.setString(2, question.getTitle());
-            pstmt.setString(3, question.getBody());
-            pstmt.setString(4, question.getIDUser());
-            pstmt.setTimestamp(5, question.getTimestamp());
-            pstmt.setTimestamp(6, question.getLastModified());
+            //pstmt.setInt(1, question.getID());
+            pstmt.setString(1, question.getTitle());
+            pstmt.setString(2, question.getIDUser());
+            pstmt.setTimestamp(3, question.getTimestamp());
+            pstmt.setTimestamp(4, question.getLastModified());
+            pstmt.setString(5, question.getBody());
 
             pstmt.execute();
 

@@ -19,13 +19,13 @@
 --
 -- Insertion into the Question table
 --
-INSERT INTO question VALUES (1, 'how to do math?', 'lucarossi', '2016-06-22 19:10:25-07',
+INSERT INTO question VALUES (DEFAULT, 'how to do math?', 'lucarossi', '2016-06-22 19:10:25-07',
                              '2017-1-1', 'help i need to do math');
-INSERT INTO question VALUES (2, 'how to drink?', 'nicolaferro', '2016-06-22 19:10:25-07',
+INSERT INTO question VALUES (DEFAULT, 'how to drink?', 'nicolaferro', '2016-06-22 19:10:25-07',
                              '2017-1-1', 'need drink');
-INSERT INTO question VALUES (3, 'what is a variable?', 'lucarossi', '2016-06-22 19:10:25-07',
+INSERT INTO question VALUES (DEFAULT, 'what is a variable?', 'lucarossi', '2016-06-22 19:10:25-07',
                              '2017-1-1', 'tes123');
-INSERT INTO question VALUES (4, 'this is not a question?', 'maurozoppo', '2016-06-22 19:10:25-07',
+INSERT INTO question VALUES (DEFAULT, 'this is not a question?', 'maurozoppo', '2016-06-22 19:10:25-07',
                              '2017-1-1', 'uhmmmm');
-INSERT INTO question VALUES (5, 'how to pass web application?', 'lucarossi', '2016-06-22 19:10:25-07',
+INSERT INTO question VALUES (DEFAULT, 'how to pass web application?', 'lucarossi', '2016-06-22 19:10:25-07',
                              '2017-1-1', 'help i need to pass the test');

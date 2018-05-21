@@ -2,6 +2,7 @@ package project.servlet;
 
 import project.resource.Question;
 import project.resource.Message;
+import project.database.CreateQuestionDatabase;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,17 +17,20 @@ import javax.servlet.http.HttpServlet;
 
 
 /**
- * Creates a new user into the database.
- * 
+ * Creates a new question into the database.
+ * The title and body of the question is provided by the request through the form.
+ * The user writing the question is obtained through the active session.
+ *
  * @author Alberto Pontini
- * @version 1.00
+ * @author Giovanni Candeo
+ * @version 2.00
  * @since 1.00
  */
 public final class CreateQuestionServlet extends SessionManagerServlet
 {
 
 	/**
-	 * Creates a new answer into the database. 
+	 * Creates a new question into the database.
 	 * 
 	 * @param req
 	 *            the HTTP request from the client.
@@ -49,25 +53,25 @@ public final class CreateQuestionServlet extends SessionManagerServlet
 		// model
 		Question q  = null;
 		Message m = null;
-		// retrieves the request parameters
-		title = req.getParameter("title");
-		body = req.getParameter("body");
-		IDUser = req.getParameter("IDUser");
 
-		// creates a new user from the request parameters
-		q = new Question(IDUser, title, body, new Timestamp((Long)System.currentTimeMillis()*1000));
+		try{
+			// retrieves the request parameters
+			title = req.getParameter("title");
+			body = req.getParameter("body");
 
-		// creates a new object for accessing the database and stores the user
-		//new CreateEmployeeDatabase(getDataSource().getConnection(), e).createEmployee();
-		/*} catch (SQLException ex) {
-			if (ex.getSQLState().equals("23505")) {
-				m = new Message(String.format("Cannot create the user: user %s already exists.", username),
-						"E300", ex.getMessage());
-			} else {
-				m = new Message("Cannot create the user: unexpected error while accessing the database.", 
-						"E200", ex.getMessage());
-			}
-		}*/
+			// retrieves the user id (username) through the session parameter
+			IDUser = (String) req.getSession().getAttribute("loggedInUser");
+
+			// creates a new question from the request parameters
+			q = new Question(IDUser, title, body, new Timestamp((Long)System.currentTimeMillis()*1000));
+
+			// creates a new object for accessing the database and stores the question
+			new CreateQuestionDatabase(getDataSource().getConnection(), q).createQuestion();
+		}catch (SQLException ex) {
+			m = new Message("Cannot create the user: unexpected error while accessing the database.",
+					"E200", ex.getMessage());
+
+		}
 		
 		// stores the user and the message as a request attribute
 		req.setAttribute("question", q);
