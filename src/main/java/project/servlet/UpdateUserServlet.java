@@ -124,7 +124,7 @@ public final class UpdateUserServlet extends AbstractDatabaseServlet
 		}
 		catch (SQLException ex)
 		{
-			m = new Message("Cannot create the user: unexpected error while accessing the database.", 
+			m = new Message("Cannot update the user: unexpected error while accessing the database.", 
 					"E200", ex.getMessage());
 		}
 		

@@ -22,7 +22,7 @@ public final class UpdateUserDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "UPDATE Utente SET email=?, name=?, surname=?, birthday=?, description=?) " +
+            "UPDATE Utente SET email=?, name=?, surname=?, birthday=?, description=? " +
             "WHERE username=?";
 
     /**
