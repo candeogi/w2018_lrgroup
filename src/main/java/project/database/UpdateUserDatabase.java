@@ -16,14 +16,14 @@ import java.util.List;
  * @version 1.00
  * @since 1.00
  */
-public final class CreateUserDatabase {
+public final class UpdateUserDatabase {
 
     /**
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO Utente (email, name, surname, username, photoProfile, password, registrationDate, birthday, description) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "UPDATE Utente SET email=?, name=?, surname=?, birthday=?, description=?) " +
+            "WHERE username=?";
 
     /**
      * The connection to the database
@@ -43,7 +43,7 @@ public final class CreateUserDatabase {
      * @param user
      *            the user to be created in the database.
      */
-    public CreateUserDatabase(final Connection con, final User user)
+    public UpdateUserDatabase(final Connection con, final User user)
     {
         this.con = con;
         this.user = user;
@@ -54,21 +54,18 @@ public final class CreateUserDatabase {
      * @throws SQLException
      *             if any error occurs while storing the user.
      */
-    public void createUser() throws SQLException {
+    public void updateUser() throws SQLException {
 
         PreparedStatement pstmt = null;
-
         try {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setString(1, user.getEmail());
             pstmt.setString(2, user.getName());
             pstmt.setString(3, user.getSurname());
-            pstmt.setString(4, user.getUsername());
-            pstmt.setBytes(5, user.getPhotoProfile());
-            pstmt.setString(6, user.getPassword());
-            pstmt.setDate(7, user.getRegistrationDate()); //TODO check date format on database
-            pstmt.setDate(8, user.getBirthday()); //TODO check date format on database
-            pstmt.setString(9, user.getDescription());
+            //pstmt.setBytes(4, user.getPhotoProfile());
+            pstmt.setDate(4, user.getBirthday());
+            pstmt.setString(5, user.getDescription());
+            pstmt.setString(6, user.getUsername());
 
             pstmt.execute();
 

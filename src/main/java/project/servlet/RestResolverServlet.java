@@ -277,6 +277,23 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 						}
 					}
 				}
+				else if(path.contains("user"))
+				{
+					//question/user/{userID}
+					path = path.substring(path.lastIndexOf("user")+4);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /question/user/{userID}: no {userID} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						String user = path.substring(1);
+						//new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByTimestamp(); TODO AbstractDatabaseServlet
+					}
+				}
 			}
 		}
 		catch(Throwable t)

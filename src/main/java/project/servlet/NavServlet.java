@@ -115,4 +115,9 @@ public class NavServlet extends AbstractDatabaseServlet
 				break;
 		}
 	}
+
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
+	{
+		doGet(req,res); //in case i'm forwarding after a post request
+	}
 }

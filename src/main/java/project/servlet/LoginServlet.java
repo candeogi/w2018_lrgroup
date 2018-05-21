@@ -28,7 +28,8 @@ import javax.sql.DataSource;
  * @version 1.0.0
  *
  */
-public final class LoginServlet extends AbstractDatabaseServlet {
+public final class LoginServlet extends AbstractDatabaseServlet
+{
 
     /**
      * Checks user login

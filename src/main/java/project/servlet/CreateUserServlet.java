@@ -54,10 +54,6 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 		String email = null;
 		String bdate;
 
-		int bday;
-		int bmonth;
-		int byear;
-
 		// model
 		User u  = null;
 		Message m = null;
