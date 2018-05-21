@@ -220,36 +220,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 			}
 			else
 			{
-				if(path.contains("timestamp"))
-				{
-					//question/timestamp/{unixTimeStamp}
-					path = path.substring(path.lastIndexOf("timestamp") + 9); //lo faccio per eliminare il / prima di timestamp
-					if (path.length() == 0 || path.equals("/"))
-					{
-						m = new Message("Wrong format for URI /question/timestamp/{unixTimeStamp}: no {unixTimeStamp} specified.",
-										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-						m.toJSON(res.getOutputStream());
-					}
-					else
-					{
-						try
-						{
-							Long time = (long) Long.parseLong(path.substring(1))*1000;
-							Date timestamp = new Date(time);
-							//new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByTimestamp(); TODO AbstractDatabaseServlet
-						}
-						catch (NumberFormatException e)
-						{
-							m = new Message(
-									"Wrong format for URI /question/timestamp/{unixTimestamp}: {unixTimestamp} is not an integer.",
-									"E4A7", e.getMessage());
-							res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-							m.toJSON(res.getOutputStream());
-						}
-					}
-				}
-				else if(path.contains("id"))
+				if(path.contains("id"))
 				{
 					//question/id/{ID}
 					path = path.substring(path.lastIndexOf("id")+2);

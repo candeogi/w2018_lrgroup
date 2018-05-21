@@ -20,14 +20,14 @@
 -- Insertion into the Utente table
 --
 INSERT INTO Utente VALUES ('primoutente@gmail.com', 'primo', 'utente', 'primoutente', 'profilepath',
-                          'passtest', '2017-1-1', null, 'randomtext');
+                          'passtest', '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO Utente VALUES ('secondoutente@gmail.com', 'secondo', 'utente', 'secondoutente', 'profilepath',
-                          'passtest', '2017-1-1', null, 'randomtext');
+                          'passtest', '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO Utente VALUES ('terzoutente@gmail.com', 'terzo', 'utente', 'terzoutente', 'profilepath',
-                          'passtest', '2017-1-1', null, 'randomtext');
+                          'passtest', '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO Utente VALUES ('mauro@gmail.com', 'mauro', 'zoppo', 'maurozoppo', 'profilepath',
-                          'passtest', '2017-1-1', null, 'randomtext');
+                          'passtest', '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO Utente VALUES ('lucarossi@gmail.com', 'luca', 'rossi', 'lucarossi', 'profilepath',
-                          'passtest', '2017-1-1', null, 'randomtext');
+                          'passtest', '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO Utente VALUES ('ferronic@gmail.com', 'nicola', 'ferro', 'nicolaferro', 'profilepath',
-                          'passtest', '2017-1-1', null, 'randomtext');
+                          'passtest', '2017-1-1', '1994-1-1', 'randomtext');
