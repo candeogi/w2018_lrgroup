@@ -172,4 +172,29 @@ public final class RestQuestion extends RestResource
 			m.toJSON(res.getOutputStream());
 		}
 	}
+
+	public void listQuestions() throws IOException {
+
+		List<Question> q = null;
+		Message m = null;
+
+		try{
+			// creates a new object for accessing the database and lists all the questions
+			q = new ListQuestionsDatabase(con).listQuestions();
+
+			if(q != null) {
+				res.setStatus(HttpServletResponse.SC_OK);
+				new ResourceList(q).toJSON(res.getOutputStream());
+			} else {
+				// it should not happen
+				m = new Message("Cannot list questions: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		} catch (Throwable t) {
+			m = new Message("Cannot search employee: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
 }

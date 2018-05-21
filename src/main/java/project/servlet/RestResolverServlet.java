@@ -1,6 +1,7 @@
 package project.servlet;
 
 import project.resource.*;
+import project.rest.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -202,7 +203,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 
 			if (path.length() == 0 || path.equals("/"))
 			{
-				//chiamare funzione che lista le domande
+				new RestQuestion(req,res, getDataSource().getConnection()).listQuestions();
 			}
 			else
 			{
