@@ -146,11 +146,11 @@ public final class RestQuestion extends RestResource
 			String path = req.getRequestURI();
 			path = path.substring(path.lastIndexOf("timestamp") + 9);
 
-			final long timestamp = Long.parseLong(path.substring(1));
+			//final long timestamp = Long.parseLong(path.substring(1));
 
 
 			// creates a new object for accessing the database and search the question
-			ql = null; //new SearchQuestionByTimestampDatabase(con, salary).searchQuestionByTimestamp(); TODO Method
+			ql = new SearchQuestionByTimestampDatabase(con).SearchQuestionByTimestamp();
 
 			if(ql != null)
 			{
@@ -187,12 +187,12 @@ public final class RestQuestion extends RestResource
 				new ResourceList(q).toJSON(res.getOutputStream());
 			} else {
 				// it should not happen
-				m = new Message("Cannot list questions: unexpected error.", "E5A1", null);
+				m = new Message("Cannot list question: unexpected error.", "E5A1", null);
 				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				m.toJSON(res.getOutputStream());
 			}
 		} catch (Throwable t) {
-			m = new Message("Cannot search employee: unexpected error.", "E5A1", t.getMessage());
+			m = new Message("Cannot search question: unexpected error.", "E5A1", t.getMessage());
 			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			m.toJSON(res.getOutputStream());
 		}
