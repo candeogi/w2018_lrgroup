@@ -1,8 +1,8 @@
 package project.servlet;
 
-import project.resource.User;
 import project.resource.Message;
 import project.resource.Answer;
+import project.database.CreateAnswerDatabase;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
  * Creates a new user into the database. 
  * 
  * @author Alberto Pontini
+ * @author Giovanni Candeo
  * @version 1.00
  * @since 1.00
  */
@@ -56,29 +57,28 @@ public final class CreateAnswerServlet extends SessionManagerServlet
 		{
 			// retrieves the request parameters
 			text = req.getParameter("text");
-			parentID = Integer.parseInt(req.getParameter("parentID"));
-			IDUser = req.getParameter("IDUser");
 
+			//parentID is the id of the answer this answer refers to
+			//for now can only answer to questions
+			//TODO answers to answers.
+			//parentID = null;
+			//parentID = Integer.parseInt(req.getParameter("parentID"));
+
+			//retrieves the username answering through the session attribute
+			IDUser = (String) req.getSession().getAttribute("loggedInUser");
+
+
+
+			a = new Answer(IDUser,false, text, -1 ,new Timestamp((Long)System.currentTimeMillis()*1000));
+
+			// creates a new object for accessing the database and stores the answer
+			new CreateAnswerDatabase(getDataSource().getConnection(), a).createAnswer();
 
 			m = new Message(String.format("Answer successfully created."));
-			a = new Answer(IDUser,false, text, parentID,new Timestamp((Long)System.currentTimeMillis()*1000));
-			// creates a new object for accessing the database and stores the user     <---------AGGIUNGERE!
-			//new CreateEmployeeDatabase(getDataSource().getConnection(), e).createEmployee();
+		} catch (SQLException ex) {
+			m = new Message("Cannot create the answer: unexpected error while accessing the database.",
+					"E200", ex.getMessage());
 		}
-		catch(NumberFormatException n)
-		{
-			m = new Message("Error, parentID must be an integer", "Qualche codice errore", n.getMessage());
-		}
-			
-		/*} catch (SQLException ex) {
-			if (ex.getSQLState().equals("23505")) {
-				m = new Message(String.format("Cannot create the user: user %s already exists.", username),
-						"E300", ex.getMessage());
-			} else {
-				m = new Message("Cannot create the user: unexpected error while accessing the database.", 
-						"E200", ex.getMessage());
-			}
-		}*/
 		
 		// stores the user and the message as a request attribute
 		req.setAttribute("answer", a);

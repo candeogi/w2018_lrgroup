@@ -18,13 +18,13 @@
 		<label for="parentID">Id della domanda a cui rispondo:</label>
 		<input name="parentID" type="text"/><br/>
 
-		<label for="IDUser">IDUser:</label>
-		<input name="IDUser" type="text"/><br/>
+<%--		<label for="IDUser">IDUser:</label>
+		<input name="IDUser" type="text"/><br/>--%>
 
 		<textarea rows="4" cols="50" name="text" placeholder="Enter text..">
 		</textarea>
-
-		<button type="submit">Submit</button><br/>
+		<br/>
+		<button type="submit">Submit</button>
 		<button type="reset">Reset the form</button>
 	</form>
 	</body>

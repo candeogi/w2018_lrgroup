@@ -29,7 +29,8 @@ import java.util.List;
  * Creates an answer in the database.
  *
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
- * @version 1.00
+ * @author Giovanni Candeo
+ * @version 2.00
  * @since 1.00
  */
 public final class CreateAnswerDatabase {
@@ -38,8 +39,8 @@ public final class CreateAnswerDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO Answer (ID, IDUser, fixed, text, parentID, timestamp) " +
-            "VALUES (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO Answer (id, isFixed, body, ts, idUser, parentID) " +
+            "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
 
     /**
      * The connection to the database
@@ -75,12 +76,13 @@ public final class CreateAnswerDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, answer.getID());
-            pstmt.setString(2, answer.getIDUser());
-            pstmt.setBoolean(3, answer.isFixed());
-            pstmt.setString(4, answer.getText());
-            pstmt.setInt(5, answer.getParentID());
-            pstmt.setTimestamp(6, answer.getTimestamp());
+            //pstmt.setInt(1, answer.getID());
+            pstmt.setBoolean(1, answer.isFixed());
+            pstmt.setString(2, answer.getText());
+            pstmt.setTimestamp(3, answer.getTimestamp());
+            pstmt.setString(4, answer.getIDUser());
+            pstmt.setNull(5, answer.getParentID()); //set null cause now works only on answer to questions
+
 
             pstmt.execute();
 
