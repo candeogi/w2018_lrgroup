@@ -60,6 +60,11 @@ public class NavServlet extends AbstractDatabaseServlet
 					req.getRequestDispatcher("/jsp/login-form.jsp").forward(req, res);
 				break;
 
+			case "log-out":
+				if(req.getSession().getAttribute("loggedInUser") != null)
+					req.getRequestDispatcher("/logout").forward(req, res);
+				break;
+
 			case "create-user":
 				if(req.getSession().getAttribute("loggedInUser") != null)
 					req.getRequestDispatcher("/").forward(req, res);
