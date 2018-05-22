@@ -208,6 +208,9 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 				switch (method) {
 					case "GET":
 						new RestQuestion(req, res, getDataSource().getConnection()).listQuestions();
+						/*List<Question> list
+						req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req,res);*/
+						//TODO json parser
 						break;
 					default:
 						m = new Message("Unsupported operation for URI /question.",

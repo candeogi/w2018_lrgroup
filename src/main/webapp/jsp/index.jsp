@@ -12,6 +12,8 @@
     <body>
         <h1>Index</h1>
         <p><a href="<c:url value="/?p=create-question"/>">Crea una domanda</a></p>
+        <p><a href="<c:url value="/rest/question"/>">Visualizza domande</a></p>
+
         <c:import url="/jsp/include/show-message.jsp"/>
         <c:choose>
             <c:when test="${empty sessionScope.loggedInUser}">
