@@ -27,13 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrive question by ID in the database.
+ * Retrieve questions by user in the database.
  *
  * @author Alberto Forti
  * @version 1.00
  * @since 1.00
  */
-public final class SearchQuestionByIDDatabase
+public final class SearchQuestionByUserDatabase
 {
 
     /**
@@ -42,36 +42,36 @@ public final class SearchQuestionByIDDatabase
     private static final String QUERY =
             "SELECT * " +
                     "FROM Question " +
-                    "WHERE id=?";
+                    "WHERE iduser=?";
 
     /**
      * The connection to the database
      */
     private final Connection con;
-    private final int id;
+    private final String iduser;
 
 
     /**
-     * Creates a new object for a specific question retrieval.
+     * Creates a new object for questions made by an user retrieval.
      *
      * @param con
      *            the connection to the database.
      */
-    public SearchQuestionByIDDatabase(final Connection con, final int ID)
+    public SearchQuestionByUserDatabase(final Connection con, final String IDUser)
     {
         this.con = con;
-        this.id = ID;
+        this.iduser = IDUser;
     }
 
     /**
-     * Retrieve a specific question in the database.
+     * Retrive questions made by an user in the database.
      *
-     * @return a list of {@code Question} (must be one) object matching the ID.
+     * @return An ArrayList of recent questions.
      *
      * @throws SQLException
-     *             if any error occurs while retrieve the question.
+     *             if any error occurs while retive the questions.
      */
-    public List<Question> SearchQuestionByID() throws SQLException
+    public List<Question> SearchQuestionByUser() throws SQLException
     {
 
         PreparedStatement pstmt = null;
@@ -79,8 +79,7 @@ public final class SearchQuestionByIDDatabase
 
         try {
             pstmt = con.prepareStatement(QUERY);
-            pstmt.setInt(1, id);
-
+            pstmt.setString(1, iduser);
 
             ResultSet rs = pstmt.executeQuery();
 
