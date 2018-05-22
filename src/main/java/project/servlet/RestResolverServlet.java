@@ -236,7 +236,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 						try
 						{
 							Integer.parseInt(path.substring(1));
-							//new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByTimestamp(); TODO AbstractDatabaseServlet
+							new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByID(); // TODO AbstractDatabaseServlet
 						}
 						catch (NumberFormatException e)
 						{

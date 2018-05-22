@@ -92,7 +92,7 @@ public final class RestQuestion extends RestResource
 	public void searchQuestionByID()  throws IOException
 	{
 
-		Question q  = null;
+		List<Question> q  = null;
 		Message m = null;
 
 		try
@@ -105,12 +105,12 @@ public final class RestQuestion extends RestResource
 
 
 			// creates a new object for accessing the database and search the question
-			q = null; //new SearchQuestionByIDDatabase(con, salary).searchQuestionByID(); TODO Method
+			q = new SearchQuestionByIDDatabase(con, questionID).SearchQuestionByID();
 
 			if(q != null)
 			{
 				res.setStatus(HttpServletResponse.SC_OK);
-				q.toJSON(res.getOutputStream());
+				new ResourceList(q).toJSON(res.getOutputStream());
 			}
 			else
 			{
