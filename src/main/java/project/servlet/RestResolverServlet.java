@@ -200,7 +200,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 		String path = req.getRequestURI();
 		Message m = null;
 		try {
-			// strip everyhing until after the /question
+			// strip everything until after the /question
 			path = path.substring(path.lastIndexOf("question") + 8);
 
 			if (path.length() == 0 || path.equals("/"))

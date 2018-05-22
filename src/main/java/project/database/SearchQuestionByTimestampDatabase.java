@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrive recent questions in the database.
+ * Retrieve recent questions in the database.
  *
  * @author Davide Storato
  * @version 1.00
@@ -50,7 +50,7 @@ public final class SearchQuestionByTimestampDatabase
     private final Connection con;
 
     /**
-     * Creates a new object for recent questions retrival.
+     * Creates a new object for recent questions retrieval.
      *
      * @param con
      *            the connection to the database.
@@ -61,12 +61,12 @@ public final class SearchQuestionByTimestampDatabase
     }
 
     /**
-     * Retrive recent questions in the database.
+     * Retrieve recent questions in the database.
      *
      * @return An ArrayList of recent questions.
      *
      * @throws SQLException
-     *             if any error occurs while retive the questions.
+     *             if any error occurs while retrieve the questions.
      */
     public List<Question> SearchQuestionByTimestamp() throws SQLException
     {

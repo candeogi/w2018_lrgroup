@@ -56,6 +56,8 @@ public final class SearchQuestionByIDDatabase
      *
      * @param con
      *            the connection to the database.
+     * @param ID
+     *            the ID of a question.
      */
     public SearchQuestionByIDDatabase(final Connection con, final int ID)
     {

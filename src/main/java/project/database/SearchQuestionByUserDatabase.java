@@ -56,6 +56,8 @@ public final class SearchQuestionByUserDatabase
      *
      * @param con
      *            the connection to the database.
+     * @param IDUser
+     *            the ID of an user.
      */
     public SearchQuestionByUserDatabase(final Connection con, final String IDUser)
     {
