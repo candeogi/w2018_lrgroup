@@ -106,7 +106,7 @@ public final class RestAnswer extends RestResource
 
 
 			// creates a new object for accessing the database and search the answers
-			al = null; //new searchAnswerByQuestionIDDatabase(con, salary).searchAnswerByQuestionID()); TODO Method
+			al = new SearchAnswerByQuestionIDDatabase(con, questionID).searchAnswerByQuestionID();
 
 			if(al != null)
 			{
@@ -151,7 +151,7 @@ public final class RestAnswer extends RestResource
 
 
 			// creates a new object for accessing the database and search the answers
-			al = null; //new searchAnswerByUserIDDatabase(con, salary).searchAnswerByUserID()); TODO Method
+			al = new SearchAnswerByUserIDDatabase(con,userID).searchAnswerByUserID();
 
 			if(al != null)
 			{

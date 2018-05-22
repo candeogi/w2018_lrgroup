@@ -126,7 +126,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 		String path = req.getRequestURI();
 		Message m = null;
 		try {
-			// strip everyhing until after the /question
+			// strip everything until after the /answer
 			path = path.substring(path.lastIndexOf("answer") + 6);
 
 			if (path.length() == 0 || path.equals("/"))
@@ -139,7 +139,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 			{
 				if(path.contains("id"))
 				{
-					// /answer/id/{answerID}
+					// /answer/id/{questionID}
 					path = path.substring(path.lastIndexOf("id") + 2);
 					if (path.length() == 0 || path.equals("/"))
 					{
@@ -153,7 +153,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 						try
 						{
 							Integer.parseInt(path.substring(1));
-							//new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID(); TODO AbstractDatabaseServlet
+							new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
 						}
 						catch (NumberFormatException e)
 						{
@@ -178,7 +178,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 					}
 					else
 					{
-						//new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID(); TODO AbstractDatabaseServlet
+						new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID();
 					}
 				}
 			}
