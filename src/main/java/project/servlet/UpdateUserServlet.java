@@ -129,7 +129,8 @@ public final class UpdateUserServlet extends AbstractDatabaseServlet
 		}
 		
 		req.setAttribute("message", m);
-		req.getRequestDispatcher("/?p=user&u=" + username).forward(req, res);
+		if(m.isError()) req.getRequestDispatcher("/jsp/error.jsp").forward(req, res);
+		else res.sendRedirect(req.getContextPath() + "/?p=user&u=" + username);
 	}
 
 }
