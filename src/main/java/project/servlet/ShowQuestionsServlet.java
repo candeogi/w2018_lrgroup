@@ -38,44 +38,9 @@ public class ShowQuestionsServlet extends AbstractDatabaseServlet
             m = new Message("Cannot search for questions: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
         }
+        req.setAttribute("questions", q);
+        req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req, res);
 
-        res.setContentType("text/html; charset=utf-8");
-        PrintWriter out = res.getWriter();
-        out.printf("<!DOCTYPE html>%n");
 
-        out.printf("<html lang=\"en\">%n");
-        out.printf("<head>%n");
-        out.printf("<meta charset=\"utf-8\">%n");
-        out.printf("<title>Show questions</title>%n");
-        out.printf("</head>%n");
-        out.printf("<body>%n");
-        out.printf("<h1>Show questions</h1>%n");
-        out.printf("<hr/>%n");
-        if(m.isError()) {
-            out.printf("<ul>%n");
-            out.printf("<li>error code: %s</li>%n", m.getErrorCode());
-            out.printf("<li>message: %s</li>%n", m.getMessage());
-            out.printf("<li>details: %s</li>%n", m.getErrorDetails());
-            out.printf("</ul>%n");
-        } else {
-            out.printf("<p>%s</p>%n", m.getMessage());
-
-            out.printf("<table>%n");
-            out.printf("<tr>%n");
-            out.printf("<td>User</td><td>Title</td><td>Body</td><td>Published on</td><td>Last modified</td>%n");
-            out.printf("</tr>%n");
-
-            for(Question e: q) {
-                out.printf("<tr>%n");
-                out.printf("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>%n",
-                        e.getIDUser(), e.getTitle(), e.getBody(), e.getTimestamp(),e.getLastModified());
-                out.printf("</tr>%n");
-            }
-            out.printf("</table>%n");
-        }
-        out.printf("</body>%n");
-        out.printf("</html>%n");
-        out.flush();
-        out.close();
     }
 }
