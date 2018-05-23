@@ -9,7 +9,7 @@
 <h1>Shows questions</h1>
 <hr/>
 <c:import url="/jsp/include/show-message.jsp"/>
-<c:if test='${not empty resource-list && !message.error}'>
+<c:if test='${not empty questions && !message.error}'>
 
     <table>
         <thead>
@@ -20,7 +20,7 @@
         <!-- display the message -->
         <c:import url="/jsp/include/show-message.jsp"/>
         <tbody>
-        <c:forEach var="question" items="${resource-list}">
+        <c:forEach var="question" items="${questions}">
             <tr>
                 <td><c:out value="${question.ID}"/></td>
                 <td><c:out value="${question.title}"/></td>
