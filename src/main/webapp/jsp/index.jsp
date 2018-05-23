@@ -8,7 +8,9 @@
         <meta charset="utf-8">
         <title>Login Form</title>
     </head>
-
+    <header>
+        <c:import url="/jsp/include/header.jsp"/>
+    </header>
     <body>
         <h1>Index</h1>
         <p><a href="<c:url value="/?p=create-question"/>">Crea una domanda</a></p>

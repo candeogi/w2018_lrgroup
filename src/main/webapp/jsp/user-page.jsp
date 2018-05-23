@@ -8,7 +8,9 @@
         <meta charset="utf-8">
         <title>User Profile</title>
     </head>
-
+    <header>
+        <c:import url="/jsp/include/header.jsp"/>
+    </header>
     <body>
         <c:if test="${empty user}">
             <c:redirect url="/jsp/error.jsp" /> <!--Forse c'è un metodo migliore per impedire l'accesso diretto alla pagina-->

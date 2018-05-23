@@ -5,6 +5,9 @@
 	<head>
 		<title>404 - Not Found</title>
 	</head>
+	<header>
+		<c:import url="/jsp/include/header.jsp"/>
+	</header>
 	<body>
 		<h1>404 - Not Found</h1>
 		<hr/>

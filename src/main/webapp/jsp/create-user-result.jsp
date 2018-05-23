@@ -7,7 +7,9 @@
 	<head>
 		<title>Create User</title>
 	</head>
-
+	<header>
+		<c:import url="/jsp/include/header.jsp"/>
+	</header>
 	<body>
 		<h1>Create User</h1>
 		<hr/>

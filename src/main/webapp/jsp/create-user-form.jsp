@@ -8,7 +8,9 @@
 		<meta charset="utf-8">
 		<title>Create User</title>
 	</head>
-
+	<header>
+	<c:import url="/jsp/include/header.jsp"/>
+	</header>
   <body>
 	<h1>Create User</h1>
 	<c:if  test="${not empty sessionScope.loggedInUser}">

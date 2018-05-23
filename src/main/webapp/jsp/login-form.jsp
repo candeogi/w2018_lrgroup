@@ -8,7 +8,9 @@
         <meta charset="utf-8">
         <title>Login Form</title>
     </head>
-
+    <header>
+    <c:import url="/jsp/include/header.jsp"/>
+    </header>
     <body>
         <h1>Login</h1>
         <c:import url="/jsp/include/show-message.jsp"/>

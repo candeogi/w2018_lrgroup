@@ -12,7 +12,9 @@ Since: 1.0
 <head>
     <title>Login Result</title>
 </head>
-
+<header>
+    <c:import url="/jsp/include/header.jsp"/>
+</header>
 <body>
 
 <!-- display the message -->
