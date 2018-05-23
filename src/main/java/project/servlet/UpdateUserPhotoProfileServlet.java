@@ -19,16 +19,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.Part;
+import javax.servlet.annotation.MultipartConfig;
 
 
 /**
- * Updates a user's informations (except password and user's photoProfile)
+ * Updates a user's PhotoProfile
  * 
  * @author Alberto Pontini
  * @version 1.00
  * @since 1.00
  */
-public final class UpdateUserServlet extends AbstractDatabaseServlet
+
+@MultipartConfig(fileSizeThreshold=1024*1024, 	// 1 MB 
+                 maxFileSize=1024*1024,      	// 1 MB
+                 maxRequestSize=1024*1024*10)   // 10 MB
+public final class UpdateUserPhotoProfileServlet extends AbstractDatabaseServlet
 {
 
 	/**
@@ -48,12 +54,8 @@ public final class UpdateUserServlet extends AbstractDatabaseServlet
 			throws ServletException, IOException {
 
 		// request parameters
-		String name = null;
-		String surname = null;
+		Part photoProfile = null;
 		String username = null;
-		String email = null;
-		String bdate = null;
-		String description = null;
 
 		// model
 		User u  = null;
@@ -61,50 +63,41 @@ public final class UpdateUserServlet extends AbstractDatabaseServlet
 
 		try
 		{
-			// retrieves the request parameters
+			// retrieves the request parameter
 			username = req.getParameter("username");
+			photoProfile = req.getPart("photoProfile");
+			byte[] picToSet = null;
+			if(photoProfile == null)
+			{
+					//photoProfile = req.getParameter("currentPhotoProfile");
+					//byte[] picToSet = photoProfile.getBytes(); //Not too sure about this
+			}
+			else
+			{
+				InputStream fileContent = photoProfile.getInputStream();
 
-			name = req.getParameter("name");
-			if(name.equals(""))
-				name = req.getParameter("currentName");
+				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+				int nRead;
+				byte[] data = new byte[51200]; //Max image size is 500KB
 
-			surname = req.getParameter("surname");
-			if(surname.equals(""))
-				surname = req.getParameter("currentSurname");
+				while ((nRead = fileContent.read(data, 0, data.length)) != -1)
+				{
+				  buffer.write(data, 0, nRead);
+				}
 
-			email = req.getParameter("email");
-			if(email.equals(""))
-				email = req.getParameter("currentEmail");
+				buffer.flush();
 
-			bdate = req.getParameter("bdate");
-			if(bdate.equals("") || bdate.equals("mm/dd/yyy"))
-				bdate = req.getParameter("currentBdate");
-
-			description = req.getParameter("description");
-			if(description.equals(""))
-				description = req.getParameter("currentDescription");
-
-
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    		Date birthday = new Date(dateFormat.parse(bdate).getTime());
+				picToSet = buffer.toByteArray();
+			}
 			
-			u = new User(email, name, surname, username, null ,"", null, birthday, description);
+			u = new User(null, null, null, username, picToSet ,"", null, null, null);
 
 			// creates a new object for accessing the database and updates the user
-			new UpdateUserDatabase(getDataSource().getConnection(), u).updateUser();
-		}
-		catch(NumberFormatException e)
-		{
-			m = new Message("Birthday not correct","E300", e.getMessage());
-		}
-		catch(ParseException pe)
-		{
-			//Should not happen
-			m = new Message("Birthday not correct","E300", pe.getMessage());
+			new UpdateUserPhotoProfileDatabase(getDataSource().getConnection(), u).updateUserPhotoProfile();
 		}
 		catch (SQLException ex)
 		{
-			m = new Message("Cannot update the user: unexpected error while accessing the database.", 
+			m = new Message("Cannot upload image file: unexpected error while accessing the database.", 
 					"E200", ex.getMessage());
 		}
 		

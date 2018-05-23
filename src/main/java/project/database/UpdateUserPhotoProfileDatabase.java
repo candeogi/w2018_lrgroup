@@ -16,13 +16,13 @@ import java.util.List;
  * @version 1.00
  * @since 1.00
  */
-public final class UpdateUserDatabase {
+public final class UpdateUserPhotoProfileDatabase {
 
     /**
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "UPDATE Utente SET email=?, name=?, surname=?, birthday=?, description=? " +
+            "UPDATE Utente SET photoprofile=? " +
             "WHERE username=?";
 
     /**
@@ -43,7 +43,7 @@ public final class UpdateUserDatabase {
      * @param user
      *            the user to be created in the database.
      */
-    public UpdateUserDatabase(final Connection con, final User user)
+    public UpdateUserPhotoProfileDatabase(final Connection con, final User user)
     {
         this.con = con;
         this.user = user;
@@ -54,17 +54,13 @@ public final class UpdateUserDatabase {
      * @throws SQLException
      *             if any error occurs while storing the user.
      */
-    public void updateUser() throws SQLException {
+    public void updateUserPhotoProfile() throws SQLException {
 
         PreparedStatement pstmt = null;
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setString(1, user.getEmail());
-            pstmt.setString(2, user.getName());
-            pstmt.setString(3, user.getSurname());
-            pstmt.setDate(4, user.getBirthday());
-            pstmt.setString(5, user.getDescription());
-            pstmt.setString(6, user.getUsername());
+            pstmt.setBytes(1, user.getPhotoProfile());
+            pstmt.setString(2, user.getUsername());
 
             pstmt.execute();
 

@@ -17,48 +17,53 @@
         </c:if>
         <h1>User Profile</h1>
         <c:import url="/jsp/include/show-message.jsp"/>
-        <form method="POST" action="<c:url value="/update-user" />">
-            <img src="<c:out value="${user.photoProfile}" />" />
-            <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+
+        <img src="data:image/jpeg;${user.photoProfile}" /><br />
+        <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+            <form method="POST" enctype="multipart/form-data" action="<c:url value="/update-user-pic" />" >
                 <input type="hidden" name="currentPhotoProfile" value="<c:out value="${user.photoProfile}" />">
+                <input type="hidden" name="username" value="<c:out value="${user.username}" />">
                 <input type="file" name="photoProfile" /><br />
-            </c:if>
-            
-            <p>Name: <c:out value="${user.name}" /></p>
-            <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+                <button type="submit">Upload</button>
+            </form>
+        </c:if>
+        
+        <p>Name: <c:out value="${user.name}" /></p>
+        <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+            <form method="POST" action="<c:url value="/update-user" />" >
                 <input type="hidden" name="currentName" value="<c:out value="${user.name}" />">
                 <input type="text" name="name" /><br />
-            </c:if>
+        </c:if>
+    
+        <p>Surname: <c:out value="${user.surname}" /></p>
+        <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+            <input type="hidden" name="currentSurname" value="<c:out value="${user.surname}" />">
+            <input type="text" name="surname" /><br />
+        </c:if>
         
-            <p>Surname: <c:out value="${user.surname}" /></p>
-            <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
-                <input type="hidden" name="currentSurname" value="<c:out value="${user.surname}" />">
-                <input type="text" name="surname" /><br />
-            </c:if>
-            
-            <p>Email: <c:out value="${user.email}" /></p>
-            <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
-                <input type="hidden" name="currentEmail" value="<c:out value="${user.email}" />">
-                <input type="text" name="email" /><br />
-            </c:if>
-            
-            <p>Username: <c:out value="${user.username}" /></p>
-            <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
-                <input type="hidden" name="username" value="<c:out value="${user.username}" />">
-            </c:if>
-            <p>Birthday: <c:out value="${user.birthday}" /></p>
-            <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
-                <input type="hidden" name="currentBdate" value="<c:out value="${user.birthday}" />">
-                <input type="date" name="bdate" /><br />
-            </c:if>
+        <p>Email: <c:out value="${user.email}" /></p>
+        <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+            <input type="hidden" name="currentEmail" value="<c:out value="${user.email}" />">
+            <input type="text" name="email" /><br />
+        </c:if>
+        
+        <p>Username: <c:out value="${user.username}" /></p>
+        <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+            <input type="hidden" name="username" value="<c:out value="${user.username}" />">
+        </c:if>
+        <p>Birthday: <c:out value="${user.birthday}" /></p>
+        <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+            <input type="hidden" name="currentBdate" value="<c:out value="${user.birthday}" />">
+            <input type="date" name="bdate" /><br />
+        </c:if>
 
-            <p>Registration Date: <c:out value="${user.registrationDate}" /></p>
-            <p>Description: <c:out value="${user.description}" /></p>
-            <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
-                <input type="hidden" name="currentDescription" value="<c:out value="${user.description}" />">
-                <input type="textarea" name="description" /><br />
-                <button type="submit">Apply Changes</button><br/>
-            </c:if>
-        </form>
+        <p>Registration Date: <c:out value="${user.registrationDate}" /></p>
+        <p>Description: <c:out value="${user.description}" /></p>
+        <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
+            <input type="hidden" name="currentDescription" value="<c:out value="${user.description}" />">
+            <input type="textarea" name="description" /><br />
+            <button type="submit">Apply Changes</button><br/>
+            </form>
+        </c:if>
     </body>
 </html>
