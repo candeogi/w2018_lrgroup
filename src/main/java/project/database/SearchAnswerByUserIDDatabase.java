@@ -16,7 +16,7 @@
 
 package project.database;
 
-import project.resource.Question;
+import project.resource.Answer;
 import project.resource.ResourceList;
 
 import java.sql.Connection;
@@ -27,61 +27,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieve recent questions in the database.
+ * Retrieve answers from an user in the database.
  *
- * @author Davide Storato
+ * @author Alberto Forti
  * @version 1.00
  * @since 1.00
  */
-public final class SearchQuestionByTimestampDatabase
+public final class SearchAnswerByUserIDDatabase
 {
 
     /**
      * The SQL statement to be executed
      */
-    private static final String QUERY = 
-            "SELECT * " + 
-            "FROM Question " +
-            "ORDER BY TimeStamp " + "DESC";
+    private static final String QUERY =
+            "SELECT * " +
+                    "FROM answer " +
+                    "WHERE iduser=?";
 
     /**
      * The connection to the database
      */
     private final Connection con;
+    private final String username;
+
 
     /**
-     * Creates a new object for recent questions retrieval.
+     * Creates a new object for answers retrieval.
      *
      * @param con
      *            the connection to the database.
+     * @param user
+     *            the user related to answers
      */
-    public SearchQuestionByTimestampDatabase(final Connection con)
+    public SearchAnswerByUserIDDatabase(final Connection con, final String user)
     {
         this.con = con;
+        this.username = user;
     }
 
     /**
-     * Retrieve recent questions in the database.
+     * Retrieve answers of a specific user in the database.
      *
-     * @return An ArrayList of recent questions.
+     * @return a list of {@code Answer} (must be one) object related to an user.
      *
      * @throws SQLException
-     *             if any error occurs while retrieve the questions.
+     *             if any error occurs while retrieve the answer.
      */
-    public List<Question> SearchQuestionByTimestamp() throws SQLException
+    public List<Answer> searchAnswerByUserID() throws SQLException
     {
 
         PreparedStatement pstmt = null;
-        List<Question> questList = new ArrayList<>();
+        List<Answer> answerList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
-            
+            pstmt.setString(1, username);
+
+
             ResultSet rs = pstmt.executeQuery();
-            
+
             while(rs.next()){
-                Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
-                questList.add(q);
+                Answer a = new Answer(rs.getInt("id"), rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"));
+                answerList.add(a);
             }
 
         } finally {
@@ -92,7 +99,7 @@ public final class SearchQuestionByTimestampDatabase
             con.close();
         }
 
-        return questList;
+        return answerList;
 
     }
 }

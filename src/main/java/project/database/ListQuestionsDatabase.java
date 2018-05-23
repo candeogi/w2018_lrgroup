@@ -27,22 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieve recent questions in the database.
+ * Lists all the questions in the database.
  *
- * @author Davide Storato
+ * @author Alberto Forti
  * @version 1.00
  * @since 1.00
  */
-public final class SearchQuestionByTimestampDatabase
-{
+public final class ListQuestionsDatabase {
 
     /**
      * The SQL statement to be executed
      */
-    private static final String QUERY = 
-            "SELECT * " + 
-            "FROM Question " +
-            "ORDER BY TimeStamp " + "DESC";
+    private static final String STATEMENT = "SELECT * FROM Question";
 
     /**
      * The connection to the database
@@ -50,41 +46,46 @@ public final class SearchQuestionByTimestampDatabase
     private final Connection con;
 
     /**
-     * Creates a new object for recent questions retrieval.
+     * Creates a new object for listing all the questions.
      *
      * @param con
      *            the connection to the database.
      */
-    public SearchQuestionByTimestampDatabase(final Connection con)
-    {
+    public ListQuestionsDatabase(final Connection con) {
         this.con = con;
     }
 
     /**
-     * Retrieve recent questions in the database.
+     * Lists all the questions in the database.
      *
-     * @return An ArrayList of recent questions.
+     * @return a list of {@code questions} object.
      *
      * @throws SQLException
-     *             if any error occurs while retrieve the questions.
+     *             if any error occurs while searching for questions.
      */
-    public List<Question> SearchQuestionByTimestamp() throws SQLException
-    {
+    public List<Question> listQuestions() throws SQLException {
 
         PreparedStatement pstmt = null;
-        List<Question> questList = new ArrayList<>();
+        ResultSet rs = null;
+
+        // the results of the search
+        final List<Question> questions = new ArrayList<Question>();
 
         try {
-            pstmt = con.prepareStatement(QUERY);
-            
-            ResultSet rs = pstmt.executeQuery();
-            
-            while(rs.next()){
-                Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
-                questList.add(q);
+            pstmt = con.prepareStatement(STATEMENT);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                questions.add(new Question(rs.getInt("id"), rs.getString("idUser"),
+                        rs.getString("title"), rs.getString("body"),
+                        rs.getTimestamp("ts"), rs.getTimestamp("lastModified")));
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
             }
 
-        } finally {
             if (pstmt != null) {
                 pstmt.close();
             }
@@ -92,7 +93,6 @@ public final class SearchQuestionByTimestampDatabase
             con.close();
         }
 
-        return questList;
-
+        return questions;
     }
 }

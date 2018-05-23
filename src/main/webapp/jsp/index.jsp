@@ -12,15 +12,17 @@
     <body>
         <h1>Index</h1>
         <p><a href="<c:url value="/?p=create-question"/>">Crea una domanda</a></p>
+        <p><a href="<c:url value="/rest/question"/>">Visualizza domande</a></p>
+
         <c:import url="/jsp/include/show-message.jsp"/>
         <c:choose>
-        <c:when test="${empty sessionScope.loggedInUser}">
-            <p>Please <a href="<c:url value="/?p=create-user"/>">Register</a> or <a href="<c:url value="/?p=log-in"/>">Login</a></p>
-        </c:when>
-        <c:when test="${not empty sessionScope.loggedInUser}">
-            <p>Logged as: <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />"><c:out value='${sessionScope.loggedInUser}'/></a></p>
-            <a href="<c:url value="/?p=log-out"/>">Logout</a>
-        </c:when>
-    </c:choose>
+            <c:when test="${empty sessionScope.loggedInUser}">
+                <p>Please <a href="<c:url value="/?p=create-user"/>">Register</a> or <a href="<c:url value="/?p=log-in"/>">Login</a></p>
+            </c:when>
+            <c:when test="${not empty sessionScope.loggedInUser}">
+                <p>Logged as: <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />"><c:out value='${sessionScope.loggedInUser}'/></a></p>
+                <a href="<c:url value="/?p=log-out"/>">Logout</a>
+            </c:when>
+        </c:choose>
     </body>
 </html>

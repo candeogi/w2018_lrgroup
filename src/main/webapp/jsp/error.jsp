@@ -11,5 +11,6 @@
 
     <body>
         <h1>There has been an error</h1>
+        <c:import url="/jsp/include/show-message.jsp"/>
     </body>
 </html>

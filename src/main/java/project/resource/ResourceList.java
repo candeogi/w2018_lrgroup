@@ -2,6 +2,7 @@ package project.resource;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import java.io.*;
+import java.text.ParseException;
 
 /**
  * Represents a list of {@link Resource} objects.
@@ -69,5 +70,9 @@ public final class ResourceList<T extends Resource> extends Resource {
 
         jg.close();
     }
+
+    /*public static ResourceList(final Iterable<T> list) fromJSON(final InputStream in) throws IOException, ParseException{
+
+    }*/
 
 }

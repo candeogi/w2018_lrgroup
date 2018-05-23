@@ -17,6 +17,11 @@
 	</servlet>
 
 	<servlet>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<servlet-class>project.servlet.UpdateUserServlet</servlet-class>
+	</servlet>
+
+	<servlet>
 		<servlet-name>CreateAnswerServlet</servlet-name>
 		<servlet-class>project.servlet.CreateAnswerServlet</servlet-class>
 	</servlet>
@@ -54,6 +59,11 @@
 	<servlet-mapping>
 		<servlet-name>CreateUserServlet</servlet-name>
 		<url-pattern>/create-user</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<url-pattern>/update-user</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -28,7 +27,8 @@ import javax.sql.DataSource;
  * @version 1.0.0
  *
  */
-public final class LoginServlet extends AbstractDatabaseServlet {
+public final class LoginServlet extends AbstractDatabaseServlet
+{
 
     /**
      * Checks user login
@@ -85,15 +85,11 @@ public final class LoginServlet extends AbstractDatabaseServlet {
                     "E200", ex.getMessage());
         }
 
-        // stores the user list and the message as a request attribute
-        //req.setAttribute("userList", userlist);
-        //req.setAttribute("message", m);
-
-        // forwards the control to the search-employee-result JSP
+        // gets back to the page where the user was headed to before being asked for his/her login
         if(m==null || !m.isError())
         {
             String from = req.getParameter("from");
-            if(from != null || !from.equals(""))
+            if(from != null && !from.equals(""))
             {
                 res.sendRedirect(req.getContextPath() + "/?p=" + req.getParameter("from"));
             }

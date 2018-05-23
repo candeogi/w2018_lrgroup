@@ -27,48 +27,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieve recent questions in the database.
+ * Retrive question by ID in the database.
  *
- * @author Davide Storato
+ * @author Alberto Forti
  * @version 1.00
  * @since 1.00
  */
-public final class SearchQuestionByTimestampDatabase
+public final class SearchQuestionByIDDatabase
 {
 
     /**
      * The SQL statement to be executed
      */
-    private static final String QUERY = 
-            "SELECT * " + 
-            "FROM Question " +
-            "ORDER BY TimeStamp " + "DESC";
+    private static final String QUERY =
+            "SELECT * " +
+                    "FROM Question " +
+                    "WHERE id=?";
 
     /**
      * The connection to the database
      */
     private final Connection con;
+    private final int id;
+
 
     /**
-     * Creates a new object for recent questions retrieval.
+     * Creates a new object for a specific question retrieval.
      *
      * @param con
      *            the connection to the database.
+     * @param ID
+     *            the ID of a question.
      */
-    public SearchQuestionByTimestampDatabase(final Connection con)
+    public SearchQuestionByIDDatabase(final Connection con, final int ID)
     {
         this.con = con;
+        this.id = ID;
     }
 
     /**
-     * Retrieve recent questions in the database.
+     * Retrieve a specific question in the database.
      *
-     * @return An ArrayList of recent questions.
+     * @return a list of {@code Question} (must be one) object matching the ID.
      *
      * @throws SQLException
-     *             if any error occurs while retrieve the questions.
+     *             if any error occurs while retrieve the question.
      */
-    public List<Question> SearchQuestionByTimestamp() throws SQLException
+    public List<Question> SearchQuestionByID() throws SQLException
     {
 
         PreparedStatement pstmt = null;
@@ -76,9 +81,11 @@ public final class SearchQuestionByTimestampDatabase
 
         try {
             pstmt = con.prepareStatement(QUERY);
-            
+            pstmt.setInt(1, id);
+
+
             ResultSet rs = pstmt.executeQuery();
-            
+
             while(rs.next()){
                 Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
                 questList.add(q);

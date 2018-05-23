@@ -92,7 +92,7 @@ public final class RestQuestion extends RestResource
 	public void searchQuestionByID()  throws IOException
 	{
 
-		Question q  = null;
+		List<Question> q  = null;
 		Message m = null;
 
 		try
@@ -105,12 +105,57 @@ public final class RestQuestion extends RestResource
 
 
 			// creates a new object for accessing the database and search the question
-			q = null; //new SearchQuestionByIDDatabase(con, salary).searchQuestionByID(); TODO Method
+			q = new SearchQuestionByIDDatabase(con, questionID).SearchQuestionByID();
 
 			if(q != null)
 			{
 				res.setStatus(HttpServletResponse.SC_OK);
-				q.toJSON(res.getOutputStream());
+				new ResourceList(q).toJSON(res.getOutputStream());
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot search question: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t)
+		{
+			m = new Message("Cannot search question: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
+	 * Searches question by user.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+	public void searchQuestionByUser()  throws IOException
+	{
+
+		List<Question> q  = null;
+		Message m = null;
+
+		try
+		{
+			// parse the URI path to extract the ID
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("user") + 4);
+
+			final String idUser = path.substring(1);
+
+
+			// creates a new object for accessing the database and search the question
+			q = new SearchQuestionByUserDatabase(con, idUser).SearchQuestionByUser();
+
+			if(q != null)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+				new ResourceList(q).toJSON(res.getOutputStream());
 			}
 			else
 			{
@@ -146,11 +191,11 @@ public final class RestQuestion extends RestResource
 			String path = req.getRequestURI();
 			path = path.substring(path.lastIndexOf("timestamp") + 9);
 
-			final long timestamp = Long.parseLong(path.substring(1));
+			//final long timestamp = Long.parseLong(path.substring(1));
 
 
 			// creates a new object for accessing the database and search the question
-			ql = null; //new SearchQuestionByTimestampDatabase(con, salary).searchQuestionByTimestamp(); TODO Method
+			ql = new SearchQuestionByTimestampDatabase(con).SearchQuestionByTimestamp();
 
 			if(ql != null)
 			{
@@ -167,6 +212,31 @@ public final class RestQuestion extends RestResource
 		}
 		catch (Throwable t)
 		{
+			m = new Message("Cannot search question: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	public void listQuestions() throws IOException {
+
+		List<Question> q = null;
+		Message m = null;
+
+		try{
+			// creates a new object for accessing the database and lists all the questions
+			q = new ListQuestionsDatabase(con).listQuestions();
+
+			if(q != null) {
+				res.setStatus(HttpServletResponse.SC_OK);
+				new ResourceList(q).toJSON(res.getOutputStream());
+			} else {
+				// it should not happen
+				m = new Message("Cannot list question: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		} catch (Throwable t) {
 			m = new Message("Cannot search question: unexpected error.", "E5A1", t.getMessage());
 			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			m.toJSON(res.getOutputStream());

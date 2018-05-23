@@ -1,6 +1,7 @@
 package project.servlet;
 
 import project.resource.*;
+import project.rest.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 			//Controllare l'autenticazione
 			
 			String[] split = req.getRequestURI().split("/");
-			switch(split[1])
+			switch(split[3]) // split[3] -> a 0 è vuoto, poi web-app-unipd, poi rest, poi question/answer
 			{
 				case "question":
 					if (processQuestion(req, res))
@@ -125,7 +126,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 		String path = req.getRequestURI();
 		Message m = null;
 		try {
-			// strip everyhing until after the /question
+			// strip everything until after the /answer
 			path = path.substring(path.lastIndexOf("answer") + 6);
 
 			if (path.length() == 0 || path.equals("/"))
@@ -138,7 +139,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 			{
 				if(path.contains("id"))
 				{
-					// /answer/id/{answerID}
+					// /answer/id/{questionID}
 					path = path.substring(path.lastIndexOf("id") + 2);
 					if (path.length() == 0 || path.equals("/"))
 					{
@@ -152,7 +153,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 						try
 						{
 							Integer.parseInt(path.substring(1));
-							//new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID(); TODO AbstractDatabaseServlet
+							new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
 						}
 						catch (NumberFormatException e)
 						{
@@ -177,7 +178,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 					}
 					else
 					{
-						//new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID(); TODO AbstractDatabaseServlet
+						new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID();
 					}
 				}
 			}
@@ -194,48 +195,35 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 	private boolean processQuestion(HttpServletRequest req, HttpServletResponse res) throws IOException
 	{
 		OutputStream out = res.getOutputStream();
+		final String method = req.getMethod();
+
 		String path = req.getRequestURI();
 		Message m = null;
 		try {
-			// strip everyhing until after the /question
+			// strip everything until after the /question
 			path = path.substring(path.lastIndexOf("question") + 8);
 
 			if (path.length() == 0 || path.equals("/"))
 			{
-				//chiamare funzione che lista le domande
+				switch (method) {
+					case "GET":
+						new RestQuestion(req, res, getDataSource().getConnection()).listQuestions();
+						/*List<Question> list
+						req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req,res);*/
+						//TODO json parser
+						break;
+					default:
+						m = new Message("Unsupported operation for URI /question.",
+								"E4A5", String.format("Requested operation %s.", method));
+						res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+						m.toJSON(res.getOutputStream());
+						break;
+				}
+
 			}
 			else
 			{
-				if(path.contains("timestamp"))
-				{
-					//question/timestamp/{unixTimeStamp}
-					path = path.substring(path.lastIndexOf("timestamp") + 9); //lo faccio per eliminare il / prima di timestamp
-					if (path.length() == 0 || path.equals("/"))
-					{
-						m = new Message("Wrong format for URI /question/timestamp/{unixTimeStamp}: no {unixTimeStamp} specified.",
-										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-						m.toJSON(res.getOutputStream());
-					}
-					else
-					{
-						try
-						{
-							Long time = (long) Long.parseLong(path.substring(1))*1000;
-							Date timestamp = new Date(time);
-							//new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByTimestamp(); TODO AbstractDatabaseServlet
-						}
-						catch (NumberFormatException e)
-						{
-							m = new Message(
-									"Wrong format for URI /question/timestamp/{unixTimestamp}: {unixTimestamp} is not an integer.",
-									"E4A7", e.getMessage());
-							res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-							m.toJSON(res.getOutputStream());
-						}
-					}
-				}
-				else if(path.contains("id"))
+				if(path.contains("id"))
 				{
 					//question/id/{ID}
 					path = path.substring(path.lastIndexOf("id")+2);
@@ -251,7 +239,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 						try
 						{
 							Integer.parseInt(path.substring(1));
-							//new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByTimestamp(); TODO AbstractDatabaseServlet
+							new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByID();
 						}
 						catch (NumberFormatException e)
 						{
@@ -261,6 +249,23 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 							res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 							m.toJSON(res.getOutputStream());
 						}
+					}
+				}
+				else if(path.contains("user"))
+				{
+					//question/user/{userID}
+					path = path.substring(path.lastIndexOf("user")+4);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /question/user/{userID}: no {userID} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						String user = path.substring(1);
+						new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByUser();
 					}
 				}
 			}

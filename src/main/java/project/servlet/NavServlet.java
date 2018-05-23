@@ -111,7 +111,8 @@ public class NavServlet extends AbstractDatabaseServlet
 				break;
 
 			default:
-				req.getRequestDispatcher("/jsp/index.jsp").forward(req, res);
+				req.setAttribute("message", new Message("Resource not Found", "E404", "Page '" + get + "' not found"));
+				req.getRequestDispatcher("/jsp/404.jsp").forward(req, res);
 				break;
 		}
 	}
