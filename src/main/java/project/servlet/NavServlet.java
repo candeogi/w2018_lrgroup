@@ -42,6 +42,17 @@ public class NavServlet extends AbstractDatabaseServlet
 
 				break;
 
+			case "show-user-questions":
+				if(req.getSession().getAttribute("loggedInUser") != null)
+					req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req, res);
+				else
+				{
+					req.setAttribute("from", "show-user-questions");
+					req.getRequestDispatcher("/jsp/login-form.jsp").forward(req, res);
+				}
+
+				break;
+
 			case "create-answer":
 				if(req.getSession().getAttribute("loggedInUser") != null)
 					req.getRequestDispatcher("/jsp/create-answer-form.jsp").forward(req, res);

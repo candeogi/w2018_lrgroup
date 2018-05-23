@@ -14,23 +14,25 @@ import project.database.*;
 import project.resource.*;
 
 /**
- * Show questions ordered by timestamp
+ * Show questions by user
  *
  * @author Alberto Forti
  * @version 1.0.0
  *
  */
 
-public class ShowQuestionsServlet extends AbstractDatabaseServlet
+public class ShowQuestionUserServlet extends SessionManagerServlet
 {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
         List<Question> q = null;
+        String IDUser;
         Message m = null;
         try {
-            // creates a new object for accessing the database and searching the questions
-            q= new SearchQuestionByTimestampDatabase(getDataSource().getConnection()).SearchQuestionByTimestamp();
-            m = new Message("Questions successfully searched.");
+                // creates a new object for accessing the database and searching the questions
+                IDUser = (String) req.getSession().getAttribute("loggedInUser");
+                q = new SearchQuestionByUserDatabase(getDataSource().getConnection(),IDUser).SearchQuestionByUser();
+                m = new Message("Questions successfully searched.");
 
         } catch (SQLException ex) {
             m = new Message("Cannot search for questions: unexpected error while accessing the database.",
