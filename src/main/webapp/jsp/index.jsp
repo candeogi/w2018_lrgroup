@@ -13,8 +13,10 @@
     </header>
     <body>
         <h1>Index</h1>
-        <p><a href="<c:url value="/?p=create-question"/>">Crea una domanda</a></p>
-        <p><a href="<c:url value="/show-questions"/>">Visualizza domande</a></p>
+        <p><a href="<c:url value="/?p=create-question"/>">Create a question</a></p>
+        <p><a href="<c:url value="/show-questions"/>">Show questions</a></p>
+
+        <p><a href="<c:url value="/jsp/show-question-ajax.jsp"/>">Show questions (via AJAX/REST)</a></p>
 
         <c:import url="/jsp/include/show-message.jsp"/>
         <c:choose>

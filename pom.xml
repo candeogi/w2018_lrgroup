@@ -166,6 +166,12 @@
 		    <artifactId>taglibs-standard-spec</artifactId>
 		    <version>1.2.5</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-jstlel</artifactId>
+			<version>1.2.5</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.postgresql</groupId>

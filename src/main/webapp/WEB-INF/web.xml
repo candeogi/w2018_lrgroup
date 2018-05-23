@@ -116,6 +116,11 @@
 		<url-pattern>/show-user-questions</url-pattern>
 	</servlet-mapping>
 
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+
 
 	<resource-ref>
       <description>Connection pool to the database</description>
