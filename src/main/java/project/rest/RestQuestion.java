@@ -1,5 +1,9 @@
 package project.rest;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import project.database.*;
 import project.resource.*;
 
@@ -9,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.io.*;
 
@@ -242,4 +250,98 @@ public final class RestQuestion extends RestResource
 			m.toJSON(res.getOutputStream());
 		}
 	}
+
+
+	/**
+	 * The JSON factory to be used for creating JSON parsers and generators.
+	 */
+	/*protected static final JsonFactory JSON_FACTORY;
+
+	static {
+		// setup the JSON factory
+		JSON_FACTORY = new JsonFactory();
+		JSON_FACTORY.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
+		JSON_FACTORY.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
+	}
+	/**
+	 * Creates a {@code Question} from its JSON representation.
+	 *
+	 * @param in the input stream containing the JSON document.
+	 *
+	 * @return the {@code Question} created from the JSON representation.
+	 *
+	 * @throws IOException if something goes wrong while parsing.
+	 *
+	 * @throws ParseException if date is not parsed correctly
+	 */
+	/*public static List<Question> fromJSON(final InputStream in) throws IOException, ParseException
+	{
+
+		// the fields read from JSON
+		int jID = -1;
+		String jBody = null;
+		String jTitle = null;
+		String jTimestamp = null;
+		String jLastModified = null;
+		String jIDUser = null;
+		List<Question> q = null;
+
+		final JsonParser jp = JSON_FACTORY.createParser(in);
+
+		// I'm looking for the question field
+		//i'll keep looping until i find a token which is a field name or until i find my resource token
+		while (jp.getCurrentToken() != JsonToken.FIELD_NAME || "resource-list".equals(jp.getCurrentName()) == false)
+		{
+			// there are no more events
+			if (jp.nextToken() == null)
+			{
+				throw new IOException("Unable to parse JSON: no question object found.");
+			}
+		}
+
+		while (jp.nextToken() != JsonToken.END_OBJECT)
+		{
+			if (jp.getCurrentToken() == JsonToken.FIELD_NAME)
+			{
+				switch (jp.getCurrentName())
+				{
+					case "ID":
+						jp.nextToken();
+						jID = jp.getIntValue();
+						break;
+					case "body":
+						jp.nextToken();
+						jBody = jp.getText();
+						break;
+					case "lastModified":
+						jp.nextToken();
+						jLastModified = jp.getText();
+						break;
+					case "timestamp":
+						jp.nextToken();
+						jTimestamp = jp.getText();
+						break;
+					case "IDUser":
+						jp.nextToken();
+						jIDUser= jp.getText();
+						break;
+					case "title":
+						jp.nextToken();
+						jTitle= jp.getText();
+						break;
+				}
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				Date parsedDate = dateFormat.parse(jTimestamp);
+				Timestamp databaseTimestamp = new Timestamp(parsedDate.getTime());
+				parsedDate = dateFormat.parse(jLastModified);
+				Timestamp databaseLastModified = new Timestamp(parsedDate.getTime());
+				q.add(new Question(jID,jIDUser,jTitle, jBody, databaseTimestamp ,databaseLastModified));
+			}
+		}
+
+
+		return q;
+
+	}*/
+
 }

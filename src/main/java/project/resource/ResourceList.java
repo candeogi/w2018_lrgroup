@@ -1,8 +1,17 @@
 package project.resource;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
+
 import java.io.*;
+import java.sql.Timestamp;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Represents a list of {@link Resource} objects.
@@ -71,7 +80,40 @@ public final class ResourceList<T extends Resource> extends Resource {
         jg.close();
     }
 
-    /*public static ResourceList(final Iterable<T> list) fromJSON(final InputStream in) throws IOException, ParseException{
+    /*public static ResourceList<Resource> fromJSON(final InputStream in) throws ParseException, IOException{
+
+        JsonParser jp = JSON_FACTORY.createParser(in);
+
+        while (jp.getCurrentToken() != JsonToken.FIELD_NAME || "resource-list".equals(jp.getCurrentName()) == false) {
+            // there are no more events
+            if (jp.nextToken() == null) {
+                throw new IOException("Unable to parse JSON: no resource-list object found.");
+            }
+        }
+
+        while (jp.nextToken() != JsonToken.END_OBJECT) {
+            if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
+                switch (jp.getCurrentName()) {
+                    case "badge":
+                        jp.nextToken();
+                        jBadge = jp.getIntValue();
+                        break;
+                    case "surname":
+                        jp.nextToken();
+                        jSurname = jp.getText();
+                        break;
+                    case "age":
+                        jp.nextToken();
+                        jAge = jp.getIntValue();
+                        break;
+                    case "salary":
+                        jp.nextToken();
+                        jSalary = jp.getIntValue();
+                        break;
+                }
+            }
+        }
+
 
     }*/
 

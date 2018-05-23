@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.Base64;
 
 
 import javax.servlet.ServletException;
@@ -67,10 +68,10 @@ public final class UpdateUserPhotoProfileServlet extends AbstractDatabaseServlet
 			username = req.getParameter("username");
 			photoProfile = req.getPart("photoProfile");
 			byte[] picToSet = null;
-			if(photoProfile == null)
+			if(photoProfile.getSubmittedFileName().equals(""))
 			{
-					//photoProfile = req.getParameter("currentPhotoProfile");
-					//byte[] picToSet = photoProfile.getBytes(); //Not too sure about this
+				m = new Message("Cannot upload image file: empty request", 
+					"E200", "Please fill the upload form");
 			}
 			else
 			{
@@ -88,12 +89,14 @@ public final class UpdateUserPhotoProfileServlet extends AbstractDatabaseServlet
 				buffer.flush();
 
 				picToSet = buffer.toByteArray();
+
+				u = new User(null, null, null, username, Base64.getEncoder().encodeToString(picToSet) ,"", null, null, null);
+
+				// creates a new object for accessing the database and updates the user
+				new UpdateUserPhotoProfileDatabase(getDataSource().getConnection(), u).updateUserPhotoProfile();
 			}
 			
-			u = new User(null, null, null, username, picToSet ,"", null, null, null);
-
-			// creates a new object for accessing the database and updates the user
-			new UpdateUserPhotoProfileDatabase(getDataSource().getConnection(), u).updateUserPhotoProfile();
+			
 		}
 		catch (SQLException ex)
 		{

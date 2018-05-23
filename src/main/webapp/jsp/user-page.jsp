@@ -18,7 +18,7 @@ cre<%@ page contentType="text/html;charset=utf-8" %>
         <h1>User Profile</h1>
         <c:import url="/jsp/include/show-message.jsp"/>
 
-        <img src="data:image/jpeg;${user.photoProfile}" /><br />
+        <img height="150px" width="150px" src="data:image/jpeg;base64,${user.photoProfile}" /><br /> <!--Temporary inline height/widht, sorry about that!-->
         <c:if test="${not empty sessionScope.loggedInUser and sessionScope.loggedInUser==user.username}">
             <form method="POST" enctype="multipart/form-data" action="<c:url value="/update-user-pic" />" >
                 <input type="hidden" name="currentPhotoProfile" value="<c:out value="${user.photoProfile}" />">

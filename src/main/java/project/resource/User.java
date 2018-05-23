@@ -21,7 +21,7 @@ public class User extends Resource
     private final String name;
     private final String surname;
     private final String username;
-    private final byte[] photoProfile;
+    private final String photoProfile;
     private final String password;
     private final Date birthday;
     private final Date registrationDate;
@@ -49,7 +49,7 @@ public class User extends Resource
      *              the descriptiom of the user
      */
     public User(final String email, final String name, final String surname, final String username,
-                final byte[] photoProfile, final String password, final Date registrationDate,
+                final String photoProfile, final String password, final Date registrationDate,
                 final Date birthday, final String description)
     {
         this.email = email;
@@ -127,7 +127,7 @@ public class User extends Resource
      *
      * @return the user's profile pic path.
      */
-    public final byte[] getPhotoProfile()
+    public final String getPhotoProfile()
     {
         return photoProfile;
     }
@@ -185,7 +185,7 @@ public class User extends Resource
         jg.writeStringField("name",name);
         jg.writeStringField("surname",surname);
         jg.writeStringField("username",username);
-        jg.writeBinaryField("photoProfile",photoProfile);
+        jg.writeStringField("photoProfile",photoProfile);
         jg.writeStringField("registrationDate",registrationDate.toString());
         jg.writeStringField("birthday",birthday.toString());
         jg.writeStringField("description",description);

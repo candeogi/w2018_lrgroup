@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServlet;
 import java.util.Date;
 import java.io.*;
+import java.util.List;
 
 public class RestResolverServlet extends AbstractDatabaseServlet
 {
@@ -196,7 +197,6 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 	{
 		OutputStream out = res.getOutputStream();
 		final String method = req.getMethod();
-
 		String path = req.getRequestURI();
 		Message m = null;
 		try {
@@ -207,10 +207,12 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 			{
 				switch (method) {
 					case "GET":
-						new RestQuestion(req, res, getDataSource().getConnection()).listQuestions();
-						/*List<Question> list
-						req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req,res);*/
-						//TODO json parser
+						RestQuestion rq = new RestQuestion(req, res, getDataSource().getConnection());
+						rq.listQuestions();
+						//TODO json parser in AJAX
+						//List<Question> ql = rq.fromJSON(req.getInputStream());
+						//req.setAttribute("questions",ql);
+						//req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req,res);
 						break;
 					default:
 						m = new Message("Unsupported operation for URI /question.",
@@ -219,6 +221,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 						m.toJSON(res.getOutputStream());
 						break;
 				}
+
 
 			}
 			else
