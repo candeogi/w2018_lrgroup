@@ -43,7 +43,7 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 	 *             if any error occurs in the client/server communication.
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+			throws ServletException, IOException {		
 
 		// request parameters
 		String username = null;

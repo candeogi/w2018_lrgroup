@@ -59,7 +59,7 @@ public final class UpdateUserPhotoProfileDatabase {
         PreparedStatement pstmt = null;
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setBytes(1, user.getPhotoProfile());
+            pstmt.setString(1, user.getPhotoProfile());
             pstmt.setString(2, user.getUsername());
 
             pstmt.execute();
