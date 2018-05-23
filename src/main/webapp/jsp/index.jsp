@@ -23,6 +23,7 @@
             </c:when>
             <c:when test="${not empty sessionScope.loggedInUser}">
                 <p>Logged as: <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />"><c:out value='${sessionScope.loggedInUser}'/></a></p>
+                <a href="<c:url value="/?p=answer"/>">Answer to a Question</a>
                 <a href="<c:url value="/?p=log-out"/>">Logout</a>
             </c:when>
         </c:choose>
