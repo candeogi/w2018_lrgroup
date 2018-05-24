@@ -19,9 +19,9 @@
 --
 -- Insertion into the Answer table
 --
-INSERT INTO answer VALUES (DEFAULT, FALSE,'i dont know man', '2016-06-22 19:10:25-07','lucarossi',null);
-INSERT INTO answer VALUES (DEFAULT, FALSE, 'just do it lol',  '2016-06-22 19:10:25-07','nicolaferro',null);
-INSERT INTO answer VALUES (DEFAULT, FALSE, 'google it',  '2016-06-22 19:10:25-07','lucarossi',null);
-INSERT INTO answer VALUES (DEFAULT, TRUE, 'just add some numbers',  '2016-06-22 19:10:25-07','maurozoppo',null);
-INSERT INTO answer VALUES (DEFAULT, FALSE, 'how to google?', '2016-06-22 19:10:25-07', 'lucarossi', 3);
-INSERT INTO answer VALUES (DEFAULT, FALSE, 'www.google.com',  '2016-06-22 19:10:25-07', 'lucarossi',5);
+INSERT INTO lr_group.answer VALUES (DEFAULT, FALSE,'i dont know man', '2016-06-22 19:10:25-07','lucarossi',null);
+INSERT INTO lr_group.answer VALUES (DEFAULT, FALSE, 'just do it lol',  '2016-06-22 19:10:25-07','nicolaferro',null);
+INSERT INTO lr_group.answer VALUES (DEFAULT, FALSE, 'google it',  '2016-06-22 19:10:25-07','lucarossi',null);
+INSERT INTO lr_group.answer VALUES (DEFAULT, TRUE, 'just add some numbers',  '2016-06-22 19:10:25-07','maurozoppo',null);
+INSERT INTO lr_group.answer VALUES (DEFAULT, FALSE, 'how to google?', '2016-06-22 19:10:25-07', 'lucarossi', 3);
+INSERT INTO lr_group.answer VALUES (DEFAULT, FALSE, 'www.google.com',  '2016-06-22 19:10:25-07', 'lucarossi',5);

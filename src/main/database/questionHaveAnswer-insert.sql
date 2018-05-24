@@ -17,10 +17,10 @@
 --  Since: 1.0
 
 -- Insertion into have table
-INSERT INTO have VALUES (1,1);
-INSERT INTO have VALUES (1,2);
-INSERT INTO have VALUES (1,3);
-INSERT INTO have VALUES (1,4);
-INSERT INTO have VALUES (1,5);
-INSERT INTO have VALUES (1,6);
+INSERT INTO lr_group.have VALUES (1,1);
+INSERT INTO lr_group.have VALUES (1,2);
+INSERT INTO lr_group.have VALUES (1,3);
+INSERT INTO lr_group.have VALUES (1,4);
+INSERT INTO lr_group.have VALUES (1,5);
+INSERT INTO lr_group.have VALUES (1,6);
 
