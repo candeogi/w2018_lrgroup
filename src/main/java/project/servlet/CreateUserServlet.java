@@ -80,7 +80,7 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 			{
 				m = new Message(String.format("User %s successfully created.", username));
 			}
-			Date regDate = new Date(((long)System.currentTimeMillis()*1000));
+			Date regDate = new Date(((long)System.currentTimeMillis()));
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     		Date birthday = new Date(dateFormat.parse(bdate).getTime());
 
