@@ -32,6 +32,8 @@ public class Question extends Resource
 	 *            the title of the question.
 	 * @param body
 	 *            the body of the question.
+	 * @param IDUser
+	 * 				the identifier of the user that makes the question
 	 * @param timestamp
 	 *            the timestamp of the question.
 	 * @param lastModified
@@ -49,7 +51,7 @@ public class Question extends Resource
 
 	/**
 	 * Creates a new question which is going to be inserted into the database
-	 * 
+	 * @param IDUser the identifier of the user that makes the question
 	 * @param title
 	 *            the title of the question.
 	 * @param body

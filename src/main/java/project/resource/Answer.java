@@ -36,6 +36,12 @@ public class Answer extends Resource
 	 *            the body of the answer.
 	 * @param timestamp
 	 *            the timestamp of the answer.
+	 * @param questionID
+	 * 				the identifier to the related question
+	 * @param IDUser
+	 * 				the identifier of the user that makes the answer
+	 * @param parentID
+	 * 				the identifier to the related parent answer
 	 */
 
 	public Answer(final int ID, final String IDUser ,final boolean fixed, final String text, final int parentID ,final Timestamp timestamp,final int questionID)
@@ -58,6 +64,12 @@ public class Answer extends Resource
 	 *            the body of the answer.
 	 * @param timestamp
 	 *            the timestamp of the answer.
+	 * @param parentID
+	 * 			  the identifier to the related answer
+	 * @param IDUser
+	 * 			the identifier of the user that makes the answer
+	 * @param questionID
+	 * 			the identifier to the related question
 	 */
 
 	public Answer(final String IDUser, final boolean fixed, final String text, final int parentID, final Timestamp timestamp,final int questionID)
