@@ -34,7 +34,7 @@ import javax.servlet.annotation.MultipartConfig;
 @MultipartConfig(fileSizeThreshold=1024*1024, 	// 1 MB 
                  maxFileSize=1024*1024,      	// 1 MB
                  maxRequestSize=1024*1024*10)   // 10 MB
-public final class UpdateUserPhotoProfileServlet extends AbstractDatabaseServlet
+public final class UpdateUserPhotoProfileServlet extends SessionManagerServlet
 {
 
 	/**
@@ -64,7 +64,7 @@ public final class UpdateUserPhotoProfileServlet extends AbstractDatabaseServlet
 		try
 		{
 			// retrieves the request parameter
-			username = req.getParameter("username");
+			username = (String) req.getSession().getAttribute("loggedInUser");
 			photoProfile = req.getPart("photoProfile");
 			byte[] picToSet = null;
 			if(photoProfile.getSubmittedFileName().equals(""))

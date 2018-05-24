@@ -26,8 +26,9 @@ import javax.servlet.http.HttpServlet;
  *
  * @author lrgroup
  * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
+ * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class UpdateUserServlet extends AbstractDatabaseServlet
+public final class UpdateUserServlet extends SessionManagerServlet
 {
 
 	/**
@@ -61,7 +62,7 @@ public final class UpdateUserServlet extends AbstractDatabaseServlet
 		try
 		{
 			// retrieves the request parameters
-			username = req.getParameter("username");
+			username = (String) req.getSession().getAttribute("loggedInUser");
 
 			name = req.getParameter("name");
 			if(name.equals(""))

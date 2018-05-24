@@ -27,7 +27,7 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
 {
 
     /**
-     * Creates a new question into the database.
+     * Update a question into the database.
      *
      * @param req
      *            the HTTP request from the client.
