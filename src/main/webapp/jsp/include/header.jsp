@@ -24,19 +24,19 @@ Since: 1.0
 
 <nav>
     <!--Home button-->
-    <div><a href="<c:url value="/jsp/index.jsp"/>">Home</a></div>
+    <a href="<c:url value="/jsp/index.jsp"/>">Home</a> |
 
     <!--Login or Logout-->
-    <div>
+
         <c:choose>
             <c:when test="${empty sessionScope.loggedInUser}">
-                <p>Please <a href="<c:url value="/?p=create-user"/>">Register</a> or <a href="<c:url value="/?p=log-in"/>">Login</a></p>
+                Please <a href="<c:url value="/?p=create-user"/>">Register</a> or <a href="<c:url value="/?p=log-in"/>">Login</a>
             </c:when>
             <c:when test="${not empty sessionScope.loggedInUser}">
-                <p>Logged as: <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />"><c:out value='${sessionScope.loggedInUser}'/></a></p>
+                Logged as: <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />"><c:out value='${sessionScope.loggedInUser}'/></a> |
                 <a href="<c:url value="/?p=log-out"/>">Logout</a>
             </c:when>
         </c:choose>
-    </div>
+
 </nav>
 <hr>

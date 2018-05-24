@@ -17,11 +17,11 @@
 		<p>Logged as: <c:out value='${sessionScope.loggedInUser}'/></p>
 	</c:if>
 	<form method="POST" action="<c:url value="/create-answer"/>" id="answerForm">
-		<label for="parentID">Id della domanda a cui rispondo:</label>
-		<input name="parentID" type="text"/><br/>
+		<label for="questionID">Id della domanda a cui rispondo:</label>
+		<input name="questionID" type="text"/><br/>
 
-<%--		<label for="IDUser">IDUser:</label>
-		<input name="IDUser" type="text"/><br/>--%>
+		<label for="parentID">Id della risposta a cui rispondere: (-1 per rispondere solo alla domanda)</label>
+		<input name="parentID" type="text"/><br/>
 
 		<textarea rows="4" cols="50" name="text" placeholder="Enter text..">
 		</textarea>

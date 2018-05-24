@@ -25,7 +25,7 @@ public class Answer extends Resource
 	private final int parentID; //Trasformare in Answer/Question?
 	private final Timestamp timestamp;
 	private final String IDUser;
-
+	private final int questionID;
 	/**
 	 * Creates a new answer.
 	 * @param ID
@@ -38,7 +38,7 @@ public class Answer extends Resource
 	 *            the timestamp of the answer.
 	 */
 
-	public Answer(final int ID, final String IDUser ,final boolean fixed, final String text, final int parentID ,final Timestamp timestamp)
+	public Answer(final int ID, final String IDUser ,final boolean fixed, final String text, final int parentID ,final Timestamp timestamp,final int questionID)
 	{
 		this.ID = ID;
 		this.fixed = fixed;
@@ -46,6 +46,7 @@ public class Answer extends Resource
 		this.parentID = parentID;
 		this.timestamp = timestamp;
 		this.IDUser = IDUser;
+		this.questionID=questionID;
 	}
 
 	/**
@@ -59,9 +60,9 @@ public class Answer extends Resource
 	 *            the timestamp of the answer.
 	 */
 
-	public Answer(final String IDUser, final boolean fixed, final String text, final int parentID, final Timestamp timestamp)
+	public Answer(final String IDUser, final boolean fixed, final String text, final int parentID, final Timestamp timestamp,final int questionID)
 	{
-		this(-1,IDUser,fixed, text, parentID, timestamp);
+		this(-1,IDUser,fixed, text, parentID, timestamp,questionID);
 	}
 
 	/**
@@ -123,6 +124,10 @@ public class Answer extends Resource
 		return parentID;
 	}
 
+	public int getQuestionID() {
+		return questionID;
+	}
+
 	@Override
 	public final void toJSON(final OutputStream out) throws IOException
 	{
@@ -141,6 +146,7 @@ public class Answer extends Resource
 		jg.writeStringField("timestamp", timestamp.toString());
 		jg.writeStringField("IDUser", IDUser);
 		jg.writeNumberField("parentID", parentID);
+		jg.writeNumberField("questionID", questionID);
 
 
 		jg.writeEndObject();
@@ -171,6 +177,7 @@ public class Answer extends Resource
 		String jTimestamp = null;
 		String jIDUser = null;
 		int jParentID = -1;
+		int jQuestionID=-1;
 		
 
 		final JsonParser jp = JSON_FACTORY.createParser(in);
@@ -215,6 +222,11 @@ public class Answer extends Resource
 						jp.nextToken();
 						jParentID = jp.getIntValue();
 						break;
+					case "questionID":
+						jp.nextToken();
+						jQuestionID = jp.getIntValue();
+						break;
+
 				}
 			}
 		}
@@ -223,6 +235,6 @@ public class Answer extends Resource
     	Date parsedDate = dateFormat.parse(jTimestamp);
     	Timestamp databaseTimestamp = new java.sql.Timestamp(parsedDate.getTime());
 
-		return new Answer(jID, jIDUser, jFixed, jText, jParentID ,databaseTimestamp);
+		return new Answer(jID, jIDUser, jFixed, jText, jParentID ,databaseTimestamp,jQuestionID);
 	}
 }

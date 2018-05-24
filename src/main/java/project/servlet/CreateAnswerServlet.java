@@ -47,6 +47,7 @@ public final class CreateAnswerServlet extends SessionManagerServlet
 		// request parameters
 		String text = null;
 		int parentID;
+		int questionID;
 		String IDUser;
 
 		// model
@@ -62,14 +63,14 @@ public final class CreateAnswerServlet extends SessionManagerServlet
 			//for now can only answer to questions
 			//TODO answers to answers.
 			//parentID = null;
-			//parentID = Integer.parseInt(req.getParameter("parentID"));
-
+			parentID = Integer.parseInt(req.getParameter("parentID"));
+			questionID=Integer.parseInt(req.getParameter("questionID"));
 			//retrieves the username answering through the session attribute
 			IDUser = (String) req.getSession().getAttribute("loggedInUser");
 
 
 
-			a = new Answer(IDUser,false, text, -1 ,new Timestamp((Long)System.currentTimeMillis()*1000));
+			a = new Answer(IDUser,false, text, parentID ,new Timestamp((Long)System.currentTimeMillis()*1000),questionID);
 
 			// creates a new object for accessing the database and stores the answer
 			new CreateAnswerDatabase(getDataSource().getConnection(), a).createAnswer();

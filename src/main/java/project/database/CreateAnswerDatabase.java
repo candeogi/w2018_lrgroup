@@ -18,10 +18,7 @@ package project.database;
 
 import project.resource.Answer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +38,8 @@ public final class CreateAnswerDatabase {
     private static final String STATEMENT = "" +
             "INSERT INTO Answer (id, isFixed, body, ts, idUser, parentID) " +
             "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
+
+
 
     /**
      * The connection to the database
@@ -73,18 +72,31 @@ public final class CreateAnswerDatabase {
     public void createAnswer() throws SQLException {
 
         PreparedStatement pstmt = null;
+        int insertedKey=-1;
 
         try {
-            pstmt = con.prepareStatement(STATEMENT);
+            pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
             //pstmt.setInt(1, answer.getID());
             pstmt.setBoolean(1, answer.isFixed());
             pstmt.setString(2, answer.getText());
             pstmt.setTimestamp(3, answer.getTimestamp());
             pstmt.setString(4, answer.getIDUser());
-            pstmt.setNull(5, answer.getParentID()); //set null cause now works only on answer to questions
-
-
+            if(answer.getParentID()!=-1){
+                pstmt.setInt(5,answer.getParentID());
+            }
+            else {
+                pstmt.setNull(5,  java.sql.Types.INTEGER);
+            }
+            //set null cause now works only on answer to questions
             pstmt.execute();
+
+            ResultSet generatedKey=pstmt.getGeneratedKeys();
+            if(generatedKey.next()){
+                insertedKey=generatedKey.getInt(1);
+            }
+            if(answer.getParentID()==-1){
+                new CreateHaveElement(con,answer.getQuestionID(),insertedKey).createElement();
+            }
 
         } finally {
             if (pstmt != null) {
@@ -93,6 +105,9 @@ public final class CreateAnswerDatabase {
 
             con.close();
         }
+
+
+
 
     }
 }
