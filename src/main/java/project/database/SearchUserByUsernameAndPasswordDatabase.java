@@ -42,7 +42,7 @@ public final class SearchUserByUsernameAndPasswordDatabase {
     private static final String STATEMENT = "" +
             "SELECT *" +
             "FROM lr_group.Utente " +
-            "WHERE username=? and password=?";
+            "WHERE username=? and password=lr_group.crypt(?,password)";
 
     /**
      * The connection to the database
