@@ -14,7 +14,7 @@ The lrgroup, composed by:
 
  - Alberto Forti
  - Alberto Pontini
- - Andrea Zigio
+ - Andrea Ziggiotto
  - Davide Storato
  - Giovanni Candeo
  - Luca Rossi
