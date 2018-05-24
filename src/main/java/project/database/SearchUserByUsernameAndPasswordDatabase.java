@@ -99,9 +99,15 @@ public final class SearchUserByUsernameAndPasswordDatabase {
             while (rs.next()) {
                 users.add(new User(
                         rs.getString("email"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
                         rs.getString("username"),
+                        rs.getString("photoProfile"),
                         rs.getString("password"),
-                        rs.getDate("registrationDate")));
+                        rs.getBoolean("isAdmin"),
+                        rs.getDate("registrationDate"),
+                        rs.getDate("birthday"),
+                        rs.getString("description")));
             }
         } finally {
             if (rs != null) {

@@ -22,6 +22,7 @@ public class User extends Resource
     private final String username;
     private final String photoProfile;
     private final String password;
+    private final boolean isAdmin;
     private final Date birthday;
     private final Date registrationDate;
     private final String description;
@@ -40,6 +41,8 @@ public class User extends Resource
      *              the directory of the user's profile picture
      * @param password
      *              the password of the user
+     * @param isAdmin
+     *              specifies if the user has administrative rights
      * @param registrationDate
      *              the registrationDate of the user
      * @param birthday
@@ -48,7 +51,7 @@ public class User extends Resource
      *              the descriptiom of the user
      */
     public User(final String email, final String name, final String surname, final String username,
-                final String photoProfile, final String password, final Date registrationDate,
+                final String photoProfile, final String password, final boolean isAdmin ,final Date registrationDate,
                 final Date birthday, final String description)
     {
         this.email = email;
@@ -57,6 +60,7 @@ public class User extends Resource
         this.username = username;
         this.photoProfile = photoProfile;
         this.password = password;
+        this.isAdmin = isAdmin;
         this.registrationDate = registrationDate;
         this.birthday = birthday;
         this.description = description;
@@ -77,7 +81,7 @@ public class User extends Resource
     public User(final String email,final String username, final String password, final Date registrationDate)
     {
 
-        this(email, "", "", username, null, password, registrationDate,
+        this(email, "", "", username, null, password, false, registrationDate,
                 null, "");
     }
 
@@ -139,6 +143,16 @@ public class User extends Resource
     public final String getPassword(){
         return password;
     }
+
+    /**
+     * Return the user's password.
+     *
+     * @return the user's password.
+     */
+    public final boolean isAdmin(){
+        return isAdmin;
+    }
+
     /**
      * Returns the registration date of the user.
      *

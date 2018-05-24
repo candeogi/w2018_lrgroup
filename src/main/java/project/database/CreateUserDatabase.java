@@ -21,8 +21,8 @@ public final class CreateUserDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.Utente (email, name, surname, username, photoProfile, password, registrationDate, birthday, description) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO lr_group.Utente (email, name, surname, username, photoProfile, password, isAdmin ,registrationDate, birthday, description) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     /**
      * The connection to the database
@@ -65,9 +65,10 @@ public final class CreateUserDatabase {
             pstmt.setString(4, user.getUsername());
             pstmt.setString(5, user.getPhotoProfile());
             pstmt.setString(6, user.getPassword());
-            pstmt.setDate(7, user.getRegistrationDate()); //TODO check date format on database
-            pstmt.setDate(8, user.getBirthday()); //TODO check date format on database
-            pstmt.setString(9, user.getDescription());
+            pstmt.setBoolean(7,user.isAdmin());
+            pstmt.setDate(8, user.getRegistrationDate()); //TODO check date format on database
+            pstmt.setDate(9, user.getBirthday()); //TODO check date format on database
+            pstmt.setString(10, user.getDescription());
 
             pstmt.execute();
 

@@ -112,11 +112,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 			return false;
 		}
 
-		//i'm allowing only GET requests
 		switch(method)
 		{
 			case "GET":
-				// nothing to do
+				return true;
+			case "POST":
 				return true;
 			default:
 				m = new Message("Unsupported operation.",
@@ -132,6 +132,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 	{
 		OutputStream out = res.getOutputStream();
 		String path = req.getRequestURI();
+		final String method = req.getMethod();
 		Message m = null;
 		try {
 			// strip everything until after the /answer
@@ -158,18 +159,29 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 					}
 					else
 					{
-						try
+						switch(method)
 						{
-							Integer.parseInt(path.substring(1));
-							new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
-						}
-						catch (NumberFormatException e)
-						{
-							m = new Message(
-									"Wrong format for URI /answer/id/{questionID}: {questionID} is not an integer.",
-									"E4A7", e.getMessage());
-							res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-							m.toJSON(res.getOutputStream());
+							case "GET":
+								try
+								{
+									Integer.parseInt(path.substring(1));
+									new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
+								}
+								catch (NumberFormatException e)
+								{
+									m = new Message(
+											"Wrong format for URI /answer/id/{questionID}: {questionID} is not an integer.",
+											"E4A7", e.getMessage());
+									res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+									m.toJSON(res.getOutputStream());
+								}
+								break;
+							default:
+								m = new Message("Unsupported operation for URI /answer/id/{questionID}.",
+										"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
 						}
 					}
 				}
@@ -186,7 +198,19 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 					}
 					else
 					{
-						new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID();
+						switch(method)
+						{
+							case "GET":
+								new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID();
+								break;
+
+							default:
+								m = new Message("Unsupported operation for URI /answer/user/{userID}.",
+								"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
+						}
 					}
 				}
 			}
@@ -229,7 +253,6 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 						break;
 				}
 
-
 			}
 			else
 			{
@@ -246,18 +269,29 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 					}
 					else
 					{
-						try
+						switch(method)
 						{
-							Integer.parseInt(path.substring(1));
-							new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByID();
-						}
-						catch (NumberFormatException e)
-						{
-							m = new Message(
-									"Wrong format for URI /question/id/{ID}: {ID} is not an integer.",
-									"E4A7", e.getMessage());
-							res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-							m.toJSON(res.getOutputStream());
+							case "GET":
+								try
+								{
+									Integer.parseInt(path.substring(1));
+									new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByID();
+								}
+								catch (NumberFormatException e)
+								{
+									m = new Message(
+											"Wrong format for URI /question/id/{ID}: {ID} is not an integer.",
+											"E4A7", e.getMessage());
+									res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+									m.toJSON(res.getOutputStream());
+								}
+								break;
+							default:
+								m = new Message("Unsupported operation for URI /question/id/{ID}.",
+										"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
 						}
 					}
 				}
@@ -274,8 +308,19 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 					}
 					else
 					{
-						String user = path.substring(1);
-						new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByUser();
+						switch(method)
+						{
+							case "GET":
+								String user = path.substring(1);
+								new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByUser();
+								break;
+							default:
+								m = new Message("Unsupported operation for URI /question/user/{userID}.",
+										"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
+						}
 					}
 				}
 			}

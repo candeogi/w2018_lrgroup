@@ -89,7 +89,7 @@ public final class UpdateUserPhotoProfileServlet extends SessionManagerServlet
 
 				picToSet = buffer.toByteArray();
 
-				u = new User(null, null, null, username, Base64.getEncoder().encodeToString(picToSet) ,"", null, null, null);
+				u = new User(null, null, null, username, Base64.getEncoder().encodeToString(picToSet) ,"", false, null, null, null);
 
 				// creates a new object for accessing the database and updates the user
 				new UpdateUserPhotoProfileDatabase(getDataSource().getConnection(), u).updateUserPhotoProfile();

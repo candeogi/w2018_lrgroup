@@ -88,7 +88,7 @@ public final class UpdateUserServlet extends SessionManagerServlet
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     		Date birthday = new Date(dateFormat.parse(bdate).getTime());
 			
-			u = new User(email, name, surname, username, null ,"", null, birthday, description);
+			u = new User(email, name, surname, username, null ,"", false, null, birthday, description);
 
 			// creates a new object for accessing the database and updates the user
 			new UpdateUserDatabase(getDataSource().getConnection(), u).updateUser();

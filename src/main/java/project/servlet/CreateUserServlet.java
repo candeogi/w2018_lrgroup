@@ -97,7 +97,7 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
                 }                
             }
 			
-			u = new User(email, name, surname, username, photoProfile, password, regDate, birthday, "");
+			u = new User(email, name, surname, username, photoProfile, password, false ,regDate, birthday, "");
 
 			new CreateUserDatabase(getDataSource().getConnection(), u).createUser();
 		}

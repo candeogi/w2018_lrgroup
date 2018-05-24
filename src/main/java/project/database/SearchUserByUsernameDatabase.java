@@ -98,6 +98,7 @@ public final class SearchUserByUsernameDatabase {
                         rs.getString("username"),
                         rs.getString("photoProfile"),
                         rs.getString("password"),
+                        rs.getBoolean("isAdmin"),
                         rs.getDate("registrationDate"),
                         rs.getDate("birthday"),
                         rs.getString("description")));
