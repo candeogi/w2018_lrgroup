@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class CreateHaveElement {
 
-    private static final String STATEMENT = "INSERT INTO Have (idQuestion,idAnswer) VALUES (?,?)";
+    private static final String STATEMENT = "INSERT INTO lr_group.Have (idQuestion,idAnswer) VALUES (?,?)";
 
     Connection con;
 

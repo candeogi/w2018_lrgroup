@@ -22,7 +22,7 @@ public final class CreateUserDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO Utente (email, name, surname, username, photoProfile, password, registrationDate, birthday, description) " +
+            "INSERT INTO lr_group.Utente (email, name, surname, username, photoProfile, password, registrationDate, birthday, description) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     /**

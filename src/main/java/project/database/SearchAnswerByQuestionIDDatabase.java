@@ -41,10 +41,10 @@ public final class SearchAnswerByQuestionIDDatabase
      */
     private static final String QUERY =
             "SELECT * " +
-                    "FROM answer " +
-                    "LEFT JOIN have " +
-                    "on answer.id = have.idanswer " +
-                    "WHERE have.idquestion=?";
+                    "FROM lr_group.answer " +
+                    "LEFT JOIN lr_group.have " +
+                    "on lr_group.answer.id = lr_group.have.idanswer " +
+                    "WHERE lr_group.have.idquestion=?";
 
     /**
      * The connection to the database

@@ -41,7 +41,7 @@ public final class SearchAnswerByUserIDDatabase
      */
     private static final String QUERY =
             "SELECT * " +
-                    "FROM answer " +
+                    "FROM lr_group.Answer " +
                     "WHERE iduser=?";
 
     /**

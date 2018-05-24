@@ -41,7 +41,7 @@ public final class SearchQuestionByTimestampDatabase
      */
     private static final String QUERY = 
             "SELECT * " + 
-            "FROM Question " +
+            "FROM lr_group.Question " +
             "ORDER BY ts " + "DESC";
 
     /**

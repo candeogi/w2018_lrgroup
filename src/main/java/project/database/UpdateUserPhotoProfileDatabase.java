@@ -22,7 +22,7 @@ public final class UpdateUserPhotoProfileDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "UPDATE Utente SET photoprofile=? " +
+            "UPDATE lr_group.Utente SET photoprofile=? " +
             "WHERE username=?";
 
     /**

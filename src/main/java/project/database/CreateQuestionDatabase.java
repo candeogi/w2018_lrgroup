@@ -38,7 +38,7 @@ public final class CreateQuestionDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO Question (id, title, idUser, ts, lastModified, body) " +
+            "INSERT INTO lr_group.Question (id, title, idUser, ts, lastModified, body) " +
             "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
 
     /**

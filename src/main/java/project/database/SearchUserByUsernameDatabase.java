@@ -42,7 +42,7 @@ public final class SearchUserByUsernameDatabase {
      */
     private static final String STATEMENT = "" +
             "SELECT *" +
-            "FROM Utente " +
+            "FROM lr_group.Utente " +
             "WHERE username=?";
 
     /**

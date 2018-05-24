@@ -36,7 +36,7 @@ public final class CreateAnswerDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO Answer (id, isFixed, body, ts, idUser, parentID) " +
+            "INSERT INTO lr_group.Answer (id, isFixed, body, ts, idUser, parentID) " +
             "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
 
 
