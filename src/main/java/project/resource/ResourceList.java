@@ -16,9 +16,8 @@ import java.util.List;
 /**
  * Represents a list of {@link Resource} objects.
  *
- * @author Nicola Ferro (ferro@dei.unipd.it)
- * @version 1.00
- * @since 1.00
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  *
  * @param <T>
  *            the type of the actual class extending {@code Resource}.

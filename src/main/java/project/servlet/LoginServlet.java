@@ -23,9 +23,8 @@ import javax.sql.DataSource;
 /**
  * Checks user login
  *
+ * @author lrgroup
  * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
- * @version 1.0.0
- *
  */
 public final class LoginServlet extends AbstractDatabaseServlet
 {

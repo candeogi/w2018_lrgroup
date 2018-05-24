@@ -16,9 +16,10 @@ import java.util.List;
 
 /**
  * Manages the REST API for the {@link Answer} resource.
- * 
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
+ * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
 public final class RestAnswer extends RestResource
 {

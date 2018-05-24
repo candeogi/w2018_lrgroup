@@ -29,9 +29,8 @@ import java.util.List;
 /**
  * Retrieve questions by user in the database.
  *
- * @author Alberto Forti
- * @version 1.00
- * @since 1.00
+ * @author lrgroup
+ * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
 public final class SearchQuestionByUserDatabase
 {

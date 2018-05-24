@@ -6,9 +6,7 @@ import java.io.*;
 /**
  * Represents a message or an error message.
  * 
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public class Message extends Resource
 {

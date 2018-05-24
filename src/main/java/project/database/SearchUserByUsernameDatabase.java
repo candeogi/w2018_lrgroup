@@ -31,9 +31,8 @@ import java.util.List;
  * Search user by username.
  * Used for the login.
  *
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public final class SearchUserByUsernameDatabase {
 

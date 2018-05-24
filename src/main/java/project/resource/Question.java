@@ -9,10 +9,9 @@ import java.text.ParseException;
 
 /**
  * Represents data about a question.
- * 
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public class Question extends Resource
 {

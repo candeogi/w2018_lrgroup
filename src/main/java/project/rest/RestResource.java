@@ -25,10 +25,9 @@ import java.sql.Connection;
 
 /**
  * Represents a generic REST resource.
- * 
- * @author Nicola Ferro (ferro@dei.unipd.it)
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public abstract class RestResource {
 

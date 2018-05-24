@@ -6,10 +6,9 @@ import java.io.*;
 
 /**
  * Represents a generic resource.
- * 
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public abstract class Resource 
 {

@@ -19,11 +19,10 @@ import javax.servlet.http.HttpServlet;
 
 /**
  * Creates a new user into the database. 
- * 
- * @author Alberto Pontini
- * @author Giovanni Candeo
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
+ * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
  */
 public final class CreateAnswerServlet extends SessionManagerServlet
 {

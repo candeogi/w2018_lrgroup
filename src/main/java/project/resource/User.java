@@ -7,10 +7,9 @@ import java.sql.Date;
 
 /**
  * Represents the data about an user.
- * 
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public class User extends Resource
 {

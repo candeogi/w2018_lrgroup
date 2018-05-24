@@ -26,10 +26,9 @@ import javax.servlet.annotation.MultipartConfig;
 
 /**
  * Updates a user's PhotoProfile
- * 
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 
 @MultipartConfig(fileSizeThreshold=1024*1024, 	// 1 MB 

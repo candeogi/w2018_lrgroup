@@ -15,9 +15,8 @@ import project.resource.*;
 /**
  * Allows site navigation and login request on protected resources
  *
- * @author Alberto Pontini
- * @version 1.0.0
- *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 
 public class NavServlet extends AbstractDatabaseServlet

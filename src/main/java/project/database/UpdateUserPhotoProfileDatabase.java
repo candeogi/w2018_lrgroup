@@ -12,9 +12,8 @@ import java.util.List;
 /**
  * Creates an user in the database.
  *
+ * @author lrgroup
  * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
- * @version 1.00
- * @since 1.00
  */
 public final class UpdateUserPhotoProfileDatabase {
 

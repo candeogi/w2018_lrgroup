@@ -10,9 +10,8 @@ import javax.sql.DataSource;
 /**
  * Gets the {@code DataSource} for managing the connection pool to the database.
  *
- * @author Nicola Ferro (ferro@dei.unipd.it)
- * @version 1.00
- * @since 1.00
+ * @author lrgroup
+ * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
  */
 public abstract class AbstractDatabaseServlet extends HttpServlet
 {

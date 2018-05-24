@@ -29,9 +29,8 @@ import java.util.List;
 /**
  * Retrieve recent questions in the database.
  *
- * @author Davide Storato
- * @version 1.00
- * @since 1.00
+ * @author lrgroup
+ * @author Davide Storato (davide.storato@studenti.unipd.it)
  */
 public final class SearchQuestionByTimestampDatabase
 {

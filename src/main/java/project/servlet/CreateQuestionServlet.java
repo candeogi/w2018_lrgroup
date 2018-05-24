@@ -21,10 +21,9 @@ import javax.servlet.http.HttpServlet;
  * The title and body of the question is provided by the request through the form.
  * The user writing the question is obtained through the active session.
  *
- * @author Alberto Pontini
- * @author Giovanni Candeo
- * @version 2.00
- * @since 1.00
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
+ * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
  */
 public final class CreateQuestionServlet extends SessionManagerServlet
 {

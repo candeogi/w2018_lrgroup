@@ -23,10 +23,9 @@ import javax.servlet.http.HttpServlet;
 
 /**
  * Updates a user's informations (except password and user's photoProfile)
- * 
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public final class UpdateUserServlet extends AbstractDatabaseServlet
 {

@@ -8,8 +8,8 @@ import java.sql.SQLException;
 /**
  * Creates an item in the "have" table in the database.
  *
- * @author Andrea Ziggiotto
- * @version 1.00
+ * @author lrgroup
+ * @author Andrea Ziggiotto (andrea.ziggiotto@studenti.unipd.it)
  */
 public class CreateHaveElement {
 

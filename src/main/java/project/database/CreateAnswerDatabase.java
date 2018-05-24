@@ -25,10 +25,9 @@ import java.util.List;
 /**
  * Creates an answer in the database.
  *
+ * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
- * @author Giovanni Candeo
- * @version 2.00
- * @since 1.00
+ * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
  */
 public final class CreateAnswerDatabase {
 

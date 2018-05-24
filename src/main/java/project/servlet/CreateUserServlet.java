@@ -21,10 +21,9 @@ import javax.servlet.http.HttpServlet;
 
 /**
  * Creates a new user into the database. 
- * 
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public final class CreateUserServlet extends AbstractDatabaseServlet
 {

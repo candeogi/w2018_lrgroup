@@ -11,9 +11,7 @@ import java.text.ParseException;
 /**
  * Represents data about an answer.
  * 
- * @author Alberto Pontini
- * @version 1.00
- * @since 1.00
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 
 public class Answer extends Resource

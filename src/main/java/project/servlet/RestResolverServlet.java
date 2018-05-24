@@ -11,7 +11,14 @@ import java.util.Date;
 import java.io.*;
 import java.util.List;
 
-public class RestResolverServlet extends AbstractDatabaseServlet
+/**
+ * Updates a user's informations (except password and user's photoProfile)
+ *
+ * @author lrgroup
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
+ * @author Alberto Forti (alberto.forti@studenti.unipd.it)
+ */
+public class RestResolverServlet extends AbstractDatabaseServlet //TODO implementare session manager
 {
 
 	/**

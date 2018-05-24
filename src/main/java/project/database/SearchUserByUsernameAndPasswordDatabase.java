@@ -31,9 +31,8 @@ import java.util.List;
  * Search user by email and password.
  * Used for the login.
  *
- * @author Giovanni Candeo
- * @version 1.00
- * @since 1.00
+ * @author lrgroup
+ * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
  */
 public final class SearchUserByUsernameAndPasswordDatabase {
 

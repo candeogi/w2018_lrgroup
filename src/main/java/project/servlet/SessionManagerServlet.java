@@ -16,9 +16,8 @@ import java.io.IOException;
  * Manage the user session.
  * If user session is not found, redirects to the login form.
  *
- * @author Giovanni Candeo
- * @version 1.00
- * @since 1.00
+ * @author lrgroup
+ * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
  */
 public class SessionManagerServlet extends AbstractDatabaseServlet{
 

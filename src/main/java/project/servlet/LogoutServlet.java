@@ -7,6 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * End user session
+ *
+ * @author lrgroup
+ * @author Andrea Ziggiotto (andrea.ziggiotto@studenti.unipd.it)
+ */
 public final class LogoutServlet extends AbstractDatabaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse res)

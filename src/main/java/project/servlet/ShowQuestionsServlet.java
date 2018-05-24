@@ -16,9 +16,8 @@ import project.resource.*;
 /**
  * Show questions ordered by timestamp
  *
- * @author Alberto Forti
- * @version 1.0.0
- *
+ * @author lrgroup
+ * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
 
 public class ShowQuestionsServlet extends AbstractDatabaseServlet

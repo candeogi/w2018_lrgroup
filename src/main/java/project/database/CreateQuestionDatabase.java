@@ -28,9 +28,8 @@ import java.util.List;
 /**
  * Creates a question in the database.
  *
+ * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
- * @version 1.00
- * @since 1.00
  */
 public final class CreateQuestionDatabase {
 

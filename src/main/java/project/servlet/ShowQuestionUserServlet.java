@@ -16,9 +16,8 @@ import project.resource.*;
 /**
  * Show questions by user
  *
- * @author Alberto Forti
- * @version 1.0.0
- *
+ * @author lrgroup
+ * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
 
 public class ShowQuestionUserServlet extends SessionManagerServlet
