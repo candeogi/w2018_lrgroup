@@ -1,5 +1,7 @@
 package project.servlet;
 
+import project.database.SearchAnswerByUserIDDatabase;
+import project.database.SearchQuestionByIDDatabase;
 import project.database.UpdateQuestionDatabase;
 import project.resource.Question;
 import project.resource.Message;
@@ -10,6 +12,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -68,33 +71,46 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
             if(body.equals(""))
                 body = req.getParameter("currentBody");
 
-            questionid = Integer.parseInt(req.getParameter("id"));
-
             // retrieves the user id (username) through the session parameter
             IDUser = (String) req.getSession().getAttribute("loggedInUser");
 
-            // creates a new question from the request parameters
-            q = new Question(questionid ,IDUser, title, body, new Timestamp(0), new Timestamp((Long)System.currentTimeMillis()));
+            questionid = Integer.parseInt(req.getParameter("id"));
+            List<Question> q_match = new SearchQuestionByIDDatabase(getDataSource().getConnection(),questionid).SearchQuestionByID();
+            if(!q_match.isEmpty() && IDUser.equals(q_match.get(0).getIDUser())){
+                // creates a new question from the request parameters
+                q = new Question(questionid ,IDUser, title, body, new Timestamp(0), new Timestamp((Long)System.currentTimeMillis()));
+                // creates a new object for accessing the database and stores the question
+                new UpdateQuestionDatabase(getDataSource().getConnection(), q).updateQuestion();
+            }
+            else {
+                m = new Message("Cannot update a question from different user",
+                        "E403", "you can't!");
+            }
 
-            // creates a new object for accessing the database and stores the question
-            new UpdateQuestionDatabase(getDataSource().getConnection(), q).updateQuestion();
+
         }catch (SQLException ex) {
             m = new Message("Cannot update the question: unexpected error while accessing the database.",
-                    "E200", ex.getMessage());
+                    "E403", ex.getMessage());
 
         }
 
-        req.setAttribute("message", m);
-
-        /*if(m!=null && m.isError())
+        if(m!=null && m.isError())
         {
             req.setAttribute("message", m);
             req.getRequestDispatcher("/jsp/error.jsp").forward(req, res);
         }
         else
         {
-            res.sendRedirect(req.getContextPath() + "/?p=question&u=" + questionid);
-        }*/
+            try {
+                req.setAttribute("question",
+                        new SearchQuestionByIDDatabase(getDataSource().getConnection(), questionid).SearchQuestionByID().get(0));
+            }catch (SQLException ex){
+                m = new Message("Cannot find the question: unexpected error while accessing the database.",
+                        "E403", ex.getMessage());
+            }
+            req.setAttribute("update",true);
+            req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);
+        }
 
 
     }

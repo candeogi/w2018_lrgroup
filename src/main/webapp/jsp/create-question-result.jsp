@@ -10,6 +10,9 @@
 	</header>
 	<body>
 		<h1>Create Question</h1>
+		<c:if test='${not empty update && !message.error}'>
+			<h1>Updated</h1>
+		</c:if>
 		<hr/>
 		<c:import url="/jsp/include/show-message.jsp"/>
 		<c:if test='${not empty question && !message.error}'>
