@@ -62,7 +62,7 @@ public final class CreateQuestionServlet extends SessionManagerServlet
 			IDUser = (String) req.getSession().getAttribute("loggedInUser");
 
 			// creates a new question from the request parameters
-			q = new Question(IDUser, title, body, new Timestamp((Long)System.currentTimeMillis()*1000));
+			q = new Question(IDUser, title, body, new Timestamp((Long)System.currentTimeMillis()));
 
 			// creates a new object for accessing the database and stores the question
 			new CreateQuestionDatabase(getDataSource().getConnection(), q).createQuestion();

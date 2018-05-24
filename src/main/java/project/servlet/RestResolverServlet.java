@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.List;
 
 /**
- * Updates a user's informations (except password and user's photoProfile)
+ * Manages the REST API for the different REST resources.
  *
  * @author lrgroup
  * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)

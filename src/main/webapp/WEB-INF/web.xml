@@ -61,6 +61,11 @@
 		<servlet-class>project.servlet.ShowQuestionUserServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>UpdateQuestionServlet</servlet-name>
+		<servlet-class>project.servlet.UpdateQuestionServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>NavServlet</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -114,6 +119,11 @@
 	<servlet-mapping>
 		<servlet-name>ShowQuestionUserServlet</servlet-name>
 		<url-pattern>/show-user-questions</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>UpdateQuestionServlet</servlet-name>
+		<url-pattern>/update-question</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

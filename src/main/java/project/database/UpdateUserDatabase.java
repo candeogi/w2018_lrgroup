@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates an user in the database.
+ * Update an user in the database.
  *
  * @author lrgroup
  * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
