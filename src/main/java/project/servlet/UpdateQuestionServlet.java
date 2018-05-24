@@ -1,15 +1,11 @@
 package project.servlet;
 
-import project.database.SearchAnswerByUserIDDatabase;
 import project.database.SearchQuestionByIDDatabase;
 import project.database.UpdateQuestionDatabase;
 import project.resource.Question;
 import project.resource.Message;
-import project.database.CreateQuestionDatabase;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -17,7 +13,6 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServlet;
 
 
 /**
@@ -26,8 +21,7 @@ import javax.servlet.http.HttpServlet;
  * The user writing the question is obtained through the active session.
  *
  * @author lrgroup
- * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
- * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
+ * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
 public final class UpdateQuestionServlet extends SessionManagerServlet
 {
@@ -60,9 +54,8 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
         Message m = null;
 
         try{
+
             // retrieves the request parameters
-
-
             title = req.getParameter("title");
             if(title.equals(""))
                 title = req.getParameter("currentTitle");
@@ -75,11 +68,10 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
             IDUser = (String) req.getSession().getAttribute("loggedInUser");
 
             questionid = Integer.parseInt(req.getParameter("id"));
-            List<Question> q_match = new SearchQuestionByIDDatabase(getDataSource().getConnection(),questionid).SearchQuestionByID();
-            if(!q_match.isEmpty() && IDUser.equals(q_match.get(0).getIDUser())){
-                // creates a new question from the request parameters
+            List<Question> q_searched = new SearchQuestionByIDDatabase(getDataSource().getConnection(),questionid)
+                    .SearchQuestionByID();
+            if(!q_searched.isEmpty() && IDUser.equals(q_searched.get(0).getIDUser())){
                 q = new Question(questionid ,IDUser, title, body, new Timestamp(0), new Timestamp((Long)System.currentTimeMillis()));
-                // creates a new object for accessing the database and stores the question
                 new UpdateQuestionDatabase(getDataSource().getConnection(), q).updateQuestion();
             }
             else {
@@ -111,8 +103,6 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
             req.setAttribute("update",true);
             req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);
         }
-
-
     }
 
 }
