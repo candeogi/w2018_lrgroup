@@ -56,6 +56,11 @@
 		<servlet-class>project.servlet.ShowQuestionsServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>ShowQuestionUserServlet</servlet-name>
+		<servlet-class>project.servlet.ShowQuestionUserServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>NavServlet</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -105,6 +110,17 @@
 		<servlet-name>ShowQuestionsServlet</servlet-name>
 		<url-pattern>/show-questions</url-pattern>
 	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ShowQuestionUserServlet</servlet-name>
+		<url-pattern>/show-user-questions</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+
 
 	<resource-ref>
       <description>Connection pool to the database</description>

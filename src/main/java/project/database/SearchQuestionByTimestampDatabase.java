@@ -42,7 +42,7 @@ public final class SearchQuestionByTimestampDatabase
     private static final String QUERY = 
             "SELECT * " + 
             "FROM Question " +
-            "ORDER BY TimeStamp " + "DESC";
+            "ORDER BY ts " + "DESC";
 
     /**
      * The connection to the database
