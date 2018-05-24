@@ -18,7 +18,7 @@ import java.util.List;
  * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public class RestResolverServlet extends AbstractDatabaseServlet //TODO implementare session manager
+public class RestResolverServlet extends AbstractDatabaseServlet
 {
 
 	/**
@@ -46,7 +46,12 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 		{
 			if(!checkMethodMediaType(req,res)) return;
 
-			//Controllare l'autenticazione
+			if(req.getSession().getAttribute("loggedInUser")==null)
+			{
+				final Message m = new Message("User not logged in", "E4A6","LogIn required");
+				res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+				m.toJSON(out);
+			}
 			
 			String[] split = req.getRequestURI().split("/");
 			switch(split[3]) // split[3] -> a 0 è vuoto, poi web-app-unipd, poi rest, poi question/answer
@@ -191,7 +196,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 					path = path.substring(path.lastIndexOf("user") + 2);
 					if (path.length() == 0 || path.equals("/"))
 					{
-						m = new Message("Wrong format for URI /answer/user/{userid}: no {userid} specified.",
+						m = new Message("Wrong format for URI /answer/user/{userID}: no {userID} specified.",
 										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
 						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 						m.toJSON(res.getOutputStream());
@@ -206,6 +211,90 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 
 							default:
 								m = new Message("Unsupported operation for URI /answer/user/{userID}.",
+								"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
+						}
+					}
+				}
+				else if(path.contains("upvote"))
+				{
+					// /answer/upvote/{answerID}
+					path = path.substring(path.lastIndexOf("upvote") + 6);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /answer/upvote/{answerID}: no {answerID} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						switch(method)
+						{
+							case "POST":
+								//TODO funzione che aggiunge il voto
+								break;
+
+							default:
+								m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
+								"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
+						}
+					}
+				}
+				else if(path.contains("downvote"))
+				{
+					// /answer/downvote/{answerID}
+					path = path.substring(path.lastIndexOf("downvote") + 8);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /answer/downvote/{answerID}: no {answerID} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						switch(method)
+						{
+							case "POST":
+								//TODO funzione che aggiunge il voto negativo
+								break;
+
+							default:
+								m = new Message("Unsupported operation for URI /answer/downvote/{answerID}.",
+								"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
+						}
+					}
+				}
+				else if(path.contains("novote"))
+				{
+					// /answer/novote/{answerID}
+					path = path.substring(path.lastIndexOf("novote") + 6);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /answer/novote/{answerID}: no {answerID} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						switch(method)
+						{
+							case "POST":
+								//TODO funzione che toglie il voto
+								break;
+
+							default:
+								m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
 								"E4A5", String.format("Requested operation %s.", method));
 								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 								m.toJSON(res.getOutputStream());
@@ -317,6 +406,90 @@ public class RestResolverServlet extends AbstractDatabaseServlet //TODO implemen
 							default:
 								m = new Message("Unsupported operation for URI /question/user/{userID}.",
 										"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
+						}
+					}
+				}
+				else if(path.contains("upvote"))
+				{
+					// /question/upvote/{questionID}
+					path = path.substring(path.lastIndexOf("upvote") + 6);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /question/upvote/{questionID}: no {questionID} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						switch(method)
+						{
+							case "POST":
+								//TODO funzione che aggiunge il voto
+								break;
+
+							default:
+								m = new Message("Unsupported operation for URI /question/upvote/{questionID}.",
+								"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
+						}
+					}
+				}
+				else if(path.contains("downvote"))
+				{
+					// /question/downvote/{questionID}
+					path = path.substring(path.lastIndexOf("downvote") + 8);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /question/downvote/{questionID}: no {questionID} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						switch(method)
+						{
+							case "POST":
+								//TODO funzione che aggiunge il voto negativo
+								break;
+
+							default:
+								m = new Message("Unsupported operation for URI /question/downvote/{questionID}.",
+								"E4A5", String.format("Requested operation %s.", method));
+								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+								m.toJSON(res.getOutputStream());
+								break;
+						}
+					}
+				}
+				else if(path.contains("novote"))
+				{
+					// /question/novote/{questionID}
+					path = path.substring(path.lastIndexOf("novote") + 6);
+					if (path.length() == 0 || path.equals("/"))
+					{
+						m = new Message("Wrong format for URI /question/novote/{questionID}: no {questionID} specified.",
+										"E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+						res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						m.toJSON(res.getOutputStream());
+					}
+					else
+					{
+						switch(method)
+						{
+							case "POST":
+								//TODO funzione che toglie il voto
+								break;
+
+							default:
+								m = new Message("Unsupported operation for URI /question/upvote/{questionID}.",
+								"E4A5", String.format("Requested operation %s.", method));
 								res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 								m.toJSON(res.getOutputStream());
 								break;
