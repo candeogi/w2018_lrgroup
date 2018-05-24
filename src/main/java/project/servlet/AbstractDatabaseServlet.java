@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.sql.DataSource;
+import javax.servlet.ServletContext;
+
 
 /**
  * Gets the {@code DataSource} for managing the connection pool to the database.
@@ -20,6 +22,7 @@ public abstract class AbstractDatabaseServlet extends HttpServlet
 	 * The connection pool to the database.
 	 */
 	private DataSource ds;
+    private ServletContext sc;
 
 	/**
      * Gets the {@code DataSource} for managing the connection pool to the database.
@@ -35,6 +38,7 @@ public abstract class AbstractDatabaseServlet extends HttpServlet
 
         // the JNDI lookup context
         InitialContext cxt;
+        sc = config.getServletContext();
 
         try {
             cxt = new InitialContext();
@@ -62,6 +66,10 @@ public abstract class AbstractDatabaseServlet extends HttpServlet
      */
     protected final DataSource getDataSource() {
         return ds;
+    }
+
+    public final ServletContext getServletContext() {
+        return sc;
     }
 
 }

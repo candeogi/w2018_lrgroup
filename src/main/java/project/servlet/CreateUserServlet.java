@@ -11,12 +11,17 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.InputStream;
 
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletContext;
+
 
 
 /**
@@ -59,7 +64,6 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 
 		try
 		{
-			// retrieves the request parameters
 			username = req.getParameter("username");
 			password = req.getParameter("password");
 			password2 = req.getParameter("password2");
@@ -68,7 +72,6 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 			email = req.getParameter("email");
 			bdate = req.getParameter("bdate");
 
-			// creates a new user from the request parameters
 			if(!password2.equals(password))
 			{
 				m = new Message("Passwords do not match","E300", "--");
@@ -80,10 +83,22 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 			Date regDate = new Date(((long)System.currentTimeMillis()*1000));
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     		Date birthday = new Date(dateFormat.parse(bdate).getTime());
-			
-			u = new User(email, name, surname, username, null ,password, regDate, birthday, "");
 
-			// creates a new object for accessing the database and stores the user     <---------AGGIUNGERE!
+    		String photoProfile = "";
+    		String str = "";
+			ServletContext context = getServletContext();
+    		InputStream is = context.getResourceAsStream("/resources/defaultBase64PhotoProfile");
+    		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            if (is != null)
+            {                            
+                while ((str = reader.readLine()) != null)
+                {    
+                    photoProfile = photoProfile + str;
+                }                
+            }
+			
+			u = new User(email, name, surname, username, photoProfile, password, regDate, birthday, "");
+
 			new CreateUserDatabase(getDataSource().getConnection(), u).createUser();
 		}
 		catch(NumberFormatException e)
@@ -105,12 +120,14 @@ public final class CreateUserServlet extends AbstractDatabaseServlet
 			//Should not happen
 			m = new Message("Birthday not correct","E300", pe.getMessage());
 		}
+		catch(IOException ioe)
+		{
+			m = new Message("Error occured while parsing default photo profile", "Qualche codice", ioe.getMessage());
+		}
 		
-		// stores the user and the message as a request attribute
 		req.setAttribute("user", u);
 		req.setAttribute("message", m);
 		
-		// forwards the control to the create-user-result JSP
 		req.getRequestDispatcher("/jsp/create-user-result.jsp").forward(req, res);
 	}
 

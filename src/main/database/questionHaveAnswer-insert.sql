@@ -23,4 +23,3 @@ INSERT INTO lr_group.have VALUES (1,3);
 INSERT INTO lr_group.have VALUES (1,4);
 INSERT INTO lr_group.have VALUES (1,5);
 INSERT INTO lr_group.have VALUES (1,6);
-
