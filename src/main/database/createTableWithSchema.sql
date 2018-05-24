@@ -19,20 +19,17 @@
 --
 -- DB creation code
 --
-DROP DATABASE IF EXISTS webapp; 
 
-CREATE DATABASE  webapp ENCODING 'UTF-8';
+CREATE SCHEMA lr_group;
 
-\c webapp;
-
-CREATE TYPE webSiteType AS ENUM (
+CREATE TYPE lr_group.webSiteType AS ENUM (
     'BitBucket','Github','Linkedin','OwnSite'
 );
 
 
 /*creation of the user*/
 
-CREATE TABLE Utente (
+CREATE TABLE lr_group.Utente (
     email VARCHAR(300) NOT NULL,
     name VARCHAR(30),                  
     surname VARCHAR(30),
@@ -46,7 +43,7 @@ CREATE TABLE Utente (
     PRIMARY KEY(username)
 );
  
-CREATE TABLE Question (
+CREATE TABLE lr_group.Question (
     id SERIAL,
     title VARCHAR(50),
     idUser VARCHAR(20), --abbiamo scritto 0 sull'er
@@ -56,11 +53,11 @@ CREATE TABLE Question (
  
     PRIMARY KEY(id),
      
-    FOREIGN KEY(idUser) REFERENCES Utente(username)
+    FOREIGN KEY(idUser) REFERENCES lr_group.Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
-CREATE TABLE VoteQuestion(
+CREATE TABLE lr_group.VoteQuestion(
     question INTEGER NOT NULL,
     idUser VARCHAR(20) NOT NULL,
     vote INTEGER
@@ -69,15 +66,15 @@ CREATE TABLE VoteQuestion(
  
     PRIMARY KEY(question,idUser),
  
-    FOREIGN KEY(question) REFERENCES Question(id)
+    FOREIGN KEY(question) REFERENCES lr_group.Question(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(idUser) REFERENCES Utente(username)
+    FOREIGN KEY(idUser) REFERENCES lr_group.Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
  
-CREATE TABLE Category (
+CREATE TABLE lr_group.Category (
     name VARCHAR(20) NOT NULL,
     description VARCHAR(50),
     isCompany BOOLEAN DEFAULT FALSE,
@@ -85,20 +82,20 @@ CREATE TABLE Category (
     PRIMARY KEY(name)
 );
  
-CREATE TABLE Below(
+CREATE TABLE lr_group.Below(
     category VARCHAR(20) NOT NULL, 
     question INTEGER NOT NULL,
  
     PRIMARY KEY(category,question),
  
-    FOREIGN KEY(category) REFERENCES Category(name)
+    FOREIGN KEY(category) REFERENCES lr_group.Category(name)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(question) REFERENCES Question(id)
+    FOREIGN KEY(question) REFERENCES lr_group.Question(id)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
-CREATE TABLE Answer (
+CREATE TABLE lr_group.Answer (
     id SERIAL,
     isFixed BOOLEAN DEFAULT FALSE,
     body VARCHAR,
@@ -108,14 +105,14 @@ CREATE TABLE Answer (
  
     PRIMARY KEY(id),
  
-    FOREIGN KEY(idUser) REFERENCES Utente(username)
+    FOREIGN KEY(idUser) REFERENCES lr_group.Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(parentId) REFERENCES Answer(id)
+    FOREIGN KEY(parentId) REFERENCES lr_group.Answer(id)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
-CREATE TABLE VoteAnswer(
+CREATE TABLE lr_group.VoteAnswer(
     answer INTEGER NOT NULL,
     idUser VARCHAR(20) NOT NULL,
     vote INTEGER
@@ -124,51 +121,51 @@ CREATE TABLE VoteAnswer(
  
     PRIMARY KEY(answer,idUser),
  
-    FOREIGN KEY(answer) REFERENCES Answer(id)
+    FOREIGN KEY(answer) REFERENCES lr_group.Answer(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(idUser) REFERENCES Utente(username)
+    FOREIGN KEY(idUser) REFERENCES lr_group.Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
-CREATE TABLE Have(
+CREATE TABLE lr_group.Have(
     idQuestion INTEGER NOT NULL,
     idAnswer INTEGER NOT NULL,
  
     PRIMARY KEY(idQuestion,idAnswer),
  
-    FOREIGN KEY(idQuestion) REFERENCES Question(id)
+    FOREIGN KEY(idQuestion) REFERENCES lr_group.Question(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(idAnswer) REFERENCES Answer(id)
+    FOREIGN KEY(idAnswer) REFERENCES lr_group.Answer(id)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
-CREATE TABLE IsInterested(
+CREATE TABLE lr_group.IsInterested(
     question INTEGER NOT NULL,
     idUser VARCHAR(50) NOT NULL,
  
     PRIMARY KEY(question,idUser),
  
-    FOREIGN KEY(question) REFERENCES Question(id)
+    FOREIGN KEY(question) REFERENCES lr_group.Question(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
-    FOREIGN KEY(idUser) REFERENCES Utente(username)
+    FOREIGN KEY(idUser) REFERENCES lr_group.Utente(username)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
-CREATE TABLE Website(
+CREATE TABLE lr_group.Website(
     name VARCHAR(50) NOT NULL,
  
     PRIMARY KEY(name)
 );
  
-CREATE TABLE HaveWebsite(
+CREATE TABLE lr_group.HaveWebsite(
     website VARCHAR(50) NOT NULL,
     link VARCHAR(50) NOT NULL,
-	type webSiteType NOT NULL, 
+ 	type lr_group.webSiteType NOT NULL,
     PRIMARY KEY(website,link),
  
-    FOREIGN KEY(website) REFERENCES Website(name)
+    FOREIGN KEY(website) REFERENCES lr_group.Website(name)
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
