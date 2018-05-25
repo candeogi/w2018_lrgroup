@@ -14,7 +14,8 @@
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
- 
+
+ Author: LRGroup
  Author: Alberto Pontini
  Version: 1.0
  Since: 1.0
@@ -23,7 +24,7 @@
 <!-- The contents of this file will be loaded for each web application -->
 <Context>
 
-   <Resource name="jdbc/user-webapp"
+   <Resource name="jdbc/lrgroup-webapp"
           auth="Container"
           type="javax.sql.DataSource"
           factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
