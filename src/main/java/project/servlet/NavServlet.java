@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import project.database.SearchQuestionByUserDatabase;
 import project.database.SearchUserByUsernameDatabase;
 import project.resource.*;
 
@@ -42,8 +43,22 @@ public class NavServlet extends AbstractDatabaseServlet
 				break;
 
 			case "show-user-questions":
-				if(req.getSession().getAttribute("loggedInUser") != null)
-					req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req, res);
+				if(req.getSession().getAttribute("loggedInUser") != null){
+					List<Question> q = null;
+					Message m = null;
+					try{
+						q = new SearchQuestionByUserDatabase(getDataSource().getConnection(),
+								(String)req.getSession().getAttribute("loggedInUser")).SearchQuestionByUser();
+						m = new Message("Question searched");
+					}
+					catch (SQLException ex){
+						m = new Message("Cannot search for questions: unexpected error while accessing the database.",
+								"E200", ex.getMessage());
+					}
+
+					req.setAttribute("m",m);
+					req.setAttribute("questions",q);
+					req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req, res);}
 				else
 				{
 					req.setAttribute("from", "show-user-questions");
