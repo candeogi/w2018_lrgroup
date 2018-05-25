@@ -22,7 +22,10 @@ public final class CreateUserDatabase {
      */
     private static final String STATEMENT = "" +
             "INSERT INTO lr_group.Utente (email, name, surname, username, photoProfile, password, isAdmin ,registrationDate, birthday, description) " +
-            "VALUES (?, ?, ?, ?, ?, lr_group.crypt(?,lr_group.gen_salt('bf',8)), ?, ?, ?, ?)";
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    /*private static final String STATEMENT = "" +
+            "INSERT INTO lr_group.Utente (email, name, surname, username, photoProfile, password, isAdmin ,registrationDate, birthday, description) " +
+            "VALUES (?, ?, ?, ?, ?, lr_group.crypt(?,lr_group.gen_salt('bf',8)), ?, ?, ?, ?)";*/
 
     /**
      * The connection to the database

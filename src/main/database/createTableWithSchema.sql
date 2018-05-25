@@ -26,7 +26,7 @@ CREATE TYPE lr_group.webSiteType AS ENUM (
     'BitBucket','Github','Linkedin','OwnSite'
 );
 
-CREATE EXTENSION pgcrypto WITH SCHEMA lr_group;
+/*CREATE EXTENSION pgcrypto WITH SCHEMA lr_group;*/
 
 /*creation of the user*/
 
@@ -36,7 +36,8 @@ CREATE TABLE lr_group.Utente (
     surname VARCHAR(30),
     username VARCHAR(20) NOT NULL,
     photoprofile VARCHAR DEFAULT NULL,
-    password TEXT NOT NULL, -- not sure its the best data type
+    password  VARCHAR(32) NOT NULL, -- not sure its the best data type
+    /*password TEXT NOT NULL, -- not sure its the best data type*/
     isAdmin BOOLEAN DEFAULT FALSE,
     registrationDate DATE NOT NULL,
     birthday DATE,
