@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrive question by ID in the database.
+ * Retrieve question by ID in the database.
  *
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)

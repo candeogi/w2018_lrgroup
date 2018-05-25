@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates an user in the database.
+ * Update the user photo profile
  *
  * @author lrgroup
- * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
+ * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  */
 public final class UpdateUserPhotoProfileDatabase {
 
