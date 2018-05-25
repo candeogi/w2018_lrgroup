@@ -144,19 +144,6 @@ CREATE TABLE lr_group.Have(
     ON DELETE NO ACTION ON UPDATE CASCADE
 );
  
-CREATE TABLE lr_group.IsInterested(
-    question INTEGER NOT NULL,
-    idUser VARCHAR(50) NOT NULL,
- 
-    PRIMARY KEY(question,idUser),
- 
-    FOREIGN KEY(question) REFERENCES lr_group.Question(id)
-    ON DELETE NO ACTION ON UPDATE CASCADE,
- 
-    FOREIGN KEY(idUser) REFERENCES lr_group.Utente(username)
-    ON DELETE NO ACTION ON UPDATE CASCADE
-);
- 
 CREATE TABLE lr_group.Website(
     name VARCHAR(50) NOT NULL,
  
