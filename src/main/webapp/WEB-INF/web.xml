@@ -66,6 +66,11 @@
 		<servlet-class>project.servlet.UpdateQuestionServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>DeleteQuestionServlet</servlet-name>
+		<servlet-class>project.servlet.DeleteQuestionServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>NavServlet</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -124,6 +129,11 @@
 	<servlet-mapping>
 		<servlet-name>UpdateQuestionServlet</servlet-name>
 		<url-pattern>/update-question</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DeleteQuestionServlet</servlet-name>
+		<url-pattern>/delete-question</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

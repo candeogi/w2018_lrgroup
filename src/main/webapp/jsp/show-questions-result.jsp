@@ -28,7 +28,14 @@
                 <td><c:out value="${question.timestamp}"/></td>
                 <td><c:out value="${question.lastModified}"/></td>
                 <td><c:out value="${question.IDUser}"/></td>
-
+                <c:if test="${isAdmin == true}">
+                    <td>
+                        <form method="POST" action="<c:url value="/delete-question"/>" id="deleteForm">
+                            <input type="hidden" name="idquestion" value="${question.ID}"/>
+                            <button type="submit">Delete</button><br/>
+                    </form>
+                    </td>
+                </c:if>
             </tr>
         </c:forEach>
         </tbody>
