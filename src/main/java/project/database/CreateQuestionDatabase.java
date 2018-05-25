@@ -46,7 +46,7 @@ public final class CreateQuestionDatabase {
     private final Connection con;
 
     /**
-     * The question to be updated in the database
+     * The question to be created in the database
      */
     private final Question question;
 

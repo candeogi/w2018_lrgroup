@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieve questions by user in the database.
+ * Retrieves questions by user in the database.
  *
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
@@ -51,7 +51,7 @@ public final class SearchQuestionByUserDatabase
 
 
     /**
-     * Creates a new object for questions made by an user retrieval.
+     * Creates a new object for questions made by an user.
      *
      * @param con
      *            the connection to the database.
@@ -65,12 +65,12 @@ public final class SearchQuestionByUserDatabase
     }
 
     /**
-     * Retrive questions made by an user in the database.
+     * Retrieve questions made by an user in the database.
      *
-     * @return An ArrayList of recent questions.
+     * @return An ArrayList of user's questions.
      *
      * @throws SQLException
-     *             if any error occurs while retive the questions.
+     *             if any error occurs while retrieving the user's questions.
      */
     public List<Question> SearchQuestionByUser() throws SQLException
     {

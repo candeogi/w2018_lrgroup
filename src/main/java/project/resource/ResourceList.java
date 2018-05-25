@@ -38,6 +38,12 @@ public final class ResourceList<T extends Resource> extends Resource {
         this.list = list;
     }
 
+    /**
+     *
+     * @param out  the stream to which the JSON representation of the {@code Resource} has to be written.
+     *
+     * @throws IOException if something goes wrong while parsing.
+     */
     @Override
     public final void toJSON(final OutputStream out) throws IOException {
 

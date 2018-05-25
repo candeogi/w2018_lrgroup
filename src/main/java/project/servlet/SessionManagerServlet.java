@@ -25,7 +25,7 @@ public class SessionManagerServlet extends AbstractDatabaseServlet{
 
     /**
      * Overrides service method called by the servlet container.
-     * If there is a session i allow the servlet to respond to the request; otherwise redirects to the login form.
+     * If there is a session it allows the servlet to respond to the request; otherwise redirects to the login form.
      *
      * @param req
      *          the HTTP request from the client.

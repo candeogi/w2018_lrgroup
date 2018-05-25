@@ -183,6 +183,12 @@ public class User extends Resource
     }
 
 
+    /**
+     *
+     * @param out  the stream to which the JSON representation of the {@code Resource} has to be written.
+     *
+     * @throws IOException if something goes wrong while parsing.
+     */
 	@Override
 	public final void toJSON(final OutputStream out) throws IOException {
 
@@ -199,6 +205,7 @@ public class User extends Resource
         jg.writeStringField("surname",surname);
         jg.writeStringField("username",username);
         jg.writeStringField("photoProfile",photoProfile);
+        jg.writeBooleanField("isAdmin",isAdmin);
         jg.writeStringField("registrationDate",registrationDate.toString());
         jg.writeStringField("birthday",birthday.toString());
         jg.writeStringField("description",description);

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Update an user in the database.
+ * Updates an user in the database.
  *
  * @author lrgroup
  * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
@@ -35,12 +35,12 @@ public final class UpdateUserDatabase {
     private final User user;
 
     /**
-     * Creates a new object for creating an user.
+     * Creates a new object to update an user.
      *
      * @param con
      *            the connection to the database.
      * @param user
-     *            the user to be created in the database.
+     *            the user to be updated in the database.
      */
     public UpdateUserDatabase(final Connection con, final User user)
     {
@@ -49,9 +49,9 @@ public final class UpdateUserDatabase {
     }
 
     /**
-     * Creates a user in the database.
+     * Updates a user in the database.
      * @throws SQLException
-     *             if any error occurs while storing the user.
+     *             if any error occurs while updating the user.
      */
     public void updateUser() throws SQLException {
 

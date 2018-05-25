@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Search user by username.
+ * Searches user by username.
  * Used for the login.
  *
  * @author lrgroup

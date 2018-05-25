@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieve recent questions in the database.
+ * Retrieves recent questions in the database.
  *
  * @author lrgroup
  * @author Davide Storato (davide.storato@studenti.unipd.it)
@@ -60,12 +60,12 @@ public final class SearchQuestionByTimestampDatabase
     }
 
     /**
-     * Retrieve recent questions in the database.
+     * Retrieves recent questions in the database.
      *
      * @return An ArrayList of recent questions.
      *
      * @throws SQLException
-     *             if any error occurs while retrieve the questions.
+     *             if any error occurs while retrieving the questions.
      */
     public List<Question> SearchQuestionByTimestamp() throws SQLException
     {

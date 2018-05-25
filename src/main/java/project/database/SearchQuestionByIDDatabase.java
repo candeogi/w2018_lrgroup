@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieve question by ID in the database.
+ * Retrieves question by ID in the database.
  *
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
@@ -65,12 +65,12 @@ public final class SearchQuestionByIDDatabase
     }
 
     /**
-     * Retrieve a specific question in the database.
+     * Retrieves a specific question in the database.
      *
      * @return a list of {@code Question} (must be one) object matching the ID.
      *
      * @throws SQLException
-     *             if any error occurs while retrieve the question.
+     *             if any error occurs while retrieving the question.
      */
     public List<Question> SearchQuestionByID() throws SQLException
     {

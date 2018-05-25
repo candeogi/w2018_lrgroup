@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 
 /**
- * Update a question in the database.
+ * Updates a question in the database.
  *
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
@@ -33,7 +33,7 @@ public final class UpdateQuestionDatabase {
     private final Question question;
 
     /**
-     * Creates a new object for updating a question.
+     * Creates a new object to update a question.
      *
      * @param con
      *            the connection to the database.
@@ -47,9 +47,9 @@ public final class UpdateQuestionDatabase {
     }
 
     /**
-     * Update a question in the database.
+     * Updates a question in the database.
      * @throws SQLException
-     *             if any error occurs while storing the user.
+     *             if any error occurs while updating the user.
      */
     public void updateQuestion() throws SQLException {
 

@@ -3,7 +3,6 @@ package project.rest;
 import project.database.*;
 import project.resource.*;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

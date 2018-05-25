@@ -14,7 +14,7 @@ public abstract class Resource
 {
 
 	/**
-	 * The JSON factory to be used for creating JSON parsers and generators.
+	 * The JSON factory to be used to create JSON parsers and generators.
 	 */
 	protected static final JsonFactory JSON_FACTORY;
 

@@ -22,6 +22,14 @@ import project.resource.*;
 
 public class ShowQuestionUserServlet extends SessionManagerServlet
 {
+    /**
+     * Shows the user's question.
+     *
+     * @param req the HTTP request;
+     * @param res the HTTP response.
+     * @throws ServletException if any error occurs while executing the servlet.
+     * @throws IOException if any error occurs in the client/server communication.
+     */
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
         List<Question> q = null;

@@ -52,7 +52,6 @@ public final class SearchUserByUsernameAndPasswordDatabase {
     /**
      * Username and Password of the User
      */
-    //private final int salary;
     private final String username;
     private final String password;
 

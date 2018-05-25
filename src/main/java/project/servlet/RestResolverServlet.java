@@ -6,10 +6,7 @@ import project.rest.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServlet;
-import java.util.Date;
 import java.io.*;
-import java.util.List;
 
 /**
  * Manages the REST API for the different REST resources.
@@ -36,6 +33,15 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 	 */
 	private static final String ALL_MEDIA_TYPE = "*/*";
 
+	/**
+	 * Overrides service method called by the servlet container.
+	 * It provides the resource requested if this is available, otherwise it throws an error message.
+	 *
+	 * @param req the HTTP request.
+	 * @param res the HTTP response.
+	 * @throws ServletException if any error occurs while executing the servlet.
+	 * @throws IOException if any error occurs in the client/server communication.
+	 */
 	@Override
 	protected final void service(final HttpServletRequest req, final HttpServletResponse res) throws ServletException, IOException
 	{
@@ -133,6 +139,14 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 
 	}
 
+	/**
+	 * Process the answer-related resources
+	 *
+	 * @param req the HTTP request.
+	 * @param res the HTTP response.
+	 * @return TRUE if a resource is found, otherwise FALSE
+	 * @throws IOException if any error occurs in the client/server communication.
+	 */
 	private boolean processAnswer(HttpServletRequest req, HttpServletResponse res) throws IOException
 	{
 		OutputStream out = res.getOutputStream();
@@ -171,6 +185,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 								{
 									Integer.parseInt(path.substring(1));
 									new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
+									//TODO Return true?
 								}
 								catch (NumberFormatException e)
 								{
@@ -313,6 +328,14 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 		return true;
 	}
 
+	/**
+	 * Process the question-related resources.
+	 *
+	 * @param req the HTTP request.
+	 * @param res the HTTP response.
+	 * @return TRUE if a resource is found, otherwise FALSE
+	 * @throws IOException if any error occurs in the client/server communication.
+	 */
 	private boolean processQuestion(HttpServletRequest req, HttpServletResponse res) throws IOException
 	{
 		OutputStream out = res.getOutputStream();

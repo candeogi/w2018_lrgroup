@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieve answers to a specific question in the database.
+ * Retrieves answers to a specific question in the database.
  *
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
@@ -67,12 +67,12 @@ public final class SearchAnswerByQuestionIDDatabase
     }
 
     /**
-     * Retrieve answers for specific question in the database.
+     * Retrieves answers for specific question in the database.
      *
      * @return a list of {@code Answer} (must be one) object related to a specific question.
      *
      * @throws SQLException
-     *             if any error occurs while retrieve the answer.
+     *             if any error occurs while retrieving the answer.
      */
     public List<Answer> searchAnswerByQuestionID() throws SQLException
     {

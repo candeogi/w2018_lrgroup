@@ -5,19 +5,16 @@ import project.resource.Message;
 import project.database.CreateQuestionDatabase;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServlet;
 
 
 /**
- * Creates a new question into the database.
+ * Creates a new question into the database. <p>
  * The title and body of the question is provided by the request through the form.
  * The user writing the question is obtained through the active session.
  *

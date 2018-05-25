@@ -22,6 +22,10 @@ public abstract class AbstractDatabaseServlet extends HttpServlet
 	 * The connection pool to the database.
 	 */
 	private DataSource ds;
+
+    /**
+     * The original servlet context.
+     */
     private ServletContext sc;
 
 	/**

@@ -30,7 +30,7 @@ public final class CreateUserDatabase {
     private final Connection con;
 
     /**
-     * The user to be updated in the database
+     * The user to be created in the database
      */
     private final User user;
 
@@ -66,8 +66,8 @@ public final class CreateUserDatabase {
             pstmt.setString(5, user.getPhotoProfile());
             pstmt.setString(6, user.getPassword());
             pstmt.setBoolean(7,user.isAdmin());
-            pstmt.setDate(8, user.getRegistrationDate()); //TODO check date format on database
-            pstmt.setDate(9, user.getBirthday()); //TODO check date format on database
+            pstmt.setDate(8, user.getRegistrationDate());
+            pstmt.setDate(9, user.getBirthday());
             pstmt.setString(10, user.getDescription());
 
             pstmt.execute();

@@ -23,23 +23,6 @@ public final class LogoutServlet extends AbstractDatabaseServlet {
         Message m = null;
 
         res.sendRedirect(req.getContextPath()+"/jsp/index.jsp");
-        /*if(m==null || !m.isError())
-        {
-            String from = req.getParameter("from");
-            if(from != null || !from.equals(""))
-            {
-                res.sendRedirect(req.getContextPath() + "/?p=" + req.getParameter("from"));
-            }
-            else
-            {
-                res.sendRedirect(req.getContextPath() + "/");
-            }
-        }
-        else
-        {
-            req.setAttribute("message", m);
-            req.getRequestDispatcher("/jsp/login-result.jsp").forward(req,res);
-        }*/
 
     }
 }

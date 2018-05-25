@@ -20,7 +20,7 @@ public class Answer extends Resource
 	private final int ID;
 	private final boolean fixed;
 	private final String text;
-	private final int parentID; //Trasformare in Answer/Question?
+	private final int parentID;
 	private final Timestamp timestamp;
 	private final String IDUser;
 	private final int questionID;
@@ -35,11 +35,11 @@ public class Answer extends Resource
 	 * @param timestamp
 	 *            the timestamp of the answer.
 	 * @param questionID
-	 * 				the identifier to the related question
+	 * 				the identifier of the related question
 	 * @param IDUser
-	 * 				the identifier of the user that makes the answer
+	 * 				the identifier of the user that creates the answer
 	 * @param parentID
-	 * 				the identifier to the related parent answer
+	 * 				the identifier of the related parent answer
 	 */
 
 	public Answer(final int ID, final String IDUser ,final boolean fixed, final String text, final int parentID ,final Timestamp timestamp,final int questionID)
@@ -63,11 +63,11 @@ public class Answer extends Resource
 	 * @param timestamp
 	 *            the timestamp of the answer.
 	 * @param parentID
-	 * 			  the identifier to the related answer
+	 * 			  the identifier of the related answer
 	 * @param IDUser
-	 * 			the identifier of the user that makes the answer
+	 * 			the identifier of the user that creates the answer
 	 * @param questionID
-	 * 			the identifier to the related question
+	 * 			the identifier of the related question
 	 */
 
 	public Answer(final String IDUser, final boolean fixed, final String text, final int parentID, final Timestamp timestamp,final int questionID)
@@ -123,21 +123,29 @@ public class Answer extends Resource
 	 * 
 	 * @return the timestamp of the answer.
 	 */
+	public Timestamp getTimestamp() { return timestamp; }
 
-	public Timestamp getTimestamp()
-	{
-		return timestamp;
-	}
+	/**
+	 * Returns the related parent answer ID
+	 *
+	 * @return the related parent answer ID
+	 */
+	public int getParentID() { return parentID; }
 
-	public int getParentID()
-	{
-		return parentID;
-	}
+	/**
+	 * Returns the related question ID
+	 *
+	 * @return the related question ID
+	 */
+	public int getQuestionID() { return questionID; }
 
-	public int getQuestionID() {
-		return questionID;
-	}
-
+	/**
+	 *
+	 *
+	 * @param out the stream to which the JSON representation of the {@code Resource} has to be written.
+	 *
+	 * @throws IOException if something goes wrong while parsing.
+	 */
 	@Override
 	public final void toJSON(final OutputStream out) throws IOException
 	{

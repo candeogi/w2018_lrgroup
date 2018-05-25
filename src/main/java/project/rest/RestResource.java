@@ -16,11 +16,8 @@
 
 package project.rest;
 
-import com.fasterxml.jackson.core.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.sql.Connection;
 
 /**

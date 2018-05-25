@@ -1,6 +1,5 @@
 package project.servlet;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +21,14 @@ import project.resource.*;
 
 public class NavServlet extends AbstractDatabaseServlet
 {
+	/**
+	 * Allows site navigation and login request on protected resources
+	 *
+	 * @param req the HTTP request.
+	 * @param res the HTTP response.
+	 * @throws ServletException if any error occurs while executing the servlet.
+	 * @throws IOException if any error occurs in the client/server communication.
+	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
 	{
 		String get = req.getParameter("p");
