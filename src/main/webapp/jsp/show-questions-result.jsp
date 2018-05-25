@@ -5,6 +5,9 @@
 <head>
     <title>Shows questions</title>
 </head>
+<header>
+    <c:import url="/jsp/include/header.jsp"/>
+</header>
 <body>
 <h1>Shows questions</h1>
 <hr/>

@@ -38,6 +38,10 @@ Since: 1.0
 
 </head>
 
+<header>
+    <c:import url="/jsp/include/header.jsp"/>
+</header>
+
 <body>
 
 <h1>Show question rest</h1>
