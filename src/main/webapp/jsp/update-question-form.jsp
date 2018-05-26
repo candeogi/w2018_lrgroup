@@ -18,6 +18,8 @@
 </c:if>
 <form method="POST" action="<c:url value="/update-question"/>" id="questionForm">
     <p>Old title: <c:out value='${oldtitle}'/></p>
+    <input type="hidden" name="currentTitle" value="${oldtitle}"/>
+
     <label for="title">Title:</label>
     <input name="title" type="text"/><br/>
 
@@ -26,10 +28,11 @@
     <input type="hidden" name="id" value="${questionid}"/>
 
     <p>Old body: <c:out value='${oldbody}'/></p>
+    <input type="hidden" name="currentBody" value="${oldbody}"/>
+
 
     <label for="body">Body:</label>
-    <textarea rows="4" cols="50" name="body" placeholder="Enter text..">
-		</textarea>
+    <textarea rows="4" cols="50" name="body" placeholder="Enter text"></textarea>
 
     <button type="submit">Submit</button><br/>
     <button type="reset">Reset the form</button>
