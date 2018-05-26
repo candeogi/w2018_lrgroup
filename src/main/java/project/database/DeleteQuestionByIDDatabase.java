@@ -36,6 +36,15 @@ public final class DeleteQuestionByIDDatabase
      */
     private static final String QUERY =
             "DELETE " +
+                    "FROM lr_group.answer " +
+                    "WHERE EXISTS " +
+                    "(SELECT 1 " +
+                    " FROM lr_group.have" +
+                    " WHERE idanswer = lr_group.answer.id " +
+                    " AND idquestion = ?) ";
+
+    private static final String QUERY_2 =
+            "DELETE " +
                     "FROM lr_group.Question " +
                     "WHERE id=? "; //TODO query CASCADE?
 
@@ -75,9 +84,14 @@ public final class DeleteQuestionByIDDatabase
         try {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setInt(1, id);
-
-
             rs = pstmt.executeUpdate();
+
+
+            pstmt = con.prepareStatement(QUERY_2);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeUpdate();
+
+
 
         } finally {
             if (pstmt != null) {

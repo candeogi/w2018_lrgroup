@@ -139,10 +139,10 @@ CREATE TABLE lr_group.Have(
     PRIMARY KEY(idQuestion,idAnswer),
  
     FOREIGN KEY(idQuestion) REFERENCES lr_group.Question(id)
-    ON DELETE NO ACTION ON UPDATE CASCADE,
+    ON DELETE CASCADE ON UPDATE CASCADE,
  
     FOREIGN KEY(idAnswer) REFERENCES lr_group.Answer(id)
-    ON DELETE NO ACTION ON UPDATE CASCADE
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
  
 CREATE TABLE lr_group.Website(
