@@ -34,9 +34,13 @@ public final class Wrapper extends SessionManagerServlet
             throws ServletException, IOException {
 
         int idquestion = Integer.parseInt(req.getParameter("IDquestion"));
-
+        String oldtitle = (String) req.getParameter("oldtitle");
+        String oldbody = (String) req.getParameter("oldbody");
 
         req.setAttribute("questionid",idquestion);
+        req.setAttribute("oldtitle",oldtitle);
+        req.setAttribute("oldbody",oldbody);
+
         req.getRequestDispatcher("/jsp/update-question-form.jsp").forward(req, res);
 
     }

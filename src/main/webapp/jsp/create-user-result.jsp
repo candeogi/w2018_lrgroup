@@ -17,7 +17,7 @@
 		<!-- display the message -->
 		<c:import url="/jsp/include/show-message.jsp"/>
 
-		<!-- display the just created employee, if any and no errors -->
+		<!-- display the just created user, if any and no errors -->
 		<c:if test='${not empty user && !message.error}'>
 			<ul>
 				<li>Username: <c:out value="${user.username}"/></li>

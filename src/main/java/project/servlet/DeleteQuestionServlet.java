@@ -1,10 +1,13 @@
 package project.servlet;
 
 import project.database.DeleteQuestionByIDDatabase;
+import project.database.ListQuestionsDatabase;
 import project.resource.Message;
+import project.resource.Question;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +46,6 @@ public final class DeleteQuestionServlet extends SessionManagerServlet
 
             questionid = Integer.parseInt(req.getParameter("idquestion"));
             new DeleteQuestionByIDDatabase(getDataSource().getConnection(),questionid).DeleteQuestionByID();
-
             m = new Message("Correctly deleted the question");
 
 
@@ -60,8 +62,7 @@ public final class DeleteQuestionServlet extends SessionManagerServlet
         }
         else
         {
-            res.sendRedirect(req.getContextPath()+"/show-question-result.jsp");
-
+            res.sendRedirect(req.getContextPath() + "/");
         }
     }
 

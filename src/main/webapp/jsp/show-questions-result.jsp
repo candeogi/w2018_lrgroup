@@ -35,6 +35,7 @@
                     <td>
                         <form method="POST" action="<c:url value="/delete-question"/>" id="deleteForm">
                             <input type="hidden" name="idquestion" value="${question.ID}"/>
+
                             <button type="submit">Delete</button><br/>
                         </form>
                     </td>
@@ -43,6 +44,8 @@
                         <td>
                             <form method="POST" action="<c:url value="/to-update-form"/>" id="updateForm">
                                 <input type="hidden" name="IDquestion" value="${question.ID}"/>
+                                <input type="hidden" name="oldtitle" value="${question.title}"/>
+                                <input type="hidden" name="oldbody" value="${question.body}"/>
                                 <button type="submit">Update</button><br/>
                             </form>
                         </td>

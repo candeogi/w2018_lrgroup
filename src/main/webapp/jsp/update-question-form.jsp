@@ -17,6 +17,7 @@
     <p>Logged as: <c:out value='${sessionScope.loggedInUser}'/></p>
 </c:if>
 <form method="POST" action="<c:url value="/update-question"/>" id="questionForm">
+    <p>Old title: <c:out value='${oldtitle}'/></p>
     <label for="title">Title:</label>
     <input name="title" type="text"/><br/>
 
@@ -24,6 +25,9 @@
     <input name="id" type="text"/><br/>--%>
     <input type="hidden" name="id" value="${questionid}"/>
 
+    <p>Old body: <c:out value='${oldbody}'/></p>
+
+    <label for="body">Body:</label>
     <textarea rows="4" cols="50" name="body" placeholder="Enter text..">
 		</textarea>
 
