@@ -36,7 +36,16 @@
                         <form method="POST" action="<c:url value="/delete-question"/>" id="deleteForm">
                             <input type="hidden" name="idquestion" value="${question.ID}"/>
                             <button type="submit">Delete</button><br/>
-                    </form>
+                        </form>
+                    </td>
+                        </c:if>
+                        <c:if test="${(isAdmin == true) or (not empty sessionScope.loggedInUser and sessionScope.loggedInUser==question.IDUser)}">
+                        <td>
+                            <form method="POST" action="<c:url value="/to-update-form"/>" id="updateForm">
+                                <input type="hidden" name="IDquestion" value="${question.ID}"/>
+                                <button type="submit">Update</button><br/>
+                            </form>
+                        </td>
                     </td>
                 </c:if>
             </tr>

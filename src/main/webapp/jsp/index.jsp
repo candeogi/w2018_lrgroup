@@ -25,8 +25,8 @@
             </c:when>
             <c:when test="${not empty sessionScope.loggedInUser}">
                 <p><a href="<c:url value="/?p=show-user-questions"/>">Show my questions</a></p>
-               <p><a href="<c:url value="/?p=answer"/>">Answer to a Question</a></p>
-                <p><a href="<c:url value="/?p=update-question"/>">Update a question</a></p>
+                <p><a href="<c:url value="/?p=answer"/>">Answer to a Question</a></p>
+                <%--<p><a href="<c:url value="/?p=update-question"/>">Update a question</a></p>--%>
 
 
             </c:when>

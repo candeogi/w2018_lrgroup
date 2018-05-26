@@ -71,6 +71,11 @@
 		<servlet-class>project.servlet.DeleteQuestionServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>Wrapper</servlet-name>
+		<servlet-class>project.servlet.Wrapper</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>NavServlet</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -141,6 +146,10 @@
 		<url-pattern>*.js</url-pattern>
 	</servlet-mapping>
 
+	<servlet-mapping>
+		<servlet-name>Wrapper</servlet-name>
+		<url-pattern>/to-update-form</url-pattern>
+	</servlet-mapping>
 
 	<resource-ref>
       <description>Connection pool to the database</description>

@@ -20,8 +20,9 @@
     <label for="title">Title:</label>
     <input name="title" type="text"/><br/>
 
-    <label for="id">question id:</label>
-    <input name="id" type="text"/><br/>
+    <%--<label for="id">question id:</label>
+    <input name="id" type="text"/><br/>--%>
+    <input type="hidden" name="id" value="${questionid}"/>
 
     <textarea rows="4" cols="50" name="body" placeholder="Enter text..">
 		</textarea>

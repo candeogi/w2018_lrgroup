@@ -1,6 +1,7 @@
 package project.servlet;
 
 import project.database.SearchQuestionByIDDatabase;
+import project.database.SearchUserByUsernameDatabase;
 import project.database.UpdateQuestionDatabase;
 import project.resource.Question;
 import project.resource.Message;
@@ -70,7 +71,10 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
             questionid = Integer.parseInt(req.getParameter("id"));
             List<Question> q_searched = new SearchQuestionByIDDatabase(getDataSource().getConnection(),questionid)
                     .SearchQuestionByID();
-            if(!q_searched.isEmpty() && IDUser.equals(q_searched.get(0).getIDUser())){
+            boolean isAdmin = new SearchUserByUsernameDatabase(getDataSource().getConnection(),IDUser)
+                    .searchUserByUsername().get(0).isAdmin();
+
+            if(!q_searched.isEmpty() && (IDUser.equals(q_searched.get(0).getIDUser()) || isAdmin)){
                 q = new Question(questionid ,IDUser, title, body, new Timestamp(0), new Timestamp((Long)System.currentTimeMillis()));
                 new UpdateQuestionDatabase(getDataSource().getConnection(), q).updateQuestion();
             }
