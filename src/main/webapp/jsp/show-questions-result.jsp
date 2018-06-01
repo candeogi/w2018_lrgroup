@@ -31,7 +31,7 @@
                 <td><c:out value="${question.timestamp}"/></td>
                 <td><c:out value="${question.lastModified}"/></td>
                 <td><c:out value="${question.IDUser}"/></td>
-                <c:if test="${isAdmin == true}">
+                <c:if test="${sessionScope.isAdmin == true}">
                     <td>
                         <form method="POST" action="<c:url value="/delete-question"/>" id="deleteForm">
                             <input type="hidden" name="idquestion" value="${question.ID}"/>
@@ -40,7 +40,7 @@
                         </form>
                     </td>
                         </c:if>
-                        <c:if test="${(isAdmin == true) or (not empty sessionScope.loggedInUser and sessionScope.loggedInUser==question.IDUser)}">
+                        <c:if test="${(sessionScope.isAdmin == true) or (not empty sessionScope.loggedInUser and sessionScope.loggedInUser==question.IDUser)}">
                         <td>
                             <form method="POST" action="<c:url value="/to-update-form"/>" id="updateForm">
                                 <input type="hidden" name="IDquestion" value="${question.ID}"/>
