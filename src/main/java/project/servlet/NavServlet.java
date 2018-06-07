@@ -131,7 +131,7 @@ public class NavServlet extends AbstractDatabaseServlet
 							{
 								u = ul.get(0);
 								req.setAttribute("user",u);
-								req.getRequestDispatcher("/jsp/user-page.jsp").forward(req, res);
+								req.getRequestDispatcher("/jsp/user-information.jsp").forward(req, res);
 							}
 						}
 						catch(SQLException sqle)
