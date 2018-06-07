@@ -49,7 +49,7 @@ public final class LoginServlet extends AbstractDatabaseServlet
 
         //get user session
         HttpSession session= req.getSession();  //TODO getSession(false) maybe
-
+        
         try {
 
             // retrieves the request parameters
@@ -65,11 +65,13 @@ public final class LoginServlet extends AbstractDatabaseServlet
             {
                 //m = new Message("Login success!");
                 session.setAttribute("loggedInUser",userlist.get(0).getUsername());
+                session.setAttribute("isAdmin",userlist.get(0).isAdmin());
             }
             else
             {
                 m = new Message("Login failed!", "SomeCode", "User/Password is not correct");
                 session.removeAttribute("loggedInUser");
+                session.removeAttribute("isAdmin");
             }
 
         }catch (SQLException ex) {

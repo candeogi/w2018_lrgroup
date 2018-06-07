@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Example Bootstrap WA 2017-2018">
+    <meta name="author" content="Giovanni Candeo">
+
+    <title>AnyQuestions?</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--popper-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <!--bootstrap js-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    
+    <!-- Header on top-->
+    <header class="navbar bg-dark text-white">
+      <div class="justify-content-start">
+        <nav class="nav">
+          <a class="nav-link">
+            <i class="fas fa-question-circle"></i>
+          </a>
+          <a class="nav-link">AnyQuestions.com</a>
+        </nav>
+      </div>
+      <div class="justify-content-end">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+          Login
+        </button>
+        <button id="registerButton" type="button" class="btn btn-secondary">
+          Register
+        </button>
+      </div>
+    </header><!--close header-->
+
+    <!-- The Modal for the login , this code shouldnt be here, maybe we can import this code in a smarter way-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">AnyQuestions.com</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputUsername">Username</label>
+                <input type="text" class="form-control" id="exampleInputUsername" aria-describedby="emailHelp" placeholder="Username">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-primary ">Login</button>
+            </form>
+          </div>
+          <!--<div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->
+
+    <!-- Container Div -->
+    <div class="container-fluid">
+
+      <!-- Buttons To Sort Categories + Search -->
+      <div class="row button_menu justify-content-center">
+        
+        <div class="col-md-8">
+          <nav class="nav nav-pills justify-content-center">
+            <a class="nav-link active" href="#">Popular Questions</a>
+            <a class="nav-link" href="#">Your Questions</a>
+            <a class="nav-link" href="#">Latest Questions</a>
+            <a class="nav-link disabled" href="#">Your Questions</a>
+          </nav> 
+        </div>
+
+        <div class="col-md-4">
+          <form>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search a Question">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form> 
+        </div>
+
+      </div><!-- Buttons+Search Div -->
+
+      <!-- After Categories Button Div -->
+      <div class="row">
+
+        <!-- Browse Questions Table Div -->
+        <div class="col-md-8">    
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Solved</th>
+                <th><i class="fas fa-thumbs-up"></i> <!-- / <i class="fas fa-thumbs-down"> --></i></th>
+                <th>Question Title</th>
+                <th>Author</th>
+                <th>LastModified</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><i class="fas fa-check-circle solved"></i></td>
+                <td>25</td> 
+                <td>Question 1</td>
+                <td>Doe</td>
+                <td>11/05/2017 - 11:05</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-check-circle solved"></i></td>  
+                <td>5</td>               
+                <td>Question 2</td>
+                <td>Moe</td>
+                <td>11/05/2017 - 12:05</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-times-circle"></i></td>  
+                <td>32</td>               
+                <td>Question 3</td>
+                <td>Dooley</td>
+                <td>11/05/2017 - 15:05</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-check-circle solved"></i></td>        
+                <td>21</td>         
+                <td>Question 4</td>
+                <td>Han</td>
+                <td>11/05/2017 - 15:05</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-times-circle"></i></td>
+                <td>-15</td>                  
+                <td>Question 5</td>
+                <td>Dave</td>
+                <td>11/05/2017 - 15:05</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- close table div -->
+
+        <div class="col-md-4">
+          <img class="img-fluid adsbanner" src="https://images-na.ssl-images-amazon.com/images/I/716MJHggVDL._UX342_.jpg" alt="Wowee">
+        </div>
+
+      </div> <!-- close After Categories Button Div -->
+
+      <!-- Footer -->
+      <footer>
+        <div class="row" id="footer_row">
+          <div class="col-md-8">
+            <small class="text-muted">Designed and built with love by 
+              <a href="mailto:lrgroup@mailnesia.com">@lrgroup</a></small>
+          </div>
+          <div class="col-md-4">
+          </div>
+        <div>
+      </footer>
+        
+    </div><!-- /.container -->
+
+    <!--Custom script test-->
+    <script type="text/javascript" src="js/test.js"></script>
+  </body>
+</html>

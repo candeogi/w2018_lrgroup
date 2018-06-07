@@ -35,10 +35,8 @@ public class ShowQuestionsServlet extends SessionManagerServlet
         List<Question> q = null;
         String iduser = (String) req.getSession().getAttribute("loggedInUser");
         Message m = null;
-        boolean a = false;
         try {
             // creates a new object for accessing the database and searching the questions
-            a = new SearchUserByUsernameDatabase(getDataSource().getConnection(),iduser).searchUserByUsername().get(0).isAdmin();
             q= new SearchQuestionByTimestampDatabase(getDataSource().getConnection()).SearchQuestionByTimestamp();
             m = new Message("Questions successfully searched.");
 
@@ -47,7 +45,6 @@ public class ShowQuestionsServlet extends SessionManagerServlet
                     "E200", ex.getMessage());
         }
         req.setAttribute("questions", q);
-        req.setAttribute("isAdmin", a);
         req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req, res);
 
 
