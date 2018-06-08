@@ -17,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 
 /**
  * Updates a user's informations (except password and user's photoProfile)
@@ -60,28 +62,38 @@ public final class UpdateUserServlet extends SessionManagerServlet
 		{
 			// retrieves the request parameters
 			username = (String) req.getSession().getAttribute("loggedInUser");
+            getServletContext().log("loggedUser: "+username);
 
 			name = req.getParameter("name");
+			getServletContext().log("name : "+name);
 			if(name.equals(""))
 				name = req.getParameter("currentName");
 
+
 			surname = req.getParameter("surname");
+			getServletContext().log("surname : "+surname);
 			if(surname.equals(""))
 				surname = req.getParameter("currentSurname");
 
 			email = req.getParameter("email");
+			getServletContext().log("email : "+email);
 			if(email.equals(""))
 				email = req.getParameter("currentEmail");
 
 			bdate = req.getParameter("bdate");
-			if(bdate.equals("") || bdate.equals("mm/dd/yyy"))
+			getServletContext().log("bdate : "+bdate);
+			if(bdate.equals("") || bdate.equals("mm/dd/yyy")){
+				getServletContext().log("tengo quella di prima");
 				bdate = req.getParameter("currentBdate");
+			}
+
 
 			description = req.getParameter("description");
+			getServletContext().log("description : "+description);
 			if(description.equals(""))
 				description = req.getParameter("currentDescription");
 
-
+			bdate=bdate.replace("/","-");
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     		Date birthday = new Date(dateFormat.parse(bdate).getTime());
 			

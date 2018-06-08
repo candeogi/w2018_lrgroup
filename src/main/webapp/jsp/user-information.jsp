@@ -48,8 +48,16 @@
             <div class="col col-lg-2">
                 Description:
             </div>
-            <div class="col-md-auto">
-
+            <div id="description-value"class="col-md-auto">
+                <c:out value="${user.description}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-2">
+                email:
+            </div>
+            <div id="email-value"class="col-md-auto">
+                <c:out value="${user.email}"/>
             </div>
         </div>
     </div>
@@ -59,26 +67,9 @@
 
 </div>
 
-<button id="modifyButton"  type="submit" class="btn btn-primary" onclick="myFunction()">Modify User</button>
+<button id="modifyButton" type="submit" class="btn btn-primary" onclick="myFunction()">Modify User</button>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<!--TODO: export to external js file-->
-<script>
-    function myFunction() {
-        $("#name-value").replaceWith("<div><form><input type='text' name='new-name' placeholder='${user.name}' </input> </form></div>");
-        $("#surname-value").replaceWith("<div><form><input type='text' name='new-name' placeholder='${user.surname}' </input> </form></div>")
-        $("#birthday-value").replaceWith("<div><form><input type='date' name='new-name' placeholder='${user.birthday}' </input> </form></div>")
-        $("#modifyButton").text("Confirm");
-        $("#modifyButton").attr("onclick","saveValue()");
-    }
-</script>
-
-<script>
-    function saveValue(){
-        alert("ciao bello");
-    }
-</script>
+<script type="text/javascript" src="jsp/js/ciao.js"></script>
 
 </body>
 </html>
