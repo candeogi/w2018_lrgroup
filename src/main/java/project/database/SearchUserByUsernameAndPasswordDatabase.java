@@ -39,14 +39,14 @@ public final class SearchUserByUsernameAndPasswordDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "" +
-            "SELECT *" +
-            "FROM lr_group.Utente " +
-            "WHERE username=? and password=?";
     /*private static final String STATEMENT = "" +
             "SELECT *" +
             "FROM lr_group.Utente " +
-            "WHERE username=? and password=lr_group.crypt(?,password)";*/
+            "WHERE username=? and password=?";*/
+    private static final String STATEMENT = "" +
+            "SELECT *" +
+            "FROM lr_group.Utente " +
+            "WHERE username=? and password=lr_group.crypt(?,password)";
 
     /**
      * The connection to the database
