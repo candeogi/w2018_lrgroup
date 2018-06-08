@@ -8,7 +8,8 @@ import java.text.ParseException;
 /**
  * Represents data about a category.
  *
- * @author Luca Rossi & Davide Storato
+ * @author Luca Rossi
+ * @author Davide Storato
  */
 
 public class Category extends Resource

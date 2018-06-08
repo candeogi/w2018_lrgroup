@@ -11,7 +11,8 @@ import java.sql.SQLException;
  * Deletes a category-question association in the database.
  *
  * @author lrgroup
- * @author Luca Rossi & Davide Storato
+ * @author Luca Rossi
+ * @author Davide Storato
  */
 public class DeleteCategoryQuestionFromBelowDatabase {
     /**

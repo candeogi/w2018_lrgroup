@@ -10,7 +10,8 @@ import java.sql.SQLException;
  * Creates a category in the database.
  *
  * @author lrgroup
- * @author Luca Rossi & Davide Storato
+ * @author Luca Rossi
+ * @author Davide Storato
  */
 public final class CreateCategoryDatabase {
 

@@ -10,8 +10,9 @@ import java.sql.SQLException;
 /**
  * Creates a category-question association in the database.
  *
- * @author lrgroup
- * @author Luca Rossi & Davide Storato
+ *  @author lrgroup
+ *  @author Luca Rossi
+ *  @author Davide Storato
  */
 
 public class CreateBelowDatabase {
