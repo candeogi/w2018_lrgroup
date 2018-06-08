@@ -43,14 +43,26 @@ public class Category extends Resource
         this(name, description, false);
     }
 
+    /**
+     * Returns the related category description
+     * @return the related category description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns if the related category is a company tag
+     * @return if the related category is a company tag
+     */
     public boolean isCompany() {
         return isCompany;
     }
 
+    /**
+     * Returns the related category name
+     * @return the related category name
+     */
     public String getName() {
 
         return name;

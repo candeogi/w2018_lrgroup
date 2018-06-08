@@ -1,25 +1,27 @@
 package project.database;
 
 import project.resource.Category;
+import project.resource.Question;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * Creates a category in the database.
+ * Creates a category-question association in the database.
  *
  * @author lrgroup
  * @author Luca Rossi & Davide Storato
  */
-public final class CreateCategoryDatabase {
+
+public class CreateBelowDatabase {
 
     /**
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.category (name, description, isCompany) " +
-            "VALUES (?, ?, ?)";
+            "INSERT INTO lr_group.below (category, question) " +
+            "VALUES (?, ?)";
 
     /**
      * The connection to the database
@@ -27,37 +29,40 @@ public final class CreateCategoryDatabase {
     private final Connection con;
 
     /**
-     * The category to be created in the database
+     * The category and the question in the database
      */
     private final Category category;
+    private final Question question;
 
     /**
-     * Creates a new object for creating a category.
+     * Creates a new object for creating a category-question association.
      *
      * @param con
      *            the connection to the database.
      * @param category
-     *            the category to be created in the database.
+     *            the category in the database.
+     * @param question
+     *            the question in the database
      */
-    public CreateCategoryDatabase (final Connection con, final Category category) {
+    public CreateBelowDatabase (final Connection con, final Category category, final Question question) {
         this.con = con;
         this.category = category;
+        this.question = question;
     }
 
     /**
-     * Creates a category in the database.
+     * Creates a category-question association in the database.
      * @throws SQLException
-     *             if any error occurs while storing the category
+     *             if any error occurs while storing the association.
      */
-    public void createCategory () throws SQLException {
+    public void createCategoryQuestionAssociation () throws SQLException {
 
         PreparedStatement pstmt = null;
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setString(1, category.getName());
-            pstmt.setString(2, category.getDescription());
-            pstmt.setBoolean(3, category.isCompany());
+            pstmt.setInt(2, question.getID());
 
             pstmt.execute();
 
