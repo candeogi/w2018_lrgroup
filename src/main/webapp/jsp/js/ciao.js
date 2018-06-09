@@ -9,7 +9,7 @@ function myFunction() {
     $("#surname-value").after("<div id='form-surname'><form><input type='text' name='new-surname'</input> </form></div>");
     $('input[name=new-surname]').val(oldsurname);
 
-    var oldbirthday = $("#birthday-value").text().trim();
+    var oldbirthday = $("#birthday-value").text().trim();//TODO:SETTARE COMPLEANNO A DEFAULT SE NON VIENE CAMBIATO
     $("#birthday-value").hide();
     $("#birthday-value").after("<div id='form-bdate'><form><input type='date' name='new-birthday'</input> </form></div>");
     $('input[name=new-birthday]').val(oldbirthday);
