@@ -1,4 +1,5 @@
-function myFunction() {
+function modifyValue() {
+    alert("entrato");
     var oldname = $("#name-value").text().trim();
     $("#name-value").hide();
     $("#name-value").after("<div id='form-name'><form><input type='text' name='new-name'</input> </form></div>");
@@ -69,8 +70,8 @@ function returnToVisualization(name,surname,birthday,description) {
 
 
 
-    $("#modifyButton").text("Modify own information");
-    $("#modifyButton").attr("onclick", "myFunction()");
+    $("#modifyButton").text("Modify user");
+    $("#modifyButton").attr("onclick", "modifyValue()");
 }
 
 

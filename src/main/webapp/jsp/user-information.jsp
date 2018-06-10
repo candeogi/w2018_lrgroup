@@ -11,8 +11,7 @@
 <head>
     <title>User Information</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <%--//TODO: problema con il css--%>
-    <link  rel="stylesheet" type="text/css" href="jsp/css/style-information.css">
+    <link  rel="stylesheet" type="text/css" href="<c:url value='/css/style-information.css' />">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
@@ -24,42 +23,42 @@
     <div class="col col-lg-10">
         <div class="row">
             <div class="col col-lg-2">
-                Name:
+               <p> Name:</p>
             </div>
             <div id="name-value" class="col-md-auto">
-                <c:out value="${user.name}"/>
+                <p><c:out value="${user.name}"/></p>
             </div>
         </div>
         <div class="row">
             <div class="col col-lg-2">
-                Surname:
+                <p>Surname:</p>
             </div>
             <div id="surname-value" class="col-md-auto">
-                <c:out value="${user.surname}"/>
+                <p><c:out value="${user.surname}"/></p>
             </div>
         </div>
         <div class="row">
             <div class="col col-lg-2">
-                Birthday:
+                <p>Birthday:</p>
             </div>
             <div id="birthday-value" class="col-md-auto">
-                <c:out value="${user.birthday}"/>
+                <p><c:out value="${user.birthday}"/></p>
             </div>
         </div>
         <div class="row">
             <div class="col col-lg-2">
-                Description:
+                <p>Description:</p>
             </div>
             <div id="description-value"class="col-md-auto">
-                <c:out value="${user.description}"/>
+                <p><c:out value="${user.description}"/></p>
             </div>
         </div>
         <div class="row">
             <div class="col col-lg-2">
-                email:
+                <p>Email address: </p>
             </div>
             <div id="email-value"class="col-md-auto">
-                <c:out value="${user.email}"/>
+                <p><c:out value="${user.email}"/></p>
             </div>
         </div>
     </div>
@@ -69,9 +68,9 @@
 
 </div>
 
-<button id="modifyButton" type="submit" class="btn btn-primary" onclick="myFunction()">Modify User</button>
+<button id="modifyButton" type="submit" class="btn btn-primary" onclick="modifyValue()">Modify User</button>
 
-<script type="text/javascript" src="jsp/js/ciao.js"></script>
+<script type="text/javascript" src="js/ciao.js"></script>
 
 </body>
 </html>
