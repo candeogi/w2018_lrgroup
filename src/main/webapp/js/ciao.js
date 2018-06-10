@@ -1,5 +1,4 @@
 function modifyValue() {
-    alert("entrato");
     var oldname = $("#name-value").text().trim();
     $("#name-value").hide();
     $("#name-value").after("<div id='form-name'><form><input type='text' name='new-name'</input> </form></div>");
@@ -10,7 +9,17 @@ function modifyValue() {
     $("#surname-value").after("<div id='form-surname'><form><input type='text' name='new-surname'</input> </form></div>");
     $('input[name=new-surname]').val(oldsurname);
 
-    var oldbirthday = $("#birthday-value").text().trim();//TODO:SETTARE COMPLEANNO A DEFAULT SE NON VIENE CAMBIATO
+    var tempbirthday = $("#birthday-value").text().trim().split("/");
+    var oldbirthday;
+    if(tempbirthday.length==3){
+        oldbirthday=tempbirthday[2]+"-"+tempbirthday[1]+"-"+tempbirthday[0];
+    }
+    else {
+        oldbirthday=tempbirthday[0];
+    }
+
+
+    console.log("oldbirthday "+oldbirthday);
     $("#birthday-value").hide();
     $("#birthday-value").after("<div id='form-bdate'><form><input type='date' name='new-birthday'</input> </form></div>");
     $('input[name=new-birthday]').val(oldbirthday);
@@ -19,7 +28,7 @@ function modifyValue() {
     var oldDescription = $("#description-value").text().trim();//TODO problem with setting description
     $("#description-value").hide();
     $("#description-value").after("<div id='form-description'><form><textarea type='text' rows='5' name='new-description'> </textarea> </form></div>");
-    $('input[name=new-description]').val(oldDescription);
+    $('input[name=new-description]').attr("placeholder",oldDescription);
 
 
     $("#modifyButton").text("Confirm");
