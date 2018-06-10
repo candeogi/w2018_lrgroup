@@ -27,8 +27,9 @@ function modifyValue() {
 
     var oldDescription = $("#description-value").text().trim();//TODO problem with setting description
     $("#description-value").hide();
-    $("#description-value").after("<div id='form-description'><form><textarea type='text' rows='5' name='new-description'> </textarea> </form></div>");
-    $('input[name=new-description]').attr("placeholder",oldDescription);
+    $("#description-value").after("<div id='form-description'><form><textarea type='text' rows='5' name='new-description'></textarea> </form></div>");
+    $('textarea[name=new-description]').val(oldDescription);
+
 
 
     $("#modifyButton").text("Confirm");
