@@ -62,13 +62,14 @@
             </div>
         </div>
     </div>
-    <div class="col align-self-end">
-        <img src="user.png" alt="photo of the user" class="img">
+    <div id="photo-div" class="col align-self-end">
+        <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="img">
     </div>
 
 </div>
 
 <button id="modifyButton" type="submit" class="btn btn-primary" onclick="modifyValue()">Modify User</button>
+
 
 <script type="text/javascript" src="js/ciao.js"></script>
 

@@ -11,15 +11,15 @@ function modifyValue() {
 
     var tempbirthday = $("#birthday-value").text().trim().split("/");
     var oldbirthday;
-    if(tempbirthday.length==3){
-        oldbirthday=tempbirthday[2]+"-"+tempbirthday[1]+"-"+tempbirthday[0];
+    if (tempbirthday.length == 3) {
+        oldbirthday = tempbirthday[2] + "-" + tempbirthday[1] + "-" + tempbirthday[0];
     }
     else {
-        oldbirthday=tempbirthday[0];
+        oldbirthday = tempbirthday[0];
     }
 
 
-    console.log("oldbirthday "+oldbirthday);
+    console.log("oldbirthday " + oldbirthday);
     $("#birthday-value").hide();
     $("#birthday-value").after("<div id='form-bdate'><form><input type='date' name='new-birthday'</input> </form></div>");
     $('input[name=new-birthday]').val(oldbirthday);
@@ -31,10 +31,12 @@ function modifyValue() {
     $('textarea[name=new-description]').val(oldDescription);
 
 
+    $("#photo-div").after("<form method='POST' enctype='multipart/form-data' action='/update-user-pic'/> <input type=\"file\" name=\"photoProfile\" /><br/> <button type='submit'>Upload</button></form>");
 
     $("#modifyButton").text("Confirm");
     $("#modifyButton").attr("onclick", "saveValue()");
 }
+
 
 function saveValue() {
     var name = $('input[name=new-name]').val();
@@ -46,7 +48,7 @@ function saveValue() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             var data = xhr.responseText;
-           // console.log(data);
+            // console.log(data);
         }
     }
 
@@ -56,28 +58,27 @@ function saveValue() {
     var information = "name=" + name + "&" + "surname=" + surname + "&" + "bdate=" + birthday + "&";
     information = information + "email=" + email + "&" + "description=" + description;
     xhr.send(information);
-    returnToVisualization(name,surname,birthday,description);
+    returnToVisualization(name, surname, birthday, description);
 }
 
-function returnToVisualization(name,surname,birthday,description) {
-   $('#form-name').remove();
-   $('#name-value').show();
-   $('#name-value').text(name);
+function returnToVisualization(name, surname, birthday, description) {
+    $('#form-name').remove();
+    $('#name-value').show();
+    $('#name-value').text(name);
 
-   $('#form-surname').remove();
-   $('#surname-value').show();
-   $('#surname-value').text(surname);
+    $('#form-surname').remove();
+    $('#surname-value').show();
+    $('#surname-value').text(surname);
 
-   $('#form-bdate').remove();
-   $('#birthday-value').show();
-   var bdatevalue=birthday.toString().split("-");
-   var newBdate=bdatevalue[2]+"/"+bdatevalue[1]+"/"+bdatevalue[0];
-   $('#birthday-value').text(newBdate);
+    $('#form-bdate').remove();
+    $('#birthday-value').show();
+    var bdatevalue = birthday.toString().split("-");
+    var newBdate = bdatevalue[2] + "/" + bdatevalue[1] + "/" + bdatevalue[0];
+    $('#birthday-value').text(newBdate);
 
-   $('#form-description').remove();
-   $('#description-value').show();
-   $('#description-value').text(description);
-
+    $('#form-description').remove();
+    $('#description-value').show();
+    $('#description-value').text(description);
 
 
     $("#modifyButton").text("Modify user");
