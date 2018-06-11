@@ -152,6 +152,12 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
 		<servlet-name>Wrapper</servlet-name>
 		<url-pattern>/to-update-form</url-pattern>
 	</servlet-mapping>
