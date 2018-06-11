@@ -352,10 +352,6 @@ public class RestResolverServlet extends AbstractDatabaseServlet
 					case "GET":
 						RestQuestion rq = new RestQuestion(req, res, getDataSource().getConnection());
 						rq.listQuestions();
-						//TODO json parser in AJAX
-						//List<Question> ql = rq.fromJSON(req.getInputStream());
-						//req.setAttribute("questions",ql);
-						//req.getRequestDispatcher("/jsp/show-questions-result.jsp").forward(req,res);
 						break;
 					default:
 						m = new Message("Unsupported operation for URI /question.",

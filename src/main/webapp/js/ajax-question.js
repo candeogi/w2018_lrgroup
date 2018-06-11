@@ -3,7 +3,7 @@
     var url;
     window.onload=makeRequest;
 
-    $('#switchQs a[href="#yourQs"]').on('click', function(event) {
+    $('#switchQs a[href="#popularQs"]').on('click', function(event) {
         event.preventDefault(); // To prevent following the link (optional)
         url = 'http://localhost:8080/web-app-project/rest/question'; //TO-DO: popular question(ordered by upvote?)
         httpRequest = new XMLHttpRequest();

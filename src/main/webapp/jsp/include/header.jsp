@@ -74,6 +74,19 @@ Since: 1.0
                 </a>
             </c:when>
 
+            <c:when test="${(not empty sessionScope.loggedInUser) and (sessionScope.isAdmin == true)}">
+                <a href="<c:url value="/?p=admin-panel"/>">
+                    <button type="button" class="btn btn-primary">
+                        Admin tools
+                    </button>
+                </a>
+                <a href="<c:url value="/?p=log-out"/>">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Logout
+                    </button>
+                </a>
+            </c:when>
+
             <c:when test="${not empty sessionScope.loggedInUser}">
                 <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />">
                     <img src="<c:url value="/images/user.png"/>" class="rounded-circle">
@@ -84,6 +97,7 @@ Since: 1.0
                     </button>
                 </a>
             </c:when>
+
         </c:choose>
     </div>
 
