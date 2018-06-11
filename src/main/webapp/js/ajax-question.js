@@ -1,6 +1,6 @@
-(function() {
+
     var httpRequest;
-    document.getElementById('ajaxButton').addEventListener('click', makeRequest);
+    window.onload=makeRequest;
 
     function makeRequest() {
 
@@ -23,8 +23,8 @@
             if (httpRequest.status == 200) {
 
 
-                var div = document.getElementById('results');
-                var table = document.createElement('table');
+                var div = document.getElementsByClassName('col-md-8');
+                var table = document.getElementsByClassName('table table-hover');
 
                 var thead = document.createElement('thead');
 
@@ -55,7 +55,7 @@
                 tr.appendChild(th);
 
                 thead.appendChild(tr);
-                table.appendChild(thead);
+                table.item(0).appendChild(thead);
 
                 var tbody = document.createElement('tbody');
 
@@ -94,13 +94,13 @@
                     tbody.appendChild(tr);
                 }
 
-                table.appendChild(tbody);
+                table.item(0).appendChild(tbody);
 
-                div.appendChild(table);
+                div.item(1).appendChild(table);
 
             } else {
                 alert('There was a problem with the request.');
             }
         }
     }
-})();
+

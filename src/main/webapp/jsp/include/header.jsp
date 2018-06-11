@@ -21,6 +21,44 @@ Since: 1.0
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<head>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--popper-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <!--bootstrap js-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+</head>
+
+
+<header class="navbar bg-dark text-white">
+    <div class="justify-content-start">
+        <nav class="nav">
+            <a class="nav-link">
+                <i class="fas fa-question-circle"></i>
+            </a>
+            <a class="nav-link">AnyQuestions.com</a>
+        </nav>
+    </div>
+    <div class="justify-content-end">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Login
+        </button>
+        <button id="registerButton" type="button" class="btn btn-secondary">
+            Register
+        </button>
+    </div>
+</header>
 
 <nav>
     <!--Home button-->

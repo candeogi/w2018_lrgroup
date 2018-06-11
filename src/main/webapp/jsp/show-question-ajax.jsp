@@ -26,15 +26,19 @@ Since: 1.0
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Show question rest</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-    <style type="text/css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-        div {
-            margin: 2em;
-        }
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--popper-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <!--bootstrap js-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
-    </style>
 
 </head>
 
@@ -44,19 +48,59 @@ Since: 1.0
 
 <body>
 
-<h1>Show question rest</h1>
+<div class="container-fluid">
 
-<div>
+    <!-- Buttons To Sort Categories + Search -->
+    <div class="row button_menu justify-content-center">
 
-    <button type="submit" id="ajaxButton">Submit</button><br/>
+        <div class="col-md-8">
+            <nav class="nav nav-pills justify-content-center">
+                <a class="nav-link active" href="#">Popular Questions</a>
+                <a class="nav-link" href="#">Your Questions</a>
+                <a class="nav-link" href="#">Latest Questions</a>
+                <a class="nav-link disabled" href="#">Your Questions</a>
+            </nav>
+        </div>
 
-</div>
+        <div class="col-md-4">
+            <form>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search a Question">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-<div id="results">
+    </div><!-- Buttons+Search Div -->
 
-</div>
+    <!-- After Categories Button Div -->
+    <div class="row">
 
-<script type="text/javascript" language="JavaScript" src="js/ajax-question.js"></script>
+        <!-- Browse Questions Table Div -->
+        <div class="col-md-8">
+            <table class="table table-hover">
 
+
+            </table>
+
+        </div><!-- close table div -->
+
+        <div class="col-md-4">
+            <img class="img-fluid adsbanner" src="https://images-na.ssl-images-amazon.com/images/I/716MJHggVDL._UX342_.jpg" alt="Wowee">
+        </div>
+
+    </div> <!-- close After Categories Button Div -->
+
+<script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
 </body>
+
+<footer>
+    <c:import url="/jsp/include/footer.jsp"/>
+</footer>
+
+
 </html>
