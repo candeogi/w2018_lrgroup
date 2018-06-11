@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $("#modifyButton").click(function(){
+$(document).ready(function () {
+    $("#modifyButton").click(function () {
         modifyValue();
     });
 });
@@ -39,11 +39,11 @@ function modifyValue() {
 
 
     //PROBLEMA
-    $("#photo-div").after("<form id='photo-form' method='POST' enctype='multipart/form-data' action='/update-user-pic'/> <input type='file' name='photoProfile' /><button type='submit'>Upload</button></form>");
+    $("#photo-div").after("<form id='photo-form' method='POST' enctype='multipart/form-data' action='/update-user-pic'> <input type='file' name='photoProfile' /><button type='submit'>Upload</button></form>");
 
     $("#modifyButton").text("Confirm");
     $("#modifyButton").unbind();
-    $("#modifyButton").click(function(){
+    $("#modifyButton").click(function () {
         saveValue();
     });
 }
@@ -95,7 +95,7 @@ function returnToVisualization(name, surname, birthday, description) {
 
     $("#modifyButton").unbind();
     $("#modifyButton").text("Modify user");
-    $("#modifyButton").click(function(){
+    $("#modifyButton").click(function () {
         modifyValue();
     });
 }

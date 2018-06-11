@@ -33,6 +33,10 @@ Since: 1.0
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
+
+    <!--awesome-font-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--popper-->
@@ -46,10 +50,11 @@ Since: 1.0
 <header class="navbar bg-dark text-white">
     <div class="justify-content-start">
         <nav class="nav">
-            <a class="nav-link">
+            <a class="nav-link" href="<c:url value="/jsp/index.jsp"/>"><i class="fas fa-home"></i></a>
+
+            <a class="nav-link" href="<c:url value="/?p=show-user-questions"/>">
                 <i class="fas fa-question-circle"></i>
             </a>
-            <a class="nav-link">AnyQuestions.com</a>
         </nav>
     </div>
     <div class="justify-content-end">
@@ -59,11 +64,13 @@ Since: 1.0
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                         Register
                     </button>
-                </a> or <a href="<c:url value="/?p=log-in"/>">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                    Login
-                </button>
-            </a>
+                </a>
+                <%--href="<c:url value="/?p=log-in"/>"--%>
+                <a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Login
+                    </button>
+                </a>
             </c:when>
 
             <c:when test="${not empty sessionScope.loggedInUser}">
@@ -78,11 +85,44 @@ Since: 1.0
             </c:when>
         </c:choose>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">AnyQuestions.com</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="<c:url value="/login"/>" >
+                        <div class="form-group">
+                            <label for="exampleInputUsername">Username</label>
+                            <input name="username" type="text" class="form-control" id="exampleInputUsername"
+                                   aria-describedby="emailHelp" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input name="password" type="password" class="form-control" id="exampleInputPassword1"
+                                   placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary ">Login</button>
+                    </form>
+                </div>
+                <!--<div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
 </header>
 
 <nav>
-    <!--Home button-->
-    <a href="<c:url value="/jsp/index.jsp"/>">Home</a> |
+
 
 </nav>
 <hr>

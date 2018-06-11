@@ -2,7 +2,7 @@ body{
     background:#fcefa1;
 }
 div p{
-    padding: auto;
+    padding-left: 10%;
     font-family: Verdana, Arial, sans-serif;
     font-size: 100%;
 }
@@ -10,32 +10,3 @@ img{
     width: 10%;
 }
 
-div.button_menu {
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-i.solved {
-    color:Green;
-}
-/*we have it but not using it yet*/
-img.adsbanner{
-
-}
-div#footer_row {
-    text-align: center;
-    background-color: #ffffd9;
-    margin-top: 2em;
-    padding: 1em;
-}
-button#login_button {
-    background-color: #2c7fb8;
-    border-color: #2c7fb8;
-}
-button#login_button:hover {
-    background-color: #7fcdbb;
-    border-color: #7fcdbb;
-}
-
-.navbar{
-    background:#7fcdbb;
-}
