@@ -49,17 +49,18 @@ Since: 1.0
 <body>
 
 <div class="container-fluid">
-
+    <input type="hidden" name="user" id="idUser" value="${sessionScope.loggedInUser}"/>
     <!-- Buttons To Sort Categories + Search -->
     <div class="row button_menu justify-content-center">
 
         <div class="col-md-8">
-            <nav class="nav nav-pills justify-content-center">
-                <a class="nav-link active" href="#">Popular Questions</a>
-                <a class="nav-link" href="#">Your Questions</a>
-                <a class="nav-link" href="#">Latest Questions</a>
-                <a class="nav-link disabled" href="#">Your Questions</a>
+            <nav class="nav nav-pills justify-content-center" id="switchQs">
+                <a class="nav-link active" href="#popularQs" data-toggle="tab">Popular Questions</a>
+                <a class="nav-link" href="#yourQs" data-toggle="tab">Your Questions</a>
+                <a class="nav-link" href="#latestQs" data-toggle="tab">Latest Questions</a>
             </nav>
+
+
         </div>
 
         <div class="col-md-4">
@@ -82,13 +83,14 @@ Since: 1.0
 
         <!-- Browse Questions Table Div -->
         <div class="col-md-8">
+        <div class="table-responsive">
             <table class="table table-hover">
 
 
             </table>
 
         </div><!-- close table div -->
-
+        </div>
         <div class="col-md-4">
             <img class="img-fluid adsbanner" src="https://images-na.ssl-images-amazon.com/images/I/716MJHggVDL._UX342_.jpg" alt="Wowee">
         </div>
@@ -99,7 +101,7 @@ Since: 1.0
 </body>
 
 <footer>
-    <c:import url="/jsp/include/footer.jsp"/>
+    <c:import url=  "/jsp/include/footer.jsp"/>
 </footer>
 
 

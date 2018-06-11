@@ -1,10 +1,54 @@
 
     var httpRequest;
+    var url;
     window.onload=makeRequest;
+
+    $('#switchQs a[href="#yourQs"]').on('click', function(event) {
+        event.preventDefault(); // To prevent following the link (optional)
+        url = 'http://localhost:8080/web-app-project/rest/question'; //TO-DO: popular question(ordered by upvote?)
+        httpRequest = new XMLHttpRequest();
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = alertContents;
+        httpRequest.open('GET', url);
+        httpRequest.send();
+    });
+
+    $('#switchQs a[href="#yourQs"]').on('click', function(event) {
+        event.preventDefault(); // To prevent following the link (optional)
+        url = 'http://localhost:8080/web-app-project/rest/question/user/'+document.getElementById('idUser').value;
+        httpRequest = new XMLHttpRequest();
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = alertContents;
+        httpRequest.open('GET', url);
+        httpRequest.send();
+    });
+
+    $('#switchQs a[href="#latestQs"]').on('click', function(event) {
+        event.preventDefault(); // To prevent following the link (optional)
+        url = 'http://localhost:8080/web-app-project/rest/question';
+        httpRequest = new XMLHttpRequest();
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = alertContents;
+        httpRequest.open('GET', url);
+        httpRequest.send();
+    });
+
 
     function makeRequest() {
 
-        var url = 'http://localhost:8080/web-app-project/rest/question';
+        url = 'http://localhost:8080/web-app-project/rest/question';
 
         httpRequest = new XMLHttpRequest();
 
@@ -23,8 +67,10 @@
             if (httpRequest.status == 200) {
 
 
-                var div = document.getElementsByClassName('col-md-8');
+                var div = document.getElementsByClassName('table-responsive');
+
                 var table = document.getElementsByClassName('table table-hover');
+                document.getElementsByClassName("table table-hover").item(0).innerHTML = "";
 
                 var thead = document.createElement('thead');
 
@@ -76,7 +122,8 @@
                     tr.appendChild(td_title);
 
                     var td_body = document.createElement('td');
-                    td_body.appendChild(document.createTextNode(question['body']));
+                    if(question['body'].length<23) td_body.appendChild(document.createTextNode(question['body']));
+                    else td_body.appendChild(document.createTextNode(question['body'].substr(0,20)+'...'));
                     tr.appendChild(td_body);
 
                     var td_ts = document.createElement('td');
@@ -96,11 +143,13 @@
 
                 table.item(0).appendChild(tbody);
 
-                div.item(1).appendChild(table);
+                div.item(0).appendChild(table.item(0));
 
             } else {
                 alert('There was a problem with the request.');
             }
         }
     }
+
+
 

@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Create Question</title>
+		<!-- include summernote css/js -->
 	</head>
 	<header>
 		<c:import url="/jsp/include/header.jsp"/>
@@ -13,21 +14,18 @@
   <body>
 	<h1>Create Question</h1>
 	<c:import url="/jsp/include/show-message.jsp"/>
-	<c:if  test="${not empty sessionScope.loggedInUser}">
-		<p>Logged as: <c:out value='${sessionScope.loggedInUser}'/></p>
-	</c:if>
+
 	<form method="POST" action="<c:url value="/create-question"/>" id="questionForm">
-		<label for="title">Title:</label>
-		<input name="title" type="text"/><br/>
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input name="title" type="text" class="form-control" id="title" aria-describedby="title" placeholder="Enter title">
+			<!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+		</div>
+		<textarea id="bodyID" name="body"></textarea>
 
-		<%--<label for="IDUser">IDUser:</label>--%>
-		<%--<input name="IDUser" type="text"/><br/>--%>
-		
-		<textarea rows="4" cols="50" name="body" placeholder="Enter text..">
-		</textarea>
-
-		<button type="submit">Submit</button><br/>
-		<button type="reset">Reset the form</button>
+		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="reset" class="btn btn-primary">Reset the form</button>
 	</form>
-	</body>
+
+  </body>
 </html>
