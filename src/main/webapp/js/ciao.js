@@ -1,12 +1,19 @@
+$(document).ready(function() {
+    $("#modifyButton").click(function(){
+        modifyValue();
+    });
+});
+
+
 function modifyValue() {
     var oldname = $("#name-value").text().trim();
     $("#name-value").hide();
-    $("#name-value").after("<div id='form-name'><form><input type='text' name='new-name'</input> </form></div>");
+    $("#name-value").after("<div id='form-name'><form><input class='form-control' type='text' name='new-name'</input> </form></div>");
     $('input[name=new-name]').val(oldname);
 
     var oldsurname = $("#surname-value").text().trim();
     $("#surname-value").hide();
-    $("#surname-value").after("<div id='form-surname'><form><input type='text' name='new-surname'</input> </form></div>");
+    $("#surname-value").after("<div id='form-surname'><form><input class='form-control' type='text' name='new-surname'</input> </form></div>");
     $('input[name=new-surname]').val(oldsurname);
 
     var tempbirthday = $("#birthday-value").text().trim().split("/");
@@ -31,10 +38,14 @@ function modifyValue() {
     $('textarea[name=new-description]').val(oldDescription);
 
 
-    $("#photo-div").after("<form method='POST' enctype='multipart/form-data' action='/update-user-pic'/> <input type=\"file\" name=\"photoProfile\" /><br/> <button type='submit'>Upload</button></form>");
+    //PROBLEMA
+    $("#photo-div").after("<form id='photo-form' method='POST' enctype='multipart/form-data' action='/update-user-pic'/> <input type='file' name='photoProfile' /><button type='submit'>Upload</button></form>");
 
     $("#modifyButton").text("Confirm");
-    $("#modifyButton").attr("onclick", "saveValue()");
+    $("#modifyButton").unbind();
+    $("#modifyButton").click(function(){
+        saveValue();
+    });
 }
 
 
@@ -80,9 +91,13 @@ function returnToVisualization(name, surname, birthday, description) {
     $('#description-value').show();
     $('#description-value').text(description);
 
+    $('#photo-form').remove();
 
+    $("#modifyButton").unbind();
     $("#modifyButton").text("Modify user");
-    $("#modifyButton").attr("onclick", "modifyValue()");
+    $("#modifyButton").click(function(){
+        modifyValue();
+    });
 }
 
 
