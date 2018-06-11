@@ -60,14 +60,15 @@ Since: 1.0
     <div class="justify-content-end">
         <c:choose>
             <c:when test="${empty sessionScope.loggedInUser}">
-                <a href="<c:url value="/?p=create-user"/>">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                <%--href="<c:url value="/?p=create-user"/>"--%>
+                <a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-registration">
                         Register
                     </button>
                 </a>
                 <%--href="<c:url value="/?p=log-in"/>"--%>
                 <a>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-login">
                         Login
                     </button>
                 </a>
@@ -86,7 +87,7 @@ Since: 1.0
         </c:choose>
     </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -118,6 +119,66 @@ Since: 1.0
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="modal-registration" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >AnyQuestions.com</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="<c:url value="/create-user"/>" >
+                        <div class="form-group">
+                            <label for="exampleInputUsername">Name</label>
+                            <input name="name" type="text" class="form-control" id="name-reg"
+                                   aria-describedby="emailHelp" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername">Surname</label>
+                            <input name="surname" type="text" class="form-control" id="surname-reg"
+                                   aria-describedby="emailHelp" placeholder="Surname">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername">Surname</label>
+                            <input name="username" type="text" class="form-control" id="username-reg"
+                                   aria-describedby="emailHelp" placeholder="Surname">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername">Name</label>
+                            <input name="email" type="text" class="form-control" id="email-reg"
+                                   aria-describedby="emailHelp" placeholder="e-mail">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input name="password" type="password" class="form-control" id="password-reg"
+                                   placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input name="password2" type="password" class="form-control" id="password2-reg"
+                                   placeholder="Repeat Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername">Name</label>
+                            <input name="bdate" type="date" class="form-control" id="date-reg"
+                                   aria-describedby="emailHelp">
+                        </div>
+                        <button type="submit" class="btn btn-primary ">Login</button>
+                    </form>
+                </div>
+                <!--<div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
 
 </header>
 
