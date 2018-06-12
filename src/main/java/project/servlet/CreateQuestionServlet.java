@@ -1,5 +1,7 @@
 package project.servlet;
 
+import project.database.CreateBelowDatabase;
+import project.resource.Category;
 import project.resource.Question;
 import project.resource.Message;
 import project.database.CreateQuestionDatabase;
@@ -22,59 +24,60 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
  */
-public final class CreateQuestionServlet extends SessionManagerServlet
-{
+public final class CreateQuestionServlet extends SessionManagerServlet {
 
-	/**
-	 * Creates a new question into the database.
-	 * 
-	 * @param req
-	 *            the HTTP request from the client.
-	 * @param res
-	 *            the HTTP response from the server.
-	 * 
-	 * @throws ServletException
-	 *             if any error occurs while executing the servlet.
-	 * @throws IOException
-	 *             if any error occurs in the client/server communication.
-	 */
-	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+    /**
+     * Creates a new question into the database.
+     *
+     * @param req the HTTP request from the client.
+     * @param res the HTTP response from the server.
+     * @throws ServletException if any error occurs while executing the servlet.
+     * @throws IOException      if any error occurs in the client/server communication.
+     */
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
 
-		// request parameters
-		String title = null;
-		String body = null;
-		String IDUser;
+        // request parameters
+        String title = null;
+        String body = null;
+        String IDUser;
 
-		// model
-		Question q  = null;
-		Message m = null;
+        // model
+        Question q = null;
+        Category c = null;
+        Message m = null;
 
-		try{
-			// retrieves the request parameters
-			title = req.getParameter("title");
-			body = req.getParameter("body");
 
-			// retrieves the user id (username) through the session parameter
-			IDUser = (String) req.getSession().getAttribute("loggedInUser");
+        try {
+            // retrieves the request parameters
+            title = req.getParameter("title");
+            body = req.getParameter("body");
 
-			// creates a new question from the request parameters
-			q = new Question(IDUser, title, body, new Timestamp((Long)System.currentTimeMillis()));
+            // retrieves the user id (username) through the session parameter
+            IDUser = (String) req.getSession().getAttribute("loggedInUser");
 
-			// creates a new object for accessing the database and stores the question
-			new CreateQuestionDatabase(getDataSource().getConnection(), q).createQuestion();
-		}catch (SQLException ex) {
-			m = new Message("Cannot create the user: unexpected error while accessing the database.",
-					"E200", ex.getMessage());
+            // creates a new question from the request parameters
+            q = new Question(IDUser, title, body, new Timestamp((Long) System.currentTimeMillis()));
 
-		}
-		
-		// stores the user and the message as a request attribute
-		req.setAttribute("question", q);
-		req.setAttribute("message", m);
-		
-		// forwards the control to the create-user-result JSP
-		req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);
-	}
+//            //TODO  remove
+//            c = new Category("Mufasa", "Re leone", false);
+            // creates a new object for accessing the database and stores the question
+            new CreateQuestionDatabase(getDataSource().getConnection(), q).createQuestion();
+
+//            new CreateBelowDatabase(getDataSource().getConnection(), c, q);
+
+        } catch (SQLException ex) {
+            m = new Message("Cannot create the user: unexpected error while accessing the database.",
+                    "E200", ex.getMessage());
+
+        }
+
+        // stores the user and the message as a request attribute
+        req.setAttribute("question", q);
+        req.setAttribute("message", m);
+
+        // forwards the control to the create-user-result JSP
+        req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);
+    }
 
 }

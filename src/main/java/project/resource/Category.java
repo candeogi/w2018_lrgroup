@@ -71,7 +71,6 @@ public class Category extends Resource
 
     /**
      *
-     *
      * @param out the stream to which the JSON representation of the {@code Resource} has to be written.
      *
      * @throws IOException if something goes wrong while parsing.
@@ -101,11 +100,11 @@ public class Category extends Resource
     }
 
     /**
-     * Creates a {@code Answer} from its JSON representation.
+     * Creates a {@code category} from its JSON representation.
      *
      * @param in the input stream containing the JSON document.
      *
-     * @return the {@code Answer} created from the JSON representation.
+     * @return the {@code category} created from the JSON representation.
      *
      * @throws IOException if something goes wrong while parsing.
      *
@@ -124,7 +123,7 @@ public class Category extends Resource
 
         // I'm looking for the answer field
         //i'll keep looping until i find a token which is a field name or until i find my resource token
-        while (jp.getCurrentToken() != JsonToken.FIELD_NAME || "category".equals(jp.getCurrentName()) == false) {
+        while (jp.getCurrentToken() != JsonToken.FIELD_NAME || !"category".equals(jp.getCurrentName())) {
 
             // there are no more events
             if (jp.nextToken() == null) {

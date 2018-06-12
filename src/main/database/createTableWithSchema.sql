@@ -146,17 +146,58 @@ CREATE TABLE lr_group.Have(
 );
  
 CREATE TABLE lr_group.Website(
-    name VARCHAR(50) NOT NULL,
- 
-    PRIMARY KEY(name)
+    address VARCHAR(50) NOT NULL,
+    addrType  VARCHAR(50) NOT NULL,
+    PRIMARY KEY(address)
+);
+
+CREATE TABLE lr_group.Own(
+    address VARCHAR(50) NOT NULL,
+    username  VARCHAR(50) NOT NULL,
+
+    PRIMARY KEY(address, username),
+
+    FOREIGN KEY(username) REFERENCES lr_group.Utente(username)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+
+    FOREIGN KEY(address) REFERENCES lr_group.Website(address)
+    ON DELETE CASCADE ON UPDATE CASCADE
+
 );
  
-CREATE TABLE lr_group.HaveWebsite(
-    website VARCHAR(50) NOT NULL,
-    link VARCHAR(50) NOT NULL,
- 	type lr_group.webSiteType NOT NULL,
-    PRIMARY KEY(website,link),
- 
-    FOREIGN KEY(website) REFERENCES lr_group.Website(name)
+-- CREATE TABLE lr_group.HaveWebsite(
+--     website VARCHAR(50) NOT NULL,
+--     link VARCHAR(50) NOT NULL,
+--  	type lr_group.webSiteType NOT NULL,
+--     PRIMARY KEY(website,link),
+--
+--     FOREIGN KEY(website) REFERENCES lr_group.Website(name)
+--     ON DELETE NO ACTION ON UPDATE CASCADE
+-- );
+
+CREATE TABLE lr_group.Certificate(
+
+    name VARCHAR(50),
+    organization VARCHAR(50),
+
+    PRIMARY KEY(name,organization),
+);
+
+CREATE TABLE lr_group.HaveCertificate(
+    username VARCHAR(20) NOT NULL,
+    name VARCHAR(50),
+    organization VARCHAR(50),
+    achievmentDate DATE,
+
+    PRIMARY KEY(username,organization,name),
+
+    FOREIGN KEY(username) REFERENCES lr_group.Utente(username)
+    ON DELETE NO ACTION ON UPDATE CASCADE,
+
+    FOREIGN KEY(name) REFERENCES lr_group.Certificate(name)
+    ON DELETE NO ACTION ON UPDATE CASCADE,
+
+    FOREIGN KEY(organization) REFERENCES lr_group.Certificate(organization)
     ON DELETE NO ACTION ON UPDATE CASCADE
+
 );
