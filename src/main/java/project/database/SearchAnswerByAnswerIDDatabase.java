@@ -27,10 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieves answers to a specific question in the database.
+ * Retrieves answers to a specific answer in the database.
  *
  * @author lrgroup
- * @author Alberto Forti (alberto.forti@studenti.unipd.it)
+ * @author Alberto Pontini
  */
 public final class SearchAnswerByAnswerIDDatabase
 {
@@ -56,8 +56,8 @@ public final class SearchAnswerByAnswerIDDatabase
      *
      * @param con
      *            the connection to the database.
-     * @param questionid
-     *            the id of the related question.
+     * @param answerid
+     *            the id of the related answer.
      */
     public SearchAnswerByAnswerIDDatabase(final Connection con, final int answerid)
     {
@@ -66,7 +66,7 @@ public final class SearchAnswerByAnswerIDDatabase
     }
 
     /**
-     * Retrieves answers for specific question in the database.
+     * Retrieves answers to a specific answer in the database.
      *
      * @return a list of {@code Answer} (must be one) object related to a specific answer.
      *

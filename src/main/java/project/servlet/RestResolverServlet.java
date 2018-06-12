@@ -54,6 +54,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 final Message m = new Message("User not logged in", "E4A6", "LogIn required");
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 m.toJSON(out);
+                //AGGIUNGERE UN RETURN!
             }
 
             String[] split = req.getRequestURI().split("/");
@@ -268,7 +269,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     } else {
                         switch (method) {
                             case "POST":
-                                //TODO funzione che aggiunge il voto
+                                new RestAnswer(req, res, getDataSource().getConnection()).upvoteAnswer();
                                 break;
 
                             default:
@@ -290,7 +291,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     } else {
                         switch (method) {
                             case "POST":
-                                //TODO funzione che aggiunge il voto negativo
+                                new RestAnswer(req, res, getDataSource().getConnection()).downvoteAnswer();
                                 break;
 
                             default:

@@ -122,7 +122,7 @@ CREATE TABLE lr_group.VoteAnswer(
     idUser VARCHAR(20) NOT NULL,
     vote INTEGER
       DEFAULT 0
-      CHECK (vote=0 OR vote=1 OR vote=-1), --can be -1,0,1
+      CHECK (vote=1 OR vote=-1), --can be -1,1
  
     PRIMARY KEY(answer,idUser),
  
