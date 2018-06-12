@@ -24,6 +24,14 @@
         <div class="col col-lg-10">
             <div class="row">
                 <div class="col col-lg-2">
+                    <p> Username:</p>
+                </div>
+                <div id="username-value" class="col-md-auto">
+                    <p><c:out value="${user.username}"/></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-2">
                     <p> Name:</p>
                 </div>
                 <div id="name-value" class="col-md-auto">
@@ -70,6 +78,9 @@
 
     <div id="website" class="container border border-dark">
         <p>Website:</p>
+        <table id="table-website" class="table table-hover">
+
+        </table>
 
     </div>
 
