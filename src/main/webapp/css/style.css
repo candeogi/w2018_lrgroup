@@ -29,3 +29,7 @@ button#login_button:hover {
 	background-color: #7fcdbb;
 	border-color: #7fcdbb;
 }
+
+.rounded-circle{
+	width: 10%;
+}

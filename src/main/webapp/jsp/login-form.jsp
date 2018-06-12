@@ -14,7 +14,7 @@
     <body>
         <h1>Login</h1>
         <c:import url="/jsp/include/show-message.jsp"/>
-        <form method="POST" action="<c:url value="/login"/>">
+        <form method="POST" action="<c:url value="/login"/>" autocomplete="on">
             <input type="hidden" name="from" value="${from}"/>
             <label for="username">Username:</label>
             <input name="username" type="text"/><br/>

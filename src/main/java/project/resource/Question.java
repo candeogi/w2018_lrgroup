@@ -142,7 +142,7 @@ public class Question extends Resource
 		jg.writeStringField("title", title);
 		jg.writeStringField("body", body);
 		jg.writeStringField("timestamp", timestamp.toString());
-		jg.writeStringField("lastModified",lastModified.toString());
+		if(lastModified!=null) jg.writeStringField("lastModified",lastModified.toString());
 		jg.writeStringField("IDUser",IDUser);
 
 		jg.writeEndObject();

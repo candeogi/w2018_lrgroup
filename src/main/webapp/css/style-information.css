@@ -2,7 +2,11 @@ body{
     background:#fcefa1;
 }
 div p{
-    padding: auto;
+    padding-left: 10%;
     font-family: Verdana, Arial, sans-serif;
     font-size: 100%;
 }
+img{
+    width: 10%;
+}
+

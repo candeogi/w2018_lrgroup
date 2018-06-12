@@ -76,6 +76,11 @@
 		<servlet-class>project.servlet.Wrapper</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>ShowUsersServlet</servlet-name>
+		<servlet-class>project.servlet.ShowUsersServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>NavServlet</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -152,8 +157,19 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
 		<servlet-name>Wrapper</servlet-name>
 		<url-pattern>/to-update-form</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ShowUsersServlet</servlet-name>
+		<url-pattern>/admin-panel</url-pattern>
 	</servlet-mapping>
 
 	<resource-ref>

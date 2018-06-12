@@ -11,19 +11,22 @@
 <head>
     <title>User Information</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link  rel="stylesheet" type="text/css" href="<c:url value='/css/style-information.css' />">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/style-information.css' />">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
 <body>
-<div class="container-fluid">
-    Menu di navigazione
-</div>
+
+<header>
+    <c:import url="/jsp/include/header.jsp"/>
+</header>
+
+
 <div class="row justify-content-between">
     <div class="col col-lg-10">
         <div class="row">
             <div class="col col-lg-2">
-               <p> Name:</p>
+                <p> Name:</p>
             </div>
             <div id="name-value" class="col-md-auto">
                 <p><c:out value="${user.name}"/></p>
@@ -49,7 +52,7 @@
             <div class="col col-lg-2">
                 <p>Description:</p>
             </div>
-            <div id="description-value"class="col-md-auto">
+            <div id="description-value" class="col-md-auto">
                 <p><c:out value="${user.description}"/></p>
             </div>
         </div>
@@ -57,18 +60,19 @@
             <div class="col col-lg-2">
                 <p>Email address: </p>
             </div>
-            <div id="email-value"class="col-md-auto">
+            <div id="email-value" class="col-md-auto">
                 <p><c:out value="${user.email}"/></p>
             </div>
         </div>
     </div>
-    <div class="col align-self-end">
-        <img src="user.png" alt="photo of the user" class="img">
+    <div id="photo-div" class="col align-self-end">
+        <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="img">
     </div>
 
 </div>
 
-<button id="modifyButton" type="submit" class="btn btn-primary" onclick="modifyValue()">Modify User</button>
+<button id="modifyButton" type="submit" class="btn btn-primary">Modify User</button>
+
 
 <script type="text/javascript" src="js/ciao.js"></script>
 
