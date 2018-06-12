@@ -1,15 +1,9 @@
 package project.servlet;
 
-
-import project.database.DeleteQuestionByIDDatabase;
 import project.database.DeleteUserByUsernameDatabase;
-import project.database.ListQuestionsDatabase;
 import project.resource.Message;
-import project.resource.Question;
-
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
