@@ -177,16 +177,16 @@ CREATE TABLE lr_group.Own(
 
 CREATE TABLE lr_group.Certificate(
 
-    name VARCHAR(50),
-    organization VARCHAR(50),
+    name VARCHAR(50) NOT NULL,
+    organization VARCHAR(50) NOT NULL,
 
     PRIMARY KEY(name,organization),
 );
 
 CREATE TABLE lr_group.HaveCertificate(
     username VARCHAR(20) NOT NULL,
-    name VARCHAR(50),
-    organization VARCHAR(50),
+    name VARCHAR(50) NOT NULL ,
+    organization VARCHAR(50) NOT NULL,
     achievmentDate DATE,
 
     PRIMARY KEY(username,organization,name),

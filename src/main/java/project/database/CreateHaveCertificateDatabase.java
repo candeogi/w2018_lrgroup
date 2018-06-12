@@ -25,8 +25,8 @@ public class CreateHaveCertificateDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.HaveCertificate (username, name, organization) " +
-            "VALUES (?,?,?)";
+            "INSERT INTO lr_group.HaveCertificate (username, name, organization achievmentDate) " +
+            "VALUES (?,?,?,?)";
 
 
     /**
@@ -37,14 +37,15 @@ public class CreateHaveCertificateDatabase {
     private final String username;
     private final String name;
     private final String organization;
+    private final Date achievmentDate;
 
 
-    public CreateHaveCertificateDatabase(final Connection con, String username, String name, String organization) {
+    public CreateHaveCertificateDatabase(final Connection con, String username, String name, String organization, Date achievmentDate) {
         this.con = con;
         this.username = username;
         this.name = name;
         this.organization = organization;
-
+        this.achievmentDate = achievmentDate;
     }
 
     /**
@@ -63,6 +64,7 @@ public class CreateHaveCertificateDatabase {
             pstmt.setString(1, username);
             pstmt.setString(2, name);
             pstmt.setString(3, organization);
+            pstmt.setDate(4,achievmentDate);
 
             pstmt.execute();
 

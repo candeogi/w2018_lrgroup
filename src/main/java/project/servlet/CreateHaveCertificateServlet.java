@@ -5,8 +5,10 @@ import project.resource.Message;
 
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 
 import javax.servlet.ServletException;
@@ -39,6 +41,7 @@ public class CreateHaveCertificateServlet extends SessionManagerServlet {
         String name = null;
         String organization = null;
         String IDUser = null;
+        String achievmentDate;
 
         Message m = null;
 
@@ -46,14 +49,23 @@ public class CreateHaveCertificateServlet extends SessionManagerServlet {
             // retrieves the request parameters
             name = req.getParameter("certificate-name");
             organization = req.getParameter("organization");
+            achievmentDate = req.getParameter("achievmentDate");
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date aDate = new Date(dateFormat.parse(achievmentDate).getTime());
 
             IDUser = (String) req.getSession().getAttribute("loggedInUser");
 
             // creates a new object for accessing the database and stores the HaveCertificate
-            new CreateHaveCertificateDatabase(getDataSource().getConnection(), IDUser, name, organization).createHaveCertificate();
+            new CreateHaveCertificateDatabase(getDataSource().getConnection(), IDUser, name, organization, aDate).createHaveCertificate();
 
             m = new Message(String.format("Answer successfully created."));
-        } catch (SQLException ex) {
+
+        }catch(ParseException pe) {
+            //Should not happen
+            m = new Message("Birthday not correct", "E300", pe.getMessage());
+
+        }catch (SQLException ex) {
             m = new Message("Cannot create the Have Certificate: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
         }
