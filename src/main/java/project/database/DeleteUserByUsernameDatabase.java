@@ -34,19 +34,25 @@ public final class DeleteUserByUsernameDatabase
     /**
      * The SQL statement to be executed
      */
-    private static final String QUERY =
-            "DELETE " +
-                    "FROM lr_group.utente " +
-                    "WHERE EXISTS " +
-                    "(SELECT 1 " +
-                    " FROM lr_group.have" +
-                    " WHERE idanswer = lr_group.answer.id " +
-                    " AND idquestion = ?) ";
+//    private static final String QUERY =
+//            "DELETE " +
+//                    "FROM lr_group.utente " +
+//                    "WHERE EXISTS " +
+//                    "(SELECT 1 " +
+//                    " FROM lr_group.have" +
+//                    " WHERE idanswer = lr_group.answer.id " +
+//                    " AND idquestion = ?) ";
+//
+//    private static final String QUERY_2 =
+//            "DELETE " +
+//                    "FROM lr_group.U " +
+//                    "WHERE id=? "; //TODO query CASCADE?
 
-    private static final String QUERY_2 =
+
+    private static final String QUERY_1 =
             "DELETE " +
-                    "FROM lr_group.Question " +
-                    "WHERE id=? "; //TODO query CASCADE?
+                    "FROM lr_group.Utente " +
+                    "WHERE username=? "; //TODO query CASCADE?
 
     /**
      * The connection to the database
@@ -82,14 +88,14 @@ public final class DeleteUserByUsernameDatabase
         int rs = 0;
 
         try {
-            /*pstmt = con.prepareStatement(QUERY);
-            pstmt.setInt(1, u);
+
+//            pstmt = con.prepareStatement(QUERY);
+//            pstmt.setInt(1, u);
+//            rs = pstmt.executeUpdate();
+
+            pstmt = con.prepareStatement(QUERY_1);
+            pstmt.setString(1, username);
             rs = pstmt.executeUpdate();
-
-
-            pstmt = con.prepareStatement(QUERY_2);
-            pstmt.setInt(1, id);
-            rs = pstmt.executeUpdate();*/
 
 
 
