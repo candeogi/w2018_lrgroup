@@ -26,17 +26,16 @@ import java.util.List;
  * Creates an answer in the database.
  *
  * @author lrgroup
- * @author Alberto Forti (alberto.forti@studenti.unipd.it)
- * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
+ * @author Alberto Pontini
  */
-public final class CreateAnswerDatabase {
+public final class CreateAnswerDownvoteDatabase {
 
     /**
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.Answer (id, isFixed, body, ts, idUser, parentID) " +
-            "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
+            "INSERT INTO lr_group.VoteAnswer (answer, idUser, vote) " +
+            "VALUES (?, ?, ?)";
 
 
 
@@ -48,54 +47,41 @@ public final class CreateAnswerDatabase {
     /**
      * The answer to be updated in the database
      */
-    private final Answer answer;
+    private final int idAnswer;
+    private final String user;
 
     /**
      * Creates a new object for creating an answer.
      *
      * @param con
      *            the connection to the database.
-     * @param answer
-     *            the answer to be created in the database.
+     * @param user
+     *            the user who voted the question.
+     * @param idAnswer
+     *            the answer to be voted in the database.
      */
-    public CreateAnswerDatabase(final Connection con, final Answer answer) {
+    public CreateAnswerDownvoteDatabase(final Connection con, final String user ,final int idAnswer) {
         this.con = con;
-        this.answer = answer;
+        this.idAnswer = idAnswer;
+        this.user = user;
     }
 
     /**
-     * Creates a answer in the database.
+     * Creates an upvote in the database.
      * @throws SQLException
      *             if any error occurs while storing the answer.
      */
-    public boolean createAnswer() throws SQLException {
+    public boolean createAnswerDownvote() throws SQLException {
 
         PreparedStatement pstmt = null;
-        int insertedKey=-1;
 
         try {
-            pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
-            //pstmt.setInt(1, answer.getID());
-            pstmt.setBoolean(1, answer.isFixed());
-            pstmt.setString(2, answer.getText());
-            pstmt.setTimestamp(3, answer.getTimestamp());
-            pstmt.setString(4, answer.getIDUser());
-            if(answer.getParentID()!=-1){
-                pstmt.setInt(5,answer.getParentID());
-            }
-            else {
-                pstmt.setNull(5,  java.sql.Types.INTEGER);
-            }
-            //set null cause now works only on answer to questions
-            pstmt.execute();
+            pstmt = con.prepareStatement(STATEMENT);
+            pstmt.setInt(1, idAnswer);
+            pstmt.setString(2, user);
+            pstmt.setInt(3, -1);
 
-            ResultSet generatedKey=pstmt.getGeneratedKeys();
-            if(generatedKey.next()){
-                insertedKey=generatedKey.getInt(1);
-            }
-            if(answer.getParentID()==-1){
-                new CreateHaveElement(con,answer.getQuestionID(),insertedKey).createElement();
-            }
+            pstmt.execute();
 
             return true;
         }
@@ -111,9 +97,5 @@ public final class CreateAnswerDatabase {
 
             con.close();
         }
-
-
-
-
     }
 }
