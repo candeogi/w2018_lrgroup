@@ -26,18 +26,22 @@ public class RestCertificate extends RestResource {
         Message message;
         try {
             // parse the URI path to extract the ID
+//            String path = req.getRequestURI();
+//            path = path.substring(path.lastIndexOf("organization") + 12);
+//            final String certificateOrganization = path.substring(1);
+
             String path = req.getRequestURI();
-            path = path.substring(path.lastIndexOf("organization") + 2);
+            path = path.substring(path.lastIndexOf("user") + 4);
+
+            final String idUser = path.substring(1);
 
             message = new Message(path);
             message.toJSON(res.getOutputStream());
 
-
-            final String certificateOrganization = path.substring(1);
-
             String IDUser = (String) req.getSession().getAttribute("loggedInUser");
+
             // creates a new object for accessing the database and search the question
-            c = new SearchCertificateByUsernameDatabase(con, IDUser).SearchQuestionByUser();
+            c = new SearchCertificateByUsernameDatabase(con, idUser).SearchQuestionByUser();
 
             if (c != null) {
                 res.setStatus(HttpServletResponse.SC_OK);
