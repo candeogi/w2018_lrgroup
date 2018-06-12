@@ -8,3 +8,5 @@ DROP SCHEMA lr_group CASCADE;
 \i category-insert.sql
 \i below-insert.sql
 \i permission-insert.sql
+\i certificate-insert.sql
+\i haveCertificate-insert.sql

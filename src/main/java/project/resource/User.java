@@ -64,6 +64,7 @@ public class User extends Resource
         this.registrationDate = registrationDate;
         this.birthday = birthday;
         this.description = description;
+
     }
 
 
