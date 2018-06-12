@@ -15,7 +15,7 @@ public class RestWebsite extends  RestResource{
 
     }
 
-    public searchWebsiteByID() throws IOException{
+    /*public searchWebsiteByID() throws IOException{
         List<WebSite> websites=null;
         Message message=null;
         try{
@@ -24,5 +24,5 @@ public class RestWebsite extends  RestResource{
             fina
         }
 
-    }
+    }*/
 }
