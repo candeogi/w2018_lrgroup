@@ -19,8 +19,8 @@
 --
 -- Insertion into the Category table
 --
-INSERT INTO lr_group.category  VALUES ('dati alg2',' me lo dica lei ',DEFAULT);
-INSERT INTO lr_group.category  VALUES ('math',' me lo dica lei ',DEFAULT);
-INSERT INTO lr_group.category  VALUES ('apericena',' me lo dica lei ',DEFAULT);
-INSERT INTO lr_group.category  VALUES ('web app',' me lo dica lei ',DEFAULT);
-INSERT INTO lr_group.category  VALUES ('any questions?',' me lo dica lei ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'dati alg2',' me lo dica lei ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'math',' me lo dica lei ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'apericena',' me lo dica lei ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'web app',' me lo dica lei ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'any questions?',' me lo dica lei ',DEFAULT);

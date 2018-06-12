@@ -19,8 +19,8 @@ public final class CreateCategoryDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.category (name, description, isCompany) " +
-            "VALUES (?, ?, ?)";
+            "INSERT INTO lr_group.category (id, name, description, isCompany) " +
+            "VALUES (DEFAULT,?, ?, ?)";
 
     /**
      * The connection to the database

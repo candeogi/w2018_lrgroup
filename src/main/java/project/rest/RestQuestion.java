@@ -251,4 +251,49 @@ public final class RestQuestion extends RestResource
 		}
 	}
 
+	/**
+	 * Searches question by category.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+	public void searchQuestionByCategory()  throws IOException
+	{
+
+		List<Question> q  = null;
+		Message m = null;
+
+		try
+		{
+			// parse the URI path to extract the category
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("category") + 8);
+
+			final int categoryID = Integer.parseInt(path.substring(1));
+
+
+			// creates a new object for accessing the database and search the question
+			q = new SearchQuestionByCategoryDatabase(con, categoryID).searchQuestionByCategory();
+
+			if(q != null)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+				new ResourceList(q).toJSON(res.getOutputStream());
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot search question: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t)
+		{
+			m = new Message("Cannot search question: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
 }

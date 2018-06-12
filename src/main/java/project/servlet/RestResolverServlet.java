@@ -80,6 +80,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         return;
                     }
                     break;
+                case "category":
+                    if (processCategory(req, res)) {
+                        return;
+                    }
+                    break;
                 //Aggiungere le risorse possibili
             }
             // if none of the above process methods succeeds, it means an unknow resource has been requested
@@ -440,6 +445,28 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
                         }
                     }
+                } else if (path.contains("category")) {
+                    // /question/category/{category}
+                    path = path.substring(path.lastIndexOf("category") + 8);
+                    if (path.length() == 0 || path.equals("/")) {
+                        m = new Message("Wrong format for URI /question/category/{categoryID}: no {categoryID} specified.",
+                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        m.toJSON(res.getOutputStream());
+                    } else {
+                        switch (method) {
+                            case "GET":
+                                String user = path.substring(1);
+                                new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByCategory();
+                                break;
+                            default:
+                                m = new Message("Unsupported operation for URI /question/category/{categoryID}.",
+                                        "E4A5", String.format("Requested operation %s.", method));
+                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                                m.toJSON(res.getOutputStream());
+                                break;
+                        }
+                    }
                 } else if (path.contains("downvote")) {
                     // /question/downvote/{questionID}
                     path = path.substring(path.lastIndexOf("downvote") + 8);
@@ -493,6 +520,47 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         }
         return true;
     }
+
+    /**
+     * Process the category-related resources.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @return TRUE if a resource is found, otherwise FALSE
+     * @throws IOException if any error occurs in the client/server communication.
+     */
+    private boolean processCategory(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        OutputStream out = res.getOutputStream();
+        final String method = req.getMethod();
+        String path = req.getRequestURI();
+        Message m = null;
+        try {
+            // strip everything until after the /category
+            path = path.substring(path.lastIndexOf("category") + 8);
+
+            if (path.length() == 0 || path.equals("/")) {
+                switch (method) {
+                    case "GET":
+                        RestCategory rc = new RestCategory(req, res, getDataSource().getConnection());
+                        rc.searchCategory();
+                        break;
+                    default:
+                        m = new Message("Unsupported operation for URI /category.",
+                                "E4A5", String.format("Requested operation %s.", method));
+                        res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                        m.toJSON(res.getOutputStream());
+                        break;
+                }
+
+            }
+        } catch (Throwable t) {
+            m = new Message("Unexpected error.", "E5A1", t.getMessage());
+            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            m.toJSON(res.getOutputStream());
+        }
+        return true;
+    }
+
 
     private boolean processWebsite(HttpServletRequest req, HttpServletResponse res) throws IOException {
         getServletContext().log("All'interno di processWebsite");

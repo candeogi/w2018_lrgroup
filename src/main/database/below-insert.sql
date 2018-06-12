@@ -19,8 +19,8 @@
 --
 -- Insertion into the below table
 --
-INSERT INTO lr_group.below  VALUES ('dati alg2',1);
-INSERT INTO lr_group.below  VALUES ('math',2);
-INSERT INTO lr_group.below  VALUES ('apericena',1);
-INSERT INTO lr_group.below  VALUES ('web app',1);
-INSERT INTO lr_group.below  VALUES ('any questions?',3);
+INSERT INTO lr_group.below  VALUES (1,1);
+INSERT INTO lr_group.below  VALUES (2,2);
+INSERT INTO lr_group.below  VALUES (3,1);
+INSERT INTO lr_group.below  VALUES (4,1);
+INSERT INTO lr_group.below  VALUES (5,3);
