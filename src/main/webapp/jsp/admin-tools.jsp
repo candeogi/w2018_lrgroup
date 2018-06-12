@@ -9,48 +9,79 @@
     <c:import url="/jsp/include/header.jsp"/>
 </header>
 <body>
-<h1>User list</h1>
-<hr/>
-<c:import url="/jsp/include/show-message.jsp"/>
-<c:if test='${not empty users && !message.error}'>
+<c:set var="base64" value="data:image/jpeg;base64," />
+<div class="container-fluid">
+    <c:import url="/jsp/include/show-message.jsp"/>
+    <c:if test='${not empty users && !message.error}'>
+    <!-- Browse Questions Table Div -->
+    <div class="col-md-8">
 
-    <table>
-        <thead>
-        <tr>
-            <th>Email</th><th>Name</th><th>Surname</th><th>Username</th><th>Birthday</th><th>Reg. date</th>
-        </tr>
-        </thead>
-        <!-- display the message -->
-        <c:import url="/jsp/include/show-message.jsp"/>
-        <tbody>
-        <c:forEach var="user" items="${users}">
+        <table class="table table-hover">
+            <thead>
             <tr>
+                <th></th><th>Email</th><th>Name</th><th>Surname</th><th>Username</th><th>Birthday</th><th>Reg. date</th><th>Admin?</th><th></th><th></th>
+            </tr>
+            </thead>
+            <!-- display the message -->
+            <c:import url="/jsp/include/show-message.jsp"/>
+            <tbody>
+            <c:forEach var="user" items="${users}">
+            <tr>
+                <td><img src="<c:out value="${base64}${user.photoProfile}"/>" class="rounded-circle img-fluid"></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.surname}"/></td>
                 <td><c:out value="${user.username}"/></td>
                 <td><c:out value="${user.birthday}"/></td>
                 <td><c:out value="${user.registrationDate}"/></td>
-                <c:if test="${sessionScope.isAdmin == true and sessionScope.loggedInUser != user.username}">
-                    <td>
-                        <form method="POST" action="<c:url value="/delete-user"/>" id="deleteForm">
-                            <input type="hidden" name="username" value="${user.username}"/>
+                <td>
+                    <c:choose>
+                        <c:when test="${user.isAdmin()}">
+                            <i class="fas fa-check-circle"></i>
+                        </c:when>
 
-                            <button type="submit">Delete</button><br/>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="POST" action="<c:url value="/to-update-user-form"/>" id="updateForm">
-                            <input type="hidden" name="username" value="${user.username}"/>
+                        <c:when test="${not user.isAdmin()}">
+                            <i class="fas fa-times-circle"></i>
+                        </c:when>
+                    </c:choose>
+                </td>
+                <td>
+                    <form method="POST" action="<c:url value="/delete-user"/>" id="deleteForm">
+                        <input type="hidden" name="username" value="${user.username}"/>
+                        <c:choose>
+                        <c:when test="${sessionScope.isAdmin == true and sessionScope.loggedInUser != user.username and not user.isAdmin()}">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="far fa-trash-alt"></i> Delete</button><br/>
+                        </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-primary btn-sm" disabled>
+                                    <i class="far fa-trash-alt"></i> Delete</button><br/>
+                            </c:otherwise>
+                        </c:choose>
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="<c:url value="/to-update-user-form"/>" id="updateForm">
+                        <input type="hidden" name="username" value="${user.username}"/>
+                        <c:choose>
+                            <c:when test="${sessionScope.isAdmin == true and sessionScope.loggedInUser != user.username and not user.isAdmin()}">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="far fa-edit"></i>Update</button><br/>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-primary btn-sm" disabled>
+                                    <i class="far fa-edit"></i>Update</button><br/>
+                            </c:otherwise>
+                        </c:choose>
 
-                            <button type="submit">Update</button><br/>
-                        </form>
-                    </td>
-                </c:if>
-        </c:forEach>
-        </tbody>
-    </table>
+                    </form>
+                </td>
+                </c:forEach>
+            </tbody>
+        </table>
 
-</c:if>
+        </c:if>
+    </div>
+</div>
 </body>
 </html>

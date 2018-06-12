@@ -66,7 +66,7 @@ public class User extends Resource
         this.description = description;
     }
 
-    
+
     /**
      * Creates a new user: name, surname, photoProfile, birthday and description are set to null
      * @param email

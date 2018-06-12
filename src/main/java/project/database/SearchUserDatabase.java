@@ -89,7 +89,7 @@ public final class SearchUserDatabase {
                         rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("username"),
-                        rs.getString("photoProfile"),
+                        rs.getString("photoprofile"),
                         rs.getString("password"),
                         rs.getBoolean("isAdmin"),
                         rs.getDate("registrationDate"),
