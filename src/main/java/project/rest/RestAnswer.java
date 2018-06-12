@@ -43,8 +43,7 @@ public final class RestAnswer extends RestResource
 	 */
 	public void createAnswer() throws IOException
 	{
-		//NOT NEEDED FOR NOW, Just in case for future implementations
-		Answer a  = null;
+		boolean a;
 		Message m = null;
 
 		try{
@@ -52,12 +51,11 @@ public final class RestAnswer extends RestResource
 			final Answer answer = Answer.fromJSON(req.getInputStream());
 
 			// creates a new object for accessing the database and stores the answer
-			a = null; //new CreateAnswerDatabase(con, answer).createAnswer(); Commented for testing purposes
+			a = new CreateAnswerDatabase(con, answer).createAnswer();
 
-			if(a != null)
+			if(a)
 			{
 				res.setStatus(HttpServletResponse.SC_CREATED);
-				a.toJSON(res.getOutputStream());
 			}
 			else
 			{
@@ -85,6 +83,82 @@ public final class RestAnswer extends RestResource
 	}
 
 	/**
+	 * Updates an answer in the database. 
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+
+	public void updateAnswer() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			final Answer answer = Answer.fromJSON(req.getInputStream());
+
+			a = new UpdateAnswerDatabase(con, answer).updateAnswer();
+
+			if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot delete the answer: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot delete the answer: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
+	 * Deletes an answer in the database. 
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+
+	public void deleteAnswer() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			final Answer answer = Answer.fromJSON(req.getInputStream());
+
+			a = new DeleteAnswerByIDDatabase(con, answer.getID()).deleteAnswerByID();
+
+			if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot delete the answer: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot delete the answer: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
 	 * Searches answers by a question ID.
 	 *
 	 * @throws IOException
@@ -107,6 +181,51 @@ public final class RestAnswer extends RestResource
 
 			// creates a new object for accessing the database and search the answers
 			al = new SearchAnswerByQuestionIDDatabase(con, questionID).searchAnswerByQuestionID();
+
+			if(al != null)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+				new ResourceList(al).toJSON(res.getOutputStream());
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot search answers: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t)
+		{
+			m = new Message("Cannot search answers: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
+	 * Searches answers by an answer ID.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+	public void searchAnswerByAnswerID()  throws IOException
+	{
+
+		List<Answer> al  = null;
+		Message m = null;
+
+		try
+		{
+			// parse the URI path to extract the ID
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("idAnswer") +8);
+
+			final int questionID = Integer.parseInt(path.substring(1));
+
+
+			// creates a new object for accessing the database and search the answers
+			al = new SearchAnswerByAnswerIDDatabase(con, questionID).searchAnswerByAnswerID();
 
 			if(al != null)
 			{

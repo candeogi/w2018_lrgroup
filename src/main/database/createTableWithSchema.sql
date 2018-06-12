@@ -42,6 +42,7 @@ CREATE TABLE lr_group.Utente (
     registrationDate DATE NOT NULL,
     birthday DATE,
     description TEXT,
+    companyUser boolean,
 
  
     PRIMARY KEY(username)
