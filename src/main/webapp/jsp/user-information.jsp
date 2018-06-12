@@ -17,64 +17,73 @@
 </head>
 <body>
 
-<header>
-    <c:import url="/jsp/include/header.jsp"/>
-</header>
+<c:import url="/jsp/include/header.jsp"/>
 
-
-<div class="row justify-content-between">
-    <div class="col col-lg-10">
-        <div class="row">
-            <div class="col col-lg-2">
-                <p> Name:</p>
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col col-lg-10">
+            <div class="row">
+                <div class="col col-lg-2">
+                    <p> Name:</p>
+                </div>
+                <div id="name-value" class="col-md-auto">
+                    <p><c:out value="${user.name}"/></p>
+                </div>
             </div>
-            <div id="name-value" class="col-md-auto">
-                <p><c:out value="${user.name}"/></p>
+            <div class="row">
+                <div class="col col-lg-2">
+                    <p>Surname:</p>
+                </div>
+                <div id="surname-value" class="col-md-auto">
+                    <p><c:out value="${user.surname}"/></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-2">
+                    <p>Birthday:</p>
+                </div>
+                <div id="birthday-value" class="col-md-auto">
+                    <p><c:out value="${user.birthday}"/></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-2">
+                    <p>Description:</p>
+                </div>
+                <div id="description-value" class="col-md-auto">
+                    <p><c:out value="${user.description}"/></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-2">
+                    <p>Email address: </p>
+                </div>
+                <div id="email-value" class="col-md-auto">
+                    <p><c:out value="${user.email}"/></p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col col-lg-2">
-                <p>Surname:</p>
-            </div>
-            <div id="surname-value" class="col-md-auto">
-                <p><c:out value="${user.surname}"/></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-lg-2">
-                <p>Birthday:</p>
-            </div>
-            <div id="birthday-value" class="col-md-auto">
-                <p><c:out value="${user.birthday}"/></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-lg-2">
-                <p>Description:</p>
-            </div>
-            <div id="description-value" class="col-md-auto">
-                <p><c:out value="${user.description}"/></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-lg-2">
-                <p>Email address: </p>
-            </div>
-            <div id="email-value" class="col-md-auto">
-                <p><c:out value="${user.email}"/></p>
-            </div>
+        <div id="photo-div" class="col align-self-end">
+            <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="img">
         </div>
     </div>
-    <div id="photo-div" class="col align-self-end">
-        <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="img">
+
+    <div id="website" class="container border border-dark">
+        <p>Website:</p>
+
     </div>
 
+    <div id="certification" class="container border border-dark">
+        <p>Certification:</p>
+
+    </div>
 </div>
 
 <button id="modifyButton" type="submit" class="btn btn-primary">Modify User</button>
 
 
 <script type="text/javascript" src="js/ciao.js"></script>
+
 
 </body>
 </html>

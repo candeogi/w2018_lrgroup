@@ -147,7 +147,7 @@ CREATE TABLE lr_group.Have(
  
 CREATE TABLE lr_group.Website(
     address VARCHAR(50) NOT NULL,
-    addrType  VARCHAR(50) NOT NULL,
+    addrType  lr_group.webSiteType NOT NULL,
     PRIMARY KEY(address)
 );
 
@@ -180,7 +180,7 @@ CREATE TABLE lr_group.Certificate(
     name VARCHAR(50) NOT NULL,
     organization VARCHAR(50) NOT NULL,
 
-    PRIMARY KEY(name,organization),
+    PRIMARY KEY(name,organization)
 );
 
 CREATE TABLE lr_group.HaveCertificate(
