@@ -14,10 +14,10 @@
     <c:import url="/jsp/include/show-message.jsp"/>
     <c:if test='${not empty users && !message.error}'>
     <!-- Browse Questions Table Div -->
-    <div class="col-md-8">
+    <div>
 
-        <table class="table table-hover">
-            <thead>
+        <table class="table table-hover table-striped table-responsive">
+            <thead class="thead-light">
             <tr>
                 <th></th><th>Email</th><th>Name</th><th>Surname</th><th>Username</th><th>Birthday</th><th>Reg. date</th><th>Admin?</th><th></th><th></th>
             </tr>
@@ -27,7 +27,7 @@
             <tbody>
             <c:forEach var="user" items="${users}">
             <tr>
-                <td><img src="<c:out value="${base64}${user.photoProfile}"/>" class="rounded-circle img-fluid"></td>
+                <td class="col-md-2"><img src="<c:out value="${base64}${user.photoProfile}"/>" class="rounded-circle"></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.surname}"/></td>
@@ -84,4 +84,9 @@
     </div>
 </div>
 </body>
+
+<footer>
+    <c:import url=  "/jsp/include/footer.jsp"/>
+</footer>
+
 </html>

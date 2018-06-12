@@ -20,6 +20,7 @@ Since: 1.0
 
 <div class="row" id="footer_row">
         <div class="col-md-8">
+            <i class="fas fa-heart"></i>
             <small class="text-muted">Designed and built with love by
                 <a href="mailto:lrgroup@mailnesia.com">@lrgroup</a></small>
         </div>
