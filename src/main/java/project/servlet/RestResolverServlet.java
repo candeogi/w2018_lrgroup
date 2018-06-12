@@ -157,6 +157,24 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
             path = path.substring(path.lastIndexOf("answer") + 6);
 
             if (path.length() == 0 || path.equals("/")) {
+                switch (method)
+                {
+                    case "POST":
+                        new RestAnswer(req, res, getDataSource().getConnection()).createAnswer();
+                        break;
+                    case "PUT":
+                        new RestAnswer(req, res, getDataSource().getConnection()).updateAnswer();
+                        break;
+                    case "DELETE":
+                        new RestAnswer(req, res, getDataSource().getConnection()).deleteAnswer();
+                        break;
+                    default:
+                        m = new Message("Unsupported operation for URI /answer.",
+                                "E4A5", String.format("Requested operation %s.", method));
+                        res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                        m.toJSON(res.getOutputStream());
+                        break;
+                }
                 m = new Message("Wrong format for URI /answer/id/{questionID} or /answer/user/{userid}",
                         "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                 res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -176,7 +194,6 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 try {
                                     Integer.parseInt(path.substring(1));
                                     new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
-                                    //TODO Return true?
                                 } catch (NumberFormatException e) {
                                     m = new Message(
                                             "Wrong format for URI /answer/id/{questionID}: {questionID} is not an integer.",
@@ -193,9 +210,34 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
                         }
                     }
-                } else if (path.contains("user")) {
+                } 
+                else if (path.contains("idAnswer"))
+                {
+                    // /answer/idAnswer/{answerID}
+                    path = path.substring(path.lastIndexOf("idAnswer") + 8);
+                    if (path.length() == 0 || path.equals("/")) {
+                        m = new Message("Wrong format for URI /answer/idAnswer/{answerID}: no {answerID} specified.",
+                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        m.toJSON(res.getOutputStream());
+                    } else {
+                        switch (method) {
+                            case "GET":
+                                new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByAnswerID();
+                                break;
+
+                            default:
+                                m = new Message("Unsupported operation for URI /answer/user/{userID}.",
+                                        "E4A5", String.format("Requested operation %s.", method));
+                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                                m.toJSON(res.getOutputStream());
+                                break;
+                        }
+                    }
+                }
+                else if (path.contains("user")) {
                     // /answer/user/{userid}
-                    path = path.substring(path.lastIndexOf("user") + 2);
+                    path = path.substring(path.lastIndexOf("user") + 4);
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /answer/user/{userID}: no {userID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));

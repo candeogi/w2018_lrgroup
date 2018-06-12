@@ -32,7 +32,7 @@ import java.util.List;
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class SearchAnswerByQuestionIDDatabase
+public final class SearchAnswerByAnswerIDDatabase
 {
 
     /**
@@ -41,16 +41,14 @@ public final class SearchAnswerByQuestionIDDatabase
     private static final String QUERY =
             "SELECT * " +
                     "FROM lr_group.answer " +
-                    "LEFT JOIN lr_group.have " +
-                    "on lr_group.answer.id = lr_group.have.idanswer " +
-                    "WHERE lr_group.have.idquestion=?" +
+                    "WHERE parentID=?" +
                     "ORDER BY ts";
 
     /**
      * The connection to the database
      */
     private final Connection con;
-    private final int questionID;
+    private final int answerID;
 
 
     /**
@@ -61,21 +59,21 @@ public final class SearchAnswerByQuestionIDDatabase
      * @param questionid
      *            the id of the related question.
      */
-    public SearchAnswerByQuestionIDDatabase(final Connection con, final int questionid)
+    public SearchAnswerByAnswerIDDatabase(final Connection con, final int answerid)
     {
         this.con = con;
-        this.questionID = questionid;
+        this.answerID = answerid;
     }
 
     /**
      * Retrieves answers for specific question in the database.
      *
-     * @return a list of {@code Answer} (must be one) object related to a specific question.
+     * @return a list of {@code Answer} (must be one) object related to a specific answer.
      *
      * @throws SQLException
      *             if any error occurs while retrieving the answer.
      */
-    public List<Answer> searchAnswerByQuestionID() throws SQLException
+    public List<Answer> searchAnswerByAnswerID() throws SQLException
     {
 
         PreparedStatement pstmt = null;
@@ -83,13 +81,13 @@ public final class SearchAnswerByQuestionIDDatabase
 
         try {
             pstmt = con.prepareStatement(QUERY);
-            pstmt.setInt(1, questionID);
+            pstmt.setInt(1, answerID);
 
 
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()){
-                Answer a = new Answer(rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"),questionID);
+                Answer a = new Answer(rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"),-1);
                 answerList.add(a);
             }
 

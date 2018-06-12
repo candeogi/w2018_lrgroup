@@ -68,7 +68,7 @@ public final class CreateAnswerDatabase {
      * @throws SQLException
      *             if any error occurs while storing the answer.
      */
-    public void createAnswer() throws SQLException {
+    public boolean createAnswer() throws SQLException {
 
         PreparedStatement pstmt = null;
         int insertedKey=-1;
@@ -97,7 +97,14 @@ public final class CreateAnswerDatabase {
                 new CreateHaveElement(con,answer.getQuestionID(),insertedKey).createElement();
             }
 
-        } finally {
+            return true;
+        }
+        catch(Throwable t)
+        {
+            return false;
+        }
+        finally 
+        {
             if (pstmt != null) {
                 pstmt.close();
             }
