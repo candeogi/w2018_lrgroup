@@ -191,10 +191,8 @@ CREATE TABLE lr_group.HaveCertificate(
 
     PRIMARY KEY(username,organization,name),
 
-    FOREIGN KEY(username) REFERENCES lr_group.Utente(username)
-    ON DELETE NO ACTION ON UPDATE CASCADE,
-
     FOREIGN KEY(name,organization) REFERENCES lr_group.Certificate(name,organization)
-    ON DELETE NO ACTION ON UPDATE CASCADE
+
+     ON DELETE NO ACTION ON UPDATE CASCADE
 
 );
