@@ -43,7 +43,9 @@
             <div class="col-md-8">
                 <nav class="nav nav-pills justify-content-center" id="switchQs">
                     <a class="nav-link active" href="#popularQs" data-toggle="tab">Popular Questions</a>
+                    <c:if test="${not empty sessionScope.loggedInUser}">
                     <a class="nav-link" href="#yourQs" data-toggle="tab">Your Questions</a>
+                    </c:if>
                     <a class="nav-link" href="#latestQs" data-toggle="tab">Latest Questions</a>
                     <div class="dropdown-container">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#categoryQs" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
@@ -100,10 +102,8 @@
    <!--Custom script test-->
     <script type="text/javascript" src="test.js"></script>
 
-        <h1>Index</h1>
         <p><a href="<c:url value="/?p=create-question"/>">Create a question</a></p>
         <p><a href="<c:url value="/show-questions"/>">Show questions</a></p>
-
         <p><a href="<c:url value="/jsp/show-question-ajax.jsp"/>">Show questions (via AJAX/REST)</a></p>
 
         <c:import url="/jsp/include/show-message.jsp"/>
