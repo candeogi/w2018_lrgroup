@@ -23,7 +23,7 @@ Since: 1.0
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="<c:url value='/css/question-answer-style.css' />" rel="stylesheet">
+    <link href="<c:url value='/css/question-answers-style.css' />" rel="stylesheet">
 
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
@@ -60,6 +60,7 @@ Since: 1.0
     </div>
 </header><!--close header-->
 
+<div id="loggedInUser" data-loggedInUser="${sessionScope.loggedInUser}"></div>
 <!-- Container Div -->
 <div class="container">
 

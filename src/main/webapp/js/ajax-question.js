@@ -166,6 +166,7 @@
                 document.getElementById('tablequestionlist').innerHTML = "";
 
                 var thead = document.createElement('thead');
+                thead.className = "thead-light";
 
                 var tr = document.createElement('tr');
 
@@ -192,6 +193,13 @@
                 var th = document.createElement('th');
                 th.appendChild(document.createTextNode('IDUser'));
                 tr.appendChild(th);
+
+                if(document.getElementById('nav-tab-admin') != null) {
+                    var th = document.createElement('th');
+                    tr.appendChild(th);
+                    var th = document.createElement('th');
+                    tr.appendChild(th);
+                }
 
                 thead.appendChild(tr);
                 table.appendChild(thead);
