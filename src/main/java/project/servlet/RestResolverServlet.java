@@ -691,8 +691,10 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             getServletContext().log("ho finito Cerificate");
                             break;
                         case "DELETE":
+                            getServletContext().log("sono dentro al case DELETE Certificate");
                             RestCertificate restCertificateDelete = new RestCertificate(req, res, getDataSource().getConnection());
-                            restCertificateDelete.deleteHaveCertificatebyUserName();
+                            restCertificateDelete.deleteHaveCertificateByUserName();
+                            getServletContext().log("ho finito DELETE Cerificate");
                             break;
                         default:
                             message = new Message("Unsupported operation for URI /certificate.",
