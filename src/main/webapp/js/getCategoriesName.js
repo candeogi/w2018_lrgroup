@@ -13,7 +13,7 @@
         }
 
         httpRequest.onreadystatechange = writeResults;
-        httpRequest.open('GET', '/categories-name');
+        httpRequest.open('GET', 'categories-name');
         httpRequest.send();
 
         // stop the form from submitting the normal way and refreshing the page
@@ -44,7 +44,7 @@
 
                 // the JSON error message
                 var jsonData = JSON.parse(httpRequest.responseText);
-                jsonData = jsonData['message'];
+                categoriesList = jsonData['message'];
 
                 e = document.createElement('ul');
                 div.appendChild(e);
@@ -68,9 +68,9 @@
                 var tr;
                 var td;
 
-                // the JSON list of products
-                var jsonData = JSON.parse(httpRequest.responseText);
-                jsonData = jsonData['resource-list'];
+                // the JSON list of categories
+                var categoriesList = httpRequest.getAttribute("categories");
+                categoriesList = categoriesList['resource-list'];
 
                 var category;
 
@@ -78,14 +78,14 @@
                 e.className = 'table';
                 div.appendChild(e);
 
-                ee = document.createElement('thead');
+                /*ee = document.createElement('thead');
                 ee.className = 'thead-light';
-                e.appendChild(ee);
+                e.appendChild(ee);*/
 
                 tr = document.createElement('tr');
-                ee.appendChild(tr);
+                e.appendChild(tr);
 
-                td = document.createElement('th');
+                /*td = document.createElement('th');
                 td.appendChild(document.createTextNode());
                 tr.appendChild(td);
 
@@ -107,14 +107,14 @@
 
 
                 ee = document.createElement('tbody');
-                e.appendChild(ee);
+                e.appendChild(ee);*/
 
-                for (var i = 0; i < jsonData.length; i++) {
+                for (var i = 0; i < categoriesList.length; i++) {
 
-                    category = jsonData[i].product;
+                    category = categoriesList[i].product;
 
                     tr = document.createElement('tr');
-                    ee.appendChild(tr);
+                    e.appendChild(tr);
 
                     td = document.createElement('td');
                     td.appendChild(document.createTextNode(category['name']));

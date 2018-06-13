@@ -1,6 +1,6 @@
 package project.database;
 
-import project.resource.Answer;
+import project.resource.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +21,7 @@ public final class GetCategoriesDatabase {
      * The SQL statement to be executed
      */
     private static final String QUERY =
-            "SELECT name " +
+            "SELECT * " +
                     "FROM lr_group.category ";
 
     /**
@@ -49,11 +49,11 @@ public final class GetCategoriesDatabase {
      * @throws SQLException
      *             if any error occurs while retrieving the answer.
      */
-    public List<String> getCategories() throws SQLException
+    public List<Category> getCategories() throws SQLException
     {
 
         PreparedStatement pstmt = null;
-        List<String> categoriesList = new ArrayList<>();
+        List<Category> categoriesList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
@@ -61,7 +61,8 @@ public final class GetCategoriesDatabase {
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()){
-                categoriesList.add(rs.getString("name"));
+                Category category = new Category(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getBoolean("isCompany"));
+                categoriesList.add(category);
             }
 
         } finally {

@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Login Form</title>
+        <title>Any questions?</title>
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -18,7 +18,6 @@
         <!-- Font Awesome CSS-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
               integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
 
         <!--awesome-font-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
@@ -209,6 +208,7 @@
             </c:when>
         </c:choose>
 
-
+    <script src="<c:url value="/js/latestQuestions.js"/>"></script>
+    <script src="<c:url value="/js/getCategoriesName.js"/>"></script>
     </body>
 </html>
