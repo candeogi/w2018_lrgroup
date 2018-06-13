@@ -68,7 +68,7 @@ public class Certificate extends Resource {
         jg.writeStringField("name", name);
         jg.writeStringField("organization", organization);
         if(dateCert != null){
-            jg.writeStringField("achievmentdate ", dateCert );
+            jg.writeStringField("achievementDate", dateCert );
         }
 
         jg.writeEndObject();

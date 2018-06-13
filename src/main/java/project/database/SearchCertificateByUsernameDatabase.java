@@ -42,8 +42,8 @@ public class SearchCertificateByUsernameDatabase {
 //                    "FROM lr_group.HaveCertificate AS H INNER JOIN lr_group.Certificate AS C ON H.id" +
 //                    "WHERE username=?";
 
-    private static final String QUERY = "SELECT C.name, C.organization, H.achievmentDate FROM" +
-            "lr_group.HaveCertificate AS H INNER JOIN lr_group.Certificate AS C ON H.id = C.id"
+    private static final String QUERY = "SELECT C.name, C.organization, H.achievmentDate FROM " +
+            "lr_group.HaveCertificate AS H INNER JOIN lr_group.Certificate AS C ON H.id = C.id "
             + "WHERE username=?";
 
 
