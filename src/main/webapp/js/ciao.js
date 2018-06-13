@@ -1,5 +1,6 @@
 $(document).ready(function () {
     visualizeWebsite();
+    visualizeCertificate();
     $("#modifyButton").click(function () {
         modifyValue();
     });
@@ -22,6 +23,92 @@ function visualizeWebsite() {
     xhr2.send();
 
 }
+
+var xhrCertificate;
+function visualizeCertificate(){
+    xhrCertificate = new XMLHttpRequest();
+    xhrCertificate.onreadystatechange = function () {
+        if (xhrCertificate.readyState == 4) {
+            var data = xhrCertificate.responseText;
+            alert(data);
+        }
+    }
+
+    xhrCertificate.onreadystatechange = printResultCertificate;
+    var username = $("#username-value").text().trim();
+    xhrCertificate.open('GET', 'rest/certificate/user/' + username, true);
+    xhrCertificate.send();
+
+}
+var rowToDeleteCert;
+function printResultCertificate() {
+    if (xhrCertificate.readyState === XMLHttpRequest.DONE) {
+
+        if (xhrCertificate.status == 200) {
+
+            var jsonResult = JSON.parse(xhrCertificate.responseText);
+            var certificate = jsonResult['resource-list'];
+            var table = document.getElementById("table-certificate");
+
+            var thead = document.createElement('thead');
+            var tr = document.createElement('tr');
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode("Name"));
+            tr.appendChild(th);
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode("Organization"));
+            tr.appendChild(th);
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode("Achievement Date"));
+            tr.appendChild(th);
+
+            thead.appendChild(tr);
+            table.appendChild(thead);
+
+            var tbody = document.createElement('tbody');
+            for (var i = 0; i < certificate.length; i++) {
+                var tr = document.createElement('tr');
+
+
+                var td_name = document.createElement('td');
+                td_name.appendChild(document.createTextNode(certificate[i].certificate.name));
+                tr.appendChild(td_name);
+
+
+                var td_organization = document.createElement('td');
+                td_organization.appendChild(document.createTextNode(certificate[i].certificate.organization));
+                tr.appendChild(td_organization);
+
+                var td_achievement = document.createElement('td');
+                td_achievement.appendChild(document.createTextNode(certificate[i].certificate.achievmentDate));
+                tr.appendChild(td_achievement);
+
+                var td_delete = document.createElement('td');
+                var button = document.createElement('button');
+                var trash = document.createElement('i');
+                trash.className = "far fa-trash-alt";
+                button.appendChild(trash);
+                td_delete.appendChild(button);
+                tr.appendChild(td_delete);
+                tbody.appendChild(tr);
+                button.addEventListener("click", function () {
+                    //TODO Aggiungere rimozione certificato
+                });
+            }
+
+            table.appendChild(tbody);
+
+        }
+        else {
+            alert('There was a problem with the request.')
+        }
+    }
+
+}
+
+
 
 var rowToDelete;
 

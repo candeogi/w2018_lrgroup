@@ -39,12 +39,12 @@ public class RestCertificate extends RestResource {
                 new ResourceList(c).toJSON(res.getOutputStream());
             } else {
                 // it should not happen
-                m = new Message("Cannot search question: unexpected error.", "E5A1", null);
+                m = new Message("Cannot search certificate: unexpected error. DB", "E5A1", null);
                 res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 m.toJSON(res.getOutputStream());
             }
-        } catch (Throwable t) {
-            m = new Message("Cannot search question: unexpected error.", "E5A1", t.getMessage());
+        } catch (SQLException e) {
+            m = new Message("Cannot search certificate: unexpected error.", "E5A1", e.getMessage());
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             m.toJSON(res.getOutputStream());
         }

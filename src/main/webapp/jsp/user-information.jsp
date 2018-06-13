@@ -75,18 +75,27 @@
             <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="img">
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div id="website" class="container border border-dark">
+                    <p>Website:</p>
+                    <table id="table-website" class="table table-hover">
 
-    <div id="website" class="container border border-dark">
-        <p>Website:</p>
-        <table id="table-website" class="table table-hover">
+                    </table>
 
-        </table>
+                </div>
+            </div>
 
-    </div>
+            <div class="col">
+                <div id="certification" class="container border border-dark">
+                    <p>Certification:</p>
+                    <table id="table-certificate" class="table table-hover">
 
-    <div id="certification" class="container border border-dark">
-        <p>Certification:</p>
-
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
