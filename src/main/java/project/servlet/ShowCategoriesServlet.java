@@ -1,6 +1,7 @@
 package project.servlet;
 
 import project.database.GetCategoriesDatabase;
+import project.resource.Category;
 import project.resource.Message;
 
 
@@ -30,15 +31,15 @@ public class ShowCategoriesServlet extends AbstractDatabaseServlet{
      */
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
-        List<String> q = null;
+        List<Category> q = null;
         Message m = null;
         try {
             // creates a new object for accessing the database and searching the categories
             q= new GetCategoriesDatabase(getDataSource().getConnection()).getCategories();
-            m = new Message("Categoriess successfully searched.");
+            m = new Message("Categories successfully searched.");
 
         } catch (SQLException ex) {
-            m = new Message("Cannot search for categoriess: unexpected error while accessing the database.",
+            m = new Message("Cannot search for categories: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
         }
         req.setAttribute("categories", q);

@@ -35,7 +35,10 @@ Since: 1.0
     <table>
         <thead>
         <tr>
+            <th>ID</th>
             <th>Name</th>
+            <th>Description</th>
+            <th>Is company</th>
         </tr>
         </thead>
         <!-- display the message -->
@@ -43,7 +46,10 @@ Since: 1.0
         <tbody>
         <c:forEach var="category" items="${categories}">
             <tr>
+                <td><c:out value="${category.id}"/></td>
                 <td><c:out value="${category.name}"/></td>
+                <td><c:out value="${category.description}"/></td>
+                <td><c:out value="${category.isCompany}"/></td>
         </c:forEach>
         </tbody>
     </table>
