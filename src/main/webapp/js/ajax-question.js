@@ -1,7 +1,7 @@
 
     var httpRequest;
     var url;
-    window.onload=makeRequest;
+    window.onload=onLoadRequest;
 
     $('#switchQs a[href="#categoryQs"]').on('click', function(event) {
         event.preventDefault(); // To prevent following the link (optional)
@@ -16,6 +16,23 @@
         httpRequest.onreadystatechange = categoryDropdown;
         httpRequest.open('GET', url);
         httpRequest.send();
+    });
+
+    $('#tablequestionlist').on('click','.clickable-row',function(e){
+        e.preventDefault(); // To prevent following the link (optional)
+        var href = $(this).find("td").attr("id");
+        alert('Ciao ciao '+href);
+        /*url = 'http://localhost:8080/web-app-project/rest/question/';
+        httpRequest = new XMLHttpRequest();
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = categoryDropdown;
+        httpRequest.open('GET', url);
+        httpRequest.send();*/
+
     });
 
     function categoryDropdown(){
@@ -86,7 +103,7 @@
             alert('Giving up :( Cannot create an XMLHTTP instance');
             return false;
         }
-        httpRequest.onreadystatechange = alertContents;
+        httpRequest.onreadystatechange = loadQsRequest;
         httpRequest.open('GET', url);
         httpRequest.send();
 
@@ -104,7 +121,7 @@
             alert('Giving up :( Cannot create an XMLHTTP instance');
             return false;
         }
-        httpRequest.onreadystatechange = alertContents;
+        httpRequest.onreadystatechange = loadQsRequest;
         httpRequest.open('GET', url);
         httpRequest.send();
     });
@@ -119,7 +136,7 @@
             alert('Giving up :( Cannot create an XMLHTTP instance');
             return false;
         }
-        httpRequest.onreadystatechange = alertContents;
+        httpRequest.onreadystatechange = loadQsRequest;
         httpRequest.open('GET', url);
         httpRequest.send();
     });
@@ -134,13 +151,13 @@
             alert('Giving up :( Cannot create an XMLHTTP instance');
             return false;
         }
-        httpRequest.onreadystatechange = alertContents;
+        httpRequest.onreadystatechange = loadQsRequest;
         httpRequest.open('GET', url);
         httpRequest.send();
     });
 
 
-    function makeRequest() {
+    function onLoadRequest() {
 
         url = 'http://localhost:8080/web-app-project/rest/question';
 
@@ -150,12 +167,12 @@
             alert('Giving up :( Cannot create an XMLHTTP instance');
             return false;
         }
-        httpRequest.onreadystatechange = alertContents;
+        httpRequest.onreadystatechange = loadQsRequest;
         httpRequest.open('GET', url);
         httpRequest.send();
     }
 
-    function alertContents() {
+    function loadQsRequest() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
             if (httpRequest.status === 200) {
@@ -214,8 +231,10 @@
                 for (var i = 0; i < resource.length; i++) {
                     var question = resource[i].question;
                     var tr = document.createElement('tr');
+                    tr.className = "clickable-row";
 
                     var td_ID = document.createElement('td');
+                    td_ID.id = question['ID'];
                     td_ID.appendChild(document.createTextNode(question['ID']));
                     tr.appendChild(td_ID);
 
@@ -287,6 +306,4 @@
             }
         }
     }
-
-
 
