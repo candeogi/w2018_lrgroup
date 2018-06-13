@@ -158,6 +158,69 @@ public final class RestAnswer extends RestResource
 		}
 	}
 
+	public void deleteAnswerVote() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			final Answer answer = Answer.fromJSON(req.getInputStream());
+
+			a = new DeleteAnswerVoteDatabase(con,req.getSession().getAttribute("loggedInUser").toString() ,answer.getID()).deleteAnswerVote();
+
+			if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot delete the answer: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot delete the answer: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	public void countVotes() throws IOException
+	{
+		int a;
+		Message m = null;
+
+		try{
+
+			final Answer answer = Answer.fromJSON(req.getInputStream());
+			a = 1; //TEMP
+			//a = new DeleteAnswerVoteDatabase(con,req.getSession().getAttribute("loggedInUser").toString() ,answer.getID()).deleteAnswerVote();
+
+			if(a!=-1)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+				m.toJSON(res.getOutputStream());
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot count votes: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot count votes: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
 	/**
 	 * Creates an upvote for an answer in the database. 
 	 *
