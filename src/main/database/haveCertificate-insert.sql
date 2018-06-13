@@ -19,8 +19,8 @@
 --
 -- Insertion into the HaveCertificate table
 --
-INSERT INTO lr_group.HaveCertificate VALUES ('primoutente','Ing','UNIPD','1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('primoutente','Mat','UNIBZ','1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('primoutente','Psy','UNIPD','1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('terzoutente','Ing','UNIPD','1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('secondoutente','Let','UNIPD','1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('primoutente',1,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('primoutente',2,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('primoutente',3,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('terzoutente',4,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('secondoutente',5,'1994-1-1');

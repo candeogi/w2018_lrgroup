@@ -18,6 +18,13 @@ package project.database;
 
 import java.sql.*;
 
+/**
+ * Create HaveCertificate.
+ *
+ * @author lrgroup
+ * @author Luca Rossi
+ */
+
 public class CreateHaveCertificateDatabase {
 
 
@@ -25,8 +32,12 @@ public class CreateHaveCertificateDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.HaveCertificate (username, name, organization achievmentDate) " +
-            "VALUES (?,?,?,?)";
+            "INSERT INTO lr_group.HaveCertificate (username, id, achievmentDate) " +
+            "VALUES (?,?,?)";
+
+    private static final String QUERY = "" +
+            "SELECT id FROM lr_group.Certificate WHERE name=?"+"AND organization=?" ;
+
 
 
     /**
@@ -56,15 +67,23 @@ public class CreateHaveCertificateDatabase {
     public void createHaveCertificate() throws SQLException {
 
         PreparedStatement pstmt = null;
-        int insertedKey = -1;
+        PreparedStatement pstmt1 = null;
+        ResultSet rs = null;
 
         try {
+
+            pstmt1 = con.prepareStatement(QUERY, Statement.RETURN_GENERATED_KEYS);
+            pstmt1.setString(1, name);
+            pstmt1.setString(2, organization);
+            rs = pstmt1.executeQuery();
+
+            final int idCert = rs.getInt("id");
+
             pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1, username);
-            pstmt.setString(2, name);
-            pstmt.setString(3, organization);
-            pstmt.setDate(4,achievmentDate);
+            pstmt.setInt(2, idCert);
+            pstmt.setDate(3,achievmentDate);
 
             pstmt.execute();
 

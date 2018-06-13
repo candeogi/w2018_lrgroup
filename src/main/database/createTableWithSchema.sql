@@ -178,23 +178,23 @@ CREATE TABLE lr_group.Own(
 -- );
 
 CREATE TABLE lr_group.Certificate(
-
+    id SERIAL,
     name VARCHAR(50) NOT NULL,
     organization VARCHAR(50) NOT NULL,
 
-    PRIMARY KEY(name,organization)
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE lr_group.HaveCertificate(
     username VARCHAR(20) NOT NULL,
-    name VARCHAR(50) NOT NULL ,
-    organization VARCHAR(50) NOT NULL,
+    id INTEGER NOT NULL,
     achievmentDate DATE,
 
-    PRIMARY KEY(username,organization,name),
+    PRIMARY KEY(username,id),
 
-    FOREIGN KEY(name,organization) REFERENCES lr_group.Certificate(name,organization)
-
-     ON DELETE NO ACTION ON UPDATE CASCADE
+    FOREIGN KEY(id) REFERENCES lr_group.Certificate(id)
+    ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY(username) REFERENCES lr_group.Utente(username)
+    ON DELETE NO ACTION ON UPDATE CASCADE
 
 );

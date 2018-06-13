@@ -627,15 +627,15 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         Message message = null;
         try {
             getServletContext().log("il path che cerco certificate :"+path);
-            path = path.substring(path.lastIndexOf("certificate") + 12);
-            getServletContext().log("il path che cerco  certificate dopo rimozione:"+path);
+            path = path.substring(path.lastIndexOf("certificate") + 11);
+            getServletContext().log("il path che cerco certificate dopo rimozione:"+path);
             if (path.contains("user")) {
                 getServletContext().log("sono entrato in contains user certificate");
                 path = path.substring(path.lastIndexOf("user") + 4);
                 getServletContext().log("il path che cerco certificate tolto user:"+path);
 
                 if (path.length() == 0 || path.equals("/")) {
-                    message = new Message("Wrong format for URI /website/user/{ID}: no {ID} specified.",
+                    message = new Message("Wrong format for URI /certificate/user/{ID}: no {ID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                     res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     message.toJSON(res.getOutputStream());
@@ -646,6 +646,10 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             RestCertificate restCertificate = new RestCertificate(req, res, getDataSource().getConnection());
                             restCertificate.searchCertificateByUserName();
                             getServletContext().log("ho finito Cerificate");
+                            break;
+                        case "DELETE":
+                            RestCertificate restCertificateDelete = new RestCertificate(req, res, getDataSource().getConnection());
+                            restCertificateDelete.deleteHaveCertificatebyUserName();
                             break;
                         default:
                             message = new Message("Unsupported operation for URI /certificate.",

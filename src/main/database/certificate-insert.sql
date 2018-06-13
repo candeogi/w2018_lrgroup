@@ -19,8 +19,8 @@
 --
 -- Insertion into the Certificate table
 --
-INSERT INTO lr_group.Certificate  VALUES ('Ing','UNIPD');
-INSERT INTO lr_group.Certificate  VALUES ('Let','UNIPD');
-INSERT INTO lr_group.Certificate VALUES ('Psy','UNIPD');
-INSERT INTO lr_group.Certificate  VALUES ('Let','UNIVE');
-INSERT INTO lr_group.Certificate  VALUES ('Mat','UNIBZ');
+INSERT INTO lr_group.Certificate  VALUES (1,'Ing','UNIPD');
+INSERT INTO lr_group.Certificate  VALUES (2,'Let','UNIPD');
+INSERT INTO lr_group.Certificate VALUES (3,'Psy','UNIPD');
+INSERT INTO lr_group.Certificate  VALUES (4,'Let','UNIVE');
+INSERT INTO lr_group.Certificate  VALUES (5,'Mat','UNIBZ');

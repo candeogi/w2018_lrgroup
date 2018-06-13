@@ -37,10 +37,15 @@ public class SearchCertificateByUsernameDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String QUERY =
-            "SELECT * " +
-                    "FROM lr_group.HaveCertificate " +
-                    "WHERE username=?";
+//    private static final String QUERY =
+//            "SELECT C.name, C.organization, H.achievmentDate " +
+//                    "FROM lr_group.HaveCertificate AS H INNER JOIN lr_group.Certificate AS C ON H.id" +
+//                    "WHERE username=?";
+
+    private static final String QUERY = "SELECT C.name, C.organization, H.achievmentDate FROM" +
+            "lr_group.HaveCertificate AS H INNER JOIN lr_group.Certificate AS C ON H.id = C.id"
+            + "WHERE username=?";
+
 
     /**
      * The connection to the database
@@ -72,7 +77,7 @@ public class SearchCertificateByUsernameDatabase {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Certificate c = new Certificate(rs.getString("name"), rs.getString("organization"), (rs.getDate("achievmentDate").toString()));
+                Certificate c = new Certificate(rs.getString("name"), rs.getString("organization"), (rs.getDate("achievmentDate")).toString() );
                 questList.add(c);
             }
 
