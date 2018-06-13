@@ -117,7 +117,7 @@
             </c:when>
         </c:choose>
 
-    <<script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
+    <script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
     <!--<script src="<c:url value="/js/ajax-question.js"/>"></script>
     <script src="<c:url value="/js/getCategoriesName.js"/>"></script>-->
     </body>

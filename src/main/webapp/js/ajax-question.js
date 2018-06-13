@@ -18,6 +18,7 @@
     });
 
     function categoryDropdown(){
+
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
             if (httpRequest.status === 200) {
@@ -124,7 +125,7 @@
 
     $('#switchQs a[href="#latestQs"]').on('click', function(event) {
         event.preventDefault(); // To prevent following the link (optional)
-        url = 'http://localhost:8080/web-app-project/rest/question';
+        url = 'http://localhost:8080/web-app-project/rest/question/latestQuestion';
         httpRequest = new XMLHttpRequest();
         deletefilter();
 

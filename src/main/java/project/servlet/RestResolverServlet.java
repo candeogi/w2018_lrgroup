@@ -50,12 +50,12 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         try {
             if (!checkMethodMediaType(req, res)) return;
 
-            if (req.getSession().getAttribute("loggedInUser") == null) {
+            /*if (req.getSession().getAttribute("loggedInUser") == null) {
                 final Message m = new Message("User not logged in", "E4A6", "LogIn required");
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 m.toJSON(out);
                 //AGGIUNGERE UN RETURN!
-            }
+            }*/
 
             String[] split = req.getRequestURI().split("/");
             getServletContext().log("primo split "+split[0]);
@@ -518,6 +518,27 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 m.toJSON(res.getOutputStream());
                                 break;
                         }
+                    }
+                }else if (path.contains("latestQuestion")){
+                    path = path.substring(path.lastIndexOf("latestQuestion") + 14);
+                    if (path.length() == 0 || path.equals("/")) {
+                        switch (method) {
+                            case "GET":
+                                new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByTimestamp();
+                                break;
+                            default:
+                                m = new Message("Unsupported operation for URI /question/category/{categoryID}.",
+                                        "E4A5", String.format("Requested operation %s.", method));
+                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                                m.toJSON(res.getOutputStream());
+                                break;
+                        }
+
+                    } else {
+                        m = new Message("Unsupported operation for URI /question/latestQuestion.",
+                                "E4A5", String.format("Requested operation %s.", method));
+                        res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                        m.toJSON(res.getOutputStream());
                     }
                 }
             }
