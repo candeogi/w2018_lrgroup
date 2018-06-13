@@ -80,20 +80,21 @@ CREATE TABLE lr_group.VoteQuestion(
  
  
 CREATE TABLE lr_group.Category (
+    id SERIAL,
     name VARCHAR(20) NOT NULL,
     description VARCHAR(50),
     isCompany BOOLEAN DEFAULT FALSE,
  
-    PRIMARY KEY(name)
+    PRIMARY KEY(id)
 );
  
 CREATE TABLE lr_group.Below(
-    category VARCHAR(20) NOT NULL, 
+    idcategory INTEGER NOT NULL,
     question INTEGER NOT NULL,
  
-    PRIMARY KEY(category,question),
+    PRIMARY KEY(idcategory,question),
  
-    FOREIGN KEY(category) REFERENCES lr_group.Category(name)
+    FOREIGN KEY(idcategory) REFERENCES lr_group.Category(id)
     ON DELETE NO ACTION ON UPDATE CASCADE,
  
     FOREIGN KEY(question) REFERENCES lr_group.Question(id)
@@ -122,7 +123,7 @@ CREATE TABLE lr_group.VoteAnswer(
     idUser VARCHAR(20) NOT NULL,
     vote INTEGER
       DEFAULT 0
-      CHECK (vote=0 OR vote=1 OR vote=-1), --can be -1,0,1
+      CHECK (vote=1 OR vote=-1), --can be -1,1
  
     PRIMARY KEY(answer,idUser),
  

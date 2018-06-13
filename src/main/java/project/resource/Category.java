@@ -15,9 +15,27 @@ import java.text.ParseException;
 public class Category extends Resource
 {
 
+    private final int ID;
     private final String name;
     private final String description;
     private final boolean isCompany;
+
+
+    /**
+     * Creates a new Category
+     * @param ID id of the category
+     * @param name category name
+     * @param description a brief description of the category
+     * @param isCompany tag if the category is for a company
+     */
+
+    public Category(final int ID, final String name,  final String description,final boolean isCompany)
+    {
+        this.ID=ID;
+        this.name = name;
+        this.description = description;
+        this.isCompany = isCompany;
+    }
 
     /**
      * Creates a new Category
@@ -28,9 +46,7 @@ public class Category extends Resource
 
     public Category(final String name,  final String description,final boolean isCompany)
     {
-        this.name = name;
-        this.description = description;
-        this.isCompany = isCompany;
+        this(-1,name,description,isCompany);
     }
 
     /**
@@ -69,6 +85,10 @@ public class Category extends Resource
         return name;
     }
 
+    public int getID(){
+        return ID;
+    }
+
     /**
      *
      * @param out the stream to which the JSON representation of the {@code Resource} has to be written.
@@ -83,10 +103,11 @@ public class Category extends Resource
 
         jg.writeStartObject();
 
-        jg.writeFieldName("answer");
+        jg.writeFieldName("category");
 
         jg.writeStartObject();
 
+        if(ID!=-1) jg.writeNumberField("id",ID);
         if(name!=null) jg.writeStringField("name", name);
         jg.writeStringField("description", description);
         jg.writeBooleanField("isCompany", isCompany);

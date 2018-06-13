@@ -159,6 +159,88 @@ public final class RestAnswer extends RestResource
 	}
 
 	/**
+	 * Creates an upvote for an answer in the database. 
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+
+	public void upvoteAnswer() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("upvote") + 6);
+
+			final int answerID = Integer.parseInt(path.substring(1));
+
+			a = new CreateAnswerUpvoteDatabase(con, req.getSession().getAttribute("loggedInUser").toString(),answerID).createAnswerUpvote();
+
+			if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot upvote the answer: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot upvote the answer: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
+	 * Creates a downvote for an answer in the database. 
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+
+	public void downvoteAnswer() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("downvote") + 8);
+
+			final int answerID = Integer.parseInt(path.substring(1));
+
+			a = new CreateAnswerDownvoteDatabase(con, req.getSession().getAttribute("loggedInUser").toString(),answerID).createAnswerDownvote();
+
+			if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot downvote the answer: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot downvote the answer: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
 	 * Searches answers by a question ID.
 	 *
 	 * @throws IOException

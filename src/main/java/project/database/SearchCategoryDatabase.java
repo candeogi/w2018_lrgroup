@@ -16,8 +16,9 @@
 
 package project.database;
 
-import project.resource.Answer;
+import project.resource.Category;
 import project.resource.ResourceList;
+import project.resource.Resource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,71 +28,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieves answers to a specific answer in the database.
+ * Searches category.
  *
  * @author lrgroup
- * @author Alberto Pontini
+ * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class SearchAnswerByAnswerIDDatabase
-{
+public final class SearchCategoryDatabase {
 
     /**
      * The SQL statement to be executed
      */
-    private static final String QUERY =
-            "SELECT * " +
-                    "FROM lr_group.answer " +
-                    "WHERE parentID=?" +
-                    "ORDER BY ts";
+    private static final String STATEMENT = "" +
+            "SELECT *" +
+            "FROM lr_group.category ";
 
     /**
      * The connection to the database
      */
     private final Connection con;
-    private final int answerID;
+
 
 
     /**
-     * Creates a new object for answers retrieval.
+     * Creates a new object for searching categories.
      *
      * @param con
      *            the connection to the database.
-     * @param answerid
-     *            the id of the related answer.
      */
-    public SearchAnswerByAnswerIDDatabase(final Connection con, final int answerid)
+    public SearchCategoryDatabase(final Connection con)
     {
         this.con = con;
-        this.answerID = answerid;
     }
 
     /**
-     * Retrieves answers to a specific answer in the database.
+     * Searches categories.
      *
-     * @return a list of {@code Answer} (must be one) object related to a specific answer.
+     * @return a list of {@code Category} object.
      *
      * @throws SQLException
-     *             if any error occurs while retrieving the answer.
+     *             if any error occurs while searching for categories.
      */
-    public List<Answer> searchAnswerByAnswerID() throws SQLException
+    public List<Category> searchCategory() throws SQLException
     {
 
         PreparedStatement pstmt = null;
-        List<Answer> answerList = new ArrayList<>();
+        ResultSet rs = null;
 
-        try {
-            pstmt = con.prepareStatement(QUERY);
-            pstmt.setInt(1, answerID);
+        // the results of the search
+        final List<Category> categories = new ArrayList<Category>();
 
+        try
+        {
+            pstmt = con.prepareStatement(STATEMENT);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
-            while(rs.next()){
-                Answer a = new Answer(rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"),-1);
-                answerList.add(a);
+            while (rs.next()) {
+                categories.add(new Category(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getBoolean("isCompany")));
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
             }
 
-        } finally {
             if (pstmt != null) {
                 pstmt.close();
             }
@@ -99,7 +102,6 @@ public final class SearchAnswerByAnswerIDDatabase
             con.close();
         }
 
-        return answerList;
-
+        return categories;
     }
 }

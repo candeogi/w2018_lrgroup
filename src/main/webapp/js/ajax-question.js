@@ -3,10 +3,100 @@
     var url;
     window.onload=makeRequest;
 
+    $('#switchQs a[href="#categoryQs"]').on('click', function(event) {
+        event.preventDefault(); // To prevent following the link (optional)
+        url = 'http://localhost:8080/web-app-project/rest/category';
+        httpRequest = new XMLHttpRequest();
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = categoryDropdown;
+        httpRequest.open('GET', url);
+        httpRequest.send();
+    });
+
+    function categoryDropdown(){
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+
+            if (httpRequest.status == 200) {
+
+
+                var div = document.getElementById('listCategoryDropdown');
+
+                document.getElementById('listCategoryDropdown').innerHTML = "";
+
+                var jsonData = JSON.parse(httpRequest.responseText);
+                var resource = jsonData['resource-list'];
+
+                for (var i = 0; i < resource.length; i++){
+                    var category = resource[i].category;
+                    var link = document.createElement("a");
+                    var text = document.createTextNode(category['name']);
+                    var hidden = document.createElement("input");
+                    link.appendChild(text);
+
+                    hidden.type = "hidden";
+                    hidden.id = category['name'];
+                    hidden.value = category['id'];
+
+                    link.href = "#"+category['name'];
+                    link.className = "dropdown-item";
+
+                    div.appendChild(link);
+                    div.appendChild(hidden);
+                }
+
+            } else {
+                alert('There was a problem with the request.');
+            }
+        }
+
+    }
+
+    function deletefilter(){
+        document.getElementById("filternav").innerHTML = "";
+    }
+
+    $(".dropdown-menu").on('click', '.dropdown-item', function(e) {
+        var menu = $(this).html();
+        e.preventDefault(); // To prevent following the link (optional)
+        url = 'http://localhost:8080/web-app-project/rest/question/category/'+ document.getElementById(menu).value;
+        deletefilter();
+
+        var link = document.createElement("a");
+        var div = document.getElementById("filternav");
+
+        var text = document.createTextNode("Filter by: " + menu);
+        link.id = "filter";
+        link.className = "nav-link";
+        link.href = "#"+document.getElementById(menu).value;
+        $(link.id).attr('data-toggle','tab');
+        link.appendChild(text);
+
+        div.appendChild(link);
+
+
+        httpRequest = new XMLHttpRequest();
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = alertContents;
+        httpRequest.open('GET', url);
+        httpRequest.send();
+
+    });
+
+
+
     $('#switchQs a[href="#popularQs"]').on('click', function(event) {
         event.preventDefault(); // To prevent following the link (optional)
         url = 'http://localhost:8080/web-app-project/rest/question'; //TO-DO: popular question(ordered by upvote?)
         httpRequest = new XMLHttpRequest();
+        deletefilter();
 
         if (!httpRequest) {
             alert('Giving up :( Cannot create an XMLHTTP instance');
@@ -21,6 +111,7 @@
         event.preventDefault(); // To prevent following the link (optional)
         url = 'http://localhost:8080/web-app-project/rest/question/user/'+document.getElementById('idUser').value;
         httpRequest = new XMLHttpRequest();
+        deletefilter();
 
         if (!httpRequest) {
             alert('Giving up :( Cannot create an XMLHTTP instance');
@@ -35,6 +126,7 @@
         event.preventDefault(); // To prevent following the link (optional)
         url = 'http://localhost:8080/web-app-project/rest/question';
         httpRequest = new XMLHttpRequest();
+        deletefilter();
 
         if (!httpRequest) {
             alert('Giving up :( Cannot create an XMLHTTP instance');

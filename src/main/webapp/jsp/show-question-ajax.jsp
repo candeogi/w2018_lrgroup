@@ -24,27 +24,9 @@ Since: 1.0
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
-    <!--jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--popper-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <!--bootstrap js-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 
-</head>
-
-<header>
-    <c:import url="/jsp/include/header.jsp"/>
-</header>
+<c:import url="/jsp/include/header.jsp"/>
 
 <body>
 
@@ -58,6 +40,13 @@ Since: 1.0
                 <a class="nav-link active" href="#popularQs" data-toggle="tab">Popular Questions</a>
                 <a class="nav-link" href="#yourQs" data-toggle="tab">Your Questions</a>
                 <a class="nav-link" href="#latestQs" data-toggle="tab">Latest Questions</a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#categoryQs" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                <div class="dropdown-menu" id="listCategoryDropdown">
+
+                </div>
+                <div id="filternav">
+
+                </div>
             </nav>
 
 
