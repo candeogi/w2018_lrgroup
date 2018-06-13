@@ -23,3 +23,8 @@ INSERT INTO lr_group.website  VALUES ('https://bitbucket.org/dashboard/overview'
 INSERT INTO lr_group.website  VALUES ('https://bitbucket.org/repo/create','BitBucket');
 INSERT INTO lr_group.website  VALUES ('https://github.com/','Github');
 INSERT INTO lr_group.website  VALUES ('https://github.com/pulls','Github');
+INSERT INTO lr_group.website  VALUES ('http://www.pincopallino.it','OwnSite');
+INSERT INTO lr_group.website  VALUES ('http://www.bitbucket.com/pincopallino','BitBucket');
+INSERT INTO lr_group.website  VALUES ('http://www.github.com/pincopallino','Github');
+INSERT INTO lr_group.website  VALUES ('http://www.linkedin.com/pincopallino','Linkedin');
+
