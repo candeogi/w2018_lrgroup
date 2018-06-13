@@ -41,8 +41,6 @@ function loadQuestion(httpRequest){
     var jsonData = JSON.parse(restResponse);
     var resourceList = jsonData['resource-list'];
     var question = resourceList[0].question;
-
-    //I SHOULD STORE ELEMENTS IN A JS OBJECT SO I CAN MANIPULATE THEM. maybe?
  
     var divQuestionContainer = document.getElementById('question-container');
     //question title
@@ -78,7 +76,11 @@ function loadAnswers(httpRequest){
     //clear old list
     var baseAnswerList = document.getElementById("base-answer-list");
     baseAnswerList.innerHTML = '';
-    forEachAnswer(resourceList, showAnswer);
+
+    //lets print all the answers
+    for(var i =0; i< resourceList.length; i++){
+        showAnswer(resourceList[i].answer);
+    }
 }
 
 /*Utility function: execute myFunction for each answer object on myResourceList*/
@@ -140,6 +142,19 @@ function showAnswer(answer){
     small.appendChild(deleteLink);
     deleteLink.appendChild(document.createTextNode('delete'));
 
+    /*Lets print other answers child to this TODO <-----------------
+    var url = 'http://localhost:8080/web-app-project/rest/question';
+
+    var httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+    */
 }
 
 /*Add a new answer function*/
