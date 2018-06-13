@@ -141,6 +141,8 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 return true;
             case "POST":
                 return true;
+            case "DELETE":
+                return true;
             default:
                 m = new Message("Unsupported operation.",
                         "E4A5", String.format("Requested operation %s.", method));
@@ -572,16 +574,17 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         getServletContext().log("All'interno di processWebsite");
         OutputStream out = res.getOutputStream();
         final String method = req.getMethod();
+        getServletContext().log("metodo scelto "+method);
         String path = req.getRequestURI();
         Message message = null;
         try {
             getServletContext().log("il path che cerco :"+path);
-            path = path.substring(path.lastIndexOf("website") + 7);
-            getServletContext().log("il path che cerco :"+path);
+            path = path.substring(path.indexOf("website") + 7);
+            getServletContext().log("dopo rimozione website :"+path);
             if (path.contains("user")) {
                 getServletContext().log("sono entrato in contains user");
                 path = path.substring(path.lastIndexOf("user") + 5);
-                getServletContext().log("il path che cerco :"+path);
+                getServletContext().log("dopo rimozione user :"+path);
                 if (path.length() == 0 || path.equals("/")) {
                     message = new Message("Wrong format for URI /website/user/{ID}: no {ID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -590,10 +593,12 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 } else {
                     switch (method) {
                         case "GET":
-                            getServletContext().log("sono dentro al case GET");
                             RestWebsite restWebsite = new RestWebsite(req, res, getDataSource().getConnection());
                             restWebsite.searchWebsiteByUser();
-                            getServletContext().log("ho finito");
+                            break;
+                        case "DELETE":
+                            RestWebsite restWebsiteDelete = new RestWebsite(req, res, getDataSource().getConnection());
+                            restWebsiteDelete.removeWebsite();
                             break;
                         default:
                             message = new Message("Unsupported operation for URI /question.",

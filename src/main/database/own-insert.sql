@@ -18,8 +18,11 @@
 
 --
 -- Insertion into the Own table
---
+
 INSERT INTO lr_group.own  VALUES ('https://bitbucket.org/dashboard/overview','primoutente');
 INSERT INTO lr_group.own  VALUES ('https://bitbucket.org/repo/create','secondoutente');
-INSERT INTO lr_group.own  VALUES ('https://github.com/','primoutente');
+INSERT INTO lr_group.own  VALUES ('http://www.github.com/pincopallino','primoutente');
+INSERT INTO lr_group.own  VALUES ('http://www.linkedin.com/pincopallino','primoutente');
+INSERT INTO lr_group.own  VALUES ('http://www.bitbucket.com/pincopallino','primoutente');
+INSERT INTO lr_group.own  VALUES ('http://www.pincopallino.it','primoutente');
 INSERT INTO lr_group.own  VALUES ('https://github.com/pulls','terzoutente');

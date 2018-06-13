@@ -1,5 +1,6 @@
 package project.rest;
 
+import project.database.DeleteWebsiteDatabase;
 import project.resource.Message;
 import project.resource.ResourceList;
 import project.resource.WebSite;
@@ -33,13 +34,48 @@ public class RestWebsite extends RestResource {
                 res.setStatus(HttpServletResponse.SC_OK);
                 new ResourceList(websites).toJSON(res.getOutputStream());
             } else {
-                message = new Message("Cannot search website: unexpected error. path: "+path, "E5A1", null);
+                message = new Message("Cannot search website: unexpected error. path: " + path, "E5A1", null);
                 res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 message.toJSON(res.getOutputStream());
             }
 
         } catch (SQLException e) {
             message = new Message("Cannot search website: unexpected error. DB", "E5A1", e.getMessage());
+            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            message.toJSON(res.getOutputStream());
+        }
+
+    }
+
+    public void removeWebsite() throws IOException {
+        Message message = null;
+        try {
+            String path = req.getRequestURI();
+            path = path.substring(path.lastIndexOf("user") + 5);
+            int indexSlash = path.indexOf("/");
+
+
+            final String userID = path.substring(0, indexSlash);
+            path = path.substring(path.lastIndexOf("website") + 8);
+            final String websiteID = path;
+
+            int result=(new DeleteWebsiteDatabase(con, userID, websiteID)).deleteWebsite();
+
+
+
+
+            if (result != 0) {
+                message=new Message("Delete the selected element");
+                res.setStatus(HttpServletResponse.SC_OK);
+                message.toJSON(res.getOutputStream());
+            } else {
+                message = new Message("Cannot delete any website: unexpected error. path: "+path, "E5A1", null);
+                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                message.toJSON(res.getOutputStream());
+            }
+
+        } catch (SQLException e) {
+            message = new Message("Cannot delete website: unexpected error", "E5A1", e.getMessage());
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             message.toJSON(res.getOutputStream());
         }
