@@ -2,7 +2,7 @@
 
     var httpRequest;
 
-    document.getElementById('latestQuestions').addEventListener('submit', function(event) {
+    document.getElementById('categoriesList').addEventListener('submit', function(event) {
 
 
         httpRequest = new XMLHttpRequest();
@@ -13,7 +13,7 @@
         }
 
         httpRequest.onreadystatechange = writeResults;
-        httpRequest.open('GET', '/show-questions');
+        httpRequest.open('GET', '/categories-name');
         httpRequest.send();
 
         // stop the form from submitting the normal way and refreshing the page
@@ -25,7 +25,7 @@
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
             // get the div where to write results
-            var div = document.getElementById('results');
+            var div = document.getElementById('categoriesResults');
 
             // clean it up
             div.className = '';
@@ -72,7 +72,7 @@
                 var jsonData = JSON.parse(httpRequest.responseText);
                 jsonData = jsonData['resource-list'];
 
-                var question;
+                var category;
 
                 e = document.createElement('table');
                 e.className = 'table';
@@ -111,31 +111,14 @@
 
                 for (var i = 0; i < jsonData.length; i++) {
 
-                    question = jsonData[i].product;
+                    category = jsonData[i].product;
 
                     tr = document.createElement('tr');
                     ee.appendChild(tr);
 
                     td = document.createElement('td');
-                    td.appendChild(document.createTextNode());
+                    td.appendChild(document.createTextNode(category['name']));
                     tr.appendChild(td);
-
-                    td = document.createElement('td');
-                    td.appendChild(document.createTextNode());
-                    tr.appendChild(td);
-
-                    td = document.createElement('td');
-                    td.appendChild(document.createTextNode(question['title']));
-                    tr.appendChild(td);
-
-                    td = document.createElement('td');
-                    td.appendChild(document.createTextNode(question['idUser']));
-                    tr.appendChild(td);
-
-                    td = document.createElement('td');
-                    td.appendChild(document.createTextNode(question['lastModified']));
-                    tr.appendChild(td);
-
                 }
 
                 // otherwise write a generic error message

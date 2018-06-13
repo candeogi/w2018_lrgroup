@@ -46,7 +46,7 @@
                     <button type="submit" id="popularQuestions" >Popular Questions</button>
                     <button type="submit" id="yourQuestions" >Your Questions</button>
                     <button type="submit" id="latestQuestions" >Latest Questions</button>
-                    <button type="button" data-target="#categoryModal" data-toggle="modal" id="categoriesList">Categories</button>
+                    <button type="submit" data-target="#categoryModal" data-toggle="modal" id="categoriesList">Categories</button>
                     <button type="submit" class="nav-link disabled" href="#">Your Questions</button>
                 </nav>
             </div>
@@ -82,7 +82,7 @@
                     </thead>
 
                     <tbody>
-                        <div id="result">
+                        <div id="results">
 
                         </div>
                     <!--<tr>
@@ -138,7 +138,9 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="container">
-                        <div class="row">
+                        <div id="categoriesResults">
+                        </div>
+                       <!-- <div class="row">
                             <div class="col-md-auto">
                                 <nav class="nav nav-pills justify-content-center">
                                     <a class="nav-link" href="dea">Data structures and algoritms</a>
@@ -150,7 +152,7 @@
                                 </nav>
                             </div>
                         </div> <!--break line-->
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-md-auto">
                                 <nav class="nav nav-pills justify-content-center">
                                     <a class="nav-link" href="ss">Some say</a>
@@ -161,7 +163,7 @@
                                     <a class="nav-link" href="nm">Network modelling</a>
                                 </nav>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <!--<div class="modal-footer">
