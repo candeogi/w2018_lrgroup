@@ -81,6 +81,11 @@
 		<servlet-class>project.servlet.ShowUsersServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>GetCategoriesNameServlet</servlet-name>
+		<servlet-class>project.servlet.ShowCategoriesServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>NavServlet</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -171,6 +176,11 @@
 		<servlet-name>ShowUsersServlet</servlet-name>
 		<url-pattern>/admin-panel</url-pattern>
 	</servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GetCategoriesNameServlet</servlet-name>
+        <url-pattern>/categories-name</url-pattern>
+    </servlet-mapping>
 
 	<resource-ref>
       <description>Connection pool to the database</description>

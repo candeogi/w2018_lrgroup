@@ -44,6 +44,9 @@ Since: 1.0
                 <div class="dropdown-menu" id="listCategoryDropdown">
 
                 </div>
+                <div id="filternav">
+
+                </div>
             </nav>
 
 

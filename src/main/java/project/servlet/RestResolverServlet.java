@@ -85,6 +85,12 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         return;
                     }
                     break;
+                case "certificate":
+                    getServletContext().log("sono entrato in processCertificate");
+                    if(processCertificate(req,res)){
+                        return;
+                    }
+                    break;
                 //Aggiungere le risorse possibili
             }
             // if none of the above process methods succeeds, it means an unknow resource has been requested
@@ -612,4 +618,53 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         }
         return true;
     }
+
+    private boolean processCertificate(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        getServletContext().log("All'interno di processCertificate");
+        OutputStream out = res.getOutputStream();
+        final String method = req.getMethod();
+        String path = req.getRequestURI();
+        Message message = null;
+        try {
+            getServletContext().log("il path che cerco :"+path);
+            path = path.substring(path.lastIndexOf("certificate") + 12);
+            getServletContext().log("il path che cerco :"+path);
+            if (path.contains("user")) {
+                getServletContext().log("sono entrato in contains user");
+                path = path.substring(path.lastIndexOf("user") + 4);
+                getServletContext().log("il path che cerco :"+path);
+
+                if (path.length() == 0 || path.equals("/")) {
+                    message = new Message("Wrong format for URI /website/user/{ID}: no {ID} specified.",
+                            "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    message.toJSON(res.getOutputStream());
+                } else {
+                    switch (method) {
+                        case "GET":
+                            getServletContext().log("sono dentro al case GET");
+                            RestCertificate restCertificate = new RestCertificate(req, res, getDataSource().getConnection());
+                            restCertificate.searchCertificateByUserName();
+                            getServletContext().log("ho finito");
+                            break;
+                        default:
+                            message = new Message("Unsupported operation for URI /certificate.",
+                                    "E4A5", String.format("Requested operation %s.", method));
+                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                            message.toJSON(res.getOutputStream());
+                            break;
+
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            message = new Message("Unexpected error.", "E5A1", e.getMessage());
+            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            message.toJSON(res.getOutputStream());
+        }
+        return true;
+    }
+
+
 }

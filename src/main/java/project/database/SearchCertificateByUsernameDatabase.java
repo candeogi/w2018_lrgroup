@@ -60,7 +60,7 @@ public class SearchCertificateByUsernameDatabase {
      * @return An ArrayList of user's certificate.
      * @throws SQLException if any error occurs while retrieving the user's questions.
      */
-    public List<Certificate> SearchQuestionByUser() throws SQLException {
+    public List<Certificate> SearchCertificateByUser() throws SQLException {
 
         PreparedStatement pstmt = null;
         List<Certificate> questList = new ArrayList<>();
@@ -72,7 +72,7 @@ public class SearchCertificateByUsernameDatabase {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Certificate c = new Certificate(rs.getString("name"), rs.getString("organization"));
+                Certificate c = new Certificate(rs.getString("name"), rs.getString("organization"), (rs.getDate("achievmentDate").toString()));
                 questList.add(c);
             }
 
