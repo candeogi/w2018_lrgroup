@@ -121,4 +121,7 @@
     <!--<script src="<c:url value="/js/ajax-question.js"/>"></script>
     <script src="<c:url value="/js/getCategoriesName.js"/>"></script>-->
     </body>
+
+    <c:import url="/jsp/include/footer.jsp"/>
+
 </html>

@@ -125,7 +125,10 @@ public class Message extends Resource
 
 		jg.writeEndObject();
 
+		jg.writeRaw(',');
 		jg.flush();
+
+		jg.close();
 	}
 
 }

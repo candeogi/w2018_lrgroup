@@ -17,13 +17,10 @@ Author: Alberto Forti
 Version: 1.0
 Since: 1.0
 -->
-
-<div class="row" id="footer_row">
-        <div class="col-md-8">
+<footer class="navbar bg-dark text-white fixed-bottom">
+    <div class="justify-content-center">
             <i class="fas fa-heart"></i>
             <small class="text-muted">Designed and built with love by
                 <a href="mailto:lrgroup@mailnesia.com">@lrgroup</a></small>
         </div>
-        <div class="col-md-4">
-        </div>
-</div>
+</footer>
