@@ -2,8 +2,14 @@ package project.resource;
 
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
+
 import java.io.*;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Represents the data about an user.
@@ -217,4 +223,100 @@ public class User extends Resource
 
 		jg.flush();
 	}
+
+    /**
+     * Creates a {@code User} from its JSON representation.
+     *
+     * @param in the input stream containing the JSON document.
+     *
+     * @return the {@code Answer} created from the JSON representation.
+     *
+     * @throws IOException if something goes wrong while parsing.
+     *
+     * @throws ParseException if date is not parsed correctly
+     */
+    public static User fromJSON(final InputStream in) throws IOException, ParseException
+    {
+
+        // the fields read from JSON
+        String jEmail = null;
+        String jName = null;
+        String jSurname = null;
+        String jUsername = null;
+        String jPhotoProfile = null;
+        boolean jIsAdmin = false;
+        String jRegDate = null;
+        String jBirthday = null;
+        String jDescription = null;
+        //String jCompany = null;
+
+
+        final JsonParser jp = JSON_FACTORY.createParser(in);
+
+        // I'm looking for the user field
+        //i'll keep looping until i find a token which is a field name or until i find my resource token
+        while (jp.getCurrentToken() != JsonToken.FIELD_NAME || "user".equals(jp.getCurrentName()) == false) {
+
+            // there are no more events
+            if (jp.nextToken() == null) {
+                throw new IOException("Unable to parse JSON: no user object found.");
+            }
+        }
+
+        while (jp.nextToken() != JsonToken.END_OBJECT)
+        {
+            if (jp.getCurrentToken() == JsonToken.FIELD_NAME)
+            {
+                switch (jp.getCurrentName())
+                {
+                    case "email":
+                        jp.nextToken();
+                        jEmail = jp.getText();
+                        break;
+                    case "name":
+                        jp.nextToken();
+                        jName = jp.getText();
+                        break;
+                    case "surname":
+                        jp.nextToken();
+                        jSurname = jp.getText();
+                        break;
+                    case "username":
+                        jp.nextToken();
+                        jUsername = jp.getText();
+                        break;
+                    case "photoProfile":
+                        jp.nextToken();
+                        jPhotoProfile= jp.getText();
+                        break;
+                    case "isAdmin":
+                        jp.nextToken();
+                        jIsAdmin = jp.getBooleanValue();
+                        break;
+                    case "registrationDate":
+                        jp.nextToken();
+                        jRegDate = jp.getText();
+                        break;
+                    case "birthday":
+                        jp.nextToken();
+                        jBirthday = jp.getText();
+                        break;
+                    case "description":
+                        jp.nextToken();
+                        jDescription = jp.getText();
+                        break;
+
+                }
+            }
+        }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        java.util.Date parsedDate = dateFormat.parse(jRegDate);
+        Date regDate = new java.sql.Date(parsedDate.getTime());
+        parsedDate = dateFormat.parse(jBirthday);
+        Date birthday = new java.sql.Date(parsedDate.getTime());
+
+        //TODO Implementare Password
+        return new User(jEmail,jName,jSurname,jUsername,jPhotoProfile,"",jIsAdmin,regDate,birthday,jDescription);
+    }
 }

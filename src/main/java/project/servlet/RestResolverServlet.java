@@ -74,6 +74,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         return;
                     }
                     break;
+                case "user":
+                    if (processUser(req, res)) {
+                        return;
+                    }
+                    break;
                 case "website":
                     getServletContext().log("sono entrato in processWebSite");
                     if(processWebsite(req,res)){
@@ -709,6 +714,78 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
             message = new Message("Unexpected error.", "E5A1", e.getMessage());
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             message.toJSON(res.getOutputStream());
+        }
+        return true;
+    }
+
+    /**
+     * Process the user-related resources
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @return TRUE if a resource is found, otherwise FALSE
+     * @throws IOException if any error occurs in the client/server communication.
+     */
+    private boolean processUser(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        OutputStream out = res.getOutputStream();
+        String path = req.getRequestURI();
+        final String method = req.getMethod();
+        Message m = null;
+        try {
+            // strip everything until after the /user
+            path = path.substring(path.lastIndexOf("user") + 4);
+
+            if (path.length() == 0 || path.equals("/")) {
+                switch (method)
+                {
+                    case "GET":
+                        new RestUser(req, res, getDataSource().getConnection()).searchUser();
+                        break;
+                    default:
+                        m = new Message("Unsupported operation for URI /user.",
+                                "E4A5", String.format("Requested operation %s.", method));
+                        res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                        m.toJSON(res.getOutputStream());
+                        break;
+                }
+            } else {
+                if (path.contains("id")) {
+                    // /user/id/{username}
+                    path = path.substring(path.lastIndexOf("id") + 2);
+                    if (path.length() == 0 || path.equals("/")) {
+                        m = new Message("Wrong format for URI /user/id/{username}: no {username} specified.",
+                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        m.toJSON(res.getOutputStream());
+                    } else {
+                        switch (method) {
+                            case "GET":
+                                new RestUser(req, res, getDataSource().getConnection()).searchUserByUsername();
+                                break;
+                            case "POST":
+                                new RestUser(req, res, getDataSource().getConnection()).createUser();
+                                break;
+                            case "PUT":
+                                new RestUser(req, res, getDataSource().getConnection()).updateUser();
+                                break;
+                            case "DELETE":
+                                new RestUser(req, res, getDataSource().getConnection()).deleteUser();
+                                break;
+                            default:
+                                m = new Message("Unsupported operation for URI /user/id/{username}.",
+                                        "E4A5", String.format("Requested operation %s.", method));
+                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                                m.toJSON(res.getOutputStream());
+                                break;
+                        }
+                    }
+                }
+
+            }
+        } catch (Throwable t) {
+            m = new Message("Unexpected error.", "E5A1", t.getMessage());
+            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            m.toJSON(res.getOutputStream());
         }
         return true;
     }
