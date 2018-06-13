@@ -79,6 +79,9 @@
         <div class="row">
             <div class="col">
                 <div id="website" class="container border border-dark">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Add a new website
+                    </button>
                     <p>Website:</p>
                     <table id="table-website" class="table table-hover">
 
@@ -101,6 +104,39 @@
 
 <button id="modifyButton" type="submit" class="btn btn-primary">Modify User</button>
 
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Insert a new website</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="address-form">Website address</label>
+                    <input name="address" type="text" class="form-control" id="address-form"
+                           aria-describedby="emailHelp" placeholder="Website address">
+                </div>
+                <div class="form-group">
+                    <label for="type-form">Password</label>
+                    <input name="type" type="text" class="form-control" id="type-form"
+                           placeholder="Password">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="js/ciao.js"></script>
 
