@@ -1,6 +1,7 @@
 package project.servlet;
 
-import project.database.GetCategoriesDatabase;
+
+import project.database.SearchCategoryDatabase;
 import project.resource.Category;
 import project.resource.Message;
 
@@ -35,7 +36,7 @@ public class ShowCategoriesServlet extends AbstractDatabaseServlet{
         Message m = null;
         try {
             // creates a new object for accessing the database and searching the categories
-            q= new GetCategoriesDatabase(getDataSource().getConnection()).getCategories();
+            q= new SearchCategoryDatabase(getDataSource().getConnection()).searchCategory();
             m = new Message("Categories successfully searched.");
 
         } catch (SQLException ex) {

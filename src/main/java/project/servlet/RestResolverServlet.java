@@ -119,7 +119,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         final String accept = req.getHeader("Accept");
         final OutputStream out = res.getOutputStream();
 
-        Message m = null;
+        Message m;
 
         if (accept == null) {
             m = new Message("Output media type not specified.", "E4A1", "Accept request header missing.");
@@ -380,10 +380,9 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
      * @throws IOException if any error occurs in the client/server communication.
      */
     private boolean processQuestion(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        OutputStream out = res.getOutputStream();
         final String method = req.getMethod();
         String path = req.getRequestURI();
-        Message m = null;
+        Message m;
         try {
             // strip everything until after the /question
             path = path.substring(path.lastIndexOf("question") + 8);
@@ -488,7 +487,6 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     } else {
                         switch (method) {
                             case "GET":
-                                String user = path.substring(1);
                                 new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionByCategory();
                                 break;
                             default:
