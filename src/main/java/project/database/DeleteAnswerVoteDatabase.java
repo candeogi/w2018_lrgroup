@@ -23,21 +23,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates an answer in the database.
+ * Deletes an answer vote in the database.
  *
  * @author lrgroup
  * @author Alberto Pontini
  */
-public final class CreateAnswerDownvoteDatabase {
+public final class DeleteAnswerVoteDatabase
+{
 
     /**
-     * The SQL statement to be executed
+     * The SQL statements to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.VoteAnswer (answer, idUser, vote) " +
-            "VALUES (?, ?, ?)";
-
-    private static final String STATEMENT_2 = "" +
             "DELETE FROM lr_group.VoteAnswer" +
             "WHERE answer=? AND idUser=?";
 
@@ -46,49 +43,38 @@ public final class CreateAnswerDownvoteDatabase {
      */
     private final Connection con;
 
-    /**
-     * The answer to be updated in the database
-     */
     private final int idAnswer;
     private final String user;
 
     /**
-     * Creates a new object for creating an answer.
+     * Deletes a new object for creating an answer.
      *
      * @param con
      *            the connection to the database.
      * @param user
-     *            the user who voted the question.
+     *            the user which vote hasto be deleted the question.
      * @param idAnswer
-     *            the answer to be voted in the database.
+     *            the answer which vote has to be deleted in the database.
      */
-    public CreateAnswerDownvoteDatabase(final Connection con, final String user ,final int idAnswer) {
+    public DeleteAnswerVoteDatabase(final Connection con, final String user ,final int idAnswer) {
         this.con = con;
         this.idAnswer = idAnswer;
         this.user = user;
     }
 
     /**
-     * Creates an upvote in the database.
+     * Deletes an upvote in the database.
      * @throws SQLException
      *             if any error occurs while storing the answer.
      */
-    public boolean createAnswerDownvote() throws SQLException {
+    public boolean deleteAnswerVote() throws SQLException {
 
         PreparedStatement pstmt = null;
 
         try {
-
-            pstmt = con.prepareStatement(STATEMENT_2);
-            pstmt.setInt(1, idAnswer);
-            pstmt.setString(2,user);
-
-            pstmt.execute();
-
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, idAnswer);
-            pstmt.setString(2, user);
-            pstmt.setInt(3, -1);
+            pstmt.setInt(1,idAnswer);
+            pstmt.setString(2,user);
 
             pstmt.execute();
 

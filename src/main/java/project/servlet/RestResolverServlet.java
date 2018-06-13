@@ -326,7 +326,31 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     } else {
                         switch (method) {
                             case "POST":
-                                //TODO funzione che toglie il voto
+                                new RestAnswer(req, res, getDataSource().getConnection()).deleteAnswerVote();
+                                break;
+
+                            default:
+                                m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
+                                        "E4A5", String.format("Requested operation %s.", method));
+                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                                m.toJSON(res.getOutputStream());
+                                break;
+                        }
+                    }
+                }
+                else if (path.contains("votes"))
+                {
+                    // /answer/votes/{answerID}
+                    path = path.substring(path.lastIndexOf("votes") + 5);
+                    if (path.length() == 0 || path.equals("/")) {
+                        m = new Message("Wrong format for URI /answer/votes/{answerID}: no {answerID} specified.",
+                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        m.toJSON(res.getOutputStream());
+                    } else {
+                        switch (method) {
+                            case "GET":
+                                new RestAnswer(req, res, getDataSource().getConnection()).countVotes();
                                 break;
 
                             default:
