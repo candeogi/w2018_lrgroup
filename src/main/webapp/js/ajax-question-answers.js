@@ -1,31 +1,21 @@
-//ajax question and related answer view
+/*Ajax question and related answer view
+Author: Giovanni Candeo
+ */
+var loggedInUser = document.getElementById("loggedInUser");
+var currentUser = loggedInUser.getAttribute("data-loggedInUser");
 
-//var url1 = 'http://localhost:8080/web-app-project/rest/question/';
-//window.onload = loadDoc(url1 ,loadQuestion);
-
-//var url2 = 'answer rest url';
-//window.onload = loadDoc(url1 ,loadAnswers);
-
-function loadAll(){
-    /*load question*/
-    //var questionId=1 /*get in some way via ? jquery*/
-    //var defaultRestUrl='http://localhost:8080/web-app-project/rest/';
-    //var questionRestUrl=defaultRestUrl+'question/';
-    //var myQuestionRestUrl=questionRestUrl+questionId;
+/*At start do this*/
+$(function() {
 
     /*TEMPORARY TEST URL*/
     var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/1';
     var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/id/1';
 
+
+
     loadDoc(myQuestionRestUrl, loadQuestion);
     loadDoc(myAnswersRestUrl, loadAnswers);
-
-    //loadDoc(myUserRestUrl, loadUser); user rest call to get data
-
-    /*load answer list*/
-    //TODO
-
-}
+});
 /* USER MANAGEMENT */
 
 
@@ -76,12 +66,7 @@ function loadQuestion(httpRequest){
     questioneerUsername.appendChild(document.createTextNode(question['IDUser']));
 }
 
-/*Add a new answer function TODO*/
-function addNewAnswerForm(){
-    var AddAnswerForm = document.getElementById("AddAnswerForm");
-    var addAnswerTextArea = document.getElementById("addAnswerTextArea").value;
-    alert(addAnswerTextArea);
-}
+
 
 /*Loads answers via ajax*/
 function loadAnswers(httpRequest){
@@ -89,6 +74,10 @@ function loadAnswers(httpRequest){
     var jsonData = JSON.parse(restResponse);
     var resourceList = jsonData['resource-list'];
     //alert(resourceList[0].answer['text']); test rest if works
+
+    //clear old list
+    var baseAnswerList = document.getElementById("base-answer-list");
+    baseAnswerList.innerHTML = '';
     forEachAnswer(resourceList, showAnswer);
 }
 
@@ -115,16 +104,23 @@ function showAnswer(answer){
     voteUpIcon.className = 'fas fa-chevron-up';
     var voteNumberDiv = document.createElement("div");
     voteNumberDiv.className = 'text-center';
-    var voteNumber = document.createTextNode('0'); //TODO placeholder
+    var voteNumber = document.createTextNode('0'); //TODO placeholder implement votes
     var voteDownIcon = document.createElement("i");
     voteDownIcon.className = 'fas fa-chevron-down';
     var p = document.createElement("p");
     var answerTextBody = document.createTextNode(answer['text']);
 
-    //test
+    //create custom function call for each answer TODO better
     var deleteLink = document.createElement('a');
     deleteLink.setAttribute('onclick','deleteAnswer('+answer['ID']+')');
     deleteLink.setAttribute('href','javascript:void(0);');
+
+    //create custom timestamp
+    var small = document.createElement('small');
+    var timestampText = document.createTextNode('Sent on '+answer['timestamp']
+        + ' by ' +answer['IDUser']+ '    ');
+
+    //append from top
     baseAnswerList.appendChild(answerListElement);
     answerListElement.appendChild(answerContainer);
     answerContainer.appendChild(answerContent);
@@ -137,10 +133,50 @@ function showAnswer(answer){
     //answer content
     answerContent.appendChild(answerBody);
     answerBody.appendChild(p);
-    answerBody.appendChild(deleteLink);
+    answerBody.appendChild(small);
+
     p.appendChild(answerTextBody);
+    small.appendChild(timestampText);
+    small.appendChild(deleteLink);
     deleteLink.appendChild(document.createTextNode('delete'));
 
+}
+
+/*Add a new answer function*/
+function addNewAnswerForm(){
+    var AddAnswerForm = document.getElementById("AddAnswerForm");
+    //var addAnswerTextArea = document.getElementById("addAnswerTextArea").value;
+    var addAnswerText = $("#addAnswerTextArea").val();
+
+    var currentdate = new Date();
+    var timestamp = ""
+        + currentdate.getFullYear() + "-"
+        + (currentdate.getMonth()+1)  + "-"
+        + currentdate.getDate() + " "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds() +"."
+        + currentdate.getMilliseconds();
+
+    $.post("http://localhost:8080/web-app-project/rest/answer/",
+        JSON.stringify({"resource-list":[
+                {
+                    "answer":{
+                        "ID":1,
+                        "text": addAnswerText,
+                        "fixed":false,
+                        "timestamp": timestamp,
+                        "IDUser": currentUser,
+                        "parentID":-1,
+                        "questionID":1
+                    }
+                }]
+        }),
+        function(data,status){ //why this doesnt work
+            alert("Data: " + data + "\nStatus: " + status);
+            $("#addAnswerTextArea").val('');
+        }
+    );
 }
 
 function deleteAnswer(id){
