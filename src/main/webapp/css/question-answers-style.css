@@ -5,6 +5,10 @@ Author: Giovanni Candeo
 @charset "UTF-8";
 /* CSS Document */
 
+#loggedInUser{
+    display: none;
+}
+
 /*--question --*/
 div.question-container{
 	margin-top:1em;
