@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Date;
 import java.text.ParseException;
 
 /**
@@ -15,19 +16,26 @@ import java.text.ParseException;
  * @author Luca Rossi
  * @author Davide Storato
  */
-public class Certificate extends  Resource{
-
+public class Certificate extends Resource {
 
 
     private final String name;
     private final String organization;
+    private final String dateCert;
 
     public Certificate(String name, String organization) {
 
         this.name = name;
         this.organization = organization;
-     }
+        this.dateCert = null;
+    }
 
+    public Certificate(String name, String organization , String date) {
+
+        this.name = name;
+        this.organization = organization;
+        this.dateCert = date;
+    }
 
 
     public String getName() {
@@ -38,15 +46,14 @@ public class Certificate extends  Resource{
         return organization;
     }
 
+    public String getDate(){return dateCert;}
+
     /**
-     *
      * @param out the stream to which the JSON representation of the {@code Resource} has to be written.
-     *
      * @throws IOException if something goes wrong while parsing.
      */
 
-    public final void toJSON(final OutputStream out) throws IOException
-    {
+    public final void toJSON(final OutputStream out) throws IOException {
 
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
@@ -57,8 +64,12 @@ public class Certificate extends  Resource{
         jg.writeStartObject();
 
 
+
         jg.writeStringField("name", name);
         jg.writeStringField("organization", organization);
+        if(dateCert != null){
+            jg.writeStringField("achievmentdate ", dateCert );
+        }
 
         jg.writeEndObject();
 
@@ -71,15 +82,11 @@ public class Certificate extends  Resource{
      * Creates a {@code Certificate} from its JSON representation.
      *
      * @param in the input stream containing the JSON document.
-     *
      * @return the {@code Certificate} created from the JSON representation.
-     *
-     * @throws IOException if something goes wrong while parsing.
-     *
+     * @throws IOException    if something goes wrong while parsing.
      * @throws ParseException if date is not parsed correctly
      */
-    public static Certificate fromJSON(final InputStream in) throws IOException, ParseException
-    {
+    public static Certificate fromJSON(final InputStream in) throws IOException, ParseException {
 
         // the fields read from JSON
 
@@ -98,12 +105,9 @@ public class Certificate extends  Resource{
             }
         }
 
-        while (jp.nextToken() != JsonToken.END_OBJECT)
-        {
-            if (jp.getCurrentToken() == JsonToken.FIELD_NAME)
-            {
-                switch (jp.getCurrentName())
-                {
+        while (jp.nextToken() != JsonToken.END_OBJECT) {
+            if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
+                switch (jp.getCurrentName()) {
 
                     case "name":
                         jp.nextToken();
