@@ -36,18 +36,25 @@
     <body>
 
     <div class="container-fluid">
-
+        <input type="hidden" name="user" id="idUser" value="${sessionScope.loggedInUser}"/>
         <!-- Buttons To Sort Categories + Search -->
         <div class="row button_menu justify-content-center">
 
             <div class="col-md-8">
-                <nav class="nav nav-pills justify-content-center">
-                    <button type="submit" id="popularQuestions" >Popular Questions</button>
-                    <button type="submit" id="yourQuestions" >Your Questions</button>
-                    <button type="submit" id="latestQuestions" >Latest Questions</button>
-                    <button type="submit" data-target="#categoryModal" data-toggle="modal" id="categoriesList">Categories</button>
-                    <button type="submit" class="nav-link disabled" href="#">Your Questions</button>
+                <nav class="nav nav-pills justify-content-center" id="switchQs">
+                    <a class="nav-link active" href="#popularQs" data-toggle="tab">Popular Questions</a>
+                    <a class="nav-link" href="#yourQs" data-toggle="tab">Your Questions</a>
+                    <a class="nav-link" href="#latestQs" data-toggle="tab">Latest Questions</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#categoryQs" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                    <div class="dropdown-menu" id="listCategoryDropdown">
+
+                    </div>
+                    <div id="filternav">
+
+                    </div>
                 </nav>
+
+
             </div>
 
             <div class="col-md-4">
@@ -67,123 +74,25 @@
 
         <!-- After Categories Button Div -->
         <div class="row">
+
             <!-- Browse Questions Table Div -->
             <div class="col-md-8">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Solved</th>
-                        <th></th>
-                        <th>Question Title</th>
-                        <th>Author</th>
-                        <th>Last Modified</th>
-                    </tr>
-                    </thead>
+                <div class="table-responsive">
+                    <table class="table table-hover">
 
-                    <tbody>
-                        <div id="results">
 
-                        </div>
-                    <!--<tr>
-                        <td><i class="fas fa-check-circle solved"></i></td>
-                        <td>25</td>
-                        <td>Question 1</td>
-                        <td>Doe</td>
-                        <td>11/05/2017 - 11:05</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-check-circle solved"></i></td>
-                        <td>5</td>
-                        <td>Question 2</td>
-                        <td>Moe</td>
-                        <td>11/05/2017 - 12:05</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-times-circle"></i></td>
-                        <td>32</td>
-                        <td>Question 3</td>
-                        <td>Dooley</td>
-                        <td>11/05/2017 - 15:05</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-check-circle solved"></i></td>
-                        <td>21</td>
-                        <td>Question 4</td>
-                        <td>Han</td>
-                        <td>11/05/2017 - 15:05</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-times-circle"></i></td>
-                        <td>-15</td>
-                        <td>Question 5</td>
-                        <td>Dave</td>
-                        <td>11/05/2017 - 15:05</td>
-                    </tr>-->
-                    </tbody>
-                </table>
-            </div><!-- close table div -->
+                    </table>
 
+                </div><!-- close table div -->
+            </div>
             <div class="col-md-4">
                 <img class="img-fluid adsbanner" src="https://images-na.ssl-images-amazon.com/images/I/716MJHggVDL._UX342_.jpg" alt="Wowee">
             </div>
 
         </div> <!-- close After Categories Button Div -->
-
-    </div><!-- /.container -->
-
-    <!--modal for categories-->
-    <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div id="categoriesResults">
-                        </div>
-                       <!-- <div class="row">
-                            <div class="col-md-auto">
-                                <nav class="nav nav-pills justify-content-center">
-                                    <a class="nav-link" href="dea">Data structures and algoritms</a>
-                                </nav>
-                            </div>
-                            <div class="col-md-auto">
-                                <nav class="nav nav-pills justify-content-center">
-                                    <a class="nav-link" href="drink">Drink time</a>
-                                </nav>
-                            </div>
-                        </div> <!--break line-->
-                        <!--<div class="row">
-                            <div class="col-md-auto">
-                                <nav class="nav nav-pills justify-content-center">
-                                    <a class="nav-link" href="ss">Some say</a>
-                                </nav>
-                            </div>
-                            <div class="col-md-auto">
-                                <nav class="nav nav-pills justify-content-center">
-                                    <a class="nav-link" href="nm">Network modelling</a>
-                                </nav>
-                            </div>
-                        </div>-->
-                    </div>
-                </div>
-                <!--<div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div> -->
-            </div>
-        </div>
     </div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById('categoryModal');
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 
     <!--Custom script test-->
     <script type="text/javascript" src="test.js"></script>
@@ -208,7 +117,8 @@
             </c:when>
         </c:choose>
 
-    <script src="<c:url value="/js/latestQuestions.js"/>"></script>
-    <script src="<c:url value="/js/getCategoriesName.js"/>"></script>
+    <<script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
+    <!--<script src="<c:url value="/js/ajax-question.js"/>"></script>
+    <script src="<c:url value="/js/getCategoriesName.js"/>"></script>-->
     </body>
 </html>

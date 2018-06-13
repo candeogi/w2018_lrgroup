@@ -85,6 +85,7 @@ Since: 1.0
         </div>
 
     </div> <!-- close After Categories Button Div -->
+</div>
 
 <script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
 </body>
