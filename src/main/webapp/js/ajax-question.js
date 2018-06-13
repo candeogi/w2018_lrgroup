@@ -18,9 +18,10 @@
     });
 
     function categoryDropdown(){
+
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
-            if (httpRequest.status == 200) {
+            if (httpRequest.status === 200) {
 
 
                 var div = document.getElementById('listCategoryDropdown');
@@ -124,7 +125,7 @@
 
     $('#switchQs a[href="#latestQs"]').on('click', function(event) {
         event.preventDefault(); // To prevent following the link (optional)
-        url = 'http://localhost:8080/web-app-project/rest/question';
+        url = 'http://localhost:8080/web-app-project/rest/question/latestQuestion';
         httpRequest = new XMLHttpRequest();
         deletefilter();
 
@@ -156,7 +157,7 @@
     function alertContents() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
-            if (httpRequest.status == 200) {
+            if (httpRequest.status === 200) {
 
 
                 var div = document.getElementById('divquestionlist');
@@ -165,6 +166,7 @@
                 document.getElementById('tablequestionlist').innerHTML = "";
 
                 var thead = document.createElement('thead');
+                thead.className = "thead-light";
 
                 var tr = document.createElement('tr');
 
@@ -191,6 +193,13 @@
                 var th = document.createElement('th');
                 th.appendChild(document.createTextNode('IDUser'));
                 tr.appendChild(th);
+
+                if(document.getElementById('nav-tab-admin') != null) {
+                    var th = document.createElement('th');
+                    tr.appendChild(th);
+                    var th = document.createElement('th');
+                    tr.appendChild(th);
+                }
 
                 thead.appendChild(tr);
                 table.appendChild(thead);

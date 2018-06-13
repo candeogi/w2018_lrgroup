@@ -31,13 +31,15 @@ import java.util.List;
 public final class CreateAnswerUpvoteDatabase {
 
     /**
-     * The SQL statement to be executed
+     * The SQL statements to be executed
      */
     private static final String STATEMENT = "" +
             "INSERT INTO lr_group.VoteAnswer (answer, idUser, vote) " +
             "VALUES (?, ?, ?)";
 
-
+    private static final String STATEMENT_2 = "" +
+            "DELETE FROM lr_group.VoteAnswer" +
+            "WHERE answer=? AND idUser=?";
 
     /**
      * The connection to the database
@@ -76,6 +78,12 @@ public final class CreateAnswerUpvoteDatabase {
         PreparedStatement pstmt = null;
 
         try {
+            pstmt = con.prepareStatement(STATEMENT_2);
+            pstmt.setInt(1, idAnswer);
+            pstmt.setString(2,user);
+
+            pstmt.execute();
+
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setInt(1, idAnswer);
             pstmt.setString(2, user);

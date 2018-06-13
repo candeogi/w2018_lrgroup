@@ -37,9 +37,6 @@ public final class CreateAnswerDatabase {
     private static final String STATEMENT = "" +
             "INSERT INTO lr_group.Answer (id, isFixed, body, ts, idUser, parentID) " +
             "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
-
-
-
     /**
      * The connection to the database
      */

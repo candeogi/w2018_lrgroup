@@ -228,8 +228,8 @@ public final class RestQuestion extends RestResource
 	 */
 	public void listQuestions() throws IOException {
 
-		List<Question> q = null;
-		Message m = null;
+		List<Question> q;
+		Message m;
 
 		try{
 			// creates a new object for accessing the database and lists all the questions
@@ -260,8 +260,8 @@ public final class RestQuestion extends RestResource
 	public void searchQuestionByCategory()  throws IOException
 	{
 
-		List<Question> q  = null;
-		Message m = null;
+		List<Question> q;
+		Message m;
 
 		try
 		{

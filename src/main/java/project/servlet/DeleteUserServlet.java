@@ -25,7 +25,7 @@ public class DeleteUserServlet extends SessionManagerServlet {
 
         try {
 
-            username = req.getParameter("username to delete");
+            username = req.getParameter("username");
             new DeleteUserByUsernameDatabase(getDataSource().getConnection(), username).DeleteUserByUsername();
             m = new Message("Correctly deleted the user");
 
@@ -40,7 +40,15 @@ public class DeleteUserServlet extends SessionManagerServlet {
             req.setAttribute("message", m);
             req.getRequestDispatcher("/jsp/error.jsp").forward(req, res);
         } else {
-            res.sendRedirect(req.getContextPath() + "/");
+            String from = req.getParameter("from");
+            if(from != null && !from.equals(""))
+            {
+                res.sendRedirect(req.getContextPath() + "/?p=" + req.getParameter("from"));
+            }
+            else
+            {
+                res.sendRedirect(req.getContextPath() + "/");
+            }
         }
     }
 

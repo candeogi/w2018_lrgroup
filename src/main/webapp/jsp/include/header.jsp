@@ -47,7 +47,7 @@ Since: 1.0
 </head>
 
 
-<header class="navbar bg-dark text-white">
+<header class="navbar bg-dark text-white navbar-fixed-top">
     <div class="justify-content-start">
         <nav class="nav">
             <a class="nav-link" href="<c:url value="/jsp/index.jsp"/>"><i class="fas fa-home"></i></a>
@@ -75,6 +75,11 @@ Since: 1.0
             </c:when>
 
             <c:when test="${(not empty sessionScope.loggedInUser) and (sessionScope.isAdmin == true)}">
+                <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />">
+                    <i class="far fa-user"></i>
+
+                    <!--<img src="<c:url value="/images/user.png"/>" class="img-fluid float-right rounded-circle"> -->
+                </a>
                 <a href="<c:url value="/?p=admin-panel"/>">
                     <button type="button" class="btn btn-primary">
                         Admin tools
@@ -88,13 +93,13 @@ Since: 1.0
             </c:when>
 
             <c:when test="${not empty sessionScope.loggedInUser}">
-                <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />">
-                    <img src="<c:url value="/images/user.png"/>" class="rounded-circle">
-                </a>
                 <a href="<c:url value="/?p=log-out"/>">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                         Logout
                     </button>
+                </a>
+                <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />">
+                    <img src="<c:url value="/images/user.png"/>" class="img-fluid float-right rounded-circle">
                 </a>
             </c:when>
 

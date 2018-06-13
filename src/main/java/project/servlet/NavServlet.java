@@ -118,6 +118,7 @@ public class NavServlet extends AbstractDatabaseServlet
 
 			case "admin-panel":
 				if(req.getSession().getAttribute("loggedInUser") != null){
+					req.setAttribute("from", "admin-panel");
 					req.getRequestDispatcher("/admin-panel").forward(req, res);
 					//TODO Check if user is an admin
 				}

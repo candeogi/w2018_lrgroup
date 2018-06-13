@@ -22,7 +22,7 @@
 
     function writeResults() {
 
-        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.readyState === XMLHttpRequest.OK) {
 
             // get the div where to write results
             var div = document.getElementById('categoriesResults');

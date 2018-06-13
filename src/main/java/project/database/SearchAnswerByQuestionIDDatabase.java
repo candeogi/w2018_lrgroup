@@ -89,7 +89,7 @@ public final class SearchAnswerByQuestionIDDatabase
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()){
-                Answer a = new Answer(rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"),questionID);
+                Answer a = new Answer(rs.getInt("id"), rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"),questionID);
                 answerList.add(a);
             }
 
