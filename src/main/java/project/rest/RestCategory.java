@@ -19,8 +19,8 @@ public class RestCategory extends RestResource {
     }
 
     public void searchCategory() throws IOException {
-        List<Category> categories = null;
-        Message message = null;
+        List<Category> categories;
+        Message message;
         try {
 
             categories = new SearchCategoryDatabase(con).searchCategory();

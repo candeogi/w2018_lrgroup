@@ -20,7 +20,7 @@
     function categoryDropdown(){
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
-            if (httpRequest.status == 200) {
+            if (httpRequest.status === 200) {
 
 
                 var div = document.getElementById('listCategoryDropdown');
@@ -156,7 +156,7 @@
     function alertContents() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
-            if (httpRequest.status == 200) {
+            if (httpRequest.status === 200) {
 
 
                 var div = document.getElementById('divquestionlist');
