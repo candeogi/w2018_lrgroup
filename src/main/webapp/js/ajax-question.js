@@ -159,10 +159,10 @@
             if (httpRequest.status == 200) {
 
 
-                var div = document.getElementsByClassName('table-responsive');
+                var div = document.getElementById('divquestionlist');
+                var table = document.getElementById('tablequestionlist');
 
-                var table = document.getElementsByClassName('table table-hover');
-                document.getElementsByClassName("table table-hover").item(0).innerHTML = "";
+                document.getElementById('tablequestionlist').innerHTML = "";
 
                 var thead = document.createElement('thead');
 
@@ -193,7 +193,7 @@
                 tr.appendChild(th);
 
                 thead.appendChild(tr);
-                table.item(0).appendChild(thead);
+                table.appendChild(thead);
 
                 var tbody = document.createElement('tbody');
 
@@ -230,12 +230,47 @@
                     td_iduser.appendChild(document.createTextNode(question['IDUser']));
                     tr.appendChild(td_iduser);
 
+                    if(document.getElementById('nav-tab-admin') != null) {
+                        var td_deleteq = document.createElement('td');
+
+                        var button_deleteq = document.createElement('button');
+                        button_deleteq.type = "submit";
+                        button_deleteq.className = "btn btn-danger";
+
+                        var icon_delete = document.createElement('i');
+                        icon_delete.className = "far fa-trash-alt";
+                        var text = document.createTextNode("Delete");
+                        icon_delete.appendChild(text);
+                        button_deleteq.appendChild(icon_delete);
+
+                        td_deleteq.appendChild(button_deleteq);
+                        tr.appendChild(td_deleteq);
+
+
+                        var td_updateq = document.createElement('td');
+
+                        var button_updateq = document.createElement('button');
+                        button_updateq.type = "submit";
+                        button_updateq.className = "btn btn-warning";
+
+                        var icon_update = document.createElement('i');
+                        icon_update.className = "far fa-edit";
+                        var text = document.createTextNode("Update");
+                        icon_update.appendChild(text);
+                        button_updateq.appendChild(icon_update);
+
+                        td_updateq.appendChild(button_updateq);
+                        tr.appendChild(td_updateq);
+
+
+                    }
+
                     tbody.appendChild(tr);
                 }
 
-                table.item(0).appendChild(tbody);
+                table.appendChild(tbody);
 
-                div.item(0).appendChild(table.item(0));
+                div.appendChild(table);
 
             } else {
                 alert('There was a problem with the request.');

@@ -77,8 +77,8 @@
 
             <!-- Browse Questions Table Div -->
             <div class="col-md-8">
-                <div class="table-responsive">
-                    <table class="table table-hover">
+                <div class="table-responsive" id="divquestionlist">
+                    <table class="table table-hover" id="tablequestionlist">
 
 
                     </table>
