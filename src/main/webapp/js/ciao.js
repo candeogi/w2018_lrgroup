@@ -82,7 +82,9 @@ function printResultCertificate() {
                 tr.appendChild(td_organization);
 
                 var td_achievement = document.createElement('td');
-                td_achievement.appendChild(document.createTextNode(certificate[i].certificate.achievmentDate));
+                var date=certificate[i].certificate.achievementDate.toString().split("-");
+                var newdate=date[2]+"-"+date[1]+"-"+date[0];
+                td_achievement.appendChild(document.createTextNode(newdate));
                 tr.appendChild(td_achievement);
 
                 var td_delete = document.createElement('td');

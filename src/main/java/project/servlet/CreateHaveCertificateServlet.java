@@ -41,7 +41,7 @@ public class CreateHaveCertificateServlet extends SessionManagerServlet {
         String name = null;
         String organization = null;
         String IDUser = null;
-        String achievmentDate;
+        String achievementDate;
 
         Message m = null;
 
@@ -49,10 +49,10 @@ public class CreateHaveCertificateServlet extends SessionManagerServlet {
             // retrieves the request parameters
             name = req.getParameter("certificate-name");
             organization = req.getParameter("organization");
-            achievmentDate = req.getParameter("achievmentDate");
+            achievementDate = req.getParameter("achievementDate");
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date aDate = new Date(dateFormat.parse(achievmentDate).getTime());
+            Date aDate = new Date(dateFormat.parse(achievementDate).getTime());
 
             IDUser = (String) req.getSession().getAttribute("loggedInUser");
 

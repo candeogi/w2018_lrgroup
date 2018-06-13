@@ -188,7 +188,7 @@ CREATE TABLE lr_group.Certificate(
 CREATE TABLE lr_group.HaveCertificate(
     username VARCHAR(20) NOT NULL,
     id INTEGER NOT NULL,
-    achievmentDate DATE,
+    achievementDate DATE,
 
     PRIMARY KEY(username,id),
 
