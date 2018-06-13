@@ -33,6 +33,14 @@ button#login_button:hover {
 .rounded-circle{
 	width: 10%;
 }
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-is-open > .dropdown-content {
+    display: block;
+}
 
 #website{
 

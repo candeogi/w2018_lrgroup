@@ -45,13 +45,17 @@
                     <a class="nav-link active" href="#popularQs" data-toggle="tab">Popular Questions</a>
                     <a class="nav-link" href="#yourQs" data-toggle="tab">Your Questions</a>
                     <a class="nav-link" href="#latestQs" data-toggle="tab">Latest Questions</a>
+                    <div class="dropdown-container">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#categoryQs" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
-                    <div class="dropdown-menu" id="listCategoryDropdown">
+                        <div class="dropdown-menu" id="listCategoryDropdown">
 
+                        </div>
                     </div>
-                    <div id="filternav">
+                        <div id="filternav">
 
-                    </div>
+                        </div>
+
+
                 </nav>
 
 
@@ -93,8 +97,7 @@
     </div>
 
 
-
-    <!--Custom script test-->
+   <!--Custom script test-->
     <script type="text/javascript" src="test.js"></script>
 
         <h1>Index</h1>
@@ -118,8 +121,6 @@
         </c:choose>
 
     <script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
-    <!--<script src="<c:url value="/js/ajax-question.js"/>"></script>
-    <script src="<c:url value="/js/getCategoriesName.js"/>"></script>-->
     </body>
 
     <c:import url="/jsp/include/footer.jsp"/>

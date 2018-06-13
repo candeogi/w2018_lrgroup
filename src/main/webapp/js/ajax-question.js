@@ -5,6 +5,7 @@
 
     $('#switchQs a[href="#categoryQs"]').on('click', function(event) {
         event.preventDefault(); // To prevent following the link (optional)
+        document.getElementById("listCategoryDropdown").classList.toggle("show");
         url = 'http://localhost:8080/web-app-project/rest/category';
         httpRequest = new XMLHttpRequest();
 
@@ -22,7 +23,6 @@
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
             if (httpRequest.status === 200) {
-
 
                 var div = document.getElementById('listCategoryDropdown');
 
@@ -63,6 +63,7 @@
     $(".dropdown-menu").on('click', '.dropdown-item', function(e) {
         var menu = $(this).html();
         e.preventDefault(); // To prevent following the link (optional)
+        document.getElementById("listCategoryDropdown").classList.toggle("show", false);
         url = 'http://localhost:8080/web-app-project/rest/question/category/'+ document.getElementById(menu).value;
         deletefilter();
 
