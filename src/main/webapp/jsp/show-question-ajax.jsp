@@ -38,7 +38,9 @@ Since: 1.0
         <div class="col-md-8">
             <nav class="nav nav-pills justify-content-center" id="switchQs">
                 <a class="nav-link active" href="#popularQs" data-toggle="tab">Popular Questions</a>
-                <a class="nav-link" href="#yourQs" data-toggle="tab">Your Questions</a>
+                <c:if test="${not empty sessionScope.loggedInUser}">
+                    <a class="nav-link" href="#yourQs" data-toggle="tab">Your Questions</a>
+                </c:if>
                 <a class="nav-link" href="#latestQs" data-toggle="tab">Latest Questions</a>
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#categoryQs" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
                 <div class="dropdown-menu" id="listCategoryDropdown">
