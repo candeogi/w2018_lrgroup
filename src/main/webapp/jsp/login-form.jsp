@@ -7,24 +7,44 @@
     <head>
         <meta charset="utf-8">
         <title>Login Form</title>
+        <style>
+            h1 {
+                text-align : center;
+            }
+            form {
+                width: 300px;
+                margin: 0 auto;
+            }
+            p{
+                text-align : center;
+            }
+
+        </style>
     </head>
     <header>
     <c:import url="/jsp/include/header.jsp"/>
     </header>
     <body>
-        <h1>Login</h1>
         <c:import url="/jsp/include/show-message.jsp"/>
-        <form method="POST" action="<c:url value="/login"/>" autocomplete="on">
-            <input type="hidden" name="from" value="${from}"/>
-            <label for="username">Username:</label>
-            <input name="username" type="text"/><br/>
+        <div class="grandParentContaniner">
+            <div class="parentContainer">
+            <h1>Login</h1>
 
-            <label for="password">Password:</label>
-            <input name="password" type="password"/><br/>
+            <form method="POST" action="<c:url value="/login"/>" autocomplete="on">
+                <input type="hidden" name="from" value="${from}"/>
+                <label for="username">Username:</label>
+                <input name="username" type="text"/><br/>
 
-            <button type="submit">Login</button><br/>
-            <button type="reset">Reset the form</button>
-        </form>
-        <p>Not registered? <a href="<c:url value="/jsp/create-user-form.jsp"/>">Please reconsider your life decisions</a></p>
+                <label for="password">Password:</label>
+                <input name="password" type="password"/><br/>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="reset" class="btn btn-primary">Reset the form</button>
+            </form>
+            </div>
+        </div>
+
+            <p>Not registered? <a href="<c:url value="/jsp/create-user-form.jsp"/>">Please reconsider your life decisions</a></p>
+
     </body>
 </html>
