@@ -21,6 +21,6 @@
 --
 INSERT INTO lr_group.HaveCertificate VALUES ('primoutente',1,'1994-1-1');
 INSERT INTO lr_group.HaveCertificate VALUES ('primoutente',2,'1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('primoutente',3,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('lucarossi',3,'1994-1-1');
 INSERT INTO lr_group.HaveCertificate VALUES ('terzoutente',4,'1994-1-1');
 INSERT INTO lr_group.HaveCertificate VALUES ('secondoutente',5,'1994-1-1');

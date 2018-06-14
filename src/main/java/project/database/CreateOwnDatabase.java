@@ -18,7 +18,7 @@ public class CreateOwnDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.own(address, addrType) " +
+            "INSERT INTO lr_group.Own(address, username) " +
             "VALUES (?, ?)";
 
     /**
@@ -52,8 +52,8 @@ public class CreateOwnDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setString(1, utente);
-            pstmt.setString(2, webSite);
+            pstmt.setString(1, webSite);
+            pstmt.setString(2, utente);
 
             pstmt.execute();
 
