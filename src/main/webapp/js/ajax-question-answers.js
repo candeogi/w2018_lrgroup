@@ -211,10 +211,10 @@ function addNewAnswerForm(){
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/web-app-project/rest/answer/",
-        data: JSON.stringify({"resource-list":[
+        data: JSON.stringify(
                 {
                     "answer":{
-                        "ID":-1,
+
                         "text": addAnswerText,
                         "fixed":false,
                         "timestamp": timestamp,
@@ -222,15 +222,18 @@ function addNewAnswerForm(){
                         "parentID": -1,
                         "questionID":1
                     }
-                }]
+
         }),
         contentType: "application/json",
         dataType: 'json',
         success: function() {
             //alert("it works!);
         },
-        error: function(){
-            //alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
+        error: function(jqXHR,textStatus,errorThrown){
+            alert("" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
         }
     });
     $("#addAnswerTextArea").val('');
@@ -248,8 +251,11 @@ function deleteAnswer(id){
         success: function() {
             //alert("hey its me working");
         },
-        error: function(){
-            alert("error on DELETE http://localhost:8080/web-app-project/rest/answer/"+id);
+        error: function(jqXHR,textStatus,errorThrown){
+            alert("" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
         }
     });
     $('#'+id+'').hide();
