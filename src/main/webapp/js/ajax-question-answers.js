@@ -175,7 +175,7 @@ function visualizeAnswersToAnswer(idAnswer){
 $("#addAnswerButton").click(function () {
     addNewAnswerForm();
 });
-/*Add a new answer function*/
+/*Add a new answer function - works but goes on error TODO*/
 function addNewAnswerForm(){
 
     var addAnswerText = $("#addAnswerTextArea").val();
@@ -189,7 +189,16 @@ function addNewAnswerForm(){
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds() +"."
         + currentdate.getMilliseconds();
-    //works but goes on error TODO
+
+    var answerObject = {
+        "ID":1,
+        "text": addAnswerText,
+        "fixed":false,
+        "timestamp": timestamp,
+        "IDUser": currentUser,
+        "parentID": -1,
+        "questionID":1
+    };
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/web-app-project/rest/answer/",
@@ -209,12 +218,13 @@ function addNewAnswerForm(){
         contentType: "application/json",
         dataType: 'json',
         success: function() {
-            alert("hey its me");
+            //alert("it works!);
         },
         error: function(){
-            alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
+            //alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
         }
     });
+    printSingleAnswer(answerObject, 0);
 }
 
 function deleteAnswer(id){
@@ -226,12 +236,13 @@ function deleteAnswer(id){
         contentType: "application/json",
         dataType: 'json',
         success: function() {
-            alert("hey its me working");
+            //alert("hey its me working");
         },
         error: function(){
             alert("error on DELETE http://localhost:8080/web-app-project/rest/answer/"+id);
         }
     });
+    $('#'+id+'').hide();
 }
 
 
