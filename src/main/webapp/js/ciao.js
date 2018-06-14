@@ -123,6 +123,10 @@ function printResultCertificate() {
                 var tr = document.createElement('tr');
 
 
+                var td_id= document.createElement('td');
+                td_id.appendChild(document.createTextNode(certificate[i].certificate.ID))
+                tr.appendChild(td_id);
+
                 var td_name = document.createElement('td');
                 td_name.appendChild(document.createTextNode(certificate[i].certificate.name));
                 tr.appendChild(td_name);
@@ -148,7 +152,7 @@ function printResultCertificate() {
                 tbody.appendChild(tr);
                 button.addEventListener("click", function () {
                     rowToDeleteCert=$(this).closest('tr').get(0);
-                    var nameCert=rowToDelete.childNodes[1].innerHTML;
+                    var nameCert=rowToDeleteCert.childNodes[0].innerHTML;
                     deleteCertificate(nameCert);
                 });
             }
@@ -274,7 +278,7 @@ function deleteRowWebSite() {
 
 var xhrDeleteCertificate;
 
-function deleteCertificate(){
+function deleteCertificate(nameCert){
     xhrDeleteCertificate = new XMLHttpRequest();
     xhrDeleteCertificate.onreadystatechange = function () {
         if (xhr.readyState == 4) {
@@ -284,10 +288,11 @@ function deleteCertificate(){
     }
 
     console.log("deleting certificate");
-    xhrDeleteCertificate.onreadystatechange = deleteRowCertificate();
+    xhrDeleteCertificate.onreadystatechange = deleteRowCertificate;
     var username = $("#username-value").text().trim();
-    xhrDelete.open('DELETE', 'rest/certificate/user/' + username + '/id/' + idCertificate, true);
-    xhrDelete.send();
+    var idCertificate=nameCert;
+    xhrDeleteCertificate.open('DELETE', 'rest/certificate/user/' + username + '/id/' + idCertificate, true);
+    xhrDeleteCertificate.send();
 
 
 }
@@ -298,7 +303,7 @@ function deleteRowCertificate() {
 
         if (xhrDeleteCertificate.status == 200) {
             console.log("entrato rimozione certificato");
-            rowToDelete.parentNode.removeChild(rowToDeleteCert);
+            rowToDeleteCert.parentNode.removeChild(rowToDeleteCert);
 
         }
     }
