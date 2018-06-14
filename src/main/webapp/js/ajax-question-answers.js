@@ -115,6 +115,11 @@ function printSingleAnswer(answer, whereToAppendId){
     deleteLink.setAttribute('onclick','deleteAnswer('+answer['ID']+')');
     deleteLink.setAttribute('href','javascript:void(0);');
 
+    var editLink = document.createElement('a');
+    editLink.setAttribute('onclick','editAnswer('+answer['ID']+')');
+    editLink.setAttribute('href','javascript:void(0);');
+    editLink.className = 'editButton';
+
     //create custom timestamp
     var small = document.createElement('small');
     var timestampText = document.createTextNode('Sent on '+answer['timestamp']
@@ -138,8 +143,9 @@ function printSingleAnswer(answer, whereToAppendId){
     p.appendChild(answerTextBody);
     small.appendChild(timestampText);
     small.appendChild(deleteLink);
-    deleteLink.appendChild(document.createTextNode('delete'));
-
+    deleteLink.appendChild(document.createTextNode(' delete '));
+    small.appendChild(editLink);
+    editLink.appendChild(document.createTextNode(' edit '));
     /*Works but there is a loop issue TODO fix*/
     visualizeAnswersToAnswer(answer['ID']);
     //this calls answerDropDown(idAnswer) that calls printSingleAnswer for each answer recursively(answer, idAnswer)
@@ -191,7 +197,7 @@ function addNewAnswerForm(){
         + currentdate.getMilliseconds();
 
     var answerObject = {
-        "ID":1,
+        "ID":-1,
         "text": addAnswerText,
         "fixed":false,
         "timestamp": timestamp,
@@ -205,7 +211,7 @@ function addNewAnswerForm(){
         data: JSON.stringify({"resource-list":[
                 {
                     "answer":{
-                        "ID":1,
+                        "ID":-1,
                         "text": addAnswerText,
                         "fixed":false,
                         "timestamp": timestamp,
@@ -245,6 +251,50 @@ function deleteAnswer(id){
     });
     $('#'+id+'').hide();
 }
+function editAnswer(id){
+    var answerParagraph = $('#'+id).find('p').first();
+    var answerPreviousText = answerParagraph.text();
+    answerParagraph.replaceWith($('<textarea id="swap">'+answerPreviousText+'</textarea><br>'));
+    var buttonPressed = $('#'+id).find('.editButton').first();
 
+    var doneButton = document.createElement('a');
+    doneButton.setAttribute('onclick','editDoneAnswer('+id+')');
+    doneButton.setAttribute('href','javascript:void(0);');
+    doneButton.className = 'doneButton';
+    doneButton.appendChild(document.createTextNode(' done '));
+    buttonPressed.replaceWith(doneButton);
+}
+function editDoneAnswer(id){
+    var answerNewTextArea = $('#'+id).find('textarea').first();
+    var newAnswerTextFromTextArea = answerNewTextArea.val();
+    /*
+    var newAnswerObject = {
+        "ID":id,
+        "text": newAnswerTextFromTextArea
+    };
+    $.ajax({
+        method: "PUT",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: JSON.stringify(newAnswerObject),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function() {
+            //alert("it works!);
+        },
+        error: function(){
+            //alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
+        }
+    });*/
+    answerNewTextArea.replaceWith($('<p>'+newAnswerTextFromTextArea+'</p>'));
+    $('#'+id).find('.answer-body').find('br').first().replaceWith('');
+    var doneButton = $('#'+id).find('.doneButton').first();
+
+    var editLink = document.createElement('a');
+    editLink.setAttribute('onclick','editAnswer('+id+')');
+    editLink.setAttribute('href','javascript:void(0);');
+    editLink.className = 'editButton';
+    editLink.appendChild(document.createTextNode(' edit '));
+    doneButton.replaceWith(editLink);
+}
 
 
