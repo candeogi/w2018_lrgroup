@@ -68,6 +68,7 @@ public final class CreateWebSiteServlet extends AbstractDatabaseServlet {
         req.setAttribute("website", w);
         req.setAttribute("message", m);
 
+        
     }
 
 }

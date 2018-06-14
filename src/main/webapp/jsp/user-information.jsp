@@ -126,8 +126,8 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group mb-3">
-                        <select class="custom-select" id="type-form" value="OwnSite">
-                            <option selected>Select the type</option>
+                        <select class="custom-select" id="type-form">
+                            <option selected="OwnSite">Select the type</option>
                             <option value="BitBucket">BitBucket</option>
                             <option value="OwnSite">OwnSite</option>
                             <option value="Github">Github</option>
