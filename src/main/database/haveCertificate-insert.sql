@@ -19,8 +19,15 @@
 --
 -- Insertion into the HaveCertificate table
 --
-INSERT INTO lr_group.HaveCertificate VALUES ('primoutente',1,'1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('primoutente',2,'1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('lucarossi',3,'1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('terzoutente',4,'1994-1-1');
-INSERT INTO lr_group.HaveCertificate VALUES ('secondoutente',5,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('lucarossi',1,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('andreaziggio',2,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('albertoforti',3,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('albertopontini',1,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('davidestorato',1,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('giovannicandeo',2,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('lucarossi',5,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('andreaziggio',6,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('albertoforti',7,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('albertopontini',4,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('davidestorato',4,'1994-1-1');
+INSERT INTO lr_group.HaveCertificate VALUES ('giovannicandeo',7,'1994-1-1');

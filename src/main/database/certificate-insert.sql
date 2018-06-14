@@ -19,8 +19,10 @@
 --
 -- Insertion into the Certificate table
 --
-INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Ing','UNIPD');
-INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Let','UNIPD');
-INSERT INTO lr_group.Certificate VALUES (DEFAULT ,'Psy','UNIPD');
-INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Let','UNIVE');
-INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Mat','UNIBZ');
+INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Ingegneria Informatica','UNIPD');
+INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Ingegneria Elettronica','UNIPD');
+INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Ingegneria Telecomunicazioni','UNIPD');
+INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Lettere','UNIPD');
+INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Psicologia','UNIPD');
+INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Architettura','UNIVE');
+INSERT INTO lr_group.Certificate  VALUES (DEFAULT ,'Scienze della Formazione','UNIBZ');

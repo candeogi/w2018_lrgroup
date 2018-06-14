@@ -21,6 +21,6 @@
 --
 INSERT INTO lr_group.below  VALUES (1,1);
 INSERT INTO lr_group.below  VALUES (2,2);
-INSERT INTO lr_group.below  VALUES (3,1);
-INSERT INTO lr_group.below  VALUES (4,1);
-INSERT INTO lr_group.below  VALUES (5,3);
+INSERT INTO lr_group.below  VALUES (3,3);
+INSERT INTO lr_group.below  VALUES (4,4);
+INSERT INTO lr_group.below  VALUES (5,5);

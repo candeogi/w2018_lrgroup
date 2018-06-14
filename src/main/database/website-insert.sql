@@ -19,12 +19,14 @@
 --
 -- Insertion into the Website table
 --
-INSERT INTO lr_group.website  VALUES ('https://bitbucket.org/dashboard/overview','BitBucket');
-INSERT INTO lr_group.website  VALUES ('https://bitbucket.org/repo/create','BitBucket');
-INSERT INTO lr_group.website  VALUES ('https://github.com/','Github');
-INSERT INTO lr_group.website  VALUES ('https://github.com/pulls','Github');
-INSERT INTO lr_group.website  VALUES ('http://www.pincopallino.it','OwnSite');
-INSERT INTO lr_group.website  VALUES ('http://www.bitbucket.com/pincopallino','BitBucket');
-INSERT INTO lr_group.website  VALUES ('http://www.github.com/pincopallino','Github');
-INSERT INTO lr_group.website  VALUES ('http://www.linkedin.com/pincopallino','Linkedin');
+INSERT INTO lr_group.website  VALUES ('https://bitbucket.org/lucarossi','BitBucket');
+INSERT INTO lr_group.website  VALUES ('https://bitbucket.org/andreaziggio','BitBucket');
+INSERT INTO lr_group.website  VALUES ('https://github.com/davidestorato','Github');
+INSERT INTO lr_group.website  VALUES ('https://github.com/albertopontini','Github');
+INSERT INTO lr_group.website  VALUES ('http://www.andreazggiotto.it','OwnSite');
+INSERT INTO lr_group.website  VALUES ('http://www.albertopontini.it','OwnSite');
+INSERT INTO lr_group.website  VALUES ('http://www.albertoforti.it','OwnSite');
+INSERT INTO lr_group.website  VALUES ('http://www.bitbucket.com/albertoforti','BitBucket');
+INSERT INTO lr_group.website  VALUES ('http://www.github.com/maurozoppo','Github');
+INSERT INTO lr_group.website  VALUES ('http://www.linkedin.com/lucarossi','Linkedin');
 

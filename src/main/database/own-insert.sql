@@ -19,10 +19,15 @@
 --
 -- Insertion into the Own table
 
-INSERT INTO lr_group.own  VALUES ('https://bitbucket.org/dashboard/overview','primoutente');
-INSERT INTO lr_group.own  VALUES ('https://bitbucket.org/repo/create','secondoutente');
-INSERT INTO lr_group.own  VALUES ('http://www.github.com/pincopallino','primoutente');
-INSERT INTO lr_group.own  VALUES ('http://www.linkedin.com/pincopallino','lucarossi');
-INSERT INTO lr_group.own  VALUES ('http://www.bitbucket.com/pincopallino','lucarossi');
-INSERT INTO lr_group.own  VALUES ('http://www.pincopallino.it','primoutente');
-INSERT INTO lr_group.own  VALUES ('https://github.com/pulls','terzoutente');
+
+
+INSERT INTO lr_group.own  VALUES ('https://bitbucket.org/lucarossi','lucarossi');
+INSERT INTO lr_group.own  VALUES ('http://www.linkedin.com/lucarossi','lucarossi');
+INSERT INTO lr_group.own  VALUES ('https://bitbucket.org/andreaziggio','andreaziggio');
+INSERT INTO lr_group.own  VALUES ('http://www.andreazggiotto.it','andreaziggio');
+INSERT INTO lr_group.own  VALUES ('http://www.github.com/maurozoppo','maurozoppo');
+INSERT INTO lr_group.own  VALUES ('https://github.com/davidestorato','davidestorato');
+INSERT INTO lr_group.own  VALUES ('http://www.bitbucket.com/albertoforti','albertoforti');
+INSERT INTO lr_group.own  VALUES ('http://www.albertoforti.it','albertoforti');
+INSERT INTO lr_group.own  VALUES ('http://www.albertopontini.it','albertopontini');
+INSERT INTO lr_group.own  VALUES ('https://github.com/albertopontini','albertopontini');

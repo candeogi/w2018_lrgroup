@@ -19,8 +19,8 @@
 --
 -- Insertion into the Category table
 --
-INSERT INTO lr_group.category  VALUES (DEFAULT ,'dati alg2',' me lo dica lei ',DEFAULT);
-INSERT INTO lr_group.category  VALUES (DEFAULT ,'math',' me lo dica lei ',DEFAULT);
-INSERT INTO lr_group.category  VALUES (DEFAULT ,'apericena',' me lo dica lei ',DEFAULT);
-INSERT INTO lr_group.category  VALUES (DEFAULT ,'web app',' me lo dica lei ',DEFAULT);
-INSERT INTO lr_group.category  VALUES (DEFAULT ,'any questions?',' me lo dica lei ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'Dati Algoritmi 2','Corso Magistrale di Geppino Pucci ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'Analisi 2',' Corso Magistrale di Andrea D Agnolo ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'Web Application ',' Corso Magristrale di Ferro Nicola ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'Programmazione Java',' Domande riguardanti la programmazione Java ',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'Interviste','Esempi di interviste da parte di aziende',DEFAULT);

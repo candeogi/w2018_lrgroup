@@ -18,6 +18,6 @@
 
 -- Insertion into have table
 INSERT INTO lr_group.have VALUES (1,1);
-INSERT INTO lr_group.have VALUES (1,2);
-INSERT INTO lr_group.have VALUES (1,3);
-INSERT INTO lr_group.have VALUES (1,4);
+INSERT INTO lr_group.have VALUES (2,2);
+INSERT INTO lr_group.have VALUES (3,3);
+INSERT INTO lr_group.have VALUES (4,4);

@@ -19,13 +19,13 @@
 --
 -- Insertion into the Question table
 --
-INSERT INTO lr_group.question VALUES (DEFAULT, 'how to do math?', 'lucarossi', '2016-06-22 19:10:25-07',
-                             '2017-1-1', 'help i need to do math');
-INSERT INTO lr_group.question VALUES (DEFAULT, 'how to drink?', 'nicolaferro', '2016-06-22 19:10:25-07',
-                             '2017-1-1', 'need drink');
-INSERT INTO lr_group.question VALUES (DEFAULT, 'what is a variable?', 'lucarossi', '2016-06-22 19:10:25-07',
-                             '2017-1-1', 'tes123');
-INSERT INTO lr_group.question VALUES (DEFAULT, 'this is not a question?', 'maurozoppo', '2016-06-22 19:10:25-07',
-                             '2017-1-1', 'uhmmmm');
-INSERT INTO lr_group.question VALUES (DEFAULT, 'how to pass web application?', 'lucarossi', '2016-06-22 19:10:25-07',
-                             '2017-1-1', 'help i need to pass the test');
+INSERT INTO lr_group.question VALUES (DEFAULT, 'Esercizi DA2', 'lucarossi', '2016-06-22 19:10:25-07',
+                             '2017-1-1', 'Quali esercizi posso svolgere per passare DA2?');
+INSERT INTO lr_group.question VALUES (DEFAULT, 'Esercizi di Flusso', 'albertoforti', '2016-06-22 19:10:25-07',
+                             '2017-1-1', 'Come si risolve l es pag..');
+INSERT INTO lr_group.question VALUES (DEFAULT, 'Homework web app', 'andreaziggio', '2016-06-22 19:10:25-07',
+                             '2017-1-1', 'Lo schema relazionale è necessario?');
+INSERT INTO lr_group.question VALUES (DEFAULT, 'Java nullpointer?', 'maurozoppo', '2016-06-22 19:10:25-07',
+                             '2017-1-1', 'Errore nel codice...');
+INSERT INTO lr_group.question VALUES (DEFAULT, 'Google assunzioni', 'davidestorato', '2016-06-22 19:10:25-07',
+                             '2017-1-1', 'Domande tipiche?');
