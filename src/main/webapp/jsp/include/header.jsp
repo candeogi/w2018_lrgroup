@@ -76,9 +76,9 @@ Since: 1.0
 
             <c:when test="${(not empty sessionScope.loggedInUser) and (sessionScope.isAdmin == true)}">
                 <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />">
-                    <i class="far fa-user"></i>
+                    <!--<i class="far fa-user"></i>-->
+                    <img src="<c:url value="/images/user.png"/>" alt="avatar" class="avatar">
 
-                    <!--<img src="<c:url value="/images/user.png"/>" class="img-fluid float-right rounded-circle"> -->
                 </a>
                 <a href="<c:url value="/?p=admin-panel"/>">
                     <button type="button" class="btn btn-primary">
@@ -99,7 +99,7 @@ Since: 1.0
                     </button>
                 </a>
                 <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />">
-                    <img src="<c:url value="/images/user.png"/>" class="img-fluid float-right rounded-circle">
+                    <img src="<c:url value="/images/user.png"/>" alt="avatar" class="avatar">
                 </a>
             </c:when>
 
