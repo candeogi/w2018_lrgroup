@@ -50,7 +50,7 @@ Since: 1.0
 <header class="navbar bg-dark text-white navbar-fixed-top">
     <div class="justify-content-start">
         <nav class="nav">
-            <a class="nav-link" href="<c:url value="/jsp/index.jsp"/>"><i class="fas fa-home"></i></a>
+            <a class="nav-link" href="<c:url value="/"/>"><i class="fas fa-home"></i></a>
 
             <a class="nav-link" href="<c:url value="/?p=show-user-questions"/>"><i class="fas fa-question-circle"></i></a>
 
