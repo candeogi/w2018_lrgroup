@@ -196,10 +196,12 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         m.toJSON(res.getOutputStream());
                         break;
                 }
+                /*
                 m = new Message("Wrong format for URI /answer/id/{questionID} or /answer/user/{userid}",
                         "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                 res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 m.toJSON(res.getOutputStream());
+                */
             } else {
                 if (path.contains("question")) {
                     // /answer/question/{questionID}
@@ -224,7 +226,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 }
                                 break;
                             default:
-                                m = new Message("Unsupported operation for URI /answer/id/{questionID}.",
+                                m = new Message("Unsupported operation for URI /answer/question/{questionID}.",
                                         "E4A5", String.format("Requested operation %s.", method));
                                 res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
                                 m.toJSON(res.getOutputStream());
@@ -248,7 +250,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
 
                             default:
-                                m = new Message("Unsupported operation for URI /answer/user/{userID}.",
+                                m = new Message("Unsupported operation for URI /answer/parentAns/{answerID}.",
                                         "E4A5", String.format("Requested operation %s.", method));
                                 res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
                                 m.toJSON(res.getOutputStream());
