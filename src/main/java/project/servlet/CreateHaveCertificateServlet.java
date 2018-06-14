@@ -79,7 +79,7 @@ public class CreateHaveCertificateServlet extends SessionManagerServlet {
         req.setAttribute("message", m);
 
         // forwards the control to the create-user-result JSP
-        req.getRequestDispatcher("/jsp/create-answer-result.jsp").forward(req, res);
+        req.getRequestDispatcher("/jsp/user-information.jsp").forward(req, res);
     }
 
 

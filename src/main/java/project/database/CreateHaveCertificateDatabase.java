@@ -112,6 +112,12 @@ public class CreateHaveCertificateDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
+            if(pstmt1!=null){
+                pstmt1.close();
+            }
+            if(pstmt2!=null){
+                pstmt2.close();
+            }
 
 
             con.close();
