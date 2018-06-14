@@ -52,9 +52,9 @@ Since: 1.0
         <nav class="nav">
             <a class="nav-link" href="<c:url value="/jsp/index.jsp"/>"><i class="fas fa-home"></i></a>
 
-            <a class="nav-link" href="<c:url value="/?p=show-user-questions"/>">
-                <i class="fas fa-question-circle"></i>
-            </a>
+            <a class="nav-link" href="<c:url value="/?p=show-user-questions"/>"><i class="fas fa-question-circle"></i></a>
+
+
         </nav>
     </div>
     <div class="justify-content-end">
@@ -163,9 +163,9 @@ Since: 1.0
                                    aria-describedby="emailHelp" placeholder="Surname">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputUsername">Surname</label>
+                            <label for="exampleInputUsername">Username</label>
                             <input name="username" type="text" class="form-control" id="username-reg"
-                                   aria-describedby="emailHelp" placeholder="Surname">
+                                   aria-describedby="emailHelp" placeholder="Username">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputUsername">Name</label>
