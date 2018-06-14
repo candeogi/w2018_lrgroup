@@ -19,24 +19,29 @@ import java.text.ParseException;
 public class Certificate extends Resource {
 
 
+    private final int ID;
     private final String name;
     private final String organization;
     private final String dateCert;
 
-    public Certificate(String name, String organization) {
+    public Certificate(int ID, String name, String organization) {
 
+        this.ID = ID;
         this.name = name;
         this.organization = organization;
         this.dateCert = null;
     }
 
-    public Certificate(String name, String organization , String date) {
-
+    public Certificate(int ID, String name, String organization , String date) {
+        this.ID = ID;
         this.name = name;
         this.organization = organization;
         this.dateCert = date;
     }
 
+    public int getID() {
+        return ID;
+    }
 
     public String getName() {
         return name;
@@ -63,13 +68,11 @@ public class Certificate extends Resource {
 
         jg.writeStartObject();
 
-
-
+        if(ID!=-1) jg.writeNumberField("ID", ID);
         jg.writeStringField("name", name);
         jg.writeStringField("organization", organization);
-        if(dateCert != null){
-            jg.writeStringField("achievementDate", dateCert );
-        }
+        if(dateCert==null) jg.writeStringField("ID", "00-00-0000");
+        jg.writeStringField("achievementDate", dateCert);
 
         jg.writeEndObject();
 
@@ -86,10 +89,11 @@ public class Certificate extends Resource {
      * @throws IOException    if something goes wrong while parsing.
      * @throws ParseException if date is not parsed correctly
      */
-    public static Certificate fromJSON(final InputStream in) throws IOException, ParseException {
+    public static Certificate fromJSON(final InputStream in) throws IOException, ParseException
+    {
 
         // the fields read from JSON
-
+        int jID = -1;
         String jName = null;
         String jOrganization = null;
 
@@ -105,10 +109,16 @@ public class Certificate extends Resource {
             }
         }
 
-        while (jp.nextToken() != JsonToken.END_OBJECT) {
-            if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
-                switch (jp.getCurrentName()) {
-
+        while (jp.nextToken() != JsonToken.END_OBJECT)
+        {
+            if (jp.getCurrentToken() == JsonToken.FIELD_NAME)
+            {
+                switch (jp.getCurrentName())
+                {
+                    case "ID":
+                        jp.nextToken();
+                        jID = jp.getIntValue();
+                        break;
                     case "name":
                         jp.nextToken();
                         jName = jp.getText();
@@ -121,7 +131,7 @@ public class Certificate extends Resource {
             }
         }
 
-        return new Certificate(jName, jOrganization);
+        return new Certificate(jID,jName, jOrganization);
     }
 
 

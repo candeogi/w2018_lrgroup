@@ -429,6 +429,9 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                     m.toJSON(res.getOutputStream());
                                 }
                                 break;
+                            case "PUT":
+                                new RestQuestion(req, res, getDataSource().getConnection()).updateQuestion();
+                                break;
                             default:
                                 m = new Message("Unsupported operation for URI /question/id/{ID}.",
                                         "E4A5", String.format("Requested operation %s.", method));

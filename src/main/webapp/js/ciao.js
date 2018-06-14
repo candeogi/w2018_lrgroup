@@ -10,11 +10,13 @@ $(document).ready(function () {
 
 });
 
-
+var xhrWebsite;
 function addWebsite() {
-    var address=$("#address-form").val();
-    var type=$("#type-form").val();
-    var xhrWebsite = new XMLHttpRequest();
+    var newAddressWeb = $("#address-form").val();
+    console.log("a"+newAddressWeb);
+    var newTypeWeb = $("#type-form").val();
+    console.log("b"+newTypeWeb);
+    xhrWebsite = new XMLHttpRequest();
     xhrWebsite.onreadystatechange = function () {
         if (xhrWebsite.readyState == 4) {
             var data = xhrWebsite.responseText;
@@ -25,9 +27,31 @@ function addWebsite() {
     xhrWebsite.open('POST', 'create-website', true);
     xhrWebsite.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhrWebsite.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhrWebsite.onreadystatechange=visualizeWebsite;
-    var information = "address=" + address + "&" + "addrType=" + type;
+    xhrWebsite.onreadystatechange = addRowWebsite;
+    var information = "address=" + newAddressWeb + "&" + "addrType=" + newTypeWeb;
     xhrWebsite.send(information);
+}
+
+
+function addRowWebsite() {
+    $('#websiteModal').modal('hide');
+    if (xhrWebsite.readyState === XMLHttpRequest.DONE) {
+
+        if (xhrWebsite.status == 200) {
+            var table = document.getElementById("table-website");
+            while (table.firstChild) {
+                table.removeChild(table.firstChild);
+
+            }
+
+            visualizeWebsite();
+        }
+        else {
+            alert('There was a problem with the request.')
+        }
+    }
+
+
 }
 
 var xhr2;
@@ -49,7 +73,8 @@ function visualizeWebsite() {
 }
 
 var xhrCertificate;
-function visualizeCertificate(){
+
+function visualizeCertificate() {
     xhrCertificate = new XMLHttpRequest();
     xhrCertificate.onreadystatechange = function () {
         if (xhrCertificate.readyState == 4) {
@@ -64,7 +89,9 @@ function visualizeCertificate(){
     xhrCertificate.send();
 
 }
+
 var rowToDeleteCert;
+
 function printResultCertificate() {
     if (xhrCertificate.readyState === XMLHttpRequest.DONE) {
 
@@ -96,6 +123,10 @@ function printResultCertificate() {
                 var tr = document.createElement('tr');
 
 
+                var td_id= document.createElement('td');
+                td_id.appendChild(document.createTextNode(certificate[i].certificate.ID))
+                tr.appendChild(td_id);
+
                 var td_name = document.createElement('td');
                 td_name.appendChild(document.createTextNode(certificate[i].certificate.name));
                 tr.appendChild(td_name);
@@ -106,8 +137,8 @@ function printResultCertificate() {
                 tr.appendChild(td_organization);
 
                 var td_achievement = document.createElement('td');
-                var date=certificate[i].certificate.achievementDate.toString().split("-");
-                var newdate=date[2]+"-"+date[1]+"-"+date[0];
+                var date = certificate[i].certificate.achievementDate.toString().split("-");
+                var newdate = date[2] + "-" + date[1] + "-" + date[0];
                 td_achievement.appendChild(document.createTextNode(newdate));
                 tr.appendChild(td_achievement);
 
@@ -120,7 +151,9 @@ function printResultCertificate() {
                 tr.appendChild(td_delete);
                 tbody.appendChild(tr);
                 button.addEventListener("click", function () {
-                    //TODO Aggiungere rimozione certificato
+                    rowToDeleteCert=$(this).closest('tr').get(0);
+                    var nameCert=rowToDeleteCert.childNodes[0].innerHTML;
+                    deleteCertificate(nameCert);
                 });
             }
 
@@ -133,7 +166,6 @@ function printResultCertificate() {
     }
 
 }
-
 
 
 var rowToDelete;
@@ -214,8 +246,6 @@ function printResult() {
 }
 
 
-
-
 var xhrDelete;
 
 function deleteWebsite(nameWebsite) {
@@ -228,19 +258,52 @@ function deleteWebsite(nameWebsite) {
     }
 
     console.log("deleting website");
-    xhrDelete.onreadystatechange = deleteRow;
+    xhrDelete.onreadystatechange = deleteRowWebSite;
     var username = $("#username-value").text().trim();
     xhrDelete.open('DELETE', 'rest/website/user/' + username + '/website/' + nameWebsite, true);
     xhrDelete.send();
 }
 
 
-function deleteRow() {
+function deleteRowWebSite() {
     if (xhrDelete.readyState === XMLHttpRequest.DONE) {
 
         if (xhrDelete.status == 200) {
             console.log("entrato");
             rowToDelete.parentNode.removeChild(rowToDelete);
+
+        }
+    }
+}
+
+var xhrDeleteCertificate;
+
+function deleteCertificate(nameCert){
+    xhrDeleteCertificate = new XMLHttpRequest();
+    xhrDeleteCertificate.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            var data = xhrDelete.responseText;
+            alert(data);
+        }
+    }
+
+    console.log("deleting certificate");
+    xhrDeleteCertificate.onreadystatechange = deleteRowCertificate;
+    var username = $("#username-value").text().trim();
+    var idCertificate=nameCert;
+    xhrDeleteCertificate.open('DELETE', 'rest/certificate/user/' + username + '/id/' + idCertificate, true);
+    xhrDeleteCertificate.send();
+
+
+}
+
+
+function deleteRowCertificate() {
+    if (xhrDeleteCertificate.readyState === XMLHttpRequest.DONE) {
+
+        if (xhrDeleteCertificate.status == 200) {
+            console.log("entrato rimozione certificato");
+            rowToDeleteCert.parentNode.removeChild(rowToDeleteCert);
 
         }
     }

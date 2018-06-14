@@ -24,7 +24,6 @@
     <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
         <div class="container-fluid">
             <!-- Browse Users Table Div -->
-            <div class="col-md-8">
                 <!--<c:if test='${not empty users && !message.error}'>-->
                     <div class="table-responsive" id="divuserlist">
                         <table class="table table-hover table-striped table-responsive">
@@ -65,57 +64,145 @@
                                         <input type="hidden" name="username" value="${user.username}"/>
                                         <c:choose>
                                             <c:when test="${sessionScope.isAdmin == true and sessionScope.loggedInUser != user.username and not user.isAdmin()}">
-                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                <button type="submit" class="btn btn-primary btn-sm" id="deleteBtn">
                                                     <i class="far fa-trash-alt"></i> Delete</button><br/>
                                             </c:when>
                                             <c:otherwise>
-                                                <button type="submit" class="btn btn-primary btn-sm" disabled>
+                                                <button type="submit" class="btn btn-primary btn-sm" disabled >
                                                     <i class="far fa-trash-alt"></i> Delete</button><br/>
                                             </c:otherwise>
                                         </c:choose>
                                     </form>
                                 </td>
                                 <td>
-                                    <form method="POST" action="<c:url value="/update-user"/>" id="updateForm">
-                                        <input type="hidden" name="username" value="${user.username}"/>
-                                        <c:choose>
+                                    <c:choose>
                                             <c:when test="${sessionScope.isAdmin == true and sessionScope.loggedInUser != user.username and not user.isAdmin()}">
-                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                <button type="button" class="btn btn-primary btn-sm"  user-name="<c:out value="${user.username}"/>" data-toggle="modal" data-target="#modal-update-user">
                                                     <i class="far fa-edit"></i>Update</button><br/>
                                             </c:when>
                                             <c:otherwise>
-                                                <button type="submit" class="btn btn-primary btn-sm" disabled>
+                                                <button type="button" class="btn btn-primary btn-sm" disabled>
                                                     <i class="far fa-edit"></i>Update</button><br/>
                                             </c:otherwise>
                                         </c:choose>
-
-                                    </form>
                                 </td>
+
                                 </c:forEach>
                             </tbody>
                         </table>
                     </div>
                 </c:if>
+            <div class="modal fade" id="modal-update-user" tabindex="-1" role="dialog" aria-labelledby="UpdateUserModal"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" >Update user</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="<c:url value="/update-user"/>" id="formUser" >
+                                <div class="form-group">
+                                    <label for="usernameInput">Username</label>
+                                    <input name="username" type="text" class="form-control" id="username-user"
+                                           aria-describedby="usernameHelp" placeholder="Username" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="emailInput">Email</label>
+                                    <input name="email" type="text" class="form-control" id="email-user"
+                                           aria-describedby="emailHelp" placeholder="Email"value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nameInput">Name</label>
+                                    <input name="name" type="text" class="form-control" id="name-user"
+                                           aria-describedby="nameHelp" placeholder="Name"value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="surnameInput">Surname</label>
+                                    <input name="surname" type="text" class="form-control" id="surname-user"
+                                           aria-describedby="surnameHelp" placeholder="Surname"value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bdateInput">Username</label>
+                                    <input name="bdate" type="date" class="form-control" id="bdate-user"
+                                           aria-describedby="bdateHelp"value="">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary ">Update User</button>
+                            </form>
+                        </div>
+                        <!--<div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div> -->
+                    </div>
+                </div>
             </div>
+
         </div>
+
     </div>
 
     <div class="tab-pane fade" id="nav-question" role="tabpanel" aria-labelledby="nav-question-tab">
         <div class="container-fluid">
-            <div class="col-md-8">
                 <div class="table-responsive" id="divquestionlist">
                     <p></p>
                     <table class="table table-hover table-striped table-responsive" id="tablequestionlist">
                     </table>
                 </div><!-- close table div -->
             </div>
+
+        <div class="modal fade" id="modal-update-question" tabindex="-1" role="dialog" aria-labelledby="UpdateQuestionModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Update question</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="<c:url value="/update-question"/>" >
+                            <div class="form-group">
+                                <label for="titleInput">Title</label>
+                                <input name="title" type="text" class="form-control" id="title-qs"
+                                       aria-describedby="titleHelp" placeholder="Title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bodyInput">Body</label>
+                                <textarea rows="4" cols="50" name="body" class="form-control" id="body-qs"
+                                          aria-describedby="bodyHelp" placeholder="Body"></textarea>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary ">Update Question</button>
+                        </form>
+                    </div>
+                    <!--<div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> -->
+                </div>
+            </div>
         </div>
+
+
     </div>
     <div class="tab-pane fade" id="nav-certificate" role="tabpanel" aria-labelledby="nav-certificate-tab">...</div>
     <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">...</div>
 </div>
 
 <script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
+<script type="text/javascript" language="JavaScript" src="<c:url value='/js/admin-functions.js' />"></script>
+
 </body>
 
 <c:import url=  "/jsp/include/footer.jsp"/>
