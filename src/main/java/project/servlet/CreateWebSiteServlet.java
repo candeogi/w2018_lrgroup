@@ -1,6 +1,5 @@
 package project.servlet;
 
-import project.resource.User;
 import project.resource.Message;
 import project.database.*;
 import project.resource.WebSite;

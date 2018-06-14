@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class CreateWebSiteDatabase {
 
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.website (address, addrType) " +
+            "INSERT INTO lr_group.Website (address, addrType) " +
             "VALUES (?, ?)";
 
     /**
@@ -65,7 +65,6 @@ public class CreateWebSiteDatabase {
         }
 
     }
-
 
 }
 
