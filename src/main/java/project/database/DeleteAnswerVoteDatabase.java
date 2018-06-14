@@ -49,6 +49,7 @@ public final class DeleteAnswerVoteDatabase
     /**
      * Deletes a new object for creating an answer.
      *
+     *
      * @param con
      *            the connection to the database.
      * @param user
@@ -63,8 +64,10 @@ public final class DeleteAnswerVoteDatabase
     }
 
     /**
+     *
      * Deletes an upvote in the database.
-     * @throws SQLException
+     * @return true id the deleting is correctly done
+     *  @throws SQLException
      *             if any error occurs while storing the answer.
      */
     public boolean deleteAnswerVote() throws SQLException {

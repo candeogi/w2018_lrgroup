@@ -36,8 +36,8 @@ public class CreateWebSiteDatabase {
     private final WebSite webSite;
 
     /**
-     * @param con
-     * @param webSite
+     * @param con the reference to the connection to the database
+     * @param webSite the instance of Website to add  to the database
      */
     public CreateWebSiteDatabase(final Connection con, final WebSite webSite) {
         this.con = con;

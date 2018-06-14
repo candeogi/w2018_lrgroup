@@ -69,6 +69,7 @@ public final class CreateAnswerUpvoteDatabase {
     }
 
     /**
+     * @return return true id the answer is correctly done
      * Creates an upvote in the database.
      * @throws SQLException
      *             if any error occurs while storing the answer.

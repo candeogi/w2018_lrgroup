@@ -48,6 +48,7 @@ public final class UpdateAnswerDatabase {
     }
 
     /**
+     * @return true if the updating is done correctly
      * Updates a question in the database.
      * @throws SQLException
      *             if any error occurs while updating the user.

@@ -71,7 +71,7 @@ public final class DeleteQuestionByIDDatabase
 
     /**
      * Deletes a specific question in the database.
-     **
+     ** @return the number of deleting question????
      * @throws SQLException
      *             if any error occurs while deleting the question.
      */

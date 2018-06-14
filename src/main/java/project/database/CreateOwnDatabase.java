@@ -31,9 +31,9 @@ public class CreateOwnDatabase {
     private final String webSite;
 
     /**
-     * @param con
-     * @param utente
-     * @param website
+     * @param con the reference to the connection to the database
+     * @param utente  the id of the user (username)
+     * @param website the id of the website (address)
      */
     public CreateOwnDatabase(final Connection con, final String utente, final String website) {
         this.con = con;
