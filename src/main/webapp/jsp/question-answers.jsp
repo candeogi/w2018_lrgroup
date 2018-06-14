@@ -60,7 +60,10 @@ Since: 1.0
     </div>
 </header><!--close header-->
 
-<div id="loggedInUser" data-loggedInUser="${sessionScope.loggedInUser}"></div>
+<div id="loggedInUser"
+     data-loggedInUser="${sessionScope.loggedInUser}"
+     data-currentQuestion="1"
+></div>
 <!-- Container Div -->
 <div class="container">
 
@@ -97,7 +100,7 @@ Since: 1.0
                 <label for="addAnswerTextArea">Answer this question</label>
                 <textarea class="form-control" id="addAnswerTextArea" rows="2"></textarea>
             </div>
-            <input type="button" onclick="addNewAnswerForm()" value="Answer">
+            <input id="addAnswerButton" type="button" value="Answer">
         </form>
     </div>
     <hr>
