@@ -99,8 +99,8 @@
     </div>
 
 
-   <!--Custom script test-->
-    <script type="text/javascript" src="test.js"></script>
+
+
 
         <p><a href="<c:url value="/?p=create-question"/>">Create a question</a></p>
         <p><a href="<c:url value="/show-questions"/>">Show questions</a></p>
@@ -119,8 +119,9 @@
 
             </c:when>
         </c:choose>
-
-    <script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
+    <!--Custom script test-->
+    <script type="text/javascript" src="js/test.js"></script>
+    <script type="text/javascript" language="JavaScript" src="js/ajax-question.js"></script>
     </body>
 
     <c:import url="/jsp/include/footer.jsp"/>

@@ -115,6 +115,11 @@ function printSingleAnswer(answer, whereToAppendId){
     deleteLink.setAttribute('onclick','deleteAnswer('+answer['ID']+')');
     deleteLink.setAttribute('href','javascript:void(0);');
 
+    var editLink = document.createElement('a');
+    editLink.setAttribute('onclick','editAnswer('+answer['ID']+')');
+    editLink.setAttribute('href','javascript:void(0);');
+    editLink.className = 'editButton';
+
     //create custom timestamp
     var small = document.createElement('small');
     var timestampText = document.createTextNode('Sent on '+answer['timestamp']
@@ -138,10 +143,14 @@ function printSingleAnswer(answer, whereToAppendId){
     p.appendChild(answerTextBody);
     small.appendChild(timestampText);
     small.appendChild(deleteLink);
-    deleteLink.appendChild(document.createTextNode('delete'));
+    deleteLink.appendChild(document.createTextNode(' delete '));
 
+    if(currentUser === answer['IDUser']){
+        small.appendChild(editLink);
+        editLink.appendChild(document.createTextNode(' edit '));
+    }
     /*Works but there is a loop issue TODO fix*/
-    //visualizeAnswersToAnswer(answer['ID']);
+    visualizeAnswersToAnswer(answer['ID']);
     //this calls answerDropDown(idAnswer) that calls printSingleAnswer for each answer recursively(answer, idAnswer)
 
 }
@@ -175,7 +184,7 @@ function visualizeAnswersToAnswer(idAnswer){
 $("#addAnswerButton").click(function () {
     addNewAnswerForm();
 });
-/*Add a new answer function*/
+/*Add a new answer function - works but goes on error TODO*/
 function addNewAnswerForm(){
 
     var addAnswerText = $("#addAnswerTextArea").val();
@@ -189,14 +198,23 @@ function addNewAnswerForm(){
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds() +"."
         + currentdate.getMilliseconds();
-    //works but goes on error TODO
+
+    var answerObject = {
+        "ID":-1,
+        "text": addAnswerText,
+        "fixed":false,
+        "timestamp": timestamp,
+        "IDUser": currentUser,
+        "parentID": -1,
+        "questionID":1
+    };
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/web-app-project/rest/answer/",
-        data: JSON.stringify({"resource-list":[
+        data: JSON.stringify(
                 {
                     "answer":{
-                        "ID":1,
+
                         "text": addAnswerText,
                         "fixed":false,
                         "timestamp": timestamp,
@@ -204,17 +222,22 @@ function addNewAnswerForm(){
                         "parentID": -1,
                         "questionID":1
                     }
-                }]
+
         }),
         contentType: "application/json",
         dataType: 'json',
         success: function() {
-            alert("hey its me");
+            //alert("it works!);
         },
-        error: function(){
-            alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
+        error: function(jqXHR,textStatus,errorThrown){
+            alert("" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
         }
     });
+    $("#addAnswerTextArea").val('');
+    printSingleAnswer(answerObject, 0);
 }
 
 function deleteAnswer(id){
@@ -226,13 +249,61 @@ function deleteAnswer(id){
         contentType: "application/json",
         dataType: 'json',
         success: function() {
-            alert("hey its me working");
+            //alert("hey its me working");
         },
-        error: function(){
-            alert("error on DELETE http://localhost:8080/web-app-project/rest/answer/"+id);
+        error: function(jqXHR,textStatus,errorThrown){
+            alert("" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
         }
     });
+    $('#'+id+'').hide();
 }
+function editAnswer(id){
+    var answerParagraph = $('#'+id).find('p').first();
+    var answerPreviousText = answerParagraph.text();
+    answerParagraph.replaceWith($('<textarea id="swap">'+answerPreviousText+'</textarea><br>'));
+    var buttonPressed = $('#'+id).find('.editButton').first();
 
+    var doneButton = document.createElement('a');
+    doneButton.setAttribute('onclick','editDoneAnswer('+id+')');
+    doneButton.setAttribute('href','javascript:void(0);');
+    doneButton.className = 'doneButton';
+    doneButton.appendChild(document.createTextNode(' done '));
+    buttonPressed.replaceWith(doneButton);
+}
+function editDoneAnswer(id){
+    var answerNewTextArea = $('#'+id).find('textarea').first();
+    var newAnswerTextFromTextArea = answerNewTextArea.val();
+    /*
+    var newAnswerObject = {
+        "ID":id,
+        "text": newAnswerTextFromTextArea
+    };
+    $.ajax({
+        method: "PUT",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: JSON.stringify(newAnswerObject),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function() {
+            //alert("it works!);
+        },
+        error: function(){
+            //alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
+        }
+    });*/
+    answerNewTextArea.replaceWith($('<p>'+newAnswerTextFromTextArea+'</p>'));
+    $('#'+id).find('.answer-body').find('br').first().replaceWith('');
+    var doneButton = $('#'+id).find('.doneButton').first();
+
+    var editLink = document.createElement('a');
+    editLink.setAttribute('onclick','editAnswer('+id+')');
+    editLink.setAttribute('href','javascript:void(0);');
+    editLink.className = 'editButton';
+    editLink.appendChild(document.createTextNode(' edit '));
+    doneButton.replaceWith(editLink);
+}
 
 

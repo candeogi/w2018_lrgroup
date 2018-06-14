@@ -61,6 +61,7 @@ public final class CreateAnswerDatabase {
     }
 
     /**
+     * @return return true id the answer is correctly done
      * Creates a answer in the database.
      * @throws SQLException
      *             if any error occurs while storing the answer.

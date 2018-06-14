@@ -1,3 +1,5 @@
+//initial instruction in order to implement the listener of the button
+
 $(document).ready(function () {
     visualizeWebsite();
     visualizeCertificate();
@@ -13,8 +15,10 @@ $(document).ready(function () {
 
 });
 
-var xhrWebsite;
 
+var xhrWebsite;
+//This function is called when a user wants to add a site, so there is a called to the server and
+//then the updating of the User Interface.
 function addWebsite() {
     var newAddressWeb = $("#address-form").val();
     console.log("a" + newAddressWeb);
@@ -23,7 +27,6 @@ function addWebsite() {
     xhrWebsite = new XMLHttpRequest();
     xhrWebsite.onreadystatechange = function () {
         if (xhrWebsite.readyState == 4) {
-            var data = xhrWebsite.responseText;
             alert("communication problem, retry")
         }
     }
@@ -36,7 +39,8 @@ function addWebsite() {
     xhrWebsite.send(information);
 }
 
-
+//This function is called then the called for adding a new site, this function called
+//use an ajax call in order to updating the website table.
 function addRowWebsite() {
     $('#websiteModal').modal('hide');
     if (xhrWebsite.readyState === XMLHttpRequest.DONE) {
@@ -59,7 +63,7 @@ function addRowWebsite() {
 }
 
 var xhr2;
-
+//This funtion is used to request to the server the list of website related to a user
 function visualizeWebsite() {
     xhr2 = new XMLHttpRequest();
     xhr2.onreadystatechange = function () {
@@ -78,6 +82,8 @@ function visualizeWebsite() {
 
 var xhrCertificate;
 
+//This function is called to retrieve the list of certificate related to a user
+
 function visualizeCertificate() {
     xhrCertificate = new XMLHttpRequest();
     xhrCertificate.onreadystatechange = function () {
@@ -95,7 +101,7 @@ function visualizeCertificate() {
 }
 
 var rowToDeleteCert;
-
+//This function is used to build the content of the certificate table
 function printResultCertificate() {
     if (xhrCertificate.readyState === XMLHttpRequest.DONE) {
 
@@ -172,7 +178,13 @@ function printResultCertificate() {
 }
 
 
+
+
+
 var rowToDelete;
+
+//when the request for the website is done, this function is called for constructing
+//the content for the website table
 
 function printResult() {
     if (xhr2.readyState === XMLHttpRequest.DONE) {
@@ -251,7 +263,7 @@ function printResult() {
 
 
 var xhrDelete;
-
+//This function is called to delete a website from the list of the user
 function deleteWebsite(nameWebsite) {
     xhrDelete = new XMLHttpRequest();
     xhrDelete.onreadystatechange = function () {
@@ -268,7 +280,8 @@ function deleteWebsite(nameWebsite) {
     xhrDelete.send();
 }
 
-
+//This function is called when the deleting in the server of the website is done,
+//so the system update also the User interface
 function deleteRowWebSite() {
     if (xhrDelete.readyState === XMLHttpRequest.DONE) {
 
@@ -281,7 +294,7 @@ function deleteRowWebSite() {
 }
 
 var xhrDeleteCertificate;
-
+//This function is called when a user wants to delete a certificate
 function deleteCertificate(nameCert) {
     xhrDeleteCertificate = new XMLHttpRequest();
     xhrDeleteCertificate.onreadystatechange = function () {
@@ -301,7 +314,8 @@ function deleteCertificate(nameCert) {
 
 }
 
-
+//This function is called when the deleting of the certificate in the server is done.
+//This function has the goal of updating the user interface
 function deleteRowCertificate() {
     if (xhrDeleteCertificate.readyState === XMLHttpRequest.DONE) {
 
@@ -315,6 +329,7 @@ function deleteRowCertificate() {
 
 var xhrCertificate;
 
+//This function is called when the user wants to add a new certificate
 function addCertificate() {
     var newName = $("#name-cert-form").val();
     var newOrg = $("#org-cert-form").val();
@@ -337,6 +352,7 @@ function addCertificate() {
 
 }
 
+//When the adding of the certificate in the server is done, this function is called to updating the User Interface
 function addRowCertificate() {
     $('#certificationModal').modal('hide');
     if (xhrCertificate.readyState === XMLHttpRequest.DONE) {
@@ -358,6 +374,8 @@ function addRowCertificate() {
     }
 }
 
+
+//This function is called when the user wants to modify the personal information
 function modifyValue() {
     var oldname = $("#name-value").text().trim();
     $("#name-value").hide();
@@ -402,6 +420,7 @@ function modifyValue() {
 }
 
 
+//This function is called when the user wants to submit the new personal information
 function saveValue() {
     var name = $('input[name=new-name]').val();
     var surname = $('input[name=new-surname]').val();
@@ -425,6 +444,8 @@ function saveValue() {
     returnToVisualization(name, surname, birthday, description);
 }
 
+//After the updating in the server of the user information, this function is called with the aim
+//of reporting the UI to normal presentation.
 function returnToVisualization(name, surname, birthday, description) {
     $('#form-name').remove();
     $('#name-value').show();

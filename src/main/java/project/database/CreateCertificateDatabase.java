@@ -50,8 +50,8 @@ public final class CreateCertificateDatabase {
     private final Certificate certificate;
 
     /**
-     * @param con
-     * @param certificate
+     * @param con  the reference to the connection to the database
+     * @param certificate  the instance of the certificate to add to the database
      */
     public CreateCertificateDatabase(final Connection con, final Certificate certificate) {
         this.con = con;

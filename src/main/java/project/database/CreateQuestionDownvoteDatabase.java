@@ -16,30 +16,28 @@
 
 package project.database;
 
-import project.resource.Answer;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates an answer in the database.
+ * Creates a question downvotevote in the database.
  *
  * @author lrgroup
  * @author Alberto Pontini
  */
-public final class CreateAnswerUpvoteDatabase {
+public final class CreateQuestionDownvoteDatabase {
 
     /**
      * The SQL statements to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.VoteAnswer (answer, idUser, vote) " +
+            "INSERT INTO lr_group.VoteQuestion (question, idUser, vote) " +
             "VALUES (?, ?, ?)";
 
     private static final String STATEMENT_2 = "" +
-            "DELETE FROM lr_group.VoteAnswer" +
-            "WHERE answer=? AND idUser=?";
+            "DELETE FROM lr_group.VoteQuestion" +
+            "WHERE question=? AND idUser=?";
 
     /**
      * The connection to the database
@@ -47,48 +45,48 @@ public final class CreateAnswerUpvoteDatabase {
     private final Connection con;
 
     /**
-     * The answer to be updated in the database
+     * The question to be voted in the database
      */
-    private final int idAnswer;
+    private final int idQuestion;
     private final String user;
 
     /**
-     * Creates a new object for creating an answer.
+     * Creates a new object for creating a question downvote.
      *
      * @param con
      *            the connection to the database.
      * @param user
      *            the user who voted the question.
-     * @param idAnswer
-     *            the answer to be voted in the database.
+     * @param idQuestion
+     *            the question to be voted in the database.
      */
-    public CreateAnswerUpvoteDatabase(final Connection con, final String user ,final int idAnswer) {
+    public CreateQuestionDownvoteDatabase(final Connection con, final String user ,final int idQuestion) {
         this.con = con;
-        this.idAnswer = idAnswer;
+        this.idQuestion = idQuestion;
         this.user = user;
     }
 
     /**
-     * @return return true id the answer is correctly done
-     * Creates an upvote in the database.
+     * @return return true id the question is correctly voted
+     * Creates a downvotevote in the database.
      * @throws SQLException
      *             if any error occurs while storing the answer.
      */
-    public boolean createAnswerUpvote() throws SQLException {
+    public boolean createQuestionDownvote() throws SQLException {
 
         PreparedStatement pstmt = null;
 
         try {
             pstmt = con.prepareStatement(STATEMENT_2);
-            pstmt.setInt(1, idAnswer);
+            pstmt.setInt(1, idQuestion);
             pstmt.setString(2,user);
 
             pstmt.execute();
 
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, idAnswer);
+            pstmt.setInt(1, idQuestion);
             pstmt.setString(2, user);
-            pstmt.setInt(3, 1);
+            pstmt.setInt(3, -1);
 
             pstmt.execute();
 

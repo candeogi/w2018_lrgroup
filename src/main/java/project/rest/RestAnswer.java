@@ -165,9 +165,12 @@ public final class RestAnswer extends RestResource
 
 		try{
 
-			final Answer answer = Answer.fromJSON(req.getInputStream());
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("novote") + 6);
 
-			a = new DeleteAnswerVoteDatabase(con,req.getSession().getAttribute("loggedInUser").toString() ,answer.getID()).deleteAnswerVote();
+			final int answerID = Integer.parseInt(path.substring(1));
+
+			a = new DeleteAnswerVoteDatabase(con,req.getSession().getAttribute("loggedInUser").toString() , answerID).deleteAnswerVote();
 
 			if(a)
 			{
@@ -189,21 +192,26 @@ public final class RestAnswer extends RestResource
 		}
 	}
 
-	public void countVotes() throws IOException
+	public void countAnswerVotes() throws IOException
 	{
 		int a;
 		Message m = null;
+		Votes v;
 
 		try{
 
-			final Answer answer = Answer.fromJSON(req.getInputStream());
-			a = 1; //TEMP
-			//a = new CountAnswerVotesDatabase(con,req.getSession().getAttribute("loggedInUser").toString() ,answer.getID()).countAnswerVotes();
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("votes") + 5);
+
+			final int answerID = Integer.parseInt(path.substring(1));
+			
+			a = new CountAnswerVotesDatabase(con, answerID).countAnswerVotes();
 
 			if(a!=-1)
 			{
+				v = new Votes("answer",a,answerID);
 				res.setStatus(HttpServletResponse.SC_OK);
-				m.toJSON(res.getOutputStream());
+				v.toJSON(res.getOutputStream());
 			}
 			else
 			{

@@ -206,7 +206,7 @@ public class Answer extends Resource
 
 			// there are no more events
 			if (jp.nextToken() == null) {
-				throw new IOException("Unable to parse JSON: no employee object found.");
+				throw new IOException("Unable to parse JSON: no answer object found.");
 			}
 		}
 

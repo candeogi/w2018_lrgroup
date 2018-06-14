@@ -20,8 +20,8 @@ public class WebSite extends Resource {
 
 
     /**
-     * @param address
-     * @param type
+     * @param address the address of the website
+     * @param type the type of the website (ownsite, bitbucket, github or linkedin)
      */
 
     public WebSite(final String address, final String type) {
