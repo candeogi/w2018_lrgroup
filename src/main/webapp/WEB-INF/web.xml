@@ -94,7 +94,17 @@
 		<servlet-name>CreateWebsiteServlet</servlet-name>
 		<servlet-class>project.servlet.CreateWebSiteServlet</servlet-class>
 	</servlet>
-	
+
+	<servlet>
+		<servlet-name>CreateCertificateServlet</servlet-name>
+		<servlet-class>project.servlet.CreateHaveCertificateServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateCertificateServlet</servlet-name>
+		<url-pattern>/create-have-certificate</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>CreateWebsiteServlet</servlet-name>
 		<url-pattern>/create-website</url-pattern>

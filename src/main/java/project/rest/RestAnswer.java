@@ -198,7 +198,7 @@ public final class RestAnswer extends RestResource
 
 			final Answer answer = Answer.fromJSON(req.getInputStream());
 			a = 1; //TEMP
-			//a = new DeleteAnswerVoteDatabase(con,req.getSession().getAttribute("loggedInUser").toString() ,answer.getID()).deleteAnswerVote();
+			//a = new CountAnswerVotesDatabase(con,req.getSession().getAttribute("loggedInUser").toString() ,answer.getID()).countAnswerVotes();
 
 			if(a!=-1)
 			{
@@ -319,7 +319,7 @@ public final class RestAnswer extends RestResource
 		{
 			// parse the URI path to extract the ID
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("id") +2);
+			path = path.substring(path.lastIndexOf("question") +8);
 
 			final int questionID = Integer.parseInt(path.substring(1));
 
@@ -364,10 +364,9 @@ public final class RestAnswer extends RestResource
 		{
 			// parse the URI path to extract the ID
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("idAnswer") +8);
+			path = path.substring(path.lastIndexOf("parentAns") +9);
 
 			final int questionID = Integer.parseInt(path.substring(1));
-
 
 			// creates a new object for accessing the database and search the answers
 			al = new SearchAnswerByAnswerIDDatabase(con, questionID).searchAnswerByAnswerID();

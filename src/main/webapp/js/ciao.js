@@ -7,15 +7,19 @@ $(document).ready(function () {
     $("#saveWebsite").click(function () {
         addWebsite();
     });
+    $("#saveCertificate").click(function () {
+        addCertificate();
+    })
 
 });
 
 var xhrWebsite;
+
 function addWebsite() {
     var newAddressWeb = $("#address-form").val();
-    console.log("a"+newAddressWeb);
+    console.log("a" + newAddressWeb);
     var newTypeWeb = $("#type-form").val();
-    console.log("b"+newTypeWeb);
+    console.log("b" + newTypeWeb);
     xhrWebsite = new XMLHttpRequest();
     xhrWebsite.onreadystatechange = function () {
         if (xhrWebsite.readyState == 4) {
@@ -123,7 +127,7 @@ function printResultCertificate() {
                 var tr = document.createElement('tr');
 
 
-                var td_id= document.createElement('td');
+                var td_id = document.createElement('td');
                 td_id.appendChild(document.createTextNode(certificate[i].certificate.ID))
                 tr.appendChild(td_id);
 
@@ -151,8 +155,8 @@ function printResultCertificate() {
                 tr.appendChild(td_delete);
                 tbody.appendChild(tr);
                 button.addEventListener("click", function () {
-                    rowToDeleteCert=$(this).closest('tr').get(0);
-                    var nameCert=rowToDeleteCert.childNodes[0].innerHTML;
+                    rowToDeleteCert = $(this).closest('tr').get(0);
+                    var nameCert = rowToDeleteCert.childNodes[0].innerHTML;
                     deleteCertificate(nameCert);
                 });
             }
@@ -278,7 +282,7 @@ function deleteRowWebSite() {
 
 var xhrDeleteCertificate;
 
-function deleteCertificate(nameCert){
+function deleteCertificate(nameCert) {
     xhrDeleteCertificate = new XMLHttpRequest();
     xhrDeleteCertificate.onreadystatechange = function () {
         if (xhr.readyState == 4) {
@@ -290,7 +294,7 @@ function deleteCertificate(nameCert){
     console.log("deleting certificate");
     xhrDeleteCertificate.onreadystatechange = deleteRowCertificate;
     var username = $("#username-value").text().trim();
-    var idCertificate=nameCert;
+    var idCertificate = nameCert;
     xhrDeleteCertificate.open('DELETE', 'rest/certificate/user/' + username + '/id/' + idCertificate, true);
     xhrDeleteCertificate.send();
 
@@ -309,6 +313,50 @@ function deleteRowCertificate() {
     }
 }
 
+var xhrCertificate;
+
+function addCertificate() {
+    var newName = $("#name-cert-form").val();
+    var newOrg = $("#org-cert-form").val();
+    var newDate = $("#date-cert-form").val();
+    console.log(newDate);
+    xhrCertificate = new XMLHttpRequest();
+    xhrCertificate.onreadystatechange = function () {
+        if (xhrCertificate.readyState == 4) {
+            var data = xhrCertificate.responseText;
+            alert("communication problem, retry")
+        }
+    }
+    xhrCertificate.open('POST', 'create-have-certificate', true);
+    xhrCertificate.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhrCertificate.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhrCertificate.onreadystatechange = addRowCertificate;
+    var information = "certificate-name=" + newName + "&" + "organization=" + newOrg + "&" + "achievementDate=" + newDate;
+    xhrCertificate.send(information);
+
+
+}
+
+function addRowCertificate() {
+    $('#certificationModal').modal('hide');
+    if (xhrCertificate.readyState === XMLHttpRequest.DONE) {
+
+        if (xhrCertificate.status == 200) {
+            var table = document.getElementById("table-certificate");
+            while (table.firstChild) {
+                table.removeChild(table.firstChild);
+
+            }
+
+            visualizeCertificate();
+        }
+        else {
+            alert('There was a problem with the request.')
+        }
+
+
+    }
+}
 
 function modifyValue() {
     var oldname = $("#name-value").text().trim();

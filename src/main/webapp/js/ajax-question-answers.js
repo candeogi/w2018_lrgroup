@@ -3,95 +3,95 @@ Author: Giovanni Candeo
  */
 var loggedInUser = document.getElementById("loggedInUser");
 var currentUser = loggedInUser.getAttribute("data-loggedInUser");
+var currentQuestion = loggedInUser.getAttribute("data-currentQuestion");
+
+
+/*REST URL*/
+var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/'+currentQuestion;
+var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/question/'+currentQuestion;
 
 /*At start do this*/
-$(function() {
+window.onload = initialPageLoad;
 
-    /*TEMPORARY TEST URL*/
-    var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/1';
-    var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/id/1';
-
-
-
-    loadDoc(myQuestionRestUrl, loadQuestion);
-    loadDoc(myAnswersRestUrl, loadAnswers);
-});
+function initialPageLoad(){
+    visualizeQuestion();
+    visualizeAnswers();
+}
 /* USER MANAGEMENT */
 
+function visualizeQuestion(){
+    $.ajax({
+        method: 'GET',
+        url: myQuestionRestUrl,
+        success: function(data) {
+            var resourceList = data['resource-list'];
+            var question = resourceList[0].question;
 
-function loadDoc(url,cFunction){
-    var httpRequest;
-    httpRequest = new XMLHttpRequest();
-    if (!httpRequest) {
-        alert('Cannot create an XMLHTTP instance');
-        return false;
-    }
-    httpRequest.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){
-            cFunction(this);
+            var divQuestionContainer = document.getElementById('question-container');
+            //question title
+            var questionTitle = document.getElementById('question-title');
+            questionTitle.appendChild(document.createTextNode(question['title']));
+            //question creation timestamp
+            var questionTime = document.getElementById('question-time');
+            questionTime.appendChild(document.createTextNode("Sent by "+question['IDUser']+" on "+question['timestamp']));
+            //question body
+            var questionBody = document.getElementById('question-body');
+            var p = document.createElement('p')
+            p.appendChild(document.createTextNode(question['body']));
+            questionBody.appendChild(p);
+            //question last modified TODO check last modified how it behaves
+            if(question["lastModified"] !== ""){
+                var questionLastModified = document.getElementById('question-lastmodified');
+                questionLastModified.appendChild(document.createTextNode("Last modified on "+question['lastModified']));
+            }
+            //username - questioneer
+            var questioneerUsername = document.getElementById('questioneer-name');
+            questioneerUsername.appendChild(document.createTextNode(question['IDUser']));
+        },
+        error: function(){
+            alert("Something went wrong on loading the question!");
         }
-    };
-    httpRequest.open('GET', url, true);
-    httpRequest.send();
+    });
+}
+function visualizeAnswers(){
+    $.ajax({
+        method: 'GET',
+        url: myAnswersRestUrl,
+        success: function(data) {
+            var resourceList = data['resource-list'];
+            //alert(resourceList[0].answer['text']); test rest if works
+
+            //clear old list
+            $("#answerListDiv").html("");
+
+            //<div id="answerListDiv><ul class="answer-list">
+            var answerListDiv = document.getElementById("answerListDiv");
+            var baseAnswerList = document.createElement("ul");
+            baseAnswerList.id =0+'ul';
+            baseAnswerList.className = 'answer-list';
+            answerListDiv.appendChild(baseAnswerList);
+
+
+            //lets print all the answers
+            for(var i =0; i< resourceList.length; i++){
+                printSingleAnswer(resourceList[i].answer, 0);
+            }
+        },
+        error: function(){
+            alert("Something went wrong on loading the answers!");
+        }
+    });
 }
 
-/* Loads the question via ajax */
-function loadQuestion(httpRequest){
-    var restResponse = httpRequest.responseText;
-    var jsonData = JSON.parse(restResponse);
-    var resourceList = jsonData['resource-list'];
-    var question = resourceList[0].question;
-
-    //I SHOULD STORE ELEMENTS IN A JS OBJECT SO I CAN MANIPULATE THEM. maybe?
- 
-    var divQuestionContainer = document.getElementById('question-container');
-    //question title
-    var questionTitle = document.getElementById('question-title');
-    questionTitle.appendChild(document.createTextNode(question['title']));
-    //question creation timestamp
-    var questionTime = document.getElementById('question-time');
-    questionTime.appendChild(document.createTextNode("Sent by "+question['IDUser']+" on "+question['timestamp']));
-    //question body
-    var questionBody = document.getElementById('question-body');
-    var p = document.createElement('p')
-    p.appendChild(document.createTextNode(question['body']));
-    questionBody.appendChild(p);
-    //question last modified TODO check last modified how it behaves
-    if(question["lastModified"] !== ""){
-        var questionLastModified = document.getElementById('question-lastmodified');
-        questionLastModified.appendChild(document.createTextNode("Last modified on "+question['lastModified']));  
-    }
-    //username - questioneer
-    var questioneerUsername = document.getElementById('questioneer-name');
-    questioneerUsername.appendChild(document.createTextNode(question['IDUser']));
-}
-
-
-
-/*Loads answers via ajax*/
-function loadAnswers(httpRequest){
-    var restResponse = httpRequest.responseText;
-    var jsonData = JSON.parse(restResponse);
-    var resourceList = jsonData['resource-list'];
-    //alert(resourceList[0].answer['text']); test rest if works
-
-    //clear old list
-    var baseAnswerList = document.getElementById("base-answer-list");
-    baseAnswerList.innerHTML = '';
-    forEachAnswer(resourceList, showAnswer);
-}
-
-/*Utility function: execute myFunction for each answer object on myResourceList*/
-function forEachAnswer(myResourceList, myFunction){
-    for(var i =0; i< myResourceList.length; i++){
-        myFunction(myResourceList[i].answer);
-    }
-}
-
-function showAnswer(answer){
+function printSingleAnswer(answer, whereToAppendId){
     //console.log(answer['text']);
-    var baseAnswerList = document.getElementById("base-answer-list");
+
+    //always append to the unordered list with id 'id'+'ul'
+    var baseAnswerList = document.getElementById(whereToAppendId+'ul');
+
+    // <li id=answer['ID']>
     var answerListElement = document.createElement("li");
+    answerListElement.id = ''+answer['ID'];
     var answerContainer = document.createElement("div");
     answerContainer.className = 'answer-container';
     var answerContent = document.createElement("div");
@@ -140,12 +140,44 @@ function showAnswer(answer){
     small.appendChild(deleteLink);
     deleteLink.appendChild(document.createTextNode('delete'));
 
+    /*Works but there is a loop issue TODO fix*/
+    //visualizeAnswersToAnswer(answer['ID']);
+    //this calls answerDropDown(idAnswer) that calls printSingleAnswer for each answer recursively(answer, idAnswer)
+
 }
 
+function visualizeAnswersToAnswer(idAnswer){
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/web-app-project/rest/answer/parentAns/'+idAnswer,
+        success: function(data) {
+            var resourceList = data['resource-list'];
+
+            var baseAnswerListItem= document.getElementById(idAnswer);
+            var baseAnswerList = document.createElement("ul");
+            baseAnswerList.className = 'answer-list';
+            //always append to the unordered list with id 'id'+'ul'
+            baseAnswerList.id = idAnswer+'ul';
+            baseAnswerListItem.appendChild(baseAnswerList);
+
+            //lets print all the answers
+            for(var i =0; i< resourceList.length; i++){
+                printSingleAnswer(resourceList[i].answer, idAnswer);
+            }
+        },
+        error: function(){
+            alert("Something went wrong on loading the answers of answer"+idAnswer+"!");
+        }
+    });
+}
+
+
+$("#addAnswerButton").click(function () {
+    addNewAnswerForm();
+});
 /*Add a new answer function*/
 function addNewAnswerForm(){
-    var AddAnswerForm = document.getElementById("AddAnswerForm");
-    //var addAnswerTextArea = document.getElementById("addAnswerTextArea").value;
+
     var addAnswerText = $("#addAnswerTextArea").val();
 
     var currentdate = new Date();
@@ -157,9 +189,11 @@ function addNewAnswerForm(){
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds() +"."
         + currentdate.getMilliseconds();
-
-    $.post("http://localhost:8080/web-app-project/rest/answer/",
-        JSON.stringify({"resource-list":[
+    //works but goes on error TODO
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: JSON.stringify({"resource-list":[
                 {
                     "answer":{
                         "ID":1,
@@ -167,20 +201,37 @@ function addNewAnswerForm(){
                         "fixed":false,
                         "timestamp": timestamp,
                         "IDUser": currentUser,
-                        "parentID":-1,
+                        "parentID": -1,
                         "questionID":1
                     }
                 }]
         }),
-        function(data,status){ //why this doesnt work
-            alert("Data: " + data + "\nStatus: " + status);
-            $("#addAnswerTextArea").val('');
+        contentType: "application/json",
+        dataType: 'json',
+        success: function() {
+            alert("hey its me");
+        },
+        error: function(){
+            alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
         }
-    );
+    });
 }
 
 function deleteAnswer(id){
-    alert(id);
+    //doesnt work and goes on error TODO
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: JSON.stringify({"answer":{"ID": id}}),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function() {
+            alert("hey its me working");
+        },
+        error: function(){
+            alert("error on DELETE http://localhost:8080/web-app-project/rest/answer/"+id);
+        }
+    });
 }
 
 

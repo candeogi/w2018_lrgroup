@@ -48,9 +48,11 @@ public class CreateHaveCertificateServlet extends SessionManagerServlet {
         try {
             // retrieves the request parameters
             name = req.getParameter("certificate-name");
+            getServletContext().log("certificate : "+name);
             organization = req.getParameter("organization");
+            getServletContext().log("certificate : "+organization);
             achievementDate = req.getParameter("achievementDate");
-
+            getServletContext().log("certificate : "+achievementDate);
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date aDate = new Date(dateFormat.parse(achievementDate).getTime());
 
@@ -64,10 +66,12 @@ public class CreateHaveCertificateServlet extends SessionManagerServlet {
         }catch(ParseException pe) {
             //Should not happen
             m = new Message("Birthday not correct", "E300", pe.getMessage());
+            getServletContext().log(pe.getMessage());
 
         }catch (SQLException ex) {
             m = new Message("Cannot create the Have Certificate: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
+            getServletContext().log(ex.getMessage());
         }
 
         // stores the user and the message as a request attribute
@@ -75,7 +79,7 @@ public class CreateHaveCertificateServlet extends SessionManagerServlet {
         req.setAttribute("message", m);
 
         // forwards the control to the create-user-result JSP
-        req.getRequestDispatcher("/jsp/create-answer-result.jsp").forward(req, res);
+        req.getRequestDispatcher("/jsp/user-information.jsp").forward(req, res);
     }
 
 

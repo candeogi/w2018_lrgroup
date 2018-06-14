@@ -4,6 +4,7 @@ import project.resource.WebSite;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -20,7 +21,9 @@ public class CreateWebSiteDatabase {
             "INSERT INTO lr_group.Website (address, addrType) " +
             "VALUES (?, CAST ( ? AS  lr_group.websitetype ))";
 
-    //private static final String STATEMENT = " IF NOT EXISTS ( SELECT * FROM lr_group.Website WHERE address = ? )  BEGIN INSERT INTO lr_group.Website (address, addrType) VALUES (?, CAST ( ? AS  lr_group.websitetype )) END ";
+    private static final String STATEMENT2 = "" +
+            "SELECT address FROM lr_group.Website " +
+            "WHERE address = ? ";
 
     /**
      * The connection to the database
@@ -49,14 +52,23 @@ public class CreateWebSiteDatabase {
     public void createWebSite() throws SQLException {
 
         PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
 
         try {
-            pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setString(1, webSite.getAddress());
-            pstmt.setString(2, webSite.getType());
 
-            pstmt.execute();
+            pstmt2 = con.prepareStatement(STATEMENT2);
+            pstmt2.setString(1, webSite.getAddress());
+            ResultSet rs = pstmt2.executeQuery();
 
+            boolean rsQ = rs.next();
+
+            if (!rsQ) {
+                pstmt = con.prepareStatement(STATEMENT);
+                pstmt.setString(1, webSite.getAddress());
+                pstmt.setString(2, webSite.getType());
+
+                pstmt.execute();
+            }
         } finally {
             if (pstmt != null) {
                 pstmt.close();
