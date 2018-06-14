@@ -22,7 +22,7 @@ public final class LogoutServlet extends AbstractDatabaseServlet {
 
         Message m = null;
 
-        res.sendRedirect(req.getContextPath()+"/jsp/index.jsp");
+        res.sendRedirect(req.getContextPath());
 
     }
 }

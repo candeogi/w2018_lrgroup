@@ -1,5 +1,6 @@
 package project.servlet;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import project.resource.User;
 import project.resource.Message;
 import project.database.*;
@@ -61,7 +62,11 @@ public final class UpdateUserServlet extends SessionManagerServlet
 		try
 		{
 			// retrieves the request parameters
-			username = (String) req.getSession().getAttribute("loggedInUser");
+			if(req.getParameter("username") != null)
+				username = req.getParameter("username");
+			else
+				username = (String) req.getSession().getAttribute("loggedInUser");
+
             getServletContext().log("loggedUser: "+username);
 
 			name = req.getParameter("name");
@@ -96,8 +101,11 @@ public final class UpdateUserServlet extends SessionManagerServlet
 			bdate=bdate.replace("/","-");
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     		Date birthday = new Date(dateFormat.parse(bdate).getTime());
-			
-			u = new User(email, name, surname, username, null ,"", false, null, birthday, description);
+
+    		if(req.getParameter("admin-modifying")!= null && req.getParameter("isAdmin")!=null)
+				u = new User(email, name, surname, username, null ,"", true, null, birthday, description);
+    		else
+    			u = new User(email, name, surname, username, null ,"", false, null, birthday, description);
 
 			// creates a new object for accessing the database and updates the user
 			new UpdateUserDatabase(getDataSource().getConnection(), u).updateUser();
@@ -125,7 +133,13 @@ public final class UpdateUserServlet extends SessionManagerServlet
 		}
 		else
 		{
-			res.sendRedirect(req.getContextPath() + "/?p=user&u=" + username);
+
+			String url = req.getParameter("view");
+			getServletContext().log("view : "+ url);
+			if(url != null)
+				res.sendRedirect(req.getContextPath() + "/?p=" + url);
+			else
+				res.sendRedirect(req.getContextPath() + "/?p=user&u=" + username);
 		}
 	}
 

@@ -2,6 +2,9 @@ var username;
 var email;
 var name;
 var surname;
+var bdate;
+var description;
+var isadmin;
 var httpRequest2;
 var url2;
 
@@ -42,6 +45,10 @@ function userData(){
                 email = user['email'];
                 name = user['name'];
                 surname = user['surname'];
+                bdate = user['birthday'];
+                description = user['description'];
+                isadmin = user['isAdmin'];
+
         }
 
         else {
@@ -53,8 +60,17 @@ function userData(){
 }
 
 function fillForm(){
+    $('#formUser').find('[name="isAdmin"]').attr("disabled",false);
+    $('#userupdatingID').text("You're updating " + username);
     $('#formUser').find('[name="email"]').val(email);
     $('#formUser').find('[name="name"]').val(name);
     $('#formUser').find('[name="surname"]').val(surname);
+    $('#formUser').find('[name="bdate"]').val(bdate);
+    $('#formUser').find('[name="description"]').text(description);
+    $('#formUser').find('[name="isAdmin"]').prop("checked",isadmin);
+    if($('#admin-username').val() == username){
+        $('#formUser').find('[name="isAdmin"]').attr("disabled",true);
+    }
+
 
 }

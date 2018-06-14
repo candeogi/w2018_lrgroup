@@ -18,7 +18,7 @@ public final class UpdateUserDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "UPDATE lr_group.Utente SET email=?, name=?, surname=?, birthday=?, description=? " +
+            "UPDATE lr_group.Utente SET email=?, name=?, surname=?, birthday=?, description=?, isAdmin=?" +
             "WHERE username=?";
 
     /**
@@ -60,7 +60,8 @@ public final class UpdateUserDatabase {
             pstmt.setString(3, user.getSurname());
             pstmt.setDate(4, user.getBirthday());
             pstmt.setString(5, user.getDescription());
-            pstmt.setString(6, user.getUsername());
+            pstmt.setBoolean(6, user.isAdmin());
+            pstmt.setString(7, user.getUsername());
 
             pstmt.execute();
 
