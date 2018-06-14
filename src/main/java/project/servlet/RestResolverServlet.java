@@ -199,11 +199,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 m.toJSON(res.getOutputStream());
             } else {
-                if (path.contains("id")) {
-                    // /answer/id/{questionID}
-                    path = path.substring(path.lastIndexOf("id") + 2);
+                if (path.contains("question")) {
+                    // /answer/question/{questionID}
+                    path = path.substring(path.lastIndexOf("question") + 8);
                     if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/id/{questionID}: no {questionID} specified.",
+                        m = new Message("Wrong format for URI /answer/question/{questionID}: no {questionID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         m.toJSON(res.getOutputStream());
@@ -215,7 +215,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                     new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
                                 } catch (NumberFormatException e) {
                                     m = new Message(
-                                            "Wrong format for URI /answer/id/{questionID}: {questionID} is not an integer.",
+                                            "Wrong format for URI /answer/question/{questionID}: {questionID} is not an integer.",
                                             "E4A7", e.getMessage());
                                     res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                                     m.toJSON(res.getOutputStream());
@@ -230,12 +230,12 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         }
                     }
                 } 
-                else if (path.contains("idAnswer"))
+                else if (path.contains("parentAns"))
                 {
-                    // /answer/idAnswer/{answerID}
-                    path = path.substring(path.lastIndexOf("idAnswer") + 8);
+                    // /answer/parentAns/{answerID}
+                    path = path.substring(path.lastIndexOf("parentAns") + 9);
                     if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/idAnswer/{answerID}: no {answerID} specified.",
+                        m = new Message("Wrong format for URI /answer/parentAns/{answerID}: no {answerID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         m.toJSON(res.getOutputStream());
