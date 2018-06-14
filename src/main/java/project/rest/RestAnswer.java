@@ -189,21 +189,22 @@ public final class RestAnswer extends RestResource
 		}
 	}
 
-	public void countVotes() throws IOException
+	public void countAnswerVotes() throws IOException
 	{
 		int a;
 		Message m = null;
+		Votes v;
 
 		try{
 
 			final Answer answer = Answer.fromJSON(req.getInputStream());
-			a = 1; //TEMP
-			//a = new CountAnswerVotesDatabase(con,req.getSession().getAttribute("loggedInUser").toString() ,answer.getID()).countAnswerVotes();
+			a = new CountAnswerVotesDatabase(con, answer.getID()).countAnswerVotes();
 
 			if(a!=-1)
 			{
+				v = new Votes("answer",a,answer.getID());
 				res.setStatus(HttpServletResponse.SC_OK);
-				m.toJSON(res.getOutputStream());
+				v.toJSON(res.getOutputStream());
 			}
 			else
 			{

@@ -359,7 +359,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     } else {
                         switch (method) {
                             case "GET":
-                                new RestAnswer(req, res, getDataSource().getConnection()).countVotes();
+                                new RestAnswer(req, res, getDataSource().getConnection()).countAnswerVotes();
                                 break;
 
                             default:
