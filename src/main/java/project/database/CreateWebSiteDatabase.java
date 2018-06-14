@@ -1,6 +1,5 @@
 package project.database;
 
-import project.resource.Category;
 import project.resource.WebSite;
 
 import java.sql.Connection;
@@ -20,6 +19,8 @@ public class CreateWebSiteDatabase {
     private static final String STATEMENT = "" +
             "INSERT INTO lr_group.Website (address, addrType) " +
             "VALUES (?, CAST ( ? AS  lr_group.websitetype ))";
+
+    //private static final String STATEMENT = " IF NOT EXISTS ( SELECT * FROM lr_group.Website WHERE address = ? )  BEGIN INSERT INTO lr_group.Website (address, addrType) VALUES (?, CAST ( ? AS  lr_group.websitetype )) END ";
 
     /**
      * The connection to the database
