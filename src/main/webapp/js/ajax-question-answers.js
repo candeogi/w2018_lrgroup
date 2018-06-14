@@ -224,6 +224,7 @@ function addNewAnswerForm(){
             //alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
         }
     });
+    $("#addAnswerTextArea").val('');
     printSingleAnswer(answerObject, 0);
 }
 
