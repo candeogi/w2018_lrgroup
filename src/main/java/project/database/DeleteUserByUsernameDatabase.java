@@ -132,6 +132,5 @@ public final class DeleteUserByUsernameDatabase {
         }
 
         return rs;
-
     }
 }

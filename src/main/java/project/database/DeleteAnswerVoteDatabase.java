@@ -16,11 +16,8 @@
 
 package project.database;
 
-import project.resource.Answer;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Deletes an answer vote in the database.

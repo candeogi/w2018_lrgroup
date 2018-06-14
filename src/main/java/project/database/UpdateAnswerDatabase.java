@@ -68,6 +68,9 @@ public final class UpdateAnswerDatabase {
             else return false;
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }

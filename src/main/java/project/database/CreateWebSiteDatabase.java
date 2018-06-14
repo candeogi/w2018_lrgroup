@@ -69,9 +69,14 @@ public class CreateWebSiteDatabase {
 
                 pstmt.execute();
             }
+            rs.close();
+
         } finally {
             if (pstmt != null) {
                 pstmt.close();
+            }
+            if (pstmt2 != null) {
+                pstmt2.close();
             }
 
             con.close();

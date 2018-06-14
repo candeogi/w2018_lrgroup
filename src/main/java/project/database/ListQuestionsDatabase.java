@@ -17,7 +17,6 @@
 package project.database;
 
 import project.resource.Question;
-import project.resource.ResourceList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

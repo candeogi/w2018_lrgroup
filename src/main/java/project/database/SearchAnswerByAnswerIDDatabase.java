@@ -17,7 +17,6 @@
 package project.database;
 
 import project.resource.Answer;
-import project.resource.ResourceList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -90,6 +89,7 @@ public final class SearchAnswerByAnswerIDDatabase
                 Answer a = new Answer(rs.getInt("id"), rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"),-1);
                 answerList.add(a);
             }
+            rs.close();
 
         } finally {
             if (pstmt != null) {

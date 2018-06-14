@@ -33,16 +33,15 @@ public class CreateHaveCertificateDatabase {
      */
     private static final String STATEMENT = "" +
             "INSERT INTO lr_group.HaveCertificate (username, id, achievementDate) " +
-            "VALUES (?,?,?)";
+            "VALUES (?, ?,?)";
 
     private static final String STATEMENT2 = "" +
-            "INSERT INTO lr_group.Certificate ( name, organization) " +
-            "VALUES (?,?)";
+            "INSERT INTO lr_group.Certificate ( id , name, organization) " +
+            "VALUES (DEFAULT ,?,?)";
 
 
     private static final String QUERY = "" +
-            "SELECT id FROM lr_group.Certificate WHERE name=? "+" AND organization=? " ;
-
+            "SELECT id FROM lr_group.Certificate WHERE name=? " + " AND organization=? ";
 
 
     /**
@@ -83,42 +82,46 @@ public class CreateHaveCertificateDatabase {
             pstmt1 = con.prepareStatement(QUERY, Statement.RETURN_GENERATED_KEYS);
             pstmt1.setString(1, name);
             pstmt1.setString(2, organization);
-            rs=pstmt1.executeQuery();
+            rs = pstmt1.executeQuery();
 
+            if (rs.next()) {
+                idCert = rs.getInt("id");
+            }
 
-            if(rs.next()) {idCert = rs.getInt("id");}
-
-            if(idCert == -1){
+            if (idCert == -1) {
 
                 pstmt2 = con.prepareStatement(STATEMENT2, Statement.RETURN_GENERATED_KEYS);
                 pstmt2.setString(1, name);
                 pstmt2.setString(2, organization);
                 pstmt2.executeUpdate();
-                ResultSet generatedKey=pstmt2.getGeneratedKeys();
-                if(generatedKey.next()){
-                    idCert=generatedKey.getInt(1);
-                }
 
+                ResultSet generatedKey = pstmt2.getGeneratedKeys();
+                if (generatedKey.next()) {
+                    idCert = generatedKey.getInt("id");
+                }
+                generatedKey.close();
             }
-            
+
             pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, username);
             pstmt.setInt(2, idCert);
-            pstmt.setDate(3,achievementDate);
+            pstmt.setDate(3, achievementDate);
             pstmt.execute();
 
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }
-            if(pstmt1!=null){
+            if (pstmt1 != null) {
                 pstmt1.close();
             }
-            if(pstmt2!=null){
+            if (pstmt2 != null) {
                 pstmt2.close();
             }
-
 
             con.close();
         }
