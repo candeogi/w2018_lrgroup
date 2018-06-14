@@ -5,10 +5,6 @@ var loggedInUser = document.getElementById("loggedInUser");
 var currentUser = loggedInUser.getAttribute("data-loggedInUser");
 var currentQuestion = loggedInUser.getAttribute("data-currentQuestion");
 
-var httpRequest;
-var url;
-
-var isFirstPassage = true;
 
 /*REST URL*/
 var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/'+currentQuestion;
@@ -19,9 +15,7 @@ window.onload = initialPageLoad;
 
 function initialPageLoad(){
     visualizeQuestion();
-    //visualizeAnswers();
-    //loadDoc(myQuestionRestUrl, loadQuestion);
-    loadDoc(myAnswersRestUrl, loadAnswers);
+    visualizeAnswers();
 }
 /* USER MANAGEMENT */
 
@@ -30,7 +24,6 @@ function visualizeQuestion(){
         method: 'GET',
         url: myQuestionRestUrl,
         success: function(data) {
-            //var jsonData = JSON.parse(data);
             var resourceList = data['resource-list'];
             var question = resourceList[0].question;
 
@@ -60,76 +53,34 @@ function visualizeQuestion(){
         }
     });
 }
+function visualizeAnswers(){
+    $.ajax({
+        method: 'GET',
+        url: myAnswersRestUrl,
+        success: function(data) {
+            var resourceList = data['resource-list'];
+            //alert(resourceList[0].answer['text']); test rest if works
 
-function loadDoc(url,cFunction){
+            //clear old list
+            $("#answerListDiv").html("");
 
-    httpRequest = new XMLHttpRequest();
-    if (!httpRequest) {
-        alert('Cannot create an XMLHTTP instance');
-        return false;
-    }
-    httpRequest.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){
-            cFunction(this);
+            //<div id="answerListDiv><ul class="answer-list">
+            var answerListDiv = document.getElementById("answerListDiv");
+            var baseAnswerList = document.createElement("ul");
+            baseAnswerList.id =0+'ul';
+            baseAnswerList.className = 'answer-list';
+            answerListDiv.appendChild(baseAnswerList);
+
+
+            //lets print all the answers
+            for(var i =0; i< resourceList.length; i++){
+                printSingleAnswer(resourceList[i].answer, 0);
+            }
+        },
+        error: function(){
+            alert("Something went wrong on loading the answers!");
         }
-    };
-    httpRequest.open('GET', url, true);
-    httpRequest.send();
-}
-
-/* Loads the question via ajax */
-function loadQuestion(httpRequest){
-    var restResponse = httpRequest.responseText;
-    var jsonData = JSON.parse(restResponse);
-    var resourceList = jsonData['resource-list'];
-    var question = resourceList[0].question;
- 
-    var divQuestionContainer = document.getElementById('question-container');
-    //question title
-    var questionTitle = document.getElementById('question-title');
-    questionTitle.appendChild(document.createTextNode(question['title']));
-    //question creation timestamp
-    var questionTime = document.getElementById('question-time');
-    questionTime.appendChild(document.createTextNode("Sent by "+question['IDUser']+" on "+question['timestamp']));
-    //question body
-    var questionBody = document.getElementById('question-body');
-    var p = document.createElement('p')
-    p.appendChild(document.createTextNode(question['body']));
-    questionBody.appendChild(p);
-    //question last modified TODO check last modified how it behaves
-    if(question["lastModified"] !== ""){
-        var questionLastModified = document.getElementById('question-lastmodified');
-        questionLastModified.appendChild(document.createTextNode("Last modified on "+question['lastModified']));  
-    }
-    //username - questioneer
-    var questioneerUsername = document.getElementById('questioneer-name');
-    questioneerUsername.appendChild(document.createTextNode(question['IDUser']));
-}
-
-
-
-/*Loads answers via ajax*/
-function loadAnswers(httpRequest){
-    var restResponse = httpRequest.responseText;
-    var jsonData = JSON.parse(restResponse);
-    var resourceList = jsonData['resource-list'];
-    //alert(resourceList[0].answer['text']); test rest if works
-
-    //clear old list
-    $("#answerListDiv").html("");
-
-    //<div id="answerListDiv><ul class="answer-list">
-    var answerListDiv = document.getElementById("answerListDiv");
-    var baseAnswerList = document.createElement("ul");
-    baseAnswerList.id =0+'ul';
-    baseAnswerList.className = 'answer-list';
-    answerListDiv.appendChild(baseAnswerList);
-
-
-    //lets print all the answers
-    for(var i =0; i< resourceList.length; i++){
-            printSingleAnswer(resourceList[i].answer, 0);
-    }
+    });
 }
 
 function printSingleAnswer(answer, whereToAppendId){
@@ -189,36 +140,18 @@ function printSingleAnswer(answer, whereToAppendId){
     small.appendChild(deleteLink);
     deleteLink.appendChild(document.createTextNode('delete'));
 
-    loadAnswersToAnswer(answer['ID']);
+    /*Works but there is a loop issue TODO fix*/
+    //visualizeAnswersToAnswer(answer['ID']);
     //this calls answerDropDown(idAnswer) that calls printSingleAnswer for each answer recursively(answer, idAnswer)
 
 }
 
-function loadAnswersToAnswer(idAnswer){
-    url = 'http://localhost:8080/web-app-project/rest/answer/parentAns/'+idAnswer;
-    httpRequest = new XMLHttpRequest();
-
-    if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-    }
-    httpRequest.onreadystatechange = answerDropdown(idAnswer);
-    httpRequest.open('GET', url);
-    httpRequest.send();
-}
-function answerDropdown(idAnswer){
-
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-
-        if (httpRequest.status === 200) {
-
-
-            var div = document.getElementById('listCategoryDropdown');
-
-            document.getElementById('listCategoryDropdown').innerHTML = "";
-
-            var jsonData = JSON.parse(httpRequest.responseText);
-            var resourceList = jsonData['resource-list'];
+function visualizeAnswersToAnswer(idAnswer){
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/web-app-project/rest/answer/parentAns/'+idAnswer,
+        success: function(data) {
+            var resourceList = data['resource-list'];
 
             var baseAnswerListItem= document.getElementById(idAnswer);
             var baseAnswerList = document.createElement("ul");
@@ -231,12 +164,11 @@ function answerDropdown(idAnswer){
             for(var i =0; i< resourceList.length; i++){
                 printSingleAnswer(resourceList[i].answer, idAnswer);
             }
-
-        } else {
-            alert('There was a problem with the request.');
+        },
+        error: function(){
+            alert("Something went wrong on loading the answers of answer"+idAnswer+"!");
         }
-    }
-
+    });
 }
 
 /*Add a new answer function*/
@@ -254,9 +186,11 @@ function addNewAnswerForm(){
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds() +"."
         + currentdate.getMilliseconds();
-    /*
-    $.post("http://localhost:8080/web-app-project/rest/answer/",
-        JSON.stringify({"resource-list":[
+    //works but goes on error TODO
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: JSON.stringify({"resource-list":[
                 {
                     "answer":{
                         "ID":1,
@@ -264,36 +198,32 @@ function addNewAnswerForm(){
                         "fixed":false,
                         "timestamp": timestamp,
                         "IDUser": currentUser,
-                        "parentID":-1,
+                        "parentID": -1,
                         "questionID":1
                     }
                 }]
         }),
-        function(data,status){ //why this doesnt work
-            alert("Data: " + data + "\nStatus: " + status);
-            $("#addAnswerTextArea").val('');
-        }
-    );*/
-    $.ajax({
-        method: "GET",
-        url: myQuestionRestUrl,
+        contentType: "application/json",
+        dataType: 'json',
         success: function() {
             alert("hey its me");
         },
         error: function(){
-            alert("error on POST http://localhost:8080/web-app-project/rest/answer/");
+            alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
         }
     });
 }
 
 function deleteAnswer(id){
+    //doesnt work and goes on error TODO
     $.ajax({
-        method: "DELETE",
+        type: "DELETE",
         url: "http://localhost:8080/web-app-project/rest/answer/",
-        data: {"answer":{"ID": id}},
+        data: JSON.stringify({"answer":{"ID": id}}),
+        contentType: "application/json",
         dataType: 'json',
         success: function() {
-            alert("hey its me");
+            alert("hey its me working");
         },
         error: function(){
             alert("error on DELETE http://localhost:8080/web-app-project/rest/answer/"+id);
