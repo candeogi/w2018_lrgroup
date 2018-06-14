@@ -141,7 +141,7 @@ function printSingleAnswer(answer, whereToAppendId){
     deleteLink.appendChild(document.createTextNode('delete'));
 
     /*Works but there is a loop issue TODO fix*/
-    //visualizeAnswersToAnswer(answer['ID']);
+    visualizeAnswersToAnswer(answer['ID']);
     //this calls answerDropDown(idAnswer) that calls printSingleAnswer for each answer recursively(answer, idAnswer)
 
 }
