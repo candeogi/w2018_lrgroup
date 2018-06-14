@@ -52,8 +52,8 @@ public final class DeleteUserByUsernameDatabase {
 
     private static final String STATEMENT = " UPDATE lr_group.Question SET idUser = 'userDeleted' WHERE idUser=? ";
     private static final String STATEMENT1 = " UPDATE lr_group.Answer SET idUser = 'userDeleted' WHERE idUser=? ";
-    private static final String STATEMENT2 = " DELETE FROM lr_group.HaveCertificate WHERE idUser=? ";
-    private static final String STATEMENT3 = " DELETE FROM lr_group.Own WHERE idUser=? ";
+    private static final String STATEMENT2 = " DELETE FROM lr_group.HaveCertificate WHERE username=? ";
+    private static final String STATEMENT3 = " DELETE FROM lr_group.Own WHERE username=? ";
     /**
      * The connection to the database
      */
