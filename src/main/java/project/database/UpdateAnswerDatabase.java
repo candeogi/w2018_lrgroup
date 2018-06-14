@@ -20,7 +20,7 @@ public final class UpdateAnswerDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "UPDATE lr_group.Answer SET isFixed=?, body=?, ts=?,idUser=?, parentID=? " +
+            "UPDATE lr_group.Answer SET isFixed=?, body=?" +
             "WHERE id=?";
 
     /**
@@ -61,9 +61,6 @@ public final class UpdateAnswerDatabase {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setBoolean(1, answer.isFixed());
             pstmt.setString(2, answer.getText());
-            pstmt.setTimestamp(3, answer.getTimestamp());
-            pstmt.setString(4,answer.getIDUser());
-            pstmt.setInt(5,answer.getParentID());
 
             rs = pstmt.executeQuery();
 
