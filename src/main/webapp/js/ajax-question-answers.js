@@ -171,10 +171,13 @@ function visualizeAnswersToAnswer(idAnswer){
     });
 }
 
+
+$("#addAnswerButton").click(function () {
+    addNewAnswerForm();
+});
 /*Add a new answer function*/
 function addNewAnswerForm(){
-    var AddAnswerForm = document.getElementById("AddAnswerForm");
-    //var addAnswerTextArea = document.getElementById("addAnswerTextArea").value;
+
     var addAnswerText = $("#addAnswerTextArea").val();
 
     var currentdate = new Date();
