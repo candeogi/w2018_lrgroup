@@ -71,6 +71,8 @@ public class Certificate extends Resource {
         if(ID!=-1) jg.writeNumberField("ID", ID);
         jg.writeStringField("name", name);
         jg.writeStringField("organization", organization);
+        if(dateCert==null) jg.writeStringField("ID", "00-00-0000");
+        jg.writeStringField("achievementDate", dateCert);
 
         jg.writeEndObject();
 

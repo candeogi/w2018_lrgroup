@@ -13,7 +13,9 @@ $(document).ready(function () {
 var xhrWebsite;
 function addWebsite() {
     var newAddressWeb = $("#address-form").val();
+    console.log("a"+newAddressWeb);
     var newTypeWeb = $("#type-form").val();
+    console.log("b"+newTypeWeb);
     xhrWebsite = new XMLHttpRequest();
     xhrWebsite.onreadystatechange = function () {
         if (xhrWebsite.readyState == 4) {
