@@ -90,6 +90,15 @@
 		<servlet-name>DeleteUserServlet</servlet-name>
 		<servlet-class>project.servlet.DeleteUserServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>CreateWebsiteServlet</servlet-name>
+		<servlet-class>project.servlet.CreateWebSiteServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CreateWebsiteServlet</servlet-name>
+		<url-pattern>/create-website</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>NavServlet</servlet-name>

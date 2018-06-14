@@ -4,7 +4,31 @@ $(document).ready(function () {
     $("#modifyButton").click(function () {
         modifyValue();
     });
+    $("#saveWebsite").click(function () {
+        addWebsite();
+    });
+
 });
+
+
+function addWebsite() {
+    var address=$("#address-form").val();
+    var type=$("#type-form").val();
+    var xhrWebsite = new XMLHttpRequest();
+    xhrWebsite.onreadystatechange = function () {
+        if (xhrWebsite.readyState == 4) {
+            var data = xhrWebsite.responseText;
+            alert("communication problem, retry")
+        }
+    }
+
+    xhrWebsite.open('POST', 'create-website', true);
+    xhrWebsite.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhrWebsite.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhrWebsite.onreadystatechange=visualizeWebsite;
+    var information = "address=" + address + "&" + "addrType=" + type;
+    xhrWebsite.send(information);
+}
 
 var xhr2;
 

@@ -125,14 +125,20 @@
                            aria-describedby="emailHelp" placeholder="Website address">
                 </div>
                 <div class="form-group">
-                    <label for="type-form">Password</label>
-                    <input name="type" type="text" class="form-control" id="type-form"
-                           placeholder="Password">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="type-form" value="OwnSite">
+                            <option selected>Select the type</option>
+                            <option value="BitBucket">BitBucket</option>
+                            <option value="OwnSite">OwnSite</option>
+                            <option value="Github">Github</option>
+                            <option value="OwnSite">Site</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" id="saveWebsite">Save changes</button>
             </div>
         </div>
     </div>
