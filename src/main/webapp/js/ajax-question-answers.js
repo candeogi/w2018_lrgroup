@@ -3,28 +3,63 @@ Author: Giovanni Candeo
  */
 var loggedInUser = document.getElementById("loggedInUser");
 var currentUser = loggedInUser.getAttribute("data-loggedInUser");
+var currentQuestion = loggedInUser.getAttribute("data-currentQuestion");
 
 var httpRequest;
 var url;
 
 var isFirstPassage = true;
 
-/*TEMPORARY TEST URL*/
-
-var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/1';
-var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/id/1';
+/*REST URL*/
+var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/'+currentQuestion;
+var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/question/'+currentQuestion;
 
 /*At start do this*/
 window.onload = initialPageLoad;
 
-
 function initialPageLoad(){
-
-    loadDoc(myQuestionRestUrl, loadQuestion);
+    visualizeQuestion();
+    //visualizeAnswers();
+    //loadDoc(myQuestionRestUrl, loadQuestion);
     loadDoc(myAnswersRestUrl, loadAnswers);
 }
 /* USER MANAGEMENT */
 
+function visualizeQuestion(){
+    $.ajax({
+        method: 'GET',
+        url: myQuestionRestUrl,
+        success: function(data) {
+            //var jsonData = JSON.parse(data);
+            var resourceList = data['resource-list'];
+            var question = resourceList[0].question;
+
+            var divQuestionContainer = document.getElementById('question-container');
+            //question title
+            var questionTitle = document.getElementById('question-title');
+            questionTitle.appendChild(document.createTextNode(question['title']));
+            //question creation timestamp
+            var questionTime = document.getElementById('question-time');
+            questionTime.appendChild(document.createTextNode("Sent by "+question['IDUser']+" on "+question['timestamp']));
+            //question body
+            var questionBody = document.getElementById('question-body');
+            var p = document.createElement('p')
+            p.appendChild(document.createTextNode(question['body']));
+            questionBody.appendChild(p);
+            //question last modified TODO check last modified how it behaves
+            if(question["lastModified"] !== ""){
+                var questionLastModified = document.getElementById('question-lastmodified');
+                questionLastModified.appendChild(document.createTextNode("Last modified on "+question['lastModified']));
+            }
+            //username - questioneer
+            var questioneerUsername = document.getElementById('questioneer-name');
+            questioneerUsername.appendChild(document.createTextNode(question['IDUser']));
+        },
+        error: function(){
+            alert("Something went wrong on loading the question!");
+        }
+    });
+}
 
 function loadDoc(url,cFunction){
 
@@ -160,7 +195,7 @@ function printSingleAnswer(answer, whereToAppendId){
 }
 
 function loadAnswersToAnswer(idAnswer){
-    url = 'http://localhost:8080/web-app-project/rest/answer/idAnswer/'+idAnswer;
+    url = 'http://localhost:8080/web-app-project/rest/answer/parentAns/'+idAnswer;
     httpRequest = new XMLHttpRequest();
 
     if (!httpRequest) {
@@ -219,7 +254,7 @@ function addNewAnswerForm(){
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds() +"."
         + currentdate.getMilliseconds();
-
+    /*
     $.post("http://localhost:8080/web-app-project/rest/answer/",
         JSON.stringify({"resource-list":[
                 {
@@ -238,11 +273,32 @@ function addNewAnswerForm(){
             alert("Data: " + data + "\nStatus: " + status);
             $("#addAnswerTextArea").val('');
         }
-    );
+    );*/
+    $.ajax({
+        method: "GET",
+        url: myQuestionRestUrl,
+        success: function() {
+            alert("hey its me");
+        },
+        error: function(){
+            alert("error on POST http://localhost:8080/web-app-project/rest/answer/");
+        }
+    });
 }
 
 function deleteAnswer(id){
-    alert(id);
+    $.ajax({
+        method: "DELETE",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: {"answer":{"ID": id}},
+        dataType: 'json',
+        success: function() {
+            alert("hey its me");
+        },
+        error: function(){
+            alert("error on DELETE http://localhost:8080/web-app-project/rest/answer/"+id);
+        }
+    });
 }
 
 

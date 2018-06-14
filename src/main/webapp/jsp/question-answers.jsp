@@ -60,7 +60,10 @@ Since: 1.0
     </div>
 </header><!--close header-->
 
-<div id="loggedInUser" data-loggedInUser="${sessionScope.loggedInUser}"></div>
+<div id="loggedInUser"
+     data-loggedInUser="${sessionScope.loggedInUser}"
+     data-currentQuestion="1"
+></div>
 <!-- Container Div -->
 <div class="container">
 
