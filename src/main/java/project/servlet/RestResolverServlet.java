@@ -148,6 +148,8 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 return true;
             case "DELETE":
                 return true;
+            case "PUT":
+                return true;
             default:
                 m = new Message("Unsupported operation.",
                         "E4A5", String.format("Requested operation %s.", method));
