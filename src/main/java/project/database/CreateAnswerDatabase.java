@@ -91,6 +91,9 @@ public final class CreateAnswerDatabase {
             if(generatedKey.next()){
                 insertedKey=generatedKey.getInt(1);
             }
+
+            generatedKey.close();
+
             if(answer.getParentID()==-1){
                 new CreateHaveElement(con,answer.getQuestionID(),insertedKey).createElement();
             }

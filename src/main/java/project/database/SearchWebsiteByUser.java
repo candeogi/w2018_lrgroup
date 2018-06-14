@@ -2,7 +2,6 @@ package project.database;
 
 import project.resource.WebSite;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,6 +63,7 @@ public class SearchWebsiteByUser {
                 WebSite webSite = new WebSite(rs.getString(1), rs.getString(3));
                 webSiteList.add(webSite);
             }
+            rs.close();
 
         } finally {
             if (pstmt != null) {

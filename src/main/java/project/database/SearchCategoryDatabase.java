@@ -17,8 +17,6 @@
 package project.database;
 
 import project.resource.Category;
-import project.resource.ResourceList;
-import project.resource.Resource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

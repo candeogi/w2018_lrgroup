@@ -49,6 +49,7 @@ public class CountQuestionVotesDatabase {
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             c = rs.getInt(1); //NOT sure about return type
+            rs.close();
             return c;
         } finally {
             if (pstmt != null) {

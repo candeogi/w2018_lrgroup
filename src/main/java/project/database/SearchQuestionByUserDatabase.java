@@ -17,7 +17,6 @@
 package project.database;
 
 import project.resource.Question;
-import project.resource.ResourceList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -88,6 +87,7 @@ public final class SearchQuestionByUserDatabase
                 Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
                 questList.add(q);
             }
+            rs.close();
 
         } finally {
             if (pstmt != null) {

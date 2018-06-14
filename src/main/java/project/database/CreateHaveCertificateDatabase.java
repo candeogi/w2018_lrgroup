@@ -98,7 +98,7 @@ public class CreateHaveCertificateDatabase {
                 if(generatedKey.next()){
                     idCert=generatedKey.getInt(1);
                 }
-
+                generatedKey.close();
             }
             
             pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
@@ -109,6 +109,9 @@ public class CreateHaveCertificateDatabase {
 
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }

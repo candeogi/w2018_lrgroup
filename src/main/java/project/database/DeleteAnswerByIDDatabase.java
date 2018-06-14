@@ -16,8 +16,6 @@
 
 package project.database;
 
-import project.resource.Answer;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -83,6 +81,9 @@ public final class DeleteAnswerByIDDatabase
             else return false;
 
         } finally {
+            if (rs!= null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }
