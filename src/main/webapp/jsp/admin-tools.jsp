@@ -11,7 +11,6 @@
 <body>
 <c:set var="base64" value="data:image/jpeg;base64," />
 <c:import url="/jsp/include/show-message.jsp"/>
-
 <nav>
     <div class="nav nav-tabs" id="nav-tab-admin" role="tablist">
         <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">Edit users</a>
@@ -63,7 +62,7 @@
                                         <input type="hidden" name="from" value="${from}"/>
                                         <input type="hidden" name="username" value="${user.username}"/>
                                         <c:choose>
-                                            <c:when test="${sessionScope.isAdmin == true and sessionScope.loggedInUser != user.username and not user.isAdmin()}">
+                                            <c:when test="${sessionScope.isAdmin == true}">
                                                 <button type="submit" class="btn btn-primary btn-sm" id="deleteBtn">
                                                     <i class="far fa-trash-alt"></i> Delete</button><br/>
                                             </c:when>
@@ -76,7 +75,7 @@
                                 </td>
                                 <td>
                                     <c:choose>
-                                            <c:when test="${sessionScope.isAdmin == true and sessionScope.loggedInUser != user.username and not user.isAdmin()}">
+                                            <c:when test="${sessionScope.isAdmin == true}">
                                                 <button type="button" class="btn btn-primary btn-sm"  user-name="<c:out value="${user.username}"/>" data-toggle="modal" data-target="#modal-update-user">
                                                     <i class="far fa-edit"></i>Update</button><br/>
                                             </c:when>
@@ -98,17 +97,24 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" >Update user</h5>
+                            <div name="userupdating"> </div>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
+                            <div name="userupdating" id="userupdatingID"> </div></br>
                             <form method="POST" action="<c:url value="/update-user"/>" id="formUser" >
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label for="usernameInput">Username</label>
                                     <input name="username" type="text" class="form-control" id="username-user"
                                            aria-describedby="usernameHelp" placeholder="Username" value="">
-                                </div>
+                                </div> -->
+                                <input type="hidden" name="username" value="">
+                                <input type="hidden" name="view" value="admin-panel">
+                                <input type="hidden" name="admin-modifying" value="true">
+                                <input type="hidden" name="admin-user" id="admin-username" value="${sessionScope.loggedInUser}">
+
 
                                 <div class="form-group">
                                     <label for="emailInput">Email</label>
@@ -125,13 +131,25 @@
                                 <div class="form-group">
                                     <label for="surnameInput">Surname</label>
                                     <input name="surname" type="text" class="form-control" id="surname-user"
-                                           aria-describedby="surnameHelp" placeholder="Surname"value="">
+                                           aria-describedby="surnameHelp" placeholder="Surname" value="">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="bdateInput">Username</label>
+                                    <label for="surnameInput">Surname</label>
+                                    <textarea name="description" class="form-control" id="description-user"
+                                              aria-describedby="descrHelp" placeholder="Description"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bDateInput">Birthday Date</label>
                                     <input name="bdate" type="date" class="form-control" id="bdate-user"
-                                           aria-describedby="bdateHelp"value="">
+                                           aria-describedby="bdateHelp" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="isAdmin" type="checkbox" class="form-control" id="isAdmin-user"
+                                           aria-describedby="isAdminHelp">
+                                    <label for="isAdminInput">Is Admin?</label>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary ">Update User</button>
