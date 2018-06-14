@@ -144,8 +144,11 @@ function printSingleAnswer(answer, whereToAppendId){
     small.appendChild(timestampText);
     small.appendChild(deleteLink);
     deleteLink.appendChild(document.createTextNode(' delete '));
-    small.appendChild(editLink);
-    editLink.appendChild(document.createTextNode(' edit '));
+
+    if(currentUser === answer['IDUser']){
+        small.appendChild(editLink);
+        editLink.appendChild(document.createTextNode(' edit '));
+    }
     /*Works but there is a loop issue TODO fix*/
     visualizeAnswersToAnswer(answer['ID']);
     //this calls answerDropDown(idAnswer) that calls printSingleAnswer for each answer recursively(answer, idAnswer)
