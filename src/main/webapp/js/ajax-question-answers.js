@@ -4,23 +4,30 @@ Author: Giovanni Candeo
 var loggedInUser = document.getElementById("loggedInUser");
 var currentUser = loggedInUser.getAttribute("data-loggedInUser");
 
+var httpRequest;
+var url;
+
+var isFirstPassage = true;
+
+/*TEMPORARY TEST URL*/
+
+var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/1';
+var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/id/1';
+
 /*At start do this*/
-$(function() {
-
-    /*TEMPORARY TEST URL*/
-    var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/1';
-    var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/id/1';
+window.onload = initialPageLoad;
 
 
+function initialPageLoad(){
 
     loadDoc(myQuestionRestUrl, loadQuestion);
     loadDoc(myAnswersRestUrl, loadAnswers);
-});
+}
 /* USER MANAGEMENT */
 
 
 function loadDoc(url,cFunction){
-    var httpRequest;
+
     httpRequest = new XMLHttpRequest();
     if (!httpRequest) {
         alert('Cannot create an XMLHTTP instance');
@@ -41,8 +48,6 @@ function loadQuestion(httpRequest){
     var jsonData = JSON.parse(restResponse);
     var resourceList = jsonData['resource-list'];
     var question = resourceList[0].question;
-
-    //I SHOULD STORE ELEMENTS IN A JS OBJECT SO I CAN MANIPULATE THEM. maybe?
  
     var divQuestionContainer = document.getElementById('question-container');
     //question title
@@ -76,22 +81,31 @@ function loadAnswers(httpRequest){
     //alert(resourceList[0].answer['text']); test rest if works
 
     //clear old list
-    var baseAnswerList = document.getElementById("base-answer-list");
-    baseAnswerList.innerHTML = '';
-    forEachAnswer(resourceList, showAnswer);
-}
+    $("#answerListDiv").html("");
 
-/*Utility function: execute myFunction for each answer object on myResourceList*/
-function forEachAnswer(myResourceList, myFunction){
-    for(var i =0; i< myResourceList.length; i++){
-        myFunction(myResourceList[i].answer);
+    //<div id="answerListDiv><ul class="answer-list">
+    var answerListDiv = document.getElementById("answerListDiv");
+    var baseAnswerList = document.createElement("ul");
+    baseAnswerList.id =0+'ul';
+    baseAnswerList.className = 'answer-list';
+    answerListDiv.appendChild(baseAnswerList);
+
+
+    //lets print all the answers
+    for(var i =0; i< resourceList.length; i++){
+            printSingleAnswer(resourceList[i].answer, 0);
     }
 }
 
-function showAnswer(answer){
+function printSingleAnswer(answer, whereToAppendId){
     //console.log(answer['text']);
-    var baseAnswerList = document.getElementById("base-answer-list");
+
+    //always append to the unordered list with id 'id'+'ul'
+    var baseAnswerList = document.getElementById(whereToAppendId+'ul');
+
+    // <li id=answer['ID']>
     var answerListElement = document.createElement("li");
+    answerListElement.id = ''+answer['ID'];
     var answerContainer = document.createElement("div");
     answerContainer.className = 'answer-container';
     var answerContent = document.createElement("div");
@@ -139,6 +153,54 @@ function showAnswer(answer){
     small.appendChild(timestampText);
     small.appendChild(deleteLink);
     deleteLink.appendChild(document.createTextNode('delete'));
+
+    loadAnswersToAnswer(answer['ID']);
+    //this calls answerDropDown(idAnswer) that calls printSingleAnswer for each answer recursively(answer, idAnswer)
+
+}
+
+function loadAnswersToAnswer(idAnswer){
+    url = 'http://localhost:8080/web-app-project/rest/answer/idAnswer/'+idAnswer;
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    httpRequest.onreadystatechange = answerDropdown(idAnswer);
+    httpRequest.open('GET', url);
+    httpRequest.send();
+}
+function answerDropdown(idAnswer){
+
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+
+        if (httpRequest.status === 200) {
+
+
+            var div = document.getElementById('listCategoryDropdown');
+
+            document.getElementById('listCategoryDropdown').innerHTML = "";
+
+            var jsonData = JSON.parse(httpRequest.responseText);
+            var resourceList = jsonData['resource-list'];
+
+            var baseAnswerListItem= document.getElementById(idAnswer);
+            var baseAnswerList = document.createElement("ul");
+            baseAnswerList.className = 'answer-list';
+            //always append to the unordered list with id 'id'+'ul'
+            baseAnswerList.id = idAnswer+'ul';
+            baseAnswerListItem.appendChild(baseAnswerList);
+
+            //lets print all the answers
+            for(var i =0; i< resourceList.length; i++){
+                printSingleAnswer(resourceList[i].answer, idAnswer);
+            }
+
+        } else {
+            alert('There was a problem with the request.');
+        }
+    }
 
 }
 

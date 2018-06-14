@@ -102,9 +102,10 @@ Since: 1.0
     </div>
     <hr>
     <!--answer list below-->
-    <ul id="base-answer-list" class="answer-list">
-    </ul>
-
+    <div id="answerListDiv">
+        <ul id="base-answer-list" class="answer-list">
+        </ul>
+    </div>
 
 </div><!--c container fluid-->
 
