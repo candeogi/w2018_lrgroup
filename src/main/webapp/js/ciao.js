@@ -25,6 +25,8 @@ function addWebsite() {
     }
 
     xhrWebsite.open('POST', 'create-website', true);
+    xhrWebsite.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhrWebsite.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhrWebsite.onreadystatechange = addRowWebsite;
     var information = "address=" + newAddressWeb + "&" + "addrType=" + newTypeWeb;
     xhrWebsite.send(information);
@@ -252,7 +254,7 @@ function deleteWebsite(nameWebsite) {
     }
 
     console.log("deleting website");
-    xhrDelete.onreadystatechange = deleteRowWebSite();
+    xhrDelete.onreadystatechange = deleteRowWebSite;
     var username = $("#username-value").text().trim();
     xhrDelete.open('DELETE', 'rest/website/user/' + username + '/website/' + nameWebsite, true);
     xhrDelete.send();
