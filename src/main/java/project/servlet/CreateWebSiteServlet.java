@@ -72,6 +72,8 @@ public final class CreateWebSiteServlet extends AbstractDatabaseServlet {
         req.setAttribute("website", w);
         req.setAttribute("message", m);
 
+        req.getRequestDispatcher("/jsp/user-information.jsp").forward(req, res);
+
         
     }
 

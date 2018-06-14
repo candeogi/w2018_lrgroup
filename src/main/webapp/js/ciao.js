@@ -323,7 +323,7 @@ function addCertificate() {
     xhrCertificate = new XMLHttpRequest();
     xhrCertificate.onreadystatechange = function () {
         if (xhrCertificate.readyState == 4) {
-            var data = xhrWebsite.responseText;
+            var data = xhrCertificate.responseText;
             alert("communication problem, retry")
         }
     }
