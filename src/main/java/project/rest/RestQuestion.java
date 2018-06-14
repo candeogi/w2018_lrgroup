@@ -296,4 +296,42 @@ public final class RestQuestion extends RestResource
 		}
 	}
 
+	/**
+	 * Updates a question in the database.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+
+	public void updateQuestion() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			final Question question = Question.fromJSON(req.getInputStream());
+
+			new UpdateQuestionDatabase(con, question).updateQuestion();
+
+			/*if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot update the question: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}*/
+		}
+		catch (Throwable t)
+		{
+			m = new Message("Cannot update the question: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
 }
