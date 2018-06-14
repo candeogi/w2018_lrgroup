@@ -19,7 +19,7 @@ public class CreateWebSiteDatabase {
 
     private static final String STATEMENT = "" +
             "INSERT INTO lr_group.Website (address, addrType) " +
-            "VALUES (?, ?)";
+            "VALUES (?, CAST ( ? AS  lr_group.websitetype ))";
 
     /**
      * The connection to the database

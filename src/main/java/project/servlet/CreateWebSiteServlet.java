@@ -47,6 +47,9 @@ public final class CreateWebSiteServlet extends AbstractDatabaseServlet {
             address = req.getParameter("address");
             addrType = req.getParameter("addrType");
 
+            getServletContext().log("address: "+address);
+            getServletContext().log("addrType: "+addrType);
+
             // retrieves the user id (username) through the session parameter
             IDUser = (String) req.getSession().getAttribute("loggedInUser");
 
@@ -60,6 +63,8 @@ public final class CreateWebSiteServlet extends AbstractDatabaseServlet {
         } catch (SQLException ex) {
             m = new Message("Cannot create the WebSite: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
+
+            getServletContext().log(ex.getMessage());
 
         }
 
