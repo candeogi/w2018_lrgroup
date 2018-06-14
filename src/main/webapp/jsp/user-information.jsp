@@ -164,7 +164,7 @@
                            aria-describedby="emailHelp" placeholder="Insert the name of certification">
                 </div>
                 <div class="form-group">
-                    <label for="address-form">Name of Certification</label>
+                    <label for="address-form">Name of Organization</label>
                     <input name="address" type="text" class="form-control" id="org-cert-form"
                            aria-describedby="emailHelp" placeholder="Insert the name of the organization">
                 </div>

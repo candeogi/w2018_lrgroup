@@ -36,12 +36,12 @@ public class CreateHaveCertificateDatabase {
             "VALUES (?,?,?)";
 
     private static final String STATEMENT2 = "" +
-            "INSERT INTO lr_group.Certificate (id, name, organization) " +
-            "VALUES (DEFAULT,?,?)";
+            "INSERT INTO lr_group.Certificate ( name, organization) " +
+            "VALUES (?,?)";
 
 
     private static final String QUERY = "" +
-            "SELECT id FROM lr_group.Certificate WHERE name=?"+"AND organization=?" ;
+            "SELECT id FROM lr_group.Certificate WHERE name=? "+" AND organization=? " ;
 
 
 
@@ -83,16 +83,17 @@ public class CreateHaveCertificateDatabase {
             pstmt1 = con.prepareStatement(QUERY, Statement.RETURN_GENERATED_KEYS);
             pstmt1.setString(1, name);
             pstmt1.setString(2, organization);
-            rs = pstmt1.executeQuery();
+            rs=pstmt1.executeQuery();
 
-            idCert = rs.getInt("id");
+
+            if(rs.next()) {idCert = rs.getInt("id");}
 
             if(idCert == -1){
 
                 pstmt2 = con.prepareStatement(STATEMENT2, Statement.RETURN_GENERATED_KEYS);
                 pstmt2.setString(1, name);
                 pstmt2.setString(2, organization);
-
+                pstmt2.executeUpdate();
                 ResultSet generatedKey=pstmt2.getGeneratedKeys();
                 if(generatedKey.next()){
                     idCert=generatedKey.getInt(1);
@@ -111,6 +112,7 @@ public class CreateHaveCertificateDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
+
 
             con.close();
         }
