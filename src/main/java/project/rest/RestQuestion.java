@@ -85,6 +85,159 @@ public final class RestQuestion extends RestResource
 	}
 
 	/**
+	 * Creates an upvote for a question in the database. 
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+
+	public void upvoteQuestion() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("upvote") + 6);
+
+			final int questionID = Integer.parseInt(path.substring(1));
+
+			a = new CreateQuestionUpvoteDatabase(con, req.getSession().getAttribute("loggedInUser").toString(),questionID).createQuestionUpvote();
+
+			if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot upvote the question: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot upvote the question: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
+	 * Creates a downvote for a question in the database. 
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+
+	public void downvoteQuestion() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("downvote") + 8);
+
+			final int questionID = Integer.parseInt(path.substring(1));
+
+			a = new CreateQuestionDownvoteDatabase(con, req.getSession().getAttribute("loggedInUser").toString(),questionID).createQuestionDownvote();
+
+			if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot downvote the question: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot downvote the question: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	public void countQuestionVotes() throws IOException
+	{
+		int a;
+		Message m = null;
+		Votes v;
+
+		try{
+
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("votes") + 5);
+
+			final int questionID = Integer.parseInt(path.substring(1));
+			
+			a = new CountAnswerVotesDatabase(con, questionID).countAnswerVotes();
+
+			if(a!=-1)
+			{
+				v = new Votes("question",a,questionID);
+				res.setStatus(HttpServletResponse.SC_OK);
+				v.toJSON(res.getOutputStream());
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot count votes: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot count votes: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	public void deleteQuestionVote() throws IOException
+	{
+		boolean a;
+		Message m = null;
+
+		try{
+
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("novote") + 6);
+
+			final int questionID = Integer.parseInt(path.substring(1));
+			
+			a = new DeleteQuestionVoteDatabase(con,req.getSession().getAttribute("loggedInUser").toString() ,questionID).deleteQuestionVote();
+
+			if(a)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot delete the question vote: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t) 
+		{
+			m = new Message("Cannot delete the question vote: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
 	 * Searches question by its ID.
 	 *
 	 * @throws IOException
