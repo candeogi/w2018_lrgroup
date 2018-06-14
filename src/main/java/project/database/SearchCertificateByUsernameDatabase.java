@@ -77,7 +77,7 @@ public class SearchCertificateByUsernameDatabase {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Certificate c = new Certificate(rs.getString("name"), rs.getString("organization"), (rs.getDate("achievementDate")).toString() );
+                Certificate c = new Certificate(rs.getInt("id"),rs.getString("name"), rs.getString("organization"), (rs.getDate("achievementDate")).toString() );
                 questList.add(c);
             }
 

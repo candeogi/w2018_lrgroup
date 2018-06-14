@@ -50,7 +50,7 @@ public final class CreateCertificateServlet extends SessionManagerServlet {
             organization = req.getParameter("organization");
 
             // creates a new certificate from the request parameters
-            c = new Certificate(name, organization);
+            c = new Certificate(-1,name, organization);
 
             new CreateCertificateDatabase(getDataSource().getConnection(), c).createCertificate();
 

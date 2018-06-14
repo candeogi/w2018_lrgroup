@@ -36,8 +36,8 @@ public final class CreateCertificateDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.certificate ( name, organization) " +
-            "VALUES ( ?, ?)";
+            "INSERT INTO lr_group.certificate ( id ,name, organization) " +
+            "VALUES ( DEFAULT ,?, ?)";
 
     /**
      * The connection to the database
