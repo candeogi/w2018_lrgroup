@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col">
                 <div id="website" class="container border border-dark">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#websiteModal">
                         Add a new website
                     </button>
                     <p>Website:</p>
@@ -108,7 +108,7 @@
 
 
 <!-- Modal -->
-<div class="modal " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal " id="websiteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

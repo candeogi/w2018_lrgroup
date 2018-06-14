@@ -30,9 +30,17 @@ button#login_button:hover {
 	border-color: #7fcdbb;
 }
 
-.rounded-circle{
+/*.rounded-circle{
 	width: 10%;
+}*/
+
+.avatar {
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
+
 .dropdown-container {
     position: relative;
     display: inline-block;
@@ -41,6 +49,7 @@ button#login_button:hover {
 .dropdown-is-open > .dropdown-content {
     display: block;
 }
+
 
 #website{
 
