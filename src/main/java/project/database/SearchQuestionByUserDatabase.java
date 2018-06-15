@@ -31,8 +31,7 @@ import java.util.List;
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class SearchQuestionByUserDatabase
-{
+public final class SearchQuestionByUserDatabase {
 
     /**
      * The SQL statement to be executed
@@ -52,13 +51,10 @@ public final class SearchQuestionByUserDatabase
     /**
      * Creates a new object for questions made by an user.
      *
-     * @param con
-     *            the connection to the database.
-     * @param IDUser
-     *            the ID of an user.
+     * @param con    the connection to the database.
+     * @param IDUser the ID of an user.
      */
-    public SearchQuestionByUserDatabase(final Connection con, final String IDUser)
-    {
+    public SearchQuestionByUserDatabase(final Connection con, final String IDUser) {
         this.con = con;
         this.iduser = IDUser;
     }
@@ -67,29 +63,30 @@ public final class SearchQuestionByUserDatabase
      * Retrieve questions made by an user in the database.
      *
      * @return An ArrayList of user's questions.
-     *
-     * @throws SQLException
-     *             if any error occurs while retrieving the user's questions.
+     * @throws SQLException if any error occurs while retrieving the user's questions.
      */
-    public List<Question> SearchQuestionByUser() throws SQLException
-    {
+    public List<Question> SearchQuestionByUser() throws SQLException {
 
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         List<Question> questList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, iduser);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
                 questList.add(q);
             }
-            rs.close();
+
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }

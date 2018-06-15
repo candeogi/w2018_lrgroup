@@ -46,15 +46,12 @@ public final class SearchCategoryDatabase {
     private final Connection con;
 
 
-
     /**
      * Creates a new object for searching categories.
      *
-     * @param con
-     *            the connection to the database.
+     * @param con the connection to the database.
      */
-    public SearchCategoryDatabase(final Connection con)
-    {
+    public SearchCategoryDatabase(final Connection con) {
         this.con = con;
     }
 
@@ -62,12 +59,9 @@ public final class SearchCategoryDatabase {
      * Searches categories.
      *
      * @return a list of {@code Category} object.
-     *
-     * @throws SQLException
-     *             if any error occurs while searching for categories.
+     * @throws SQLException if any error occurs while searching for categories.
      */
-    public List<Category> searchCategory() throws SQLException
-    {
+    public List<Category> searchCategory() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -75,8 +69,7 @@ public final class SearchCategoryDatabase {
         // the results of the search
         final List<Category> categories = new ArrayList<Category>();
 
-        try
-        {
+        try {
             pstmt = con.prepareStatement(STATEMENT);
 
             rs = pstmt.executeQuery();

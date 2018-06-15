@@ -61,12 +61,9 @@ public final class SearchUserByUsernameAndPasswordDatabase {
     /**
      * Creates a new object for searching user by username and password.
      *
-     * @param con
-     *            the connection to the database.
-     * @param username
-     *            the username of the user.
-     * @param password
-     *              the password of the user.
+     * @param con      the connection to the database.
+     * @param username the username of the user.
+     * @param password the password of the user.
      */
     public SearchUserByUsernameAndPasswordDatabase(final Connection con, final String username, final String password) {
         this.con = con;
@@ -78,9 +75,7 @@ public final class SearchUserByUsernameAndPasswordDatabase {
      * Searches user by username and password.
      *
      * @return a list of {@code User} object matching the username and password.
-     *
-     * @throws SQLException
-     *             if any error occurs while searching for users.
+     * @throws SQLException if any error occurs while searching for users.
      */
     public List<User> searchUserByUsernameAndPassword() throws SQLException {
 

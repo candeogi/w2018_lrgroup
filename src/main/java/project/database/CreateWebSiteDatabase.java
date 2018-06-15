@@ -36,7 +36,7 @@ public class CreateWebSiteDatabase {
     private final WebSite webSite;
 
     /**
-     * @param con the reference to the connection to the database
+     * @param con     the reference to the connection to the database
      * @param webSite the instance of Website to add  to the database
      */
     public CreateWebSiteDatabase(final Connection con, final WebSite webSite) {
@@ -52,31 +52,29 @@ public class CreateWebSiteDatabase {
     public void createWebSite() throws SQLException {
 
         PreparedStatement pstmt = null;
-        PreparedStatement pstmt2 = null;
+        ResultSet rs = null;
 
         try {
 
-            pstmt2 = con.prepareStatement(STATEMENT2);
-            pstmt2.setString(1, webSite.getAddress());
-            ResultSet rs = pstmt2.executeQuery();
+            pstmt = con.prepareStatement(STATEMENT2);
+            pstmt.setString(1, webSite.getAddress());
+            rs = pstmt.executeQuery();
 
-            boolean rsQ = rs.next();
 
-            if (!rsQ) {
+            if (!rs.next()) {
                 pstmt = con.prepareStatement(STATEMENT);
                 pstmt.setString(1, webSite.getAddress());
                 pstmt.setString(2, webSite.getType());
 
                 pstmt.execute();
             }
-            rs.close();
 
         } finally {
             if (pstmt != null) {
                 pstmt.close();
             }
-            if (pstmt2 != null) {
-                pstmt2.close();
+            if (rs != null) {
+                rs.close();
             }
 
             con.close();

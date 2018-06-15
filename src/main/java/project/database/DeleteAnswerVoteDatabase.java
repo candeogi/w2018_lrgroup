@@ -25,8 +25,7 @@ import java.sql.*;
  * @author lrgroup
  * @author Alberto Pontini
  */
-public final class DeleteAnswerVoteDatabase
-{
+public final class DeleteAnswerVoteDatabase {
 
     /**
      * The SQL statements to be executed
@@ -46,26 +45,21 @@ public final class DeleteAnswerVoteDatabase
     /**
      * Deletes a new object for creating an answer.
      *
-     *
-     * @param con
-     *            the connection to the database.
-     * @param user
-     *            the user which vote hasto be deleted the question.
-     * @param idAnswer
-     *            the answer which vote has to be deleted in the database.
+     * @param con      the connection to the database.
+     * @param user     the user which vote hasto be deleted the question.
+     * @param idAnswer the answer which vote has to be deleted in the database.
      */
-    public DeleteAnswerVoteDatabase(final Connection con, final String user ,final int idAnswer) {
+    public DeleteAnswerVoteDatabase(final Connection con, final String user, final int idAnswer) {
         this.con = con;
         this.idAnswer = idAnswer;
         this.user = user;
     }
 
     /**
-     *
      * Deletes an upvote in the database.
+     *
      * @return true id the deleting is correctly done
-     *  @throws SQLException
-     *             if any error occurs while storing the answer.
+     * @throws SQLException if any error occurs while storing the answer.
      */
     public boolean deleteAnswerVote() throws SQLException {
 
@@ -73,19 +67,15 @@ public final class DeleteAnswerVoteDatabase
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1,idAnswer);
-            pstmt.setString(2,user);
+            pstmt.setInt(1, idAnswer);
+            pstmt.setString(2, user);
 
             pstmt.execute();
 
             return true;
-        }
-        catch(Throwable t)
-        {
+        } catch (Throwable t) {
             return false;
-        }
-        finally 
-        {
+        } finally {
             if (pstmt != null) {
                 pstmt.close();
             }

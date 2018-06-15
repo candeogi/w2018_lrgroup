@@ -53,13 +53,10 @@ public final class SearchUserByUsernameDatabase {
     /**
      * Creates a new object for searching user by username.
      *
-     * @param con
-     *            the connection to the database.
-     * @param username
-     *            the username of the user.
+     * @param con      the connection to the database.
+     * @param username the username of the user.
      */
-    public SearchUserByUsernameDatabase(final Connection con, final String username)
-    {
+    public SearchUserByUsernameDatabase(final Connection con, final String username) {
         this.con = con;
         this.username = username;
     }
@@ -68,12 +65,9 @@ public final class SearchUserByUsernameDatabase {
      * Searches user by username.
      *
      * @return a list of {@code User} (must be one) object matching the username.
-     *
-     * @throws SQLException
-     *             if any error occurs while searching for users.
+     * @throws SQLException if any error occurs while searching for users.
      */
-    public List<User> searchUserByUsername() throws SQLException
-    {
+    public List<User> searchUserByUsername() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -81,8 +75,7 @@ public final class SearchUserByUsernameDatabase {
         // the results of the search
         final List<User> users = new ArrayList<User>();
 
-        try
-        {
+        try {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setString(1, username);
 

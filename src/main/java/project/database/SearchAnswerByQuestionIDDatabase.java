@@ -31,8 +31,7 @@ import java.util.List;
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class SearchAnswerByQuestionIDDatabase
-{
+public final class SearchAnswerByQuestionIDDatabase {
 
     /**
      * The SQL statement to be executed
@@ -55,13 +54,10 @@ public final class SearchAnswerByQuestionIDDatabase
     /**
      * Creates a new object for answers retrieval.
      *
-     * @param con
-     *            the connection to the database.
-     * @param questionid
-     *            the id of the related question.
+     * @param con        the connection to the database.
+     * @param questionid the id of the related question.
      */
-    public SearchAnswerByQuestionIDDatabase(final Connection con, final int questionid)
-    {
+    public SearchAnswerByQuestionIDDatabase(final Connection con, final int questionid) {
         this.con = con;
         this.questionID = questionid;
     }
@@ -70,32 +66,32 @@ public final class SearchAnswerByQuestionIDDatabase
      * Retrieves answers for specific question in the database.
      *
      * @return a list of {@code Answer} (must be one) object related to a specific question.
-     *
-     * @throws SQLException
-     *             if any error occurs while retrieving the answer.
+     * @throws SQLException if any error occurs while retrieving the answer.
      */
-    public List<Answer> searchAnswerByQuestionID() throws SQLException
-    {
+    public List<Answer> searchAnswerByQuestionID() throws SQLException {
 
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         List<Answer> answerList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setInt(1, questionID);
 
+            rs = pstmt.executeQuery();
 
-            ResultSet rs = pstmt.executeQuery();
-
-            while(rs.next()){
-                Answer a = new Answer(rs.getInt("id"), rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"),questionID);
+            while (rs.next()) {
+                Answer a = new Answer(rs.getInt("id"), rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"), questionID);
                 answerList.add(a);
             }
-            rs.close();
+
 
         } finally {
             if (pstmt != null) {
                 pstmt.close();
+            }
+            if (rs != null) {
+                rs.close();
             }
 
             con.close();

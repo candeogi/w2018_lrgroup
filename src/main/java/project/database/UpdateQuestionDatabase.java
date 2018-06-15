@@ -35,21 +35,18 @@ public final class UpdateQuestionDatabase {
     /**
      * Creates a new object to update a question.
      *
-     * @param con
-     *            the connection to the database.
-     * @param question
-     *            the question to be updated in the database.
+     * @param con      the connection to the database.
+     * @param question the question to be updated in the database.
      */
-    public UpdateQuestionDatabase(final Connection con, final Question question)
-    {
+    public UpdateQuestionDatabase(final Connection con, final Question question) {
         this.con = con;
         this.question = question;
     }
 
     /**
      * Updates a question in the database.
-     * @throws SQLException
-     *             if any error occurs while updating the user.
+     *
+     * @throws SQLException if any error occurs while updating the user.
      */
     public void updateQuestion() throws SQLException {
 
@@ -59,7 +56,7 @@ public final class UpdateQuestionDatabase {
             pstmt.setString(1, question.getTitle());
             pstmt.setString(2, question.getBody());
             pstmt.setTimestamp(3, question.getLastModified());
-            pstmt.setInt(4,question.getID());
+            pstmt.setInt(4, question.getID());
 
             pstmt.execute();
 

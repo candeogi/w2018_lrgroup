@@ -38,21 +38,18 @@ public final class CreateUserDatabase {
     /**
      * Creates a new object for creating an user.
      *
-     * @param con
-     *            the connection to the database.
-     * @param user
-     *            the user to be created in the database.
+     * @param con  the connection to the database.
+     * @param user the user to be created in the database.
      */
-    public CreateUserDatabase(final Connection con, final User user)
-    {
+    public CreateUserDatabase(final Connection con, final User user) {
         this.con = con;
         this.user = user;
     }
 
     /**
      * Creates a user in the database.
-     * @throws SQLException
-     *             if any error occurs while storing the user.
+     *
+     * @throws SQLException if any error occurs while storing the user.
      */
     public void createUser() throws SQLException {
 
@@ -66,7 +63,7 @@ public final class CreateUserDatabase {
             pstmt.setString(4, user.getUsername());
             pstmt.setString(5, user.getPhotoProfile());
             pstmt.setString(6, user.getPassword());
-            pstmt.setBoolean(7,user.isAdmin());
+            pstmt.setBoolean(7, user.isAdmin());
             pstmt.setDate(8, user.getRegistrationDate());
             pstmt.setDate(9, user.getBirthday());
             pstmt.setString(10, user.getDescription());

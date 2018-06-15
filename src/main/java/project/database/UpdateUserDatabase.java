@@ -34,21 +34,18 @@ public final class UpdateUserDatabase {
     /**
      * Creates a new object to update an user.
      *
-     * @param con
-     *            the connection to the database.
-     * @param user
-     *            the user to be updated in the database.
+     * @param con  the connection to the database.
+     * @param user the user to be updated in the database.
      */
-    public UpdateUserDatabase(final Connection con, final User user)
-    {
+    public UpdateUserDatabase(final Connection con, final User user) {
         this.con = con;
         this.user = user;
     }
 
     /**
      * Updates a user in the database.
-     * @throws SQLException
-     *             if any error occurs while updating the user.
+     *
+     * @throws SQLException if any error occurs while updating the user.
      */
     public void updateUser() throws SQLException {
 
