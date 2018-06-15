@@ -38,7 +38,7 @@ public final class SearchUserByUsernameDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "SELECT *" +
+            "SELECT * " +
             "FROM lr_group.Utente " +
             "WHERE username=?";
 

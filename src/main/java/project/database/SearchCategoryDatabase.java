@@ -37,7 +37,7 @@ public final class SearchCategoryDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "SELECT *" +
+            "SELECT * " +
             "FROM lr_group.category ";
 
     /**

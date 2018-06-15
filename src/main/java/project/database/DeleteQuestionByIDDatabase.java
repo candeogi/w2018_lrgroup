@@ -39,7 +39,7 @@ public final class DeleteQuestionByIDDatabase
                     "FROM lr_group.answer " +
                     "WHERE EXISTS " +
                     "(SELECT 1 " +
-                    " FROM lr_group.have" +
+                    " FROM lr_group.have " +
                     " WHERE idanswer = lr_group.answer.id " +
                     " AND idquestion = ?) ";
 

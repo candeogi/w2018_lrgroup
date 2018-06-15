@@ -19,8 +19,8 @@ public class DeleteCategoryQuestionFromBelowDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "DELETE FROM lr_group.below " +
-            "WHERE lr_group.below.category = ? " + "AND" + " lr_group.below.question = ?";
+            " DELETE FROM lr_group.below " +
+            " WHERE lr_group.below.category = ? " + "AND" + " lr_group.below.question = ?";
 
     /**
      * The connection to the database

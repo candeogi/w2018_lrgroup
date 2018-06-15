@@ -18,7 +18,7 @@ public final class UpdateUserDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "UPDATE lr_group.Utente SET email=?, name=?, surname=?, birthday=?, description=?, isAdmin=?" +
+            "UPDATE lr_group.Utente SET email=?, name=?, surname=?, birthday=?, description=?, isAdmin=? " +
             "WHERE username=?";
 
     /**
