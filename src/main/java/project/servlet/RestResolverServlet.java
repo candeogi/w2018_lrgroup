@@ -70,7 +70,9 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     }
                     break;
                 case "answer":
+                    getServletContext().log("sono entrato in processAnswer");
                     if (processAnswer(req, res)) {
+                        getServletContext().log("entrato nel if di processAnswer");
                         return;
                     }
                     break;
@@ -96,7 +98,9 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         return;
                     }
                     break;
-                //Aggiungere le risorse possibili
+                default:
+                    getServletContext().log("non ho trovato nulla da fare");
+                    break;
             }
             // if none of the above process methods succeeds, it means an unknow resource has been requested
             final Message m = new Message("Unknown resource requested.", "E4A6",
@@ -187,9 +191,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         new RestAnswer(req, res, getDataSource().getConnection()).updateAnswer();
                         break;
                     case "DELETE":
+                        getServletContext().log("sono nel delete del answer");
                         new RestAnswer(req, res, getDataSource().getConnection()).deleteAnswer();
                         break;
                     default:
+                        getServletContext().log("non vado da nessuna parte");
                         m = new Message("Unsupported operation for URI /answer.",
                                 "E4A5", String.format("Requested operation %s.", method));
                         res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);

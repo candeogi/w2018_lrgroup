@@ -134,9 +134,16 @@ public final class RestAnswer extends RestResource
 
 		try{
 
-			final Answer answer = Answer.fromJSON(req.getInputStream());
 
-			a = new DeleteAnswerByIDDatabase(con, answer.getID()).deleteAnswerByID();
+			String path = req.getRequestURI();
+			path=path.substring(path.lastIndexOf("answer") +7);
+			//int idAnswer = Integer.parseInt(path);
+			m = new Message(path);
+			m.toJSON(res.getOutputStream());
+
+
+			int idAnswer=1;
+			a = new DeleteAnswerByIDDatabase(con, idAnswer).deleteAnswerByID();
 
 			if(a)
 			{
