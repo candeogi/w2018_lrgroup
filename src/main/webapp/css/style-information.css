@@ -12,6 +12,10 @@ img {
     width: 10%;
 }
 
+.profileImg{
+    width: 145px;
+    border-radius: 50%;
+}
 .adding {
     padding-top: auto;
     float: right;
