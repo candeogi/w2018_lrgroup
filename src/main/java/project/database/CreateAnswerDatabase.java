@@ -61,7 +61,7 @@ public final class CreateAnswerDatabase {
      * Creates a answer in the database.
      * @throws SQLException if any error occurs while storing the answer.
      */
-    public boolean createAnswer() throws SQLException {
+    public int createAnswer() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet generatedKey = null;
@@ -93,10 +93,10 @@ public final class CreateAnswerDatabase {
                 new CreateHaveElement(con, answer.getQuestionID(), insertedKey).createElement();
             }
 
-            return true;
+            return insertedKey;
 
         } catch (Throwable t) {
-            return false;
+            return -1;
         } finally {
 
             if (pstmt != null) {

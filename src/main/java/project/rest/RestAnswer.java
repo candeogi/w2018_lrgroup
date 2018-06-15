@@ -43,8 +43,9 @@ public final class RestAnswer extends RestResource
 	 */
 	public void createAnswer() throws IOException
 	{
-		boolean a;
+		int a;
 		Message m = null;
+		Answer ans = null;
 
 		try{
 
@@ -53,9 +54,11 @@ public final class RestAnswer extends RestResource
 			// creates a new object for accessing the database and stores the answer
 			a = new CreateAnswerDatabase(con, answer).createAnswer();
 
-			if(a)
+			if(a!=-1)
 			{
+				ans = new Answer(a, answer.getUserID(), answer.isFixed(), answer.getText(), answer.getParentID(), answer.getTimestamp(), answer.getQuestionID());
 				res.setStatus(HttpServletResponse.SC_CREATED);
+				ans.toJSON(res.getOutputStream());
 			}
 			else
 			{
