@@ -22,18 +22,36 @@
         e.preventDefault(); // To prevent following the link (optional)
         var href = $(this).find("td").attr("id");
         alert('Ciao ciao '+href);
-        /*url = 'http://localhost:8080/web-app-project/rest/question/';
+        var div = document.getElementById('divquestionlist');
+        var table = document.getElementById('tablequestionlist');
+        var form = document.createElement('form');
+        form.setAttribute('id','myform');
+        form.setAttribute('method','GET');
+        form.setAttribute('action','http://localhost:8080/web-app-project/jsp/question-answers.jsp');
+
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'questionID');
+        input.setAttribute('value',href);
+
+        form.appendChild(input);
+        table.appendChild(form);
+
+        document.forms["myform"].submit();
+        document.getElementById('tablequestionlist').innerHTML = "";
+        /*url = 'http://localhost:8080/web-app-project/jsp/question-answers.jsp';
         httpRequest = new XMLHttpRequest();
 
         if (!httpRequest) {
             alert('Giving up :( Cannot create an XMLHTTP instance');
             return false;
         }
-        httpRequest.onreadystatechange = categoryDropdown;
-        httpRequest.open('GET', url);
+        httpRequest.onreadystatechange = prova;
+        httpRequest.open('POST', url);
         httpRequest.send();*/
 
     });
+
 
     function categoryDropdown(){
 
