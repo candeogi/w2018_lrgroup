@@ -264,7 +264,7 @@ function deleteAnswer(id){
     console.log(urlToDelete);
     $.ajax({
         type: "DELETE",
-        url: urlToDelete,,
+        url: urlToDelete,
         success: function() {
             //doesnt work and goes on error but still deletes from db //TODO fix
             //alert("hey its me working");
