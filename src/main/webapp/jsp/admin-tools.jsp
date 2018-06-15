@@ -214,9 +214,20 @@
 
 
     </div>
-    <div class="tab-pane fade" id="nav-certificate" role="tabpanel" aria-labelledby="nav-certificate-tab">...</div>
-    <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">...</div>
+    <div class="tab-pane fade" id="nav-certificate" role="tabpanel" aria-labelledby="nav-certificate-tab">
+    </div>
+
+
+    <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
+        <div class="container-fluid">
+        <div class="table-responsive" id="divcategorylist">
+            <p></p>
+            <table class="table table-hover table-striped table-responsive" id="tablecategorylist">
+            </table>
+        </div><!-- close table div --></div>
 </div>
+</div>
+
 
 <script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
 <script type="text/javascript" language="JavaScript" src="<c:url value='/js/admin-functions.js' />"></script>

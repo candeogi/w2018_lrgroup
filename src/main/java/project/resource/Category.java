@@ -135,6 +135,7 @@ public class Category extends Resource
     {
 
         // the fields read from JSON
+        int jID = -1;
         String jName = null;
         String jDescription = null;
         boolean jIsCompany = false;
@@ -158,6 +159,10 @@ public class Category extends Resource
             {
                 switch (jp.getCurrentName())
                 {
+                    case "id":
+                        jp.nextToken();
+                        jID = jp.getIntValue();
+                        break;
                     case "name":
                         jp.nextToken();
                         jName = jp.getText();
@@ -175,6 +180,6 @@ public class Category extends Resource
             }
         }
 
-        return new Category(jName, jDescription, jIsCompany);
+        return new Category( jID, jName, jDescription, jIsCompany );
     }
 }

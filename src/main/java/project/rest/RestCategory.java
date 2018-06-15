@@ -1,5 +1,6 @@
 package project.rest;
 
+import project.database.CreateCategoryDatabase;
 import project.resource.Message;
 import project.resource.ResourceList;
 import project.resource.Category;
@@ -41,4 +42,34 @@ public class RestCategory extends RestResource {
         }
 
     }
+
+    public void addCategory() throws IOException {
+        Message m = null;
+        Category ans = null;
+
+        try{
+
+            final Category category = Category.fromJSON(req.getInputStream());
+
+            // creates a new object for accessing the database and stores the answer
+            new CreateCategoryDatabase(con, category).createCategory();
+
+        }
+        catch (Throwable t)
+        {
+            if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23505"))
+            {
+                m = new Message("Cannot create the category: it already exists.", "E5A2", t.getMessage());
+                res.setStatus(HttpServletResponse.SC_CONFLICT);
+                m.toJSON(res.getOutputStream());
+            }
+            else
+            {
+                m = new Message("Cannot create the category: unexpected error.", "E5A1", t.getMessage());
+                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                m.toJSON(res.getOutputStream());
+            }
+        }
+    }
 }
+

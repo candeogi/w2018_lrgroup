@@ -659,8 +659,10 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
             if (path.length() == 0 || path.equals("/")) {
                 switch (method) {
                     case "GET":
-                        RestCategory rc = new RestCategory(req, res, getDataSource().getConnection());
-                        rc.searchCategory();
+                        new RestCategory(req, res, getDataSource().getConnection()).searchCategory();
+                        break;
+                    case "POST":
+                        new RestCategory(req, res, getDataSource().getConnection()).addCategory();
                         break;
                     default:
                         m = new Message("Unsupported operation for URI /category.",
