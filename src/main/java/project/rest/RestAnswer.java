@@ -137,7 +137,7 @@ public final class RestAnswer extends RestResource
 
 			String path = req.getRequestURI();
 			path=path.substring(path.lastIndexOf("answer") +7);
-			//int idAnswer = Integer.parseInt(path);
+
 			m = new Message(path);
 			m.toJSON(res.getOutputStream());
 
