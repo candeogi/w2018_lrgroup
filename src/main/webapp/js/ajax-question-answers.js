@@ -221,7 +221,7 @@ function addNewAnswerForm(){
                 "timestamp": timestamp,
                 "IDUser": currentUser,
                 "parentID": -1,
-                "questionID": currentQuestion
+                "questionID": parseInt(currentQuestion)
             }
 
         }),
@@ -235,7 +235,7 @@ function addNewAnswerForm(){
         },
         error: function(jqXHR,textStatus,errorThrown){
             alert("" +
-                " |jqXHR:"+jqXHR+
+                " |jqXHR:"+JSON.stringify(jqXHR)+
                 " |textStatus: "+textStatus+
                 " |errorThrown:"+errorThrown);
         }
@@ -331,35 +331,7 @@ function replyAnswerAjax(){
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds() +"."
         + currentdate.getMilliseconds();
-    /*
-    $.ajax({
-        method: "POST",
-        url: "http://localhost:8080/web-app-project/rest/answer/",
-        data: JSON.stringify({
-            "answer": {
-                "text": addAnswerText,
-                "fixed": false,
-                "timestamp": timestamp,
-                "IDUser": currentUser,
-                "parentID": parentID,
-                "questionID": currentQuestion
-            }
-        }),
-        contentType: "application/json; charset=utf-8",
-        dataType   : "json",
-        success: function(data) {
-            console.log(data.answer);
-            console.log(parentID);
-            printSingleAnswer(data.answer, parentID);
-            $("#addAnswerTextArea").val('');
-        },
-        error: function(jqXHR,textStatus,errorThrown){
-            alert("error on replyAnswerAjax" +
-                " |jqXHR:"+jqXHR+
-                " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);
-        }
-    });*/
+
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/web-app-project/rest/answer/",
@@ -369,8 +341,8 @@ function replyAnswerAjax(){
                 "fixed":false,
                 "timestamp": timestamp,
                 "IDUser": currentUser,
-                "parentID": parentID,
-                "questionID": currentQuestion
+                "parentID": parseInt(parentID),
+                "questionID": parseInt(currentQuestion)
             }
 
         }),
