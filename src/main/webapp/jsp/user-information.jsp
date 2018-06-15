@@ -146,7 +146,7 @@
         </div>
 
         <div id="photo-div" class="col align-self-end">
-            <img src="<c:url value="/images/user.png"/>" alt="photo of the user" class="profileImg">
+            <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="profileImg">
         </div>
     </div>
 
