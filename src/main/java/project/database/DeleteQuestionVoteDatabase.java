@@ -1,8 +1,6 @@
 package project.database;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Deletes a question vote in the database.
@@ -34,14 +32,11 @@ public final class DeleteQuestionVoteDatabase {
     /**
      * Creates a new object for deleting a question vote.
      *
-     * @param con
-     *            the connection to the database.
-     * @param user
-     *            the user who voted the question.
-     * @param idQuestion
-     *            the question which vote has to be deleted in the database.
+     * @param con        the connection to the database.
+     * @param user       the user who voted the question.
+     * @param idQuestion the question which vote has to be deleted in the database.
      */
-    public DeleteQuestionVoteDatabase(final Connection con, final String user ,final int idQuestion) {
+    public DeleteQuestionVoteDatabase(final Connection con, final String user, final int idQuestion) {
         this.con = con;
         this.idQuestion = idQuestion;
         this.user = user;
@@ -50,8 +45,7 @@ public final class DeleteQuestionVoteDatabase {
     /**
      * @return return true id the question is correctly voted
      * Deletes a question vote in the database.
-     * @throws SQLException
-     *             if any error occurs while storing the answer.
+     * @throws SQLException if any error occurs while storing the answer.
      */
     public boolean deleteQuestionVote() throws SQLException {
 
@@ -60,18 +54,14 @@ public final class DeleteQuestionVoteDatabase {
         try {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setInt(1, idQuestion);
-            pstmt.setString(2,user);
+            pstmt.setString(2, user);
 
             pstmt.execute();
 
             return true;
-        }
-        catch(Throwable t)
-        {
+        } catch (Throwable t) {
             return false;
-        }
-        finally 
-        {
+        } finally {
             if (pstmt != null) {
                 pstmt.close();
             }

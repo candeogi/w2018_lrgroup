@@ -35,21 +35,18 @@ public final class UpdateUserPhotoProfileDatabase {
     /**
      * Creates a new object to update the user photo profile.
      *
-     * @param con
-     *            the connection to the database.
-     * @param user
-     *            the user to be updated in the database.
+     * @param con  the connection to the database.
+     * @param user the user to be updated in the database.
      */
-    public UpdateUserPhotoProfileDatabase(final Connection con, final User user)
-    {
+    public UpdateUserPhotoProfileDatabase(final Connection con, final User user) {
         this.con = con;
         this.user = user;
     }
 
     /**
      * Update the user photo profile in the database.
-     * @throws SQLException
-     *             if any error occurs while updating the user.
+     *
+     * @throws SQLException if any error occurs while updating the user.
      */
     public void updateUserPhotoProfile() throws SQLException {
 

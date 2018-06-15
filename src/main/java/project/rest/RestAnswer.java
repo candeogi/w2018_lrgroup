@@ -43,8 +43,9 @@ public final class RestAnswer extends RestResource
 	 */
 	public void createAnswer() throws IOException
 	{
-		boolean a;
+		int a;
 		Message m = null;
+		Answer ans = null;
 
 		try{
 
@@ -53,9 +54,11 @@ public final class RestAnswer extends RestResource
 			// creates a new object for accessing the database and stores the answer
 			a = new CreateAnswerDatabase(con, answer).createAnswer();
 
-			if(a)
+			if(a!=-1)
 			{
+				ans = new Answer(a, answer.getIDUser(), answer.isFixed(), answer.getText(), answer.getParentID(), answer.getTimestamp(), answer.getQuestionID());
 				res.setStatus(HttpServletResponse.SC_CREATED);
+				ans.toJSON(res.getOutputStream());
 			}
 			else
 			{
@@ -134,9 +137,16 @@ public final class RestAnswer extends RestResource
 
 		try{
 
-			final Answer answer = Answer.fromJSON(req.getInputStream());
 
-			a = new DeleteAnswerByIDDatabase(con, answer.getID()).deleteAnswerByID();
+			String path = req.getRequestURI();
+			path=path.substring(path.lastIndexOf("answer") +7);
+
+			m = new Message(path);
+			m.toJSON(res.getOutputStream());
+
+
+			int idAnswer=Integer.parseInt(path);
+			a = new DeleteAnswerByIDDatabase(con, idAnswer).deleteAnswerByID();
 
 			if(a)
 			{
@@ -145,8 +155,8 @@ public final class RestAnswer extends RestResource
 			else
 			{
 				// it should not happen
-				m = new Message("Cannot delete the answer: unexpected error.", "E5A1", null);
-				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m = new Message("cannot deleted the answer, probably the answer cannot exist anymore");
+				res.setStatus(HttpServletResponse.SC_OK);
 				m.toJSON(res.getOutputStream());
 			}
 		}

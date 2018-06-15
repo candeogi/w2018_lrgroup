@@ -20,7 +20,7 @@ public class DeleteCategoryQuestionFromBelowDatabase {
      */
     private static final String STATEMENT = "" +
             "DELETE FROM lr_group.below " +
-            "WHERE lr_group.below.category = ? " + "AND"+ " lr_group.below.question = ?";
+            "WHERE lr_group.below.category = ? " + "AND" + " lr_group.below.question = ?";
 
     /**
      * The connection to the database
@@ -36,12 +36,9 @@ public class DeleteCategoryQuestionFromBelowDatabase {
     /**
      * Creates a new object for deleting a category.
      *
-     * @param con
-     *            the connection to the database.
-     * @param category
-     *            the category in the database.
-     * @param question
-     *            the question in the database
+     * @param con      the connection to the database.
+     * @param category the category in the database.
+     * @param question the question in the database
      */
     public DeleteCategoryQuestionFromBelowDatabase(final Connection con, final Category category, final Question question) {
         this.con = con;
@@ -51,8 +48,8 @@ public class DeleteCategoryQuestionFromBelowDatabase {
 
     /**
      * Deletes a category-question association in the database.
-     * @throws SQLException
-     *             if any error occurs while deleting the association.
+     *
+     * @throws SQLException if any error occurs while deleting the association.
      */
     public void deleteCategoryQuestionAssociation() throws SQLException {
 

@@ -35,22 +35,20 @@ public final class CreateCategoryDatabase {
     /**
      * Creates a new object for creating a category.
      *
-     * @param con
-     *            the connection to the database.
-     * @param category
-     *            the category to be created in the database.
+     * @param con      the connection to the database.
+     * @param category the category to be created in the database.
      */
-    public CreateCategoryDatabase (final Connection con, final Category category) {
+    public CreateCategoryDatabase(final Connection con, final Category category) {
         this.con = con;
         this.category = category;
     }
 
     /**
      * Creates a category in the database.
-     * @throws SQLException
-     *             if any error occurs while storing the category
+     *
+     * @throws SQLException if any error occurs while storing the category
      */
-    public void createCategory () throws SQLException {
+    public void createCategory() throws SQLException {
 
         PreparedStatement pstmt = null;
 

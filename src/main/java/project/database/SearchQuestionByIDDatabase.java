@@ -31,8 +31,7 @@ import java.util.List;
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class SearchQuestionByIDDatabase
-{
+public final class SearchQuestionByIDDatabase {
 
     /**
      * The SQL statement to be executed
@@ -52,13 +51,10 @@ public final class SearchQuestionByIDDatabase
     /**
      * Creates a new object for a specific question retrieval.
      *
-     * @param con
-     *            the connection to the database.
-     * @param ID
-     *            the ID of a question.
+     * @param con the connection to the database.
+     * @param ID  the ID of a question.
      */
-    public SearchQuestionByIDDatabase(final Connection con, final int ID)
-    {
+    public SearchQuestionByIDDatabase(final Connection con, final int ID) {
         this.con = con;
         this.id = ID;
     }
@@ -67,14 +63,12 @@ public final class SearchQuestionByIDDatabase
      * Retrieves a specific question in the database.
      *
      * @return a list of {@code Question} (must be one) object matching the ID.
-     *
-     * @throws SQLException
-     *             if any error occurs while retrieving the question.
+     * @throws SQLException if any error occurs while retrieving the question.
      */
-    public List<Question> SearchQuestionByID() throws SQLException
-    {
+    public List<Question> SearchQuestionByID() throws SQLException {
 
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         List<Question> questList = new ArrayList<>();
 
         try {
@@ -82,15 +76,18 @@ public final class SearchQuestionByIDDatabase
             pstmt.setInt(1, id);
 
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
                 questList.add(q);
             }
-            rs.close();
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
             if (pstmt != null) {
                 pstmt.close();
             }

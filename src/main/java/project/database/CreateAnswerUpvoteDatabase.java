@@ -16,11 +16,7 @@
 
 package project.database;
 
-import project.resource.Answer;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Creates an answer in the database.

@@ -31,8 +31,7 @@ import java.util.List;
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class SearchQuestionByCategoryDatabase
-{
+public final class SearchQuestionByCategoryDatabase {
 
     /**
      * The SQL statement to be executed
@@ -57,13 +56,10 @@ public final class SearchQuestionByCategoryDatabase
     /**
      * Creates a new object for questions with a specified category.
      *
-     * @param con
-     *            the connection to the database.
-     * @param categoryID
-     *            the categoryID of a question.
+     * @param con        the connection to the database.
+     * @param categoryID the categoryID of a question.
      */
-    public SearchQuestionByCategoryDatabase(final Connection con, final int categoryID)
-    {
+    public SearchQuestionByCategoryDatabase(final Connection con, final int categoryID) {
         this.con = con;
         this.categoryID = categoryID;
     }
@@ -72,29 +68,29 @@ public final class SearchQuestionByCategoryDatabase
      * Retrieve questions with a specified category in the database.
      *
      * @return An ArrayList of questions.
-     *
-     * @throws SQLException
-     *             if any error occurs while retrieving the questions.
+     * @throws SQLException if any error occurs while retrieving the questions.
      */
-    public List<Question> searchQuestionByCategory() throws SQLException
-    {
+    public List<Question> searchQuestionByCategory() throws SQLException {
 
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         List<Question> questList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setInt(1, categoryID);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
                 questList.add(q);
             }
-            rs.close();
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }

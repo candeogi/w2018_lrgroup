@@ -16,11 +16,8 @@
 
 package project.database;
 
-import project.resource.Answer;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Creates an answer in the database.
@@ -55,14 +52,11 @@ public final class CreateAnswerDownvoteDatabase {
     /**
      * Creates a new object for creating an answer.
      *
-     * @param con
-     *            the connection to the database.
-     * @param user
-     *            the user who voted the question.
-     * @param idAnswer
-     *            the answer to be voted in the database.
+     * @param con      the connection to the database.
+     * @param user     the user who voted the question.
+     * @param idAnswer the answer to be voted in the database.
      */
-    public CreateAnswerDownvoteDatabase(final Connection con, final String user ,final int idAnswer) {
+    public CreateAnswerDownvoteDatabase(final Connection con, final String user, final int idAnswer) {
         this.con = con;
         this.idAnswer = idAnswer;
         this.user = user;
@@ -71,8 +65,7 @@ public final class CreateAnswerDownvoteDatabase {
     /**
      * @return return true id the answer is correctly done
      * Creates an upvote in the database.
-     * @throws SQLException
-     *             if any error occurs while storing the answer.
+     * @throws SQLException if any error occurs while storing the answer.
      */
     public boolean createAnswerDownvote() throws SQLException {
 
@@ -82,7 +75,7 @@ public final class CreateAnswerDownvoteDatabase {
 
             pstmt = con.prepareStatement(STATEMENT_2);
             pstmt.setInt(1, idAnswer);
-            pstmt.setString(2,user);
+            pstmt.setString(2, user);
 
             pstmt.execute();
 
@@ -94,13 +87,9 @@ public final class CreateAnswerDownvoteDatabase {
             pstmt.execute();
 
             return true;
-        }
-        catch(Throwable t)
-        {
+        } catch (Throwable t) {
             return false;
-        }
-        finally 
-        {
+        } finally {
             if (pstmt != null) {
                 pstmt.close();
             }

@@ -17,6 +17,7 @@
 package project.database;
 
 import project.resource.Question;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -50,10 +51,8 @@ public final class CreateQuestionDatabase {
     /**
      * Creates a new object for creating a question.
      *
-     * @param con
-     *            the connection to the database.
-     * @param question
-     *            the user to be created in the database.
+     * @param con      the connection to the database.
+     * @param question the user to be created in the database.
      */
     public CreateQuestionDatabase(final Connection con, final Question question) {
         this.con = con;
@@ -62,8 +61,8 @@ public final class CreateQuestionDatabase {
 
     /**
      * Creates a question in the database.
-     * @throws SQLException
-     *             if any error occurs while storing the question.
+     *
+     * @throws SQLException if any error occurs while storing the question.
      */
     public void createQuestion() throws SQLException {
 

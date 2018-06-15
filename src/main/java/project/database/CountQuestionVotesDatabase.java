@@ -24,10 +24,8 @@ public class CountQuestionVotesDatabase {
     /**
      * Creates a new object to count votes of a question in the database
      *
-     * @param con
-     *            the connection to the database.
-     * @param idQuestion
-     *            the question which votes have to be counted.
+     * @param con        the connection to the database.
+     * @param idQuestion the question which votes have to be counted.
      */
     public CountQuestionVotesDatabase(Connection con, int idQuestion) {
         this.con = con;
@@ -36,8 +34,8 @@ public class CountQuestionVotesDatabase {
 
     /**
      * Counts votes for a question in the database.
-     * @throws SQLException
-     *             if any error occurs while creating the relation. 
+     *
+     * @throws SQLException if any error occurs while creating the relation.
      */
 
     public int countQuestionVotes() throws SQLException {

@@ -19,8 +19,6 @@ package project.database;
 import project.resource.Answer;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Creates an answer in the database.
@@ -50,10 +48,8 @@ public final class CreateAnswerDatabase {
     /**
      * Creates a new object for creating an answer.
      *
-     * @param con
-     *            the connection to the database.
-     * @param answer
-     *            the answer to be created in the database.
+     * @param con    the connection to the database.
+     * @param answer the answer to be created in the database.
      */
     public CreateAnswerDatabase(final Connection con, final Answer answer) {
         this.con = con;
@@ -63,13 +59,13 @@ public final class CreateAnswerDatabase {
     /**
      * @return return true id the answer is correctly done
      * Creates a answer in the database.
-     * @throws SQLException
-     *             if any error occurs while storing the answer.
+     * @throws SQLException if any error occurs while storing the answer.
      */
-    public boolean createAnswer() throws SQLException {
+    public int createAnswer() throws SQLException {
 
         PreparedStatement pstmt = null;
-        int insertedKey=-1;
+        ResultSet generatedKey = null;
+        int insertedKey = -1;
 
         try {
             pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
@@ -78,42 +74,40 @@ public final class CreateAnswerDatabase {
             pstmt.setString(2, answer.getText());
             pstmt.setTimestamp(3, answer.getTimestamp());
             pstmt.setString(4, answer.getIDUser());
-            if(answer.getParentID()!=-1){
-                pstmt.setInt(5,answer.getParentID());
-            }
-            else {
-                pstmt.setNull(5,  java.sql.Types.INTEGER);
+            if (answer.getParentID() != -1) {
+                pstmt.setInt(5, answer.getParentID());
+            } else {
+                pstmt.setNull(5, java.sql.Types.INTEGER);
             }
             //set null cause now works only on answer to questions
             pstmt.execute();
 
-            ResultSet generatedKey=pstmt.getGeneratedKeys();
-            if(generatedKey.next()){
-                insertedKey=generatedKey.getInt(1);
+            generatedKey = pstmt.getGeneratedKeys();
+            if (generatedKey.next()) {
+                insertedKey = generatedKey.getInt(1);
             }
 
             generatedKey.close();
 
-            if(answer.getParentID()==-1){
-                new CreateHaveElement(con,answer.getQuestionID(),insertedKey).createElement();
+            if (answer.getParentID() == -1) {
+                new CreateHaveElement(con, answer.getQuestionID(), insertedKey).createElement();
             }
 
-            return true;
-        }
-        catch(Throwable t)
-        {
-            return false;
-        }
-        finally 
-        {
+            return insertedKey;
+
+        } catch (Throwable t) {
+            return -1;
+        } finally {
+
             if (pstmt != null) {
                 pstmt.close();
+            }
+            if (generatedKey != null) {
+                generatedKey.close();
             }
 
             con.close();
         }
-
-
 
 
     }
