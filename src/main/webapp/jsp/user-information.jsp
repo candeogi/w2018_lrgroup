@@ -144,6 +144,7 @@
                 </tr>
             </table>
         </div>
+
         <div id="photo-div" class="col align-self-end">
             <img src="<c:url value="/images/user.png"/>" alt="photo of the user" class="profileImg">
         </div>

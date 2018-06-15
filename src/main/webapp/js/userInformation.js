@@ -21,9 +21,9 @@ var xhrWebsite;
 //then the updating of the User Interface.
 function addWebsite() {
     var newAddressWeb = $("#address-form").val();
-    console.log("a" + newAddressWeb);
+
     var newTypeWeb = $("#type-form").val();
-    console.log("b" + newTypeWeb);
+
     xhrWebsite = new XMLHttpRequest();
     xhrWebsite.onreadystatechange = function () {
         if (xhrWebsite.readyState == 4) {
@@ -201,7 +201,7 @@ function printResult() {
         if (xhr2.status == 200) {
 
             var jsonResult = JSON.parse(xhr2.responseText);
-            console.log("json result: " + jsonResult.toString());
+
             var website = jsonResult['resource-list'];
             var table = document.getElementById("table-website");
 
@@ -283,7 +283,7 @@ function deleteWebsite(nameWebsite) {
         }
     }
 
-    console.log("deleting website");
+
     xhrDelete.onreadystatechange = deleteRowWebSite;
     var username = $("#username-value").text().trim();
     xhrDelete.open('DELETE', 'rest/website/user/' + username + '/website/' + nameWebsite, true);
@@ -296,7 +296,7 @@ function deleteRowWebSite() {
     if (xhrDelete.readyState === XMLHttpRequest.DONE) {
 
         if (xhrDelete.status == 200) {
-            console.log("entrato");
+
             rowToDelete.parentNode.removeChild(rowToDelete);
 
         }
@@ -314,7 +314,7 @@ function deleteCertificate(nameCert) {
         }
     }
 
-    console.log("deleting certificate");
+
     xhrDeleteCertificate.onreadystatechange = deleteRowCertificate;
     var username = $("#username-value").text().trim();
     var idCertificate = nameCert;
@@ -330,7 +330,7 @@ function deleteRowCertificate() {
     if (xhrDeleteCertificate.readyState === XMLHttpRequest.DONE) {
 
         if (xhrDeleteCertificate.status == 200) {
-            console.log("entrato rimozione certificato");
+
             rowToDeleteCert.parentNode.removeChild(rowToDeleteCert);
 
         }
@@ -344,7 +344,7 @@ function addCertificate() {
     var newName = $("#name-cert-form").val();
     var newOrg = $("#org-cert-form").val();
     var newDate = $("#date-cert-form").val();
-    console.log(newDate);
+
     xhrCertificate = new XMLHttpRequest();
     xhrCertificate.onreadystatechange = function () {
         if (xhrCertificate.readyState == 4) {
@@ -407,7 +407,6 @@ function modifyValue() {
     }
 
 
-    console.log("oldbirthday " + oldbirthday);
     $("#birthday-value").hide();
     $("#birthday-value").after("<div id='form-bdate'><form><input type='date' name='new-birthday'</input> </form></div>");
     $('input[name=new-birthday]').val(oldbirthday);
@@ -419,8 +418,32 @@ function modifyValue() {
     $('textarea[name=new-description]').val(oldDescription);
 
 
-    //PROBLEMA
-    $("#photo-div").after("<form id='photo-form' method='POST' enctype='multipart/form-data' action='/update-user-pic'> <input type='file' name='photoProfile' /><button type='submit' class= \"btn btn-primary\">Upload</button></form>");
+
+
+    var div=document.createElement("div");
+    div.setAttribute("id","form-image");
+    var form=document.createElement("form");
+    form.setAttribute("method","POST");
+    form.setAttribute("enctype","multipart/form-data");
+    form.setAttribute("action","update-user-pic");
+    var input=document.createElement("input");
+    input.setAttribute("type","file");
+    input.setAttribute("name","photoProfile");
+
+    var button=document.createElement("button");
+    button.setAttribute("type","submit");
+    button.setAttribute("class","btn btn-primary");
+    button.innerHTML="Load";
+
+    form.appendChild(input);
+    form.appendChild(button);
+
+    div.appendChild(form);
+
+
+    var button1=document.getElementById("photo-div")
+    button1.appendChild(div);
+
 
     $("#modifyButton").text("Confirm");
     $("#modifyButton").unbind();
@@ -441,7 +464,7 @@ function saveValue() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             var data = xhr.responseText;
-            // console.log(data);
+
         }
     }
 
@@ -482,6 +505,8 @@ function returnToVisualization(name, surname, birthday, description) {
     $("#modifyButton").click(function () {
         modifyValue();
     });
+
+    $("#form-image").remove();
 }
 
 
