@@ -1,6 +1,6 @@
 package project.servlet;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import project.resource.User;
 import project.resource.Message;
 import project.database.*;

@@ -52,7 +52,16 @@ Since: 1.0
         <nav class="nav">
             <a class="nav-link" href="<c:url value="/"/>"><i class="fas fa-home"></i></a>
 
-            <a class="nav-link" href="<c:url value="/?p=show-user-questions"/>"><i class="fas fa-question-circle"></i></a>
+            <c:choose>
+                <c:when test="${empty sessionScope.loggedInUser}">
+                    <a class="nav-link" href="<c:url value=""/>" data-toggle="modal" data-target="#modal-login"><i class="fas fa-question-circle"></i></a>
+
+                </c:when>
+                <c:when test="${not empty sessionScope.loggedInUser}">
+                    <a class="nav-link" href="<c:url value="/?p=show-user-questions"/>"><i class="fas fa-question-circle"></i></a>
+                </c:when>
+            </c:choose>
+            <%--<a class="nav-link" href="<c:url value="/?p=show-user-questions"/>"><i class="fas fa-question-circle"></i></a>--%>
 
 
         </nav>
