@@ -100,9 +100,19 @@
 		<servlet-class>project.servlet.CreateHaveCertificateServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>CreateCategoryServlet</servlet-name>
+		<servlet-class>project.servlet.CreateCategoryServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>CreateCertificateServlet</servlet-name>
 		<url-pattern>/create-have-certificate</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>CreateCategoryServlet</servlet-name>
+		<url-pattern>/create-category</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

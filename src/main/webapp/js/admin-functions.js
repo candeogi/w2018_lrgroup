@@ -7,7 +7,13 @@ var description;
 var isadmin;
 var httpRequest2;
 var url2;
-
+var httpRequest;
+var httpRequest4;
+var url;
+var url3;
+var title;
+var body;
+window.onload=onLoadRequest;
 
 $('#modal-update-user').on('show.bs.modal', function (e) {
     // get information to update quickly to modal view as loading begins
@@ -28,6 +34,42 @@ $('#modal-update-user').on('show.bs.modal', function (e) {
 
 
 });
+
+$('#modal-update-question').on('show.bs.modal', function (e) {
+    // get information to update quickly to modal view as loading begins
+    var opener=e.relatedTarget;//this holds the element who called the modal
+    //we get details from attributes
+    var idquestion = $(opener).attr('id-qs');
+    //set what we got to our form
+    $('#formQuestion').find('[name="id"]').val(idquestion);
+
+    url3 = 'http://localhost:8080/web-app-project/rest/question/id/'+idquestion;
+    httpRequest4 = new XMLHttpRequest();
+    if (!httpRequest4) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    httpRequest4.onreadystatechange = placeholderQs;
+    httpRequest4.open('GET', url3);
+    httpRequest4.send();
+});
+
+function placeholderQs(){
+    if (httpRequest4.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest4.status === 200) {
+            var jsonData = JSON.parse(httpRequest4.responseText);
+            var resource = jsonData['resource-list'];
+            var question = resource[0].question;
+            title = question['title'];
+            body = question['body'];
+        }
+        else {
+            alert('There was a problem with the request.');
+        }
+    }
+    $('#formQuestion').find('[name="title"]').val(title);
+    $('#formQuestion').find('[name="body"]').val(body);
+}
 
 function userData(){
     if (httpRequest2.readyState === XMLHttpRequest.DONE) {
@@ -124,10 +166,6 @@ function loadCategory(){
             th.appendChild(document.createTextNode('isCompany'));
             tr.appendChild(th);
 
-
-
-
-            //                                            <i class="fas fa-check-circle"></i>
             thead.appendChild(tr);
             table.appendChild(thead);
 
@@ -179,3 +217,177 @@ function loadCategory(){
             alert('There was a problem with the request.');
         }
     }}
+
+
+
+function onLoadRequest() {
+
+    url = 'http://localhost:8080/web-app-project/rest/question';
+
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    httpRequest.onreadystatechange = loadQsRequest;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+}
+
+function loadQsRequest() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+
+        if (httpRequest.status === 200) {
+
+
+            var div = document.getElementById('divquestionlist');
+            var table = document.getElementById('tablequestionlist');
+
+            document.getElementById('tablequestionlist').innerHTML = "";
+
+            var thead = document.createElement('thead');
+            thead.className = "thead-light";
+
+            var tr = document.createElement('tr');
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode('ID'));
+            tr.appendChild(th);
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode('title'));
+            tr.appendChild(th);
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode('body'));
+            tr.appendChild(th);
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode('timestamp'));
+            tr.appendChild(th);
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode('lastModified'));
+            tr.appendChild(th);
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode('IDUser'));
+            tr.appendChild(th);
+
+            if(document.getElementById('nav-tab-admin') != null) {
+                var th = document.createElement('th');
+                tr.appendChild(th);
+                var th = document.createElement('th');
+                tr.appendChild(th);
+            }
+
+            thead.appendChild(tr);
+            table.appendChild(thead);
+
+            var tbody = document.createElement('tbody');
+
+
+            var jsonData = JSON.parse(httpRequest.responseText);
+            var resource = jsonData['resource-list'];
+
+            for (var i = 0; i < resource.length; i++) {
+                var question = resource[i].question;
+                var tr = document.createElement('tr');
+                tr.className = "clickable-row";
+
+                var td_ID = document.createElement('td');
+                td_ID.id = question['ID'];
+                td_ID.appendChild(document.createTextNode(question['ID']));
+                tr.appendChild(td_ID);
+
+                var td_title = document.createElement('td');
+                td_title.appendChild(document.createTextNode(question['title']));
+                tr.appendChild(td_title);
+
+                var td_body = document.createElement('td');
+                if(question['body'].length<23) td_body.appendChild(document.createTextNode(question['body']));
+                else td_body.appendChild(document.createTextNode(question['body'].substr(0,20)+'...'));
+                tr.appendChild(td_body);
+
+                var td_ts = document.createElement('td');
+                td_ts.appendChild(document.createTextNode(question['timestamp']));
+                tr.appendChild(td_ts);
+
+                var td_lastMod = document.createElement('td');
+                td_lastMod.appendChild(document.createTextNode(question['lastModified']));
+                tr.appendChild(td_lastMod);
+
+                var td_iduser = document.createElement('td');
+                td_iduser.appendChild(document.createTextNode(question['IDUser']));
+                tr.appendChild(td_iduser);
+
+                var formdlt = document.createElement('form');
+                formdlt.setAttribute("method","POST");
+                formdlt.setAttribute("action","delete-question");
+                formdlt.setAttribute("id","formdltQs");
+
+                var inputid = document.createElement('input');
+                inputid.setAttribute("type","hidden");
+                inputid.setAttribute("name","idquestion");
+                inputid.setAttribute("value",question['ID']);
+                formdlt.appendChild(inputid);
+                var inputid = document.createElement('input');
+                inputid.setAttribute("type","hidden");
+                inputid.setAttribute("name","from");
+                inputid.setAttribute("value","admin-panel");
+                formdlt.appendChild(inputid);
+
+                var td_deleteq = document.createElement('td');
+
+                    var button_deleteq = document.createElement('button');
+                    button_deleteq.type = "submit";
+                    button_deleteq.className = "btn btn-danger";
+                    button_deleteq.id="deleteQsBtn";
+
+                    var icon_delete = document.createElement('i');
+                    icon_delete.className = "far fa-trash-alt";
+                    var text = document.createTextNode("Delete");
+                    icon_delete.appendChild(text);
+                    button_deleteq.appendChild(icon_delete);
+
+                    formdlt.appendChild(button_deleteq);
+                td_deleteq.appendChild(formdlt);
+
+                tr.appendChild(td_deleteq);
+
+
+                    var td_updateq = document.createElement('td');
+
+                    var button_updateq = document.createElement('button');
+                    button_updateq.type = "submit";
+                    button_updateq.id = "updateqsBtn";
+                    button_updateq.className = "btn btn-warning";
+                button_updateq.setAttribute("data-target","#modal-update-question");
+                button_updateq.setAttribute("data-toggle","modal");
+                button_updateq.setAttribute("id-qs",td_ID.id);
+
+
+
+                var icon_update = document.createElement('i');
+                    icon_update.className = "far fa-edit";
+                    var text = document.createTextNode("Update");
+                    icon_update.appendChild(text);
+                    button_updateq.appendChild(icon_update);
+
+                    td_updateq.appendChild(button_updateq);
+                    tr.appendChild(td_updateq);
+
+
+                tbody.appendChild(tr);
+            }
+
+            table.appendChild(tbody);
+
+            div.appendChild(table);
+
+        } else {
+            alert('There was a problem with the request.');
+        }
+    }
+}

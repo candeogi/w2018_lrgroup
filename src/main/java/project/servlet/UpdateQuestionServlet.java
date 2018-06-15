@@ -97,15 +97,14 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
         }
         else
         {
-            try {
-                req.setAttribute("question",
-                        new SearchQuestionByIDDatabase(getDataSource().getConnection(), questionid).SearchQuestionByID().get(0));
-            }catch (SQLException ex){
-                m = new Message("Cannot find the question: unexpected error while accessing the database.",
-                        "E403", ex.getMessage());
-            }
-            req.setAttribute("update",true);
-            req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);
+
+            String url = req.getParameter("from");
+            if(url != null)
+                res.sendRedirect(req.getContextPath() + "/?p=" + url);
+            else{
+                req.setAttribute("update",true);
+                req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);}
+
         }
     }
 
