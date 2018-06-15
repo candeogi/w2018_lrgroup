@@ -157,6 +157,7 @@ function printResultCertificate() {
                 var trash = document.createElement('i');
                 trash.className = "far fa-trash-alt";
                 button.appendChild(trash);
+                button.className = "btn btn-primary";
                 td_delete.appendChild(button);
                 tr.appendChild(td_delete);
                 tbody.appendChild(tr);
@@ -241,6 +242,7 @@ function printResult() {
                 var trash = document.createElement('i');
                 trash.className = "far fa-trash-alt";
                 button.appendChild(trash);
+                button.className = "btn btn-primary";
                 td_delete.appendChild(button);
                 tr.appendChild(td_delete);
                 tbody.appendChild(tr);
@@ -410,7 +412,7 @@ function modifyValue() {
 
 
     //PROBLEMA
-    $("#photo-div").after("<form id='photo-form' method='POST' enctype='multipart/form-data' action='/update-user-pic'> <input type='file' name='photoProfile' /><button type='submit'>Upload</button></form>");
+    $("#photo-div").after("<form id='photo-form' method='POST' enctype='multipart/form-data' action='/update-user-pic'> <input type='file' name='photoProfile' /><button type='submit' class= \"btn btn-primary\">Upload</button></form>");
 
     $("#modifyButton").text("Confirm");
     $("#modifyButton").unbind();

@@ -10,15 +10,38 @@
 <html>
 <head>
     <title>User Information</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/style-information.css' />">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <!--<link href="css/style.css" rel="stylesheet">-->
+
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!--awesome-font-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--popper-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <!--bootstrap js-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <%--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/style-information.css' />">
 
 </head>
 <body>
 
 <c:import url="/jsp/include/header.jsp"/>
-
+<div style="position:absolute;right:22%;">
+    <button id="modifyButton" type="submit" class="btn btn-primary">Modify User</button>
+</div>
 <div class="container">
     <div class="row justify-content-between">
         <div class="col col-lg-10">
@@ -79,9 +102,9 @@
         <div class="row">
             <div class="col">
                 <div id="website" class="container border border-dark">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#websiteModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#websiteModal" style="position:absolute;right:20pt;top:5pt">
                         Add a new website
-                    </button>
+                    </button> <br/>
                     <p>Website:</p>
                     <table id="table-website" class="table table-hover">
 
@@ -92,9 +115,9 @@
 
             <div class="col">
                 <div id="certification" class="container border border-dark">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#certificationModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#certificationModal" style="position:absolute;right:20pt;top:5pt">
                         Add a new certification
-                    </button>
+                    </button><br/>
                     <p>Certification:</p>
                     <table id="table-certificate" class="table table-hover">
 
@@ -105,7 +128,7 @@
     </div>
 </div>
 
-<button id="modifyButton" type="submit" class="btn btn-primary">Modify User</button>
+
 
 <!-- Button trigger modal -->
 
