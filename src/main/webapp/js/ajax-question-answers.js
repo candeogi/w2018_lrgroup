@@ -16,6 +16,10 @@ window.onload = initialPageLoad;
 function initialPageLoad(){
     visualizeQuestion();
     visualizeAnswers();
+
+    $("#insertAnswerModal").click(function () {
+        replyAnswerAjax();
+    });
 }
 /* USER MANAGEMENT */
 
@@ -110,6 +114,12 @@ function printSingleAnswer(answer, whereToAppendId){
     var p = document.createElement("p");
     var answerTextBody = document.createTextNode(answer['text']);
 
+    var replyLink = document.createElement('a');
+    replyLink.setAttribute('data-toggle', 'modal');
+    replyLink.setAttribute('data-target', '#addAnswerModal');
+    replyLink.setAttribute('onclick','setReplyModalTarget('+answer['ID']+')');
+    replyLink.setAttribute('href','javascript:void(0);');
+
     //create custom function call for each answer TODO better
     var deleteLink = document.createElement('a');
     deleteLink.setAttribute('onclick','deleteAnswer('+answer['ID']+')');
@@ -142,9 +152,10 @@ function printSingleAnswer(answer, whereToAppendId){
 
     p.appendChild(answerTextBody);
     small.appendChild(timestampText);
+    small.appendChild(replyLink);
+    replyLink.appendChild(document.createTextNode(' reply '));
     small.appendChild(deleteLink);
     deleteLink.appendChild(document.createTextNode(' delete '));
-
     if(currentUser === answer['IDUser']){
         small.appendChild(editLink);
         editLink.appendChild(document.createTextNode(' edit '));
@@ -200,28 +211,28 @@ function addNewAnswerForm(){
         + currentdate.getMilliseconds();
 
     var answerObject = {
-        "ID":-1,
+
+        "ID" : -1,
         "text": addAnswerText,
         "fixed":false,
         "timestamp": timestamp,
         "IDUser": currentUser,
         "parentID": -1,
-        "questionID":1
+        "questionID":currentQuestion
     };
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/web-app-project/rest/answer/",
-        data: JSON.stringify(
-                {
-                    "answer":{
+        data: JSON.stringify({
+            "answer":{
 
-                        "text": addAnswerText,
-                        "fixed":false,
-                        "timestamp": timestamp,
-                        "IDUser": currentUser,
-                        "parentID": -1,
-                        "questionID":1
-                    }
+                "text": addAnswerText,
+                "fixed":false,
+                "timestamp": timestamp,
+                "IDUser": currentUser,
+                "parentID": -1,
+                "questionID":1
+            }
 
         }),
         contentType: "application/json",
@@ -277,7 +288,7 @@ function editDoneAnswer(id){
     var answerNewTextArea = $('#'+id).find('textarea').first();
     var newAnswerTextFromTextArea = answerNewTextArea.val();
     /*
-    var newAnswerObject = {
+    var newAnswerObject ={
         "ID":id,
         "text": newAnswerTextFromTextArea
     };
@@ -306,4 +317,61 @@ function editDoneAnswer(id){
     doneButton.replaceWith(editLink);
 }
 
+function setReplyModalTarget(id){
+    $('#answerTextAreaModal').attr('data-reply-target',id);
+    /*This code is to set up the textarea with the parent text
+    var answerParagraph = $('#'+id).find('p').first();
+    var answerPreviousText = answerParagraph.text();*/
+    $('#answerTextAreaModal').val("");
+}
+function replyAnswerAjax(){
+    //get id setReplyModalTarget
+    var id= $('#answerTextAreaModal').attr('data-reply-target');
 
+    var addAnswerText = $('#answerTextAreaModal').val();
+
+    var currentdate = new Date();
+    var timestamp = ""
+        + currentdate.getFullYear() + "-"
+        + (currentdate.getMonth()+1)  + "-"
+        + currentdate.getDate() + " "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds() +"."
+        + currentdate.getMilliseconds();
+
+    var answerObject ={
+        "ID": -1,
+        "text": addAnswerText,
+        "fixed":false,
+        "timestamp": timestamp,
+        "IDUser": currentUser,
+        "parentID": id,
+        "questionID":currentQuestion
+    };
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: JSON.stringify({
+            "text": addAnswerText,
+            "fixed":false,
+            "timestamp": timestamp,
+            "IDUser": currentUser,
+            "parentID": id,
+            "questionID":currentQuestion
+        }),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function() {
+            //alert("it works!);
+        },
+        error: function(jqXHR,textStatus,errorThrown){
+            alert("" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
+        }
+    });
+    $("#answerTextAreaModal").val('');
+    printSingleAnswer(answerObject, id);
+}
