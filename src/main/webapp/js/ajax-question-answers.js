@@ -78,6 +78,7 @@ function visualizeAnswers(){
 
             //lets print all the answers
             for(var i =0; i< resourceList.length; i++){
+                console.log(resourceList[i].answer);
                 printSingleAnswer(resourceList[i].answer, 0);
             }
         },
@@ -210,35 +211,27 @@ function addNewAnswerForm(){
         + currentdate.getSeconds() +"."
         + currentdate.getMilliseconds();
 
-    var answerObject = {
-
-        "ID" : -1,
-        "text": addAnswerText,
-        "fixed":false,
-        "timestamp": timestamp,
-        "IDUser": currentUser,
-        "parentID": -1,
-        "questionID":currentQuestion
-    };
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/web-app-project/rest/answer/",
         data: JSON.stringify({
             "answer":{
-
                 "text": addAnswerText,
                 "fixed":false,
                 "timestamp": timestamp,
                 "IDUser": currentUser,
                 "parentID": -1,
-                "questionID":1
+                "questionID": currentQuestion
             }
 
         }),
-        contentType: "application/json",
-        dataType: 'json',
-        success: function() {
-            //alert("it works!);
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json",
+        success: function(data) {
+            console.log(data.answer);
+            printSingleAnswer(data.answer, 0);
+            $("#addAnswerTextArea").val('');
+
         },
         error: function(jqXHR,textStatus,errorThrown){
             alert("" +
@@ -247,18 +240,17 @@ function addNewAnswerForm(){
                 " |errorThrown:"+errorThrown);
         }
     });
-    $("#addAnswerTextArea").val('');
-    printSingleAnswer(answerObject, 0);
+
+
 }
 
 function deleteAnswer(id){
     //doesnt work and goes on error TODO
+    var urlToDelete = "http://localhost:8080/web-app-project/rest/answer/"+id;
+    console.log(urlToDelete);
     $.ajax({
         type: "DELETE",
-        url: "http://localhost:8080/web-app-project/rest/answer/",
-        data: JSON.stringify({"answer":{"ID": id}}),
-        contentType: "application/json",
-        dataType: 'json',
+        url: urlToDelete,
         success: function() {
             //alert("hey its me working");
         },
@@ -326,8 +318,8 @@ function setReplyModalTarget(id){
 }
 function replyAnswerAjax(){
     //get id setReplyModalTarget
-    var id= $('#answerTextAreaModal').attr('data-reply-target');
-
+    var parentID= $('#answerTextAreaModal').attr('data-reply-target');
+    console.log("parentID:" +parentID);
     var addAnswerText = $('#answerTextAreaModal').val();
 
     var currentdate = new Date();
@@ -339,31 +331,56 @@ function replyAnswerAjax(){
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds() +"."
         + currentdate.getMilliseconds();
-
-    var answerObject ={
-        "ID": -1,
-        "text": addAnswerText,
-        "fixed":false,
-        "timestamp": timestamp,
-        "IDUser": currentUser,
-        "parentID": id,
-        "questionID":currentQuestion
-    };
+    /*
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/web-app-project/rest/answer/",
         data: JSON.stringify({
-            "text": addAnswerText,
-            "fixed":false,
-            "timestamp": timestamp,
-            "IDUser": currentUser,
-            "parentID": id,
-            "questionID":currentQuestion
+            "answer": {
+                "text": addAnswerText,
+                "fixed": false,
+                "timestamp": timestamp,
+                "IDUser": currentUser,
+                "parentID": parentID,
+                "questionID": currentQuestion
+            }
         }),
-        contentType: "application/json",
-        dataType: 'json',
-        success: function() {
-            //alert("it works!);
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json",
+        success: function(data) {
+            console.log(data.answer);
+            console.log(parentID);
+            printSingleAnswer(data.answer, parentID);
+            $("#addAnswerTextArea").val('');
+        },
+        error: function(jqXHR,textStatus,errorThrown){
+            alert("error on replyAnswerAjax" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
+        }
+    });*/
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: JSON.stringify({
+            "answer":{
+                "text": addAnswerText,
+                "fixed":false,
+                "timestamp": timestamp,
+                "IDUser": currentUser,
+                "parentID": parentID,
+                "questionID": currentQuestion
+            }
+
+        }),
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json",
+        success: function(data) {
+            console.log(data.answer);
+            printSingleAnswer(data.answer, parentID);
+            $("#addAnswerTextArea").val('');
+
         },
         error: function(jqXHR,textStatus,errorThrown){
             alert("" +
@@ -372,6 +389,4 @@ function replyAnswerAjax(){
                 " |errorThrown:"+errorThrown);
         }
     });
-    $("#answerTextAreaModal").val('');
-    printSingleAnswer(answerObject, id);
 }
