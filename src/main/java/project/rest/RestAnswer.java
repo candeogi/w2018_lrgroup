@@ -56,7 +56,7 @@ public final class RestAnswer extends RestResource
 
 			if(a!=-1)
 			{
-				ans = new Answer(a, answer.getUserID(), answer.isFixed(), answer.getText(), answer.getParentID(), answer.getTimestamp(), answer.getQuestionID());
+				ans = new Answer(a, answer.getIDUser(), answer.isFixed(), answer.getText(), answer.getParentID(), answer.getTimestamp(), answer.getQuestionID());
 				res.setStatus(HttpServletResponse.SC_CREATED);
 				ans.toJSON(res.getOutputStream());
 			}
