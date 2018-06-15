@@ -114,13 +114,13 @@ Since: 1.0
 
 <script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question-answers.js' />"></script>
 
-<!-- Modal -->
+<!-- Modal for new Answer-->
 <div class="modal " id="addAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Insert a new answer</h5>
+                <h5 class="modal-title" id="answerModalTitle">Insert a new answer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -137,6 +137,28 @@ Since: 1.0
         </div>
     </div>
 </div>
-
+<!-- Modal for Edit Answer-->
+<div class="modal " id="editAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="answerEditModalTitle">Edit your comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" id="editTextAreaModal"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="editAnswerModalButton" data-dismiss="modal">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

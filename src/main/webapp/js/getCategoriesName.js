@@ -38,7 +38,7 @@
             var ee;
 
             // if we get a 500 status write the error message parsing it from JSON
-            if (httpRequest.status == 500) {
+            if (httpRequest.status === 500) {
 
                 div.className = 'alert alert-danger';
 
@@ -62,7 +62,7 @@
                 e.appendChild(ee);
 
                 // if we get a 200 status write result table parsing it from JSON
-            } else if (httpRequest.status == 200) {
+            } else if (httpRequest.status === 200) {
 
                 // a generic row and column of the table
                 var tr;
