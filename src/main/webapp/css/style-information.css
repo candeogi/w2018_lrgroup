@@ -1,13 +1,25 @@
-body{
-    background:#fcefa1;
+body {
+    background: #fcefa1;
 }
-div p{
+
+div p {
     padding-left: 10%;
     font-family: Verdana, Arial, sans-serif;
     font-size: 105%;
 }
-img{
+
+img {
     width: 10%;
+}
+
+.adding {
+    padding-top: auto;
+    float: right;
+    border-radius: 50%;
+}
+
+.table{
+    height: 50%;
 }
 
 

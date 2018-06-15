@@ -34,7 +34,7 @@ public final class CreateAnswerUpvoteDatabase {
             "VALUES (?, ?, ?)";
 
     private static final String STATEMENT_2 = "" +
-            "DELETE FROM lr_group.VoteAnswer" +
+            "DELETE FROM lr_group.VoteAnswer " +
             "WHERE answer=? AND idUser=?";
 
     /**

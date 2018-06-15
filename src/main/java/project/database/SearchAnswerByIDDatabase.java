@@ -1,19 +1,3 @@
-/*
- * Copyright 2018 University of Padua, Italy
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package project.database;
 
 import project.resource.Answer;
@@ -26,21 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieves answers to a specific answer in the database.
- *
- * @author lrgroup
- * @author Alberto Pontini
+ * @author Luca Rossi
+ * @author Andrea Ziggiotto
  */
-public final class SearchAnswerByAnswerIDDatabase {
+public class SearchAnswerByIDDatabase {
 
     /**
      * The SQL statement to be executed
      */
     private static final String QUERY =
-            "SELECT * " +
-                    "FROM lr_group.answer " +
-                    "WHERE parentID=? " +
-                    "ORDER BY ts";
+            "SELECT * FROM lr_group.answer WHERE id=?";
 
     /**
      * The connection to the database
@@ -55,7 +34,7 @@ public final class SearchAnswerByAnswerIDDatabase {
      * @param con      the connection to the database.
      * @param answerid the id of the related answer.
      */
-    public SearchAnswerByAnswerIDDatabase(final Connection con, final int answerid) {
+    public SearchAnswerByIDDatabase(final Connection con, final int answerid) {
         this.con = con;
         this.answerID = answerid;
     }
@@ -66,7 +45,7 @@ public final class SearchAnswerByAnswerIDDatabase {
      * @return a list of {@code Answer} (must be one) object related to a specific answer.
      * @throws SQLException if any error occurs while retrieving the answer.
      */
-    public List<Answer> searchAnswerByAnswerID() throws SQLException {
+    public Answer searchAnswerByID() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -94,7 +73,7 @@ public final class SearchAnswerByAnswerIDDatabase {
             con.close();
         }
 
-        return answerList;
+        return answerList.get(0);
 
     }
 }

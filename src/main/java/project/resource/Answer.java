@@ -249,10 +249,12 @@ public class Answer extends Resource
 			}
 		}
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-    	Date parsedDate = dateFormat.parse(jTimestamp);
-    	Timestamp databaseTimestamp = new java.sql.Timestamp(parsedDate.getTime());
-
+		Timestamp databaseTimestamp=null;
+		if(jTimestamp!=null) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			Date parsedDate = dateFormat.parse(jTimestamp);
+			 databaseTimestamp= new java.sql.Timestamp(parsedDate.getTime());
+		}
 		return new Answer(jID, jIDUser, jFixed, jText, jParentID ,databaseTimestamp,jQuestionID);
 	}
 }

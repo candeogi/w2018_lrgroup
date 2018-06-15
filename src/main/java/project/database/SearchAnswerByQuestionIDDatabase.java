@@ -41,7 +41,7 @@ public final class SearchAnswerByQuestionIDDatabase {
                     "FROM lr_group.answer " +
                     "LEFT JOIN lr_group.have " +
                     "on lr_group.answer.id = lr_group.have.idanswer " +
-                    "WHERE lr_group.have.idquestion=?" +
+                    "WHERE lr_group.have.idquestion=? " +
                     "ORDER BY ts";
 
     /**

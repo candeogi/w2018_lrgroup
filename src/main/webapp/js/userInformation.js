@@ -113,6 +113,13 @@ function printResultCertificate() {
 
             var thead = document.createElement('thead');
             var tr = document.createElement('tr');
+
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode("ID"));
+            th.style.visibility="collapse";
+            tr.appendChild(th);
+
+
             var th = document.createElement('th');
             th.appendChild(document.createTextNode("Name"));
             tr.appendChild(th);
@@ -134,7 +141,8 @@ function printResultCertificate() {
 
 
                 var td_id = document.createElement('td');
-                td_id.appendChild(document.createTextNode(certificate[i].certificate.ID))
+                td_id.appendChild(document.createTextNode(certificate[i].certificate.ID));
+                td_id.style.visibility="collapse";
                 tr.appendChild(td_id);
 
                 var td_name = document.createElement('td');

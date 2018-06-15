@@ -36,7 +36,7 @@ public final class RestAnswer extends RestResource
 	}
 
 	/**
-	 * Creates a new answer into the database. 
+	 * Creates a new answer into the database.
 	 *
 	 * @throws IOException
 	 *             if any error occurs in the client/server communication.
@@ -68,7 +68,7 @@ public final class RestAnswer extends RestResource
 				m.toJSON(res.getOutputStream());
 			}
 		}
-		catch (Throwable t) 
+		catch (Throwable t)
 		{
 			if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23505"))
 			{
@@ -86,7 +86,7 @@ public final class RestAnswer extends RestResource
 	}
 
 	/**
-	 * Updates an answer in the database. 
+	 * Updates an answer in the database.
 	 *
 	 * @throws IOException
 	 *             if any error occurs in the client/server communication.
@@ -94,37 +94,41 @@ public final class RestAnswer extends RestResource
 
 	public void updateAnswer() throws IOException
 	{
-		boolean a;
+		Answer a=null;
 		Message m = null;
 
 		try{
+
+		    req.getInputStream();
 
 			final Answer answer = Answer.fromJSON(req.getInputStream());
 
 			a = new UpdateAnswerDatabase(con, answer).updateAnswer();
 
-			if(a)
+			if(a!=null)
 			{
+
+				a.toJSON(res.getOutputStream());
 				res.setStatus(HttpServletResponse.SC_OK);
 			}
 			else
 			{
 				// it should not happen
-				m = new Message("Cannot delete the answer: unexpected error.", "E5A1", null);
+				m = new Message("Cannot update the answer: unexpected error. niente", "E5A1", "niente");
 				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				m.toJSON(res.getOutputStream());
 			}
 		}
 		catch (Throwable t) 
 		{
-			m = new Message("Cannot delete the answer: unexpected error.", "E5A1", t.getMessage());
+			m = new Message("Cannot update the answer: unexpected error.secondo", "E5A1", t.getMessage());
 			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			m.toJSON(res.getOutputStream());
 		}
 	}
 
 	/**
-	 * Deletes an answer in the database. 
+	 * Deletes an answer in the database.
 	 *
 	 * @throws IOException
 	 *             if any error occurs in the client/server communication.
@@ -141,16 +145,14 @@ public final class RestAnswer extends RestResource
 			String path = req.getRequestURI();
 			path=path.substring(path.lastIndexOf("answer") +7);
 
-			m = new Message(path);
-			m.toJSON(res.getOutputStream());
-
-
 			int idAnswer=Integer.parseInt(path);
 			a = new DeleteAnswerByIDDatabase(con, idAnswer).deleteAnswerByID();
 
 			if(a)
 			{
+				m = new Message("OK");
 				res.setStatus(HttpServletResponse.SC_OK);
+				m.toJSON(res.getOutputStream());
 			}
 			else
 			{
@@ -160,7 +162,7 @@ public final class RestAnswer extends RestResource
 				m.toJSON(res.getOutputStream());
 			}
 		}
-		catch (Throwable t) 
+		catch (Throwable t)
 		{
 			m = new Message("Cannot delete the answer: unexpected error.", "E5A1", t.getMessage());
 			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -194,7 +196,7 @@ public final class RestAnswer extends RestResource
 				m.toJSON(res.getOutputStream());
 			}
 		}
-		catch (Throwable t) 
+		catch (Throwable t)
 		{
 			m = new Message("Cannot delete the answer: unexpected error.", "E5A1", t.getMessage());
 			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -214,7 +216,7 @@ public final class RestAnswer extends RestResource
 			path = path.substring(path.lastIndexOf("votes") + 5);
 
 			final int answerID = Integer.parseInt(path.substring(1));
-			
+
 			a = new CountAnswerVotesDatabase(con, answerID).countAnswerVotes();
 
 			if(a!=-1)
@@ -231,7 +233,7 @@ public final class RestAnswer extends RestResource
 				m.toJSON(res.getOutputStream());
 			}
 		}
-		catch (Throwable t) 
+		catch (Throwable t)
 		{
 			m = new Message("Cannot count votes: unexpected error.", "E5A1", t.getMessage());
 			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -240,7 +242,7 @@ public final class RestAnswer extends RestResource
 	}
 
 	/**
-	 * Creates an upvote for an answer in the database. 
+	 * Creates an upvote for an answer in the database.
 	 *
 	 * @throws IOException
 	 *             if any error occurs in the client/server communication.
@@ -272,7 +274,7 @@ public final class RestAnswer extends RestResource
 				m.toJSON(res.getOutputStream());
 			}
 		}
-		catch (Throwable t) 
+		catch (Throwable t)
 		{
 			m = new Message("Cannot upvote the answer: unexpected error.", "E5A1", t.getMessage());
 			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -281,7 +283,7 @@ public final class RestAnswer extends RestResource
 	}
 
 	/**
-	 * Creates a downvote for an answer in the database. 
+	 * Creates a downvote for an answer in the database.
 	 *
 	 * @throws IOException
 	 *             if any error occurs in the client/server communication.
@@ -313,7 +315,7 @@ public final class RestAnswer extends RestResource
 				m.toJSON(res.getOutputStream());
 			}
 		}
-		catch (Throwable t) 
+		catch (Throwable t)
 		{
 			m = new Message("Cannot downvote the answer: unexpected error.", "E5A1", t.getMessage());
 			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

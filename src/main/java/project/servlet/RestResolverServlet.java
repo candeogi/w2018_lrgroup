@@ -357,6 +357,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         new RestAnswer(req, res, getDataSource().getConnection()).createAnswer();
                         break;
                     case "PUT":
+                        getServletContext().log("sono entrato in PUT");
                         new RestAnswer(req, res, getDataSource().getConnection()).updateAnswer();
                         break;
                     case "DELETE":

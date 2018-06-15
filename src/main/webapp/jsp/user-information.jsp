@@ -20,6 +20,37 @@
 <c:import url="/jsp/include/header.jsp"/>
 
 <div class="container">
+    <div class="row">
+        <div class="<col>">
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+        <div class="<col>">
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+        <div class="<col>">
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
     <div class="row justify-content-between">
         <div class="col col-lg-10">
             <div class="row">
@@ -79,10 +110,11 @@
         <div class="row">
             <div class="col">
                 <div id="website" class="container border border-dark">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#websiteModal">
-                        Add a new website
+                    <button type="button" class="btn btn-primary adding" data-toggle="modal"
+                            data-target="#websiteModal">
+                        <i class="fas fa-plus-circle"></i>
                     </button>
-                    <p>Website:</p>
+                    <label for="table-website">Website:</label>
                     <table id="table-website" class="table table-hover">
 
                     </table>
@@ -92,10 +124,12 @@
 
             <div class="col">
                 <div id="certification" class="container border border-dark">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#certificationModal">
-                        Add a new certification
+                    <button type="button" class="btn btn-primary adding" data-toggle="modal"
+                            data-target="#certificationModal">
+                        <i class="fas fa-plus-circle"></i>
                     </button>
-                    <p>Certification:</p>
+
+                    <label for="table-certificate">Certificates:</label>
                     <table id="table-certificate" class="table table-hover">
 
                     </table>
@@ -181,7 +215,6 @@
         </div>
     </div>
 </div>
-
 
 
 <script type="text/javascript" src="js/userInformation.js"></script>

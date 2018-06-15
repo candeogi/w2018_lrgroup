@@ -13,6 +13,8 @@ import java.sql.ResultSet;
  *
  * @author lrgroup
  * @author Alberto Pontini
+ * @author Luca Rossi
+ * @author Andrea Ziggiotto
  */
 public final class UpdateAnswerDatabase {
 
@@ -20,8 +22,8 @@ public final class UpdateAnswerDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "UPDATE lr_group.Answer SET isFixed=?, body=?" +
-            "WHERE id=?";
+            "UPDATE lr_group.Answer SET isFixed=? , body=? " +
+            " WHERE id=?";
 
     /**
      * The connection to the database
@@ -49,24 +51,22 @@ public final class UpdateAnswerDatabase {
      * Updates a question in the database.
      * @throws SQLException if any error occurs while updating the user.
      */
-    public boolean updateAnswer() throws SQLException {
+    public Answer updateAnswer() throws SQLException {
 
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        int rs = 0;
         try {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setBoolean(1, answer.isFixed());
             pstmt.setString(2, answer.getText());
+            pstmt.setInt(3, answer.getID());
 
-            rs = pstmt.executeQuery();
+            rs = pstmt.executeUpdate();
 
-            if (rs.next()) return true;
-            else return false;
+            if (rs > 0) {return (new SearchAnswerByIDDatabase(con,answer.getID())).searchAnswerByID();}
+            else return null;
 
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
             if (pstmt != null) {
                 pstmt.close();
             }

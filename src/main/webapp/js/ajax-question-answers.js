@@ -250,7 +250,7 @@ function deleteAnswer(id){
     console.log(urlToDelete);
     $.ajax({
         type: "DELETE",
-        url: urlToDelete,
+        url: urlToDelete,,
         success: function() {
             //alert("hey its me working");
         },
