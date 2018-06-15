@@ -92,7 +92,7 @@
                 <div id="email-value" class="col-lg-auto">
                     <p><c:out value="${user.email}"/></p>
                 </div>
-            </div>--%>
+            </div>
             <table>
                 <tr>
                     <td><div><p>Username:</p></div></td>
@@ -142,7 +142,23 @@
                         </div>
                     </td>
                 </tr>
-            </table>
+            </table>--%>
+            <div class="divTable infoTable">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell"><p> Username:</p></div><div id="username-value" class="divTableCell"><p><c:out value="${user.username}"/></p></div></div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"><p> Name:</p></div><div id="name-value" class="divTableCell"><p><c:out value="${user.name}"/></p></div></div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"><p>Surname:</p></div><div id="surname-value" class="divTableCell"><p><c:out value="${user.surname}"/></p></div></div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"><p>Birthday:</p></div><div id="birthday-value" class="divTableCell"><p><c:out value="${user.birthday}"/></p></div></div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"><p>Description:</p></div><div id="description-value" class="divTableCell"><p><c:out value="${user.description}"/></p></div></div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"><p>Email address: </p></div><div id="email-value" class="divTableCell"><p><c:out value="${user.email}"/></p></div></div>
+                </div>
+            </div>
         </div>
 
         <div id="photo-div" class="col align-self-end">

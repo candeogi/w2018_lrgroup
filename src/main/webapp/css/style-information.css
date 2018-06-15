@@ -9,7 +9,7 @@ div p {
 }
 
 img {
-    width: 30%;
+    width: 10%;
 }
 
 .profileImg{
@@ -25,6 +25,38 @@ img {
 .table{
     height: 50%;
 }
+
+div.infoTable {
+    text-align: left;
+}
+.divTable.infoTable .divTableCell, .divTable.infoTable .divTableHead {
+    padding: 3px 2px;
+}
+.infoTable .tableFootStyle {
+    font-size: 14px;
+}
+.infoTable .tableFootStyle .links {
+    text-align: right;
+}
+.infoTable .tableFootStyle .links a{
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+.infoTable.outerTableFooter {
+    border-top: none;
+}
+.infoTable.outerTableFooter .tableFootStyle {
+    padding: 3px 5px;
+}
+/* DivTable.com */
+.divTable{ display: table; }
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group;}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHeading { display: table-header-group;}
+.divTableFoot { display: table-footer-group;}
+.divTableBody { display: table-row-group;}
 
 
 
