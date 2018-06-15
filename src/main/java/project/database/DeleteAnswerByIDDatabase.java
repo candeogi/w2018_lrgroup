@@ -66,19 +66,16 @@ public final class DeleteAnswerByIDDatabase {
     public boolean deleteAnswerByID() throws SQLException {
 
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        int rowChanged=0;
 
         try {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            if (rs.next()) return true;
+            rowChanged = pstmt.executeUpdate();
+            if (rowChanged>0) return true;
             else return false;
 
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
             if (pstmt != null) {
                 pstmt.close();
             }

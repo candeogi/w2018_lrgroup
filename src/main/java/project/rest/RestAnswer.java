@@ -142,7 +142,7 @@ public final class RestAnswer extends RestResource
 			m.toJSON(res.getOutputStream());
 
 
-			int idAnswer=1;
+			int idAnswer=Integer.parseInt(path);
 			a = new DeleteAnswerByIDDatabase(con, idAnswer).deleteAnswerByID();
 
 			if(a)
@@ -152,8 +152,8 @@ public final class RestAnswer extends RestResource
 			else
 			{
 				// it should not happen
-				m = new Message("Cannot delete the answer: unexpected error.", "E5A1", null);
-				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m = new Message("cannot deleted the answer, probably the answer cannot exist anymore");
+				res.setStatus(HttpServletResponse.SC_OK);
 				m.toJSON(res.getOutputStream());
 			}
 		}

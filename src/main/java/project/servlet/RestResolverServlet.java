@@ -183,7 +183,174 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
             getServletContext().log("path : "+path);
             path = path.substring(path.lastIndexOf("answer") + 6);
             getServletContext().log("path : "+path);
-            if (!(path.length() == 0) || !path.equals("/")) {
+            if (path.contains("question")) {
+                // /answer/question/{questionID}
+                path = path.substring(path.lastIndexOf("question") + 8);
+                if (path.length() == 0 || path.equals("/")) {
+                    m = new Message("Wrong format for URI /answer/question/{questionID}: no {questionID} specified.",
+                            "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    m.toJSON(res.getOutputStream());
+                } else {
+                    switch (method) {
+                        case "GET":
+                            try {
+                                Integer.parseInt(path.substring(1));
+                                new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
+                            } catch (NumberFormatException e) {
+                                m = new Message(
+                                        "Wrong format for URI /answer/question/{questionID}: {questionID} is not an integer.",
+                                        "E4A7", e.getMessage());
+                                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                                m.toJSON(res.getOutputStream());
+                            }
+                            break;
+                        default:
+                            m = new Message("Unsupported operation for URI /answer/question/{questionID}.",
+                                    "E4A5", String.format("Requested operation %s.", method));
+                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                            m.toJSON(res.getOutputStream());
+                            break;
+                    }
+                }
+            }
+            else if (path.contains("parentAns"))
+            {
+                // /answer/parentAns/{answerID}
+                path = path.substring(path.lastIndexOf("parentAns") + 9);
+                if (path.length() == 0 || path.equals("/")) {
+                    m = new Message("Wrong format for URI /answer/parentAns/{answerID}: no {answerID} specified.",
+                            "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    m.toJSON(res.getOutputStream());
+                } else {
+                    switch (method) {
+                        case "GET":
+                            new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByAnswerID();
+                            break;
+
+                        default:
+                            m = new Message("Unsupported operation for URI /answer/parentAns/{answerID}.",
+                                    "E4A5", String.format("Requested operation %s.", method));
+                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                            m.toJSON(res.getOutputStream());
+                            break;
+                    }
+                }
+            }
+            else if (path.contains("user")) {
+                // /answer/user/{userid}
+                path = path.substring(path.lastIndexOf("user") + 4);
+                if (path.length() == 0 || path.equals("/")) {
+                    m = new Message("Wrong format for URI /answer/user/{userID}: no {userID} specified.",
+                            "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    m.toJSON(res.getOutputStream());
+                } else {
+                    switch (method) {
+                        case "GET":
+                            new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID();
+                            break;
+
+                        default:
+                            m = new Message("Unsupported operation for URI /answer/user/{userID}.",
+                                    "E4A5", String.format("Requested operation %s.", method));
+                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                            m.toJSON(res.getOutputStream());
+                            break;
+                    }
+                }
+            } else if (path.contains("upvote")) {
+                // /answer/upvote/{answerID}
+                path = path.substring(path.lastIndexOf("upvote") + 6);
+                if (path.length() == 0 || path.equals("/")) {
+                    m = new Message("Wrong format for URI /answer/upvote/{answerID}: no {answerID} specified.",
+                            "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    m.toJSON(res.getOutputStream());
+                } else {
+                    switch (method) {
+                        case "POST":
+                            new RestAnswer(req, res, getDataSource().getConnection()).upvoteAnswer();
+                            break;
+
+                        default:
+                            m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
+                                    "E4A5", String.format("Requested operation %s.", method));
+                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                            m.toJSON(res.getOutputStream());
+                            break;
+                    }
+                }
+            } else if (path.contains("downvote")) {
+                // /answer/downvote/{answerID}
+                path = path.substring(path.lastIndexOf("downvote") + 8);
+                if (path.length() == 0 || path.equals("/")) {
+                    m = new Message("Wrong format for URI /answer/downvote/{answerID}: no {answerID} specified.",
+                            "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    m.toJSON(res.getOutputStream());
+                } else {
+                    switch (method) {
+                        case "POST":
+                            new RestAnswer(req, res, getDataSource().getConnection()).downvoteAnswer();
+                            break;
+
+                        default:
+                            m = new Message("Unsupported operation for URI /answer/downvote/{answerID}.",
+                                    "E4A5", String.format("Requested operation %s.", method));
+                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                            m.toJSON(res.getOutputStream());
+                            break;
+                    }
+                }
+            } else if (path.contains("novote")) {
+                // /answer/novote/{answerID}
+                path = path.substring(path.lastIndexOf("novote") + 6);
+                if (path.length() == 0 || path.equals("/")) {
+                    m = new Message("Wrong format for URI /answer/novote/{answerID}: no {answerID} specified.",
+                            "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    m.toJSON(res.getOutputStream());
+                } else {
+                    switch (method) {
+                        case "POST":
+                            new RestAnswer(req, res, getDataSource().getConnection()).deleteAnswerVote();
+                            break;
+
+                        default:
+                            m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
+                                    "E4A5", String.format("Requested operation %s.", method));
+                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                            m.toJSON(res.getOutputStream());
+                            break;
+                    }
+                }
+            }
+            else if (path.contains("votes")) {
+                // /answer/votes/{answerID}
+                path = path.substring(path.lastIndexOf("votes") + 5);
+                if (path.length() == 0 || path.equals("/")) {
+                    m = new Message("Wrong format for URI /answer/votes/{answerID}: no {answerID} specified.",
+                            "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    m.toJSON(res.getOutputStream());
+                } else {
+                    switch (method) {
+                        case "GET":
+                            new RestAnswer(req, res, getDataSource().getConnection()).countAnswerVotes();
+                            break;
+
+                        default:
+                            m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
+                                    "E4A5", String.format("Requested operation %s.", method));
+                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                            m.toJSON(res.getOutputStream());
+                            break;
+                    }
+                }
+            }
+            else if (!(path.length() == 0) || path.equals("/")) {
                 switch (method)
                 {
                     case "POST":
@@ -193,10 +360,10 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         new RestAnswer(req, res, getDataSource().getConnection()).updateAnswer();
                         break;
                     case "DELETE":
+                        getServletContext().log("sono entrato in case DELETE");
                         new RestAnswer(req, res, getDataSource().getConnection()).deleteAnswer();
                         break;
                     default:
-                        getServletContext().log("non vado da nessuna parte");
                         m = new Message("Unsupported operation for URI /answer.",
                                 "E4A5", String.format("Requested operation %s.", method));
                         res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -210,175 +377,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 m.toJSON(res.getOutputStream());
                 */
             } else {
-                if (path.contains("question")) {
-                    // /answer/question/{questionID}
-                    path = path.substring(path.lastIndexOf("question") + 8);
-                    if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/question/{questionID}: no {questionID} specified.",
-                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        m.toJSON(res.getOutputStream());
-                    } else {
-                        switch (method) {
-                            case "GET":
-                                try {
-                                    Integer.parseInt(path.substring(1));
-                                    new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByQuestionID();
-                                } catch (NumberFormatException e) {
-                                    m = new Message(
-                                            "Wrong format for URI /answer/question/{questionID}: {questionID} is not an integer.",
-                                            "E4A7", e.getMessage());
-                                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                                    m.toJSON(res.getOutputStream());
-                                }
-                                break;
-                            default:
-                                m = new Message("Unsupported operation for URI /answer/question/{questionID}.",
-                                        "E4A5", String.format("Requested operation %s.", method));
-                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                                m.toJSON(res.getOutputStream());
-                                break;
-                        }
-                    }
-                } 
-                else if (path.contains("parentAns"))
-                {
-                    // /answer/parentAns/{answerID}
-                    path = path.substring(path.lastIndexOf("parentAns") + 9);
-                    if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/parentAns/{answerID}: no {answerID} specified.",
-                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        m.toJSON(res.getOutputStream());
-                    } else {
-                        switch (method) {
-                            case "GET":
-                                new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByAnswerID();
-                                break;
-
-                            default:
-                                m = new Message("Unsupported operation for URI /answer/parentAns/{answerID}.",
-                                        "E4A5", String.format("Requested operation %s.", method));
-                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                                m.toJSON(res.getOutputStream());
-                                break;
-                        }
-                    }
+                m = new Message("Unknown operations");
+                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                m.toJSON(res.getOutputStream());
                 }
-                else if (path.contains("user")) {
-                    // /answer/user/{userid}
-                    path = path.substring(path.lastIndexOf("user") + 4);
-                    if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/user/{userID}: no {userID} specified.",
-                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        m.toJSON(res.getOutputStream());
-                    } else {
-                        switch (method) {
-                            case "GET":
-                                new RestAnswer(req, res, getDataSource().getConnection()).searchAnswerByUserID();
-                                break;
 
-                            default:
-                                m = new Message("Unsupported operation for URI /answer/user/{userID}.",
-                                        "E4A5", String.format("Requested operation %s.", method));
-                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                                m.toJSON(res.getOutputStream());
-                                break;
-                        }
-                    }
-                } else if (path.contains("upvote")) {
-                    // /answer/upvote/{answerID}
-                    path = path.substring(path.lastIndexOf("upvote") + 6);
-                    if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/upvote/{answerID}: no {answerID} specified.",
-                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        m.toJSON(res.getOutputStream());
-                    } else {
-                        switch (method) {
-                            case "POST":
-                                new RestAnswer(req, res, getDataSource().getConnection()).upvoteAnswer();
-                                break;
-
-                            default:
-                                m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
-                                        "E4A5", String.format("Requested operation %s.", method));
-                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                                m.toJSON(res.getOutputStream());
-                                break;
-                        }
-                    }
-                } else if (path.contains("downvote")) {
-                    // /answer/downvote/{answerID}
-                    path = path.substring(path.lastIndexOf("downvote") + 8);
-                    if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/downvote/{answerID}: no {answerID} specified.",
-                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        m.toJSON(res.getOutputStream());
-                    } else {
-                        switch (method) {
-                            case "POST":
-                                new RestAnswer(req, res, getDataSource().getConnection()).downvoteAnswer();
-                                break;
-
-                            default:
-                                m = new Message("Unsupported operation for URI /answer/downvote/{answerID}.",
-                                        "E4A5", String.format("Requested operation %s.", method));
-                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                                m.toJSON(res.getOutputStream());
-                                break;
-                        }
-                    }
-                } else if (path.contains("novote")) {
-                    // /answer/novote/{answerID}
-                    path = path.substring(path.lastIndexOf("novote") + 6);
-                    if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/novote/{answerID}: no {answerID} specified.",
-                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        m.toJSON(res.getOutputStream());
-                    } else {
-                        switch (method) {
-                            case "POST":
-                                new RestAnswer(req, res, getDataSource().getConnection()).deleteAnswerVote();
-                                break;
-
-                            default:
-                                m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
-                                        "E4A5", String.format("Requested operation %s.", method));
-                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                                m.toJSON(res.getOutputStream());
-                                break;
-                        }
-                    }
-                }
-                else if (path.contains("votes"))
-                {
-                    // /answer/votes/{answerID}
-                    path = path.substring(path.lastIndexOf("votes") + 5);
-                    if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /answer/votes/{answerID}: no {answerID} specified.",
-                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        m.toJSON(res.getOutputStream());
-                    } else {
-                        switch (method) {
-                            case "GET":
-                                new RestAnswer(req, res, getDataSource().getConnection()).countAnswerVotes();
-                                break;
-
-                            default:
-                                m = new Message("Unsupported operation for URI /answer/upvote/{answerID}.",
-                                        "E4A5", String.format("Requested operation %s.", method));
-                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                                m.toJSON(res.getOutputStream());
-                                break;
-                        }
-                    }
-                }
-            }
         } catch (Throwable t) {
             m = new Message("Unexpected error.", "E5A1", t.getMessage());
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
