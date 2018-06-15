@@ -305,6 +305,7 @@ function editAnswerAjax(){
             "answer":{
                 "ID": parseInt(id),
                 "text": addAnswerText,
+                "fixed":false
             }
         }),
         contentType: "application/json; charset=utf-8",
