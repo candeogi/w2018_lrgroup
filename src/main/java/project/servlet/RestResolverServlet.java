@@ -176,12 +176,14 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         OutputStream out = res.getOutputStream();
         String path = req.getRequestURI();
         final String method = req.getMethod();
+        getServletContext().log("method "+method);
         Message m = null;
         try {
             // strip everything until after the /answer
+            getServletContext().log("path : "+path);
             path = path.substring(path.lastIndexOf("answer") + 6);
-
-            if (path.length() == 0 || path.equals("/")) {
+            getServletContext().log("path : "+path);
+            if (!(path.length() == 0) || !path.equals("/")) {
                 switch (method)
                 {
                     case "POST":
@@ -191,7 +193,6 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         new RestAnswer(req, res, getDataSource().getConnection()).updateAnswer();
                         break;
                     case "DELETE":
-                        getServletContext().log("sono nel delete del answer");
                         new RestAnswer(req, res, getDataSource().getConnection()).deleteAnswer();
                         break;
                     default:
