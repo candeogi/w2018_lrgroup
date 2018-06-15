@@ -629,7 +629,30 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
                         m.toJSON(res.getOutputStream());
                     }
+                } else if (path.contains("searchby")) {
+                    path = path.substring(path.lastIndexOf("searchby") + 8);
+
+                    if (path.length() == 0 || path.equals("/")) {
+                        m = new Message("Unsupported operation for URI /question/searchby.",
+                                "E4A5", String.format("Requested operation %s.", method));
+                        res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                        m.toJSON(res.getOutputStream());
+
+                    } else {
+                        switch (method) {
+                            case "GET":
+                                new RestQuestion(req, res, getDataSource().getConnection()).searchByKeyword();
+                                break;
+                            default:
+                                m = new Message("Unsupported operation for URI /question/searchby/{string}.",
+                                        "E4A5", String.format("Requested operation %s.", method));
+                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                                m.toJSON(res.getOutputStream());
+                                break;
+                        }
+                    }
                 }
+
             }
         } catch (Throwable t) {
             m = new Message("Unexpected error.", "E5A1", t.getMessage());
