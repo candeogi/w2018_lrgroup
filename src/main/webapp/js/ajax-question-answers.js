@@ -16,13 +16,21 @@ window.onload = initialPageLoad;
 function initialPageLoad(){
     visualizeQuestion();
     visualizeAnswers();
-
+    $("#addAnswerButton").click(function () {
+        addNewAnswerForm();
+    });
     $("#insertAnswerModal").click(function () {
         replyAnswerAjax();
     });
+
+    $("#editAnswerModalButton").click(function () {
+        editAnswerAjax();
+    });
 }
 /* USER MANAGEMENT */
-
+/*
+* Visualize the Question at Start
+*/
 function visualizeQuestion(){
     $.ajax({
         method: 'GET',
@@ -57,6 +65,9 @@ function visualizeQuestion(){
         }
     });
 }
+/*
+* Visualize the Answers at Start
+*/
 function visualizeAnswers(){
     $.ajax({
         method: 'GET',
@@ -87,7 +98,11 @@ function visualizeAnswers(){
         }
     });
 }
-
+/*
+* Print Single answers
+* answer: answer to print,
+* whereToAppendId: ul element where do i append my new answer
+*/
 function printSingleAnswer(answer, whereToAppendId){
     //console.log(answer['text']);
 
@@ -127,9 +142,10 @@ function printSingleAnswer(answer, whereToAppendId){
     deleteLink.setAttribute('href','javascript:void(0);');
 
     var editLink = document.createElement('a');
-    editLink.setAttribute('onclick','editAnswer('+answer['ID']+')');
+    editLink.setAttribute('data-toggle', 'modal');
+    editLink.setAttribute('data-target', '#editAnswerModal');
+    editLink.setAttribute('onclick','setEditModalTarget('+answer['ID']+')');
     editLink.setAttribute('href','javascript:void(0);');
-    editLink.className = 'editButton';
 
     //create custom timestamp
     var small = document.createElement('small');
@@ -166,7 +182,6 @@ function printSingleAnswer(answer, whereToAppendId){
     //this calls answerDropDown(idAnswer) that calls printSingleAnswer for each answer recursively(answer, idAnswer)
 
 }
-
 function visualizeAnswersToAnswer(idAnswer){
     $.ajax({
         method: 'GET',
@@ -192,11 +207,9 @@ function visualizeAnswersToAnswer(idAnswer){
     });
 }
 
-
-$("#addAnswerButton").click(function () {
-    addNewAnswerForm();
-});
-/*Add a new answer function - works but goes on error TODO*/
+/*
+* Reply the question
+*/
 function addNewAnswerForm(){
 
     var addAnswerText = $("#addAnswerTextArea").val();
@@ -243,16 +256,66 @@ function addNewAnswerForm(){
 
 
 }
-
+/*
+* Delete answer
+*/
 function deleteAnswer(id){
-    //doesnt work and goes on error TODO
     var urlToDelete = "http://localhost:8080/web-app-project/rest/answer/"+id;
     console.log(urlToDelete);
     $.ajax({
         type: "DELETE",
         url: urlToDelete,
         success: function() {
+            //doesnt work and goes on error but still deletes from db //TODO fix
             //alert("hey its me working");
+        },
+        error: function(jqXHR,textStatus,errorThrown){
+            /*alert("" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);*/
+        }
+    });
+    $('#'+id+'').hide();
+}
+/*
+* Edit answer
+*/
+function setEditModalTarget(id){
+    //setting attribute to edit the right answer on editAnswerAjax
+    $('#editTextAreaModal').attr('data-edit-target',id);
+    /*This code is to set up the textarea with the parent text*/
+    var answerParagraph = $('#'+id).find('p').first();
+    var answerPreviousText = answerParagraph.text();
+    $('#editTextAreaModal').val(answerPreviousText);
+}
+function editAnswerAjax(){
+    //get id of the answer being edited from data-edit-target
+    var id= $('#editTextAreaModal').attr('data-edit-target');
+
+    var addAnswerText = $('#editTextAreaModal').val();
+
+    $.ajax({
+        method: "PUT",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
+        data: JSON.stringify({
+            "answer":{
+                "ID": parseInt(id),
+                "text": addAnswerText,
+            }
+        }),
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json",
+        success: function(data) {
+            console.log(data.answer);
+            //This code should change the text in the list element
+            var answerParagraph = $('#'+id).find('p').first();
+            answerParagraph.text(data.answer["text"]);
+            $("#addAnswerTextArea").val('');
+
         },
         error: function(jqXHR,textStatus,errorThrown){
             alert("" +
@@ -261,59 +324,12 @@ function deleteAnswer(id){
                 " |errorThrown:"+errorThrown);
         }
     });
-    $('#'+id+'').hide();
 }
-function editAnswer(id){
-    var answerParagraph = $('#'+id).find('p').first();
-    var answerPreviousText = answerParagraph.text();
-    answerParagraph.replaceWith($('<textarea id="swap">'+answerPreviousText+'</textarea><br>'));
-    var buttonPressed = $('#'+id).find('.editButton').first();
-
-    var doneButton = document.createElement('a');
-    doneButton.setAttribute('onclick','editDoneAnswer('+id+')');
-    doneButton.setAttribute('href','javascript:void(0);');
-    doneButton.className = 'doneButton';
-    doneButton.appendChild(document.createTextNode(' done '));
-    buttonPressed.replaceWith(doneButton);
-}
-function editDoneAnswer(id){
-    var answerNewTextArea = $('#'+id).find('textarea').first();
-    var newAnswerTextFromTextArea = answerNewTextArea.val();
-    /*
-    var newAnswerObject ={
-        "ID":id,
-        "text": newAnswerTextFromTextArea
-    };
-    $.ajax({
-        method: "PUT",
-        url: "http://localhost:8080/web-app-project/rest/answer/",
-        data: JSON.stringify(newAnswerObject),
-        contentType: "application/json",
-        dataType: 'json',
-        success: function() {
-            //alert("it works!);
-        },
-        error: function(){
-            //alert("error on POST http://localhost:8080/web-app-project/rest/answer/ "+this.data);
-        }
-    });*/
-    answerNewTextArea.replaceWith($('<p>'+newAnswerTextFromTextArea+'</p>'));
-    $('#'+id).find('.answer-body').find('br').first().replaceWith('');
-    var doneButton = $('#'+id).find('.doneButton').first();
-
-    var editLink = document.createElement('a');
-    editLink.setAttribute('onclick','editAnswer('+id+')');
-    editLink.setAttribute('href','javascript:void(0);');
-    editLink.className = 'editButton';
-    editLink.appendChild(document.createTextNode(' edit '));
-    doneButton.replaceWith(editLink);
-}
-
+/*
+* Reply answer
+*/
 function setReplyModalTarget(id){
     $('#answerTextAreaModal').attr('data-reply-target',id);
-    /*This code is to set up the textarea with the parent text
-    var answerParagraph = $('#'+id).find('p').first();
-    var answerPreviousText = answerParagraph.text();*/
     $('#answerTextAreaModal').val("");
 }
 function replyAnswerAjax(){
