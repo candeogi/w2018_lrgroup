@@ -31,7 +31,7 @@ public final class DeleteAnswerVoteDatabase {
      * The SQL statements to be executed
      */
     private static final String STATEMENT = "" +
-            "DELETE FROM lr_group.VoteAnswer" +
+            "DELETE FROM lr_group.VoteAnswer " +
             "WHERE answer=? AND idUser=?";
 
     /**

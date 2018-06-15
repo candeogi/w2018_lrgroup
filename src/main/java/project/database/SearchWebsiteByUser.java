@@ -24,7 +24,7 @@ public class SearchWebsiteByUser {
 
     private static final String QUERY =
             "SELECT web.address,o.username,web.addrtype FROM " +
-                    "lr_group.website AS web INNER JOIN lr_group.own AS o" +
+                    "lr_group.website AS web INNER JOIN lr_group.own AS o " +
                     " ON web.address=o.address" +
                     " WHERE o.username=?";
 
