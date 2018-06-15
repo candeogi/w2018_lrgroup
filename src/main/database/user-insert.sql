@@ -54,4 +54,5 @@ INSERT INTO lr_group.Utente VALUES ('albertoforti@gmail.com', 'alberto', 'forti'
                           lr_group.CRYPT('passtest', lr_group.gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO lr_group.Utente VALUES ('userDeleted@gmail.com', 'fake', 'user', 'userDeleted', 'profilepath',
                           lr_group.CRYPT('passtest', lr_group.gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
-
+INSERT INTO lr_group.Utente VALUES ('admin@gmail.com', 'Admin', 'Powerful', 'admin', 'profilepath',
+lr_group.CRYPT('admin', lr_group.gen_salt('bf',8) ), TRUE, '2017-1-1', '1994-1-1', 'randomtext');
