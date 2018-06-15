@@ -58,10 +58,10 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
             }*/
 
             String[] split = req.getRequestURI().split("/");
-            getServletContext().log("primo split "+split[0]);
-            getServletContext().log("secondo split "+split[1]);
-            getServletContext().log("terzo split "+split[2]);
-            getServletContext().log("quarto split "+split[3]);
+            getServletContext().log("primo split " + split[0]);
+            getServletContext().log("secondo split " + split[1]);
+            getServletContext().log("terzo split " + split[2]);
+            getServletContext().log("quarto split " + split[3]);
             switch (split[3]) // split[3] -> a 0 è vuoto, poi web-app-unipd, poi rest, poi question/answer
             {
                 case "question":
@@ -83,7 +83,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     break;
                 case "website":
                     getServletContext().log("sono entrato in processWebSite");
-                    if(processWebsite(req,res)){
+                    if (processWebsite(req, res)) {
                         return;
                     }
                     break;
@@ -94,7 +94,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     break;
                 case "certificate":
                     getServletContext().log("sono entrato in processCertificate");
-                    if(processCertificate(req,res)){
+                    if (processCertificate(req, res)) {
                         return;
                     }
                     break;
@@ -173,24 +173,27 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
      * @throws IOException if any error occurs in the client/server communication.
      */
     private boolean processAnswer(HttpServletRequest req, HttpServletResponse res) throws IOException {
+
         OutputStream out = res.getOutputStream();
         String path = req.getRequestURI();
         final String method = req.getMethod();
-        getServletContext().log("method "+method);
+        getServletContext().log("method " + method);
         Message m = null;
+
         try {
-            // strip everything until after the /answer
-            getServletContext().log("path : "+path);
+
             path = path.substring(path.lastIndexOf("answer") + 6);
-            getServletContext().log("path : "+path);
+
             if (path.contains("question")) {
                 // /answer/question/{questionID}
                 path = path.substring(path.lastIndexOf("question") + 8);
                 if (path.length() == 0 || path.equals("/")) {
+
                     m = new Message("Wrong format for URI /answer/question/{questionID}: no {questionID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                     res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     m.toJSON(res.getOutputStream());
+
                 } else {
                     switch (method) {
                         case "GET":
@@ -213,9 +216,8 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             break;
                     }
                 }
-            }
-            else if (path.contains("parentAns"))
-            {
+
+            } else if (path.contains("parentAns")) {
                 // /answer/parentAns/{answerID}
                 path = path.substring(path.lastIndexOf("parentAns") + 9);
                 if (path.length() == 0 || path.equals("/")) {
@@ -223,6 +225,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                     res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     m.toJSON(res.getOutputStream());
+
                 } else {
                     switch (method) {
                         case "GET":
@@ -237,8 +240,8 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             break;
                     }
                 }
-            }
-            else if (path.contains("user")) {
+
+            } else if (path.contains("user")) {
                 // /answer/user/{userid}
                 path = path.substring(path.lastIndexOf("user") + 4);
                 if (path.length() == 0 || path.equals("/")) {
@@ -246,6 +249,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                     res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     m.toJSON(res.getOutputStream());
+
                 } else {
                     switch (method) {
                         case "GET":
@@ -260,6 +264,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             break;
                     }
                 }
+
             } else if (path.contains("upvote")) {
                 // /answer/upvote/{answerID}
                 path = path.substring(path.lastIndexOf("upvote") + 6);
@@ -290,6 +295,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                     res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     m.toJSON(res.getOutputStream());
+
                 } else {
                     switch (method) {
                         case "POST":
@@ -304,6 +310,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             break;
                     }
                 }
+
             } else if (path.contains("novote")) {
                 // /answer/novote/{answerID}
                 path = path.substring(path.lastIndexOf("novote") + 6);
@@ -326,8 +333,8 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             break;
                     }
                 }
-            }
-            else if (path.contains("votes")) {
+
+            } else if (path.contains("votes")) {
                 // /answer/votes/{answerID}
                 path = path.substring(path.lastIndexOf("votes") + 5);
                 if (path.length() == 0 || path.equals("/")) {
@@ -335,6 +342,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                     res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     m.toJSON(res.getOutputStream());
+
                 } else {
                     switch (method) {
                         case "GET":
@@ -349,10 +357,9 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             break;
                     }
                 }
-            }
-            else if (!(path.length() == 0) || path.equals("/")) {
-                switch (method)
-                {
+
+            } else if (!(path.length() == 0) || path.equals("/")) {
+                switch (method) {
                     case "POST":
                         new RestAnswer(req, res, getDataSource().getConnection()).createAnswer();
                         break;
@@ -370,17 +377,12 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         m.toJSON(res.getOutputStream());
                         break;
                 }
-                /*
-                m = new Message("Wrong format for URI /answer/id/{questionID} or /answer/user/{userid}",
-                        "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                m.toJSON(res.getOutputStream());
-                */
+
             } else {
                 m = new Message("Unknown operations");
                 res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 m.toJSON(res.getOutputStream());
-                }
+            }
 
         } catch (Throwable t) {
             m = new Message("Unexpected error.", "E5A1", t.getMessage());
@@ -399,9 +401,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
      * @throws IOException if any error occurs in the client/server communication.
      */
     private boolean processQuestion(HttpServletRequest req, HttpServletResponse res) throws IOException {
+
         final String method = req.getMethod();
         String path = req.getRequestURI();
         Message m;
+
         try {
             // strip everything until after the /question
             path = path.substring(path.lastIndexOf("question") + 8);
@@ -421,14 +425,17 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 }
 
             } else {
+
                 if (path.contains("id")) {
                     //question/id/{ID}
                     path = path.substring(path.lastIndexOf("id") + 2);
+
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/id/{ID}: no {ID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         m.toJSON(res.getOutputStream());
+
                     } else {
                         switch (method) {
                             case "GET":
@@ -454,9 +461,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
                         }
                     }
+
                 } else if (path.contains("user")) {
                     //question/user/{userID}
                     path = path.substring(path.lastIndexOf("user") + 4);
+
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/user/{userID}: no {userID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -476,9 +485,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
                         }
                     }
+
                 } else if (path.contains("upvote")) {
                     // /question/upvote/{questionID}
                     path = path.substring(path.lastIndexOf("upvote") + 6);
+
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/upvote/{questionID}: no {questionID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -498,9 +509,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
                         }
                     }
+
                 } else if (path.contains("category")) {
                     // /question/category/{category}
                     path = path.substring(path.lastIndexOf("category") + 8);
+
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/category/{categoryID}: no {categoryID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -519,14 +532,17 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
                         }
                     }
+
                 } else if (path.contains("downvote")) {
                     // /question/downvote/{questionID}
                     path = path.substring(path.lastIndexOf("downvote") + 8);
+
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/downvote/{questionID}: no {questionID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         m.toJSON(res.getOutputStream());
+
                     } else {
                         switch (method) {
                             case "POST":
@@ -543,12 +559,14 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     }
                 } else if (path.contains("novote")) {
                     // /question/novote/{questionID}
+
                     path = path.substring(path.lastIndexOf("novote") + 6);
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/novote/{questionID}: no {questionID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         m.toJSON(res.getOutputStream());
+
                     } else {
                         switch (method) {
                             case "POST":
@@ -563,15 +581,16 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
                         }
                     }
-                }
-                else if (path.contains("votes")) {
+                } else if (path.contains("votes")) {
                     // /question/novote/{questionID}
                     path = path.substring(path.lastIndexOf("votes") + 5);
+
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/votes/{questionID}: no {questionID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         m.toJSON(res.getOutputStream());
+
                     } else {
                         switch (method) {
                             case "GET":
@@ -586,8 +605,10 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                                 break;
                         }
                     }
-                }else if (path.contains("latestQuestion")){
+
+                } else if (path.contains("latestQuestion")) {
                     path = path.substring(path.lastIndexOf("latestQuestion") + 14);
+
                     if (path.length() == 0 || path.equals("/")) {
                         switch (method) {
                             case "GET":
@@ -659,20 +680,20 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
 
     private boolean processWebsite(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        getServletContext().log("All'interno di processWebsite");
+
         OutputStream out = res.getOutputStream();
         final String method = req.getMethod();
-        getServletContext().log("metodo scelto "+method);
         String path = req.getRequestURI();
         Message message = null;
+
         try {
-            getServletContext().log("il path che cerco :"+path);
+
             path = path.substring(path.indexOf("website") + 7);
-            getServletContext().log("dopo rimozione website :"+path);
+
             if (path.contains("user")) {
-                getServletContext().log("sono entrato in contains user");
+
                 path = path.substring(path.lastIndexOf("user") + 5);
-                getServletContext().log("dopo rimozione user :"+path);
+
                 if (path.length() == 0 || path.equals("/")) {
                     message = new Message("Wrong format for URI /website/user/{ID}: no {ID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -708,38 +729,35 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
     }
 
     private boolean processCertificate(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        getServletContext().log("All'interno di processCertificate");
+
         OutputStream out = res.getOutputStream();
         final String method = req.getMethod();
         String path = req.getRequestURI();
         Message message = null;
+
         try {
-            getServletContext().log("il path che cerco certificate :"+path);
+
             path = path.substring(path.lastIndexOf("certificate") + 11);
-            getServletContext().log("il path che cerco certificate dopo rimozione:"+path);
+
             if (path.contains("user")) {
-                getServletContext().log("sono entrato in contains user certificate");
                 path = path.substring(path.lastIndexOf("user") + 4);
-                getServletContext().log("il path che cerco certificate tolto user:"+path);
 
                 if (path.length() == 0 || path.equals("/")) {
+
                     message = new Message("Wrong format for URI /certificate/user/{ID}: no {ID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
                     res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     message.toJSON(res.getOutputStream());
+
                 } else {
                     switch (method) {
                         case "GET":
-                            getServletContext().log("sono dentro al case GET Certificate");
                             RestCertificate restCertificate = new RestCertificate(req, res, getDataSource().getConnection());
                             restCertificate.searchCertificateByUserName();
-                            getServletContext().log("ho finito Cerificate");
                             break;
                         case "DELETE":
-                            getServletContext().log("sono dentro al case DELETE Certificate");
                             RestCertificate restCertificateDelete = new RestCertificate(req, res, getDataSource().getConnection());
                             restCertificateDelete.deleteHaveCertificateByUserName();
-                            getServletContext().log("ho finito DELETE Cerificate");
                             break;
                         default:
                             message = new Message("Unsupported operation for URI /certificate.",
@@ -747,7 +765,6 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                             res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
                             message.toJSON(res.getOutputStream());
                             break;
-
                     }
                 }
             }
@@ -778,8 +795,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
             path = path.substring(path.lastIndexOf("user") + 4);
 
             if (path.length() == 0 || path.equals("/")) {
-                switch (method)
-                {
+                switch (method) {
                     case "GET":
                         new RestUser(req, res, getDataSource().getConnection()).searchUser();
                         break;
