@@ -65,9 +65,9 @@
             <div class="col-md-4">
                 <form>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search a Question">
+                        <input type="text" class="form-control" placeholder="Search a Question" id="searchinqs">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
+                            <button class="btn btn-default" type="submit" id="searchBtn">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>

@@ -15,7 +15,7 @@ public final class DeleteQuestionVoteDatabase {
      */
 
     private static final String STATEMENT = "" +
-            "DELETE FROM lr_group.VoteQuestion" +
+            "DELETE FROM lr_group.VoteQuestion " +
             "WHERE question=? AND idUser=?";
 
     /**

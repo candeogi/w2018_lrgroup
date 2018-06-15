@@ -126,6 +126,24 @@
         httpRequest.send();
     });
 
+    $('#searchBtn').on('click', function(event) {
+        event.preventDefault(); // To prevent following the link (optional)
+        if(document.getElementById("searchinqs").value == "")
+            url = 'http://localhost:8080/web-app-project/rest/question';
+        else
+            url = 'http://localhost:8080/web-app-project/rest/question/searchby/'+document.getElementById("searchinqs").value;
+        httpRequest = new XMLHttpRequest();
+        deletefilter();
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = loadQsRequest;
+        httpRequest.open('GET', url);
+        httpRequest.send();
+    });
+
     $('#switchQs a[href="#yourQs"]').on('click', function(event) {
         event.preventDefault(); // To prevent following the link (optional)
         url = 'http://localhost:8080/web-app-project/rest/question/user/'+document.getElementById('idUser').value;

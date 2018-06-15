@@ -52,7 +52,8 @@ public final class CreateCategoryServlet extends SessionManagerServlet {
             // retrieves the request parameters
             name = req.getParameter("name");
             description = req.getParameter("description");
-            isCompany = Boolean.parseBoolean(req.getParameter("isCompany"));
+            if(req.getParameter("isCompany") != null)
+                isCompany = true;
 
             c = new Category(name, description, isCompany);
 
@@ -69,8 +70,21 @@ public final class CreateCategoryServlet extends SessionManagerServlet {
         req.setAttribute("category", c);
         req.setAttribute("message", m);
 
-        // forwards the control to the create-user-result JSP
-        req.getRequestDispatcher("/jsp/create-category-result.jsp").forward(req, res);
+        if(m!=null && m.isError())
+        {
+            req.setAttribute("message", m);
+            req.getRequestDispatcher("/jsp/error.jsp").forward(req, res);
+        }
+        else
+        {
+
+            String url = req.getParameter("admincategory");
+            if(url != null)
+                res.sendRedirect(req.getContextPath() + "/?p=" + url);
+            else
+                req.getRequestDispatcher("/jsp/create-category-result.jsp").forward(req, res);
+        }
+
     }
 
 }

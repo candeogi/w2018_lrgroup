@@ -62,7 +62,12 @@ public final class DeleteQuestionServlet extends SessionManagerServlet
         }
         else
         {
-            res.sendRedirect(req.getContextPath() + "/");
+            String url = req.getParameter("from");
+            if(url != null)
+                res.sendRedirect(req.getContextPath() + "/?p=" + url);
+            else
+                res.sendRedirect(req.getContextPath() + "/");
+
         }
     }
 

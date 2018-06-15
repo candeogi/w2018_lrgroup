@@ -16,7 +16,7 @@
 
 package project.database;
 
-import project.resource.Category;
+import project.resource.Question;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,66 +26,66 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Searches category.
+ * Retrieves questions by keyword in the database.
  *
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class SearchCategoryDatabase {
+public final class SearchQuestionByKeywordDatabase {
 
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "" +
+    private static final String QUERY =
             "SELECT * " +
-            "FROM lr_group.category ";
+                    "FROM lr_group.Question " +
+                    "WHERE title " +
+                    "LIKE ? ";
 
     /**
      * The connection to the database
      */
     private final Connection con;
-
+    private final String keyword;
 
     /**
-     * Creates a new object for searching categories.
+     * Creates a new object for questions retrieval.
      *
      * @param con the connection to the database.
      */
-    public SearchCategoryDatabase(final Connection con) {
+    public SearchQuestionByKeywordDatabase(final Connection con, String keyword) {
         this.con = con;
+        this.keyword = keyword;
     }
 
     /**
-     * Searches categories.
+     * Retrieves questions by keyword in the database.
      *
-     * @return a list of {@code Category} object.
-     * @throws SQLException if any error occurs while searching for categories.
+     * @return An ArrayList of recent questions.
+     * @throws SQLException if any error occurs while retrieving the questions.
      */
-    public List<Category> searchCategory() throws SQLException {
+    public List<Question> searchQuestionByKeyword() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
-        // the results of the search
-        final List<Category> categories = new ArrayList<Category>();
+        List<Question> questList = new ArrayList<>();
 
         try {
-            pstmt = con.prepareStatement(STATEMENT);
+            pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, keyword);
 
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                categories.add(new Category(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getBoolean("isCompany")));
+                Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
+                questList.add(q);
             }
+
+
         } finally {
             if (rs != null) {
                 rs.close();
             }
-
             if (pstmt != null) {
                 pstmt.close();
             }
@@ -93,6 +93,7 @@ public final class SearchCategoryDatabase {
             con.close();
         }
 
-        return categories;
+        return questList;
+
     }
 }

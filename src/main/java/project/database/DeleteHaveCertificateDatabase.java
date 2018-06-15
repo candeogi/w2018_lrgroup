@@ -16,8 +16,8 @@ public class DeleteHaveCertificateDatabase {
 
     private static final String QUERY =
             "DELETE " +
-                    "FROM lr_group.HaveCertificate " +
-                    "WHERE username=? AND id=?";
+                    " FROM lr_group.HaveCertificate " +
+                    " WHERE username=? AND id=?";
 
 
     private final Connection con;

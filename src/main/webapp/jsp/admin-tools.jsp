@@ -15,7 +15,7 @@
     <div class="nav nav-tabs" id="nav-tab-admin" role="tablist">
         <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">Edit users</a>
         <a class="nav-item nav-link" id="nav-question-tab" data-toggle="tab" href="#nav-question" role="tab" aria-controls="nav-profile" aria-selected="false">Edit questions</a>
-        <a class="nav-item nav-link" id="nav-certificate-tab" data-toggle="tab" href="#nav-certificate" role="tab" aria-controls="nav-certificate" aria-selected="false">Add certificate</a>
+        <!--<a class="nav-item nav-link" id="nav-certificate-tab" data-toggle="tab" href="#nav-certificate" role="tab" aria-controls="nav-certificate" aria-selected="false">Add certificate</a>-->
         <a class="nav-item nav-link" id="nav-category-tab" data-toggle="tab" href="#nav-category" role="tab" aria-controls="nav-category" aria-selected="false">Add category</a>
     </div>
 </nav>
@@ -37,8 +37,7 @@
                             <c:forEach var="user" items="${users}">
                             <tr>
                                 <td class="col-md-2">
-                                    <!--<img src="<c:out value="${base64}${user.photoProfile}"/>" class="rounded-circle"> -->
-                                    <i class="far fa-image"></i>
+                                    <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="rounded-circle" style="width:15%">
                                 </td>
                                 <td><c:out value="${user.email}"/></td>
                                 <td><c:out value="${user.name}"/></td>
@@ -135,7 +134,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="surnameInput">Surname</label>
+                                    <label for="descrInput">Description</label>
                                     <textarea name="description" class="form-control" id="description-user"
                                               aria-describedby="descrHelp" placeholder="Description"></textarea>
                                 </div>
@@ -187,7 +186,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="<c:url value="/update-question"/>" >
+                        <form method="POST" action="<c:url value="/update-question"/>" id="formQuestion">
+                            <input type="hidden" name="id" value="">
+                            <input type="hidden" name="from" value="admin-panel">
+
+
                             <div class="form-group">
                                 <label for="titleInput">Title</label>
                                 <input name="title" type="text" class="form-control" id="title-qs"
@@ -214,11 +217,72 @@
 
 
     </div>
-    <div class="tab-pane fade" id="nav-certificate" role="tabpanel" aria-labelledby="nav-certificate-tab">...</div>
-    <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">...</div>
+    <!--<div class="tab-pane fade" id="nav-certificate" role="tabpanel" aria-labelledby="nav-certificate-tab">
+    </div>-->
+
+
+    <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#modal-add-category">
+                <i class="far fa-edit"></i>Add Category</button><br/>
+        <div class="table-responsive" id="divcategorylist">
+            <p></p>
+            <table class="table table-hover table-striped table-responsive" id="tablecategorylist">
+            </table>
+        </div><!-- close table div --></div>
+
+        <div class="modal fade" id="modal-add-category" tabindex="-1" role="dialog" aria-labelledby="AddCategoryModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Add category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="<c:url value="/create-category"/>" id="formUser" >
+                            <!--<div class="form-group">
+                                <label for="usernameInput">Username</label>
+                                <input name="username" type="text" class="form-control" id="username-user"
+                                       aria-describedby="usernameHelp" placeholder="Username" value="">
+                            </div> -->
+                            <input type="hidden" name="admincategory" value="admin-panel">
+
+                            <div class="form-group">
+                                <label for="nameInput">Name</label>
+                                <input name="name" type="text" class="form-control" id="name-category"
+                                       aria-describedby="nameHelp" placeholder="Name"value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descrInput">Description</label>
+                                <input name="description" type="text" class="form-control" id="desc-category"
+                                       aria-describedby="descHelp" placeholder="Description"value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="iscompanyInput">isCompany</label>
+                                <input name="isCompany" type="checkbox" class="form-control" id="iscompany-category"
+                                       aria-describedby="iscompanyHelp">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary ">Add category</button>
+                        </form>
+                    </div>
+                    <!--<div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+
+</div>
 </div>
 
-<script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
 <script type="text/javascript" language="JavaScript" src="<c:url value='/js/admin-functions.js' />"></script>
 
 </body>
