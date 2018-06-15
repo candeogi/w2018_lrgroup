@@ -45,8 +45,8 @@
 <div class="container">
     <div class="row justify-content-between">
         <div class="col col-lg-10">
-            <div class="row">
-                <div class="col col-lg-2">
+            <%--<div class="row">
+                <div class="col col-lg-3">
                     <p> Username:</p>
                 </div>
                 <div id="username-value" class="col-md-auto">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col col-lg-2">
+                <div class="col col-lg-3">
                     <p> Name:</p>
                 </div>
                 <div id="name-value" class="col-md-auto">
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col col-lg-2">
+                <div class="col col-lg-3">
                     <p>Surname:</p>
                 </div>
                 <div id="surname-value" class="col-md-auto">
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col col-lg-2">
+                <div class="col col-lg-3">
                     <p>Birthday:</p>
                 </div>
                 <div id="birthday-value" class="col-md-auto">
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col col-lg-2">
+                <div class="col col-lg-3">
                     <p>Description:</p>
                 </div>
                 <div id="description-value" class="col-md-auto">
@@ -89,22 +89,73 @@
                 <div class="col col-lg-2">
                     <p>Email address: </p>
                 </div>
-                <div id="email-value" class="col-md-auto">
+                <div id="email-value" class="col-lg-auto">
                     <p><c:out value="${user.email}"/></p>
                 </div>
-            </div>
+            </div>--%>
+            <table>
+                <tr>
+                    <td><div><p>Username:</p></div></td>
+                    <td>
+                        <div id="username-value" class="col-md-auto">
+                            <p><c:out value="${user.username}"/></p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div><p>Name:</p></div></td>
+                    <td>
+                        <div id="name-value" class="col-md-auto">
+                            <p><c:out value="${user.name}"/></p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div><p>Surname:</p></div></td>
+                    <td>
+                        <div id="surname-value" class="col-md-auto">
+                            <p><c:out value="${user.surname}"/></p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div><p>Birthday:</p></div></td>
+                    <td>
+                        <div id="birthday-value" class="col-md-auto">
+                            <p><c:out value="${user.birthday}"/></p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div><p>Description:</p></div></td>
+                    <td>
+                        <div id="description-value" class="col-md-auto">
+                            <p><c:out value="${user.description}"/></p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div><p>Email address:</p></div></td>
+                    <td>
+                        <div id="email-value" class="col-lg-auto">
+                            <p><c:out value="${user.email}"/></p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div id="photo-div" class="col align-self-end">
             <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="img">
         </div>
     </div>
+
     <div class="container">
         <div class="row">
             <div class="col">
                 <div id="website" class="container border border-dark">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#websiteModal" style="position:absolute;right:20pt;top:5pt">
-                        Add a new website
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#websiteModal" style="position:absolute;right:35pt;top:5pt;width:18pt;height:19.5pt;border-radius: 50%;">
+                        <i class="fas fa-plus-circle" style="position:absolute;right:3pt;top:3pt;"></i>
                     </button> <br/>
                     <p>Website:</p>
                     <table id="table-website" class="table table-hover">
@@ -116,8 +167,8 @@
 
             <div class="col">
                 <div id="certification" class="container border border-dark">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#certificationModal" style="position:absolute;right:20pt;top:5pt">
-                        Add a new certification
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#certificationModal" style="position:absolute;right:35pt;top:5pt;idth:18pt;height:19.5pt;border-radius: 50%;">
+                        <i class="fas fa-plus-circle" style="position:absolute;right:3pt;top:3pt;"></i>
                     </button><br/>
                     <p>Certification:</p>
                     <table id="table-certificate" class="table table-hover">
@@ -135,7 +186,7 @@
 
 
 <!-- Modal -->
-<div class="modal " id="websiteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="websiteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -165,13 +216,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveWebsite">Save changes</button>
+                <button type="button" class="btn btn-primary" id="saveWebsite" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal " id="certificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="certificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -200,7 +251,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveCertificate">Save changes</button>
+                <button type="button" class="btn btn-primary" id="saveCertificate"  data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>

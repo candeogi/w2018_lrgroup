@@ -71,7 +71,7 @@ Since: 1.0
             <c:when test="${empty sessionScope.loggedInUser}">
                 <%--href="<c:url value="/?p=create-user"/>"--%>
                 <a>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-registration">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-registration">
                         Register
                     </button>
                 </a>
