@@ -46,8 +46,7 @@ public final class ListQuestionsDatabase {
     /**
      * Creates a new object for listing all the questions.
      *
-     * @param con
-     *            the connection to the database.
+     * @param con the connection to the database.
      */
     public ListQuestionsDatabase(final Connection con) {
         this.con = con;
@@ -57,9 +56,7 @@ public final class ListQuestionsDatabase {
      * Lists all the questions in the database.
      *
      * @return a list of {@code questions} object.
-     *
-     * @throws SQLException
-     *             if any error occurs while searching for questions.
+     * @throws SQLException if any error occurs while searching for questions.
      */
     public List<Question> listQuestions() throws SQLException {
 

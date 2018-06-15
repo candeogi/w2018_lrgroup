@@ -31,16 +31,15 @@ import java.util.List;
  * @author lrgroup
  * @author Davide Storato (davide.storato@studenti.unipd.it)
  */
-public final class SearchQuestionByTimestampDatabase
-{
+public final class SearchQuestionByTimestampDatabase {
 
     /**
      * The SQL statement to be executed
      */
-    private static final String QUERY = 
-            "SELECT * " + 
-            "FROM lr_group.Question " +
-            "ORDER BY ts " + "DESC";
+    private static final String QUERY =
+            "SELECT * " +
+                    "FROM lr_group.Question " +
+                    "ORDER BY ts " + "DESC";
 
     /**
      * The connection to the database
@@ -50,11 +49,9 @@ public final class SearchQuestionByTimestampDatabase
     /**
      * Creates a new object for recent questions retrieval.
      *
-     * @param con
-     *            the connection to the database.
+     * @param con the connection to the database.
      */
-    public SearchQuestionByTimestampDatabase(final Connection con)
-    {
+    public SearchQuestionByTimestampDatabase(final Connection con) {
         this.con = con;
     }
 
@@ -62,28 +59,29 @@ public final class SearchQuestionByTimestampDatabase
      * Retrieves recent questions in the database.
      *
      * @return An ArrayList of recent questions.
-     *
-     * @throws SQLException
-     *             if any error occurs while retrieving the questions.
+     * @throws SQLException if any error occurs while retrieving the questions.
      */
-    public List<Question> SearchQuestionByTimestamp() throws SQLException
-    {
+    public List<Question> SearchQuestionByTimestamp() throws SQLException {
 
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         List<Question> questList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
-            
-            ResultSet rs = pstmt.executeQuery();
-            
-            while(rs.next()){
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
                 Question q = new Question(rs.getInt("id"), rs.getString("idUser"), rs.getString("title"), rs.getString("body"), rs.getTimestamp("ts"), rs.getTimestamp("lastModified"));
                 questList.add(q);
             }
-            rs.close();
+
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }

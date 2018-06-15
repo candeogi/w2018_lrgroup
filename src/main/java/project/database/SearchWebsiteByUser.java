@@ -51,21 +51,24 @@ public class SearchWebsiteByUser {
      */
     public List<WebSite> searchWebsite() throws SQLException {
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         List<WebSite> webSiteList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, user);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 WebSite webSite = new WebSite(rs.getString(1), rs.getString(3));
                 webSiteList.add(webSite);
             }
-            rs.close();
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }

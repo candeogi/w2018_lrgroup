@@ -36,13 +36,10 @@ public final class UpdateAnswerDatabase {
     /**
      * Creates a new object to update a question.
      *
-     * @param con
-     *            the connection to the database.
-     * @param answer
-     *            the answer to be updated in the database.
+     * @param con    the connection to the database.
+     * @param answer the answer to be updated in the database.
      */
-    public UpdateAnswerDatabase(final Connection con, final Answer answer)
-    {
+    public UpdateAnswerDatabase(final Connection con, final Answer answer) {
         this.con = con;
         this.answer = answer;
     }
@@ -50,8 +47,7 @@ public final class UpdateAnswerDatabase {
     /**
      * @return true if the updating is done correctly
      * Updates a question in the database.
-     * @throws SQLException
-     *             if any error occurs while updating the user.
+     * @throws SQLException if any error occurs while updating the user.
      */
     public boolean updateAnswer() throws SQLException {
 
@@ -64,7 +60,7 @@ public final class UpdateAnswerDatabase {
 
             rs = pstmt.executeQuery();
 
-            if(rs.next()) return true;
+            if (rs.next()) return true;
             else return false;
 
         } finally {

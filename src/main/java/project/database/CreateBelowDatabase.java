@@ -10,9 +10,9 @@ import java.sql.SQLException;
 /**
  * Creates a category-question association in the database.
  *
- *  @author lrgroup
- *  @author Luca Rossi
- *  @author Davide Storato
+ * @author lrgroup
+ * @author Luca Rossi
+ * @author Davide Storato
  */
 
 public class CreateBelowDatabase {
@@ -38,14 +38,11 @@ public class CreateBelowDatabase {
     /**
      * Creates a new object for creating a category-question association.
      *
-     * @param con
-     *            the connection to the database.
-     * @param category
-     *            the category in the database.
-     * @param question
-     *            the question in the database
+     * @param con      the connection to the database.
+     * @param category the category in the database.
+     * @param question the question in the database
      */
-    public CreateBelowDatabase (final Connection con, final Category category, final Question question) {
+    public CreateBelowDatabase(final Connection con, final Category category, final Question question) {
         this.con = con;
         this.category = category;
         this.question = question;
@@ -53,10 +50,10 @@ public class CreateBelowDatabase {
 
     /**
      * Creates a category-question association in the database.
-     * @throws SQLException
-     *             if any error occurs while storing the association.
+     *
+     * @throws SQLException if any error occurs while storing the association.
      */
-    public void createCategoryQuestionAssociation () throws SQLException {
+    public void createCategoryQuestionAssociation() throws SQLException {
 
         PreparedStatement pstmt = null;
 

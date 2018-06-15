@@ -81,30 +81,26 @@ public final class DeleteUserByUsernameDatabase {
     public int DeleteUserByUsername() throws SQLException {
 
         PreparedStatement pstmt = null;
-        PreparedStatement pstmt1 = null;
-        PreparedStatement pstmt2 = null;
-        PreparedStatement pstmt3 = null;
-        PreparedStatement pstmt4 = null;
 
         int rs = 0;
 
         try {
 
-            pstmt1 = con.prepareStatement(STATEMENT);
-            pstmt1.setString(1, username);
-            pstmt1.executeUpdate();
+            pstmt = con.prepareStatement(STATEMENT);
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
 
-            pstmt2 = con.prepareStatement(STATEMENT1);
-            pstmt2.setString(1, username);
-            pstmt2.executeUpdate();
+            pstmt = con.prepareStatement(STATEMENT1);
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
 
-            pstmt3 = con.prepareStatement(STATEMENT2);
-            pstmt3.setString(1, username);
-            pstmt3.executeUpdate();
+            pstmt = con.prepareStatement(STATEMENT2);
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
 
-            pstmt4 = con.prepareStatement(STATEMENT3);
-            pstmt4.setString(1, username);
-            pstmt4.executeUpdate();
+            pstmt = con.prepareStatement(STATEMENT3);
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
 
             pstmt = con.prepareStatement(QUERY_1);
             pstmt.setString(1, username);
@@ -115,19 +111,7 @@ public final class DeleteUserByUsernameDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
-            if (pstmt1 != null) {
-                pstmt1.close();
-            }
-            if (pstmt2 != null) {
-                pstmt2.close();
-            }
-            if (pstmt3 != null) {
-                pstmt3.close();
-            }
-            if (pstmt4 != null) {
-                pstmt4.close();
-            }
-
+            
             con.close();
         }
 

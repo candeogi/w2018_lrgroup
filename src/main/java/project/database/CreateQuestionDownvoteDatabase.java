@@ -51,14 +51,11 @@ public final class CreateQuestionDownvoteDatabase {
     /**
      * Creates a new object for creating a question downvote.
      *
-     * @param con
-     *            the connection to the database.
-     * @param user
-     *            the user who voted the question.
-     * @param idQuestion
-     *            the question to be voted in the database.
+     * @param con        the connection to the database.
+     * @param user       the user who voted the question.
+     * @param idQuestion the question to be voted in the database.
      */
-    public CreateQuestionDownvoteDatabase(final Connection con, final String user ,final int idQuestion) {
+    public CreateQuestionDownvoteDatabase(final Connection con, final String user, final int idQuestion) {
         this.con = con;
         this.idQuestion = idQuestion;
         this.user = user;
@@ -67,8 +64,7 @@ public final class CreateQuestionDownvoteDatabase {
     /**
      * @return return true id the question is correctly voted
      * Creates a downvotevote in the database.
-     * @throws SQLException
-     *             if any error occurs while storing the answer.
+     * @throws SQLException if any error occurs while storing the answer.
      */
     public boolean createQuestionDownvote() throws SQLException {
 
@@ -77,7 +73,7 @@ public final class CreateQuestionDownvoteDatabase {
         try {
             pstmt = con.prepareStatement(STATEMENT_2);
             pstmt.setInt(1, idQuestion);
-            pstmt.setString(2,user);
+            pstmt.setString(2, user);
 
             pstmt.execute();
 
@@ -89,21 +85,15 @@ public final class CreateQuestionDownvoteDatabase {
             pstmt.execute();
 
             return true;
-        }
-        catch(Throwable t)
-        {
+        } catch (Throwable t) {
             return false;
-        }
-        finally 
-        {
+        } finally {
             if (pstmt != null) {
                 pstmt.close();
             }
 
             con.close();
         }
-
-
 
 
     }

@@ -70,19 +70,17 @@ public class CreateHaveCertificateDatabase {
     public void createHaveCertificate() throws SQLException {
 
         PreparedStatement pstmt = null;
-        PreparedStatement pstmt1 = null;
-        PreparedStatement pstmt2 = null;
-
+        ResultSet generatedKey = null;
         ResultSet rs = null;
         int idCert = -1;
 
 
         try {
 
-            pstmt1 = con.prepareStatement(QUERY, Statement.RETURN_GENERATED_KEYS);
-            pstmt1.setString(1, name);
-            pstmt1.setString(2, organization);
-            rs = pstmt1.executeQuery();
+            pstmt = con.prepareStatement(QUERY, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, name);
+            pstmt.setString(2, organization);
+            rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 idCert = rs.getInt("id");
@@ -90,16 +88,15 @@ public class CreateHaveCertificateDatabase {
 
             if (idCert == -1) {
 
-                pstmt2 = con.prepareStatement(STATEMENT2, Statement.RETURN_GENERATED_KEYS);
-                pstmt2.setString(1, name);
-                pstmt2.setString(2, organization);
-                pstmt2.executeUpdate();
+                pstmt = con.prepareStatement(STATEMENT2, Statement.RETURN_GENERATED_KEYS);
+                pstmt.setString(1, name);
+                pstmt.setString(2, organization);
+                pstmt.executeUpdate();
 
-                ResultSet generatedKey = pstmt2.getGeneratedKeys();
+                generatedKey = pstmt.getGeneratedKeys();
                 if (generatedKey.next()) {
                     idCert = generatedKey.getInt("id");
                 }
-                generatedKey.close();
             }
 
             pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
@@ -110,18 +107,16 @@ public class CreateHaveCertificateDatabase {
 
 
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
             if (pstmt != null) {
                 pstmt.close();
             }
-            if (pstmt1 != null) {
-                pstmt1.close();
+            if (rs != null) {
+                rs.close();
             }
-            if (pstmt2 != null) {
-                pstmt2.close();
+            if (generatedKey != null) {
+                generatedKey.close();
             }
+
 
             con.close();
         }

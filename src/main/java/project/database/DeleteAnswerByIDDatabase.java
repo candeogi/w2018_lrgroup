@@ -28,8 +28,7 @@ import java.sql.ResultSet;
  * @author lrgroup
  * @author Alberto Pontini
  */
-public final class DeleteAnswerByIDDatabase
-{
+public final class DeleteAnswerByIDDatabase {
 
     /**
      * The SQL statement to be executed
@@ -50,25 +49,21 @@ public final class DeleteAnswerByIDDatabase
     /**
      * Creates a new object for a specific answer retrieval.
      *
-     * @param con
-     *            the connection to the database.
-     * @param ID
-     *            the ID of an answer.
+     * @param con the connection to the database.
+     * @param ID  the ID of an answer.
      */
-    public DeleteAnswerByIDDatabase(final Connection con, final int ID)
-    {
+    public DeleteAnswerByIDDatabase(final Connection con, final int ID) {
         this.con = con;
         this.id = ID;
     }
 
     /**
      * Deletes a specific answer in the database.
-     ** @return true when the deleting is correctly done
-     * @throws SQLException
-     *             if any error occurs while deleting the answer.
+     * * @return true when the deleting is correctly done
+     *
+     * @throws SQLException if any error occurs while deleting the answer.
      */
-    public boolean deleteAnswerByID() throws SQLException
-    {
+    public boolean deleteAnswerByID() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -77,11 +72,11 @@ public final class DeleteAnswerByIDDatabase
             pstmt = con.prepareStatement(QUERY);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            if(rs.next()) return true;
+            if (rs.next()) return true;
             else return false;
 
         } finally {
-            if (rs!= null) {
+            if (rs != null) {
                 rs.close();
             }
             if (pstmt != null) {

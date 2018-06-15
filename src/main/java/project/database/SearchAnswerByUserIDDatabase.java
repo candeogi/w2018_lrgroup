@@ -31,8 +31,7 @@ import java.util.List;
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)
  */
-public final class SearchAnswerByUserIDDatabase
-{
+public final class SearchAnswerByUserIDDatabase {
 
     /**
      * The SQL statement to be executed
@@ -52,13 +51,10 @@ public final class SearchAnswerByUserIDDatabase
     /**
      * Creates a new object for answers retrieval.
      *
-     * @param con
-     *            the connection to the database.
-     * @param user
-     *            the user related to answers
+     * @param con  the connection to the database.
+     * @param user the user related to answers
      */
-    public SearchAnswerByUserIDDatabase(final Connection con, final String user)
-    {
+    public SearchAnswerByUserIDDatabase(final Connection con, final String user) {
         this.con = con;
         this.username = user;
     }
@@ -67,32 +63,32 @@ public final class SearchAnswerByUserIDDatabase
      * Retrieves answers of a specific user in the database.
      *
      * @return a list of {@code Answer} (must be one) object related to an user.
-     *
-     * @throws SQLException
-     *             if any error occurs while retrieving the answer.
+     * @throws SQLException if any error occurs while retrieving the answer.
      */
-    public List<Answer> searchAnswerByUserID() throws SQLException
-    {
+    public List<Answer> searchAnswerByUserID() throws SQLException {
 
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         List<Answer> answerList = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, username);
 
+            rs = pstmt.executeQuery();
 
-            ResultSet rs = pstmt.executeQuery();
-
-            while(rs.next()){//TODO : verify this -1
-                Answer a = new Answer(rs.getInt("id"), rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"),-1);
+            while (rs.next()) {//TODO : verify this -1
+                Answer a = new Answer(rs.getInt("id"), rs.getString("iduser"), rs.getBoolean("isfixed"), rs.getString("body"), rs.getInt("parentid"), rs.getTimestamp("ts"), -1);
                 answerList.add(a);
             }
-            rs.close();
+
 
         } finally {
             if (pstmt != null) {
                 pstmt.close();
+            }
+            if (rs != null) {
+                rs.close();
             }
 
             con.close();

@@ -24,10 +24,10 @@ public class DeleteHaveCertificateDatabase {
     private final String username;
     private final int id;
 
-    public DeleteHaveCertificateDatabase( Connection con, String username, int id) {
+    public DeleteHaveCertificateDatabase(Connection con, String username, int id) {
         this.con = con;
         this.username = username;
-        this.id =id;
+        this.id = id;
     }
 
     public int deleteCertificate() throws SQLException {
@@ -38,7 +38,7 @@ public class DeleteHaveCertificateDatabase {
         try {
             preparedStatement = con.prepareStatement(QUERY);
             preparedStatement.setString(1, username);
-            preparedStatement.setInt(2,id );
+            preparedStatement.setInt(2, id);
             i = preparedStatement.executeUpdate();
 
         } finally {

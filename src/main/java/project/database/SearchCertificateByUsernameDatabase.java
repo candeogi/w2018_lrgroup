@@ -66,20 +66,23 @@ public class SearchCertificateByUsernameDatabase {
 
         PreparedStatement pstmt = null;
         List<Certificate> questList = new ArrayList<>();
-
+        ResultSet rs = null;
         try {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, username);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Certificate c = new Certificate(rs.getInt("id"),rs.getString("name"), rs.getString("organization"), (rs.getDate("achievementDate")).toString() );
                 questList.add(c);
             }
-            rs.close();
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
             if (pstmt != null) {
                 pstmt.close();
             }

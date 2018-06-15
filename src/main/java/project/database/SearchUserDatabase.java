@@ -46,15 +46,12 @@ public final class SearchUserDatabase {
     private final Connection con;
 
 
-
     /**
      * Creates a new object for searching users.
      *
-     * @param con
-     *            the connection to the database.
+     * @param con the connection to the database.
      */
-    public SearchUserDatabase(final Connection con)
-    {
+    public SearchUserDatabase(final Connection con) {
         this.con = con;
     }
 
@@ -62,12 +59,9 @@ public final class SearchUserDatabase {
      * Searches users.
      *
      * @return a list of {@code User} object.
-     *
-     * @throws SQLException
-     *             if any error occurs while searching for users.
+     * @throws SQLException if any error occurs while searching for users.
      */
-    public List<User> searchUser() throws SQLException
-    {
+    public List<User> searchUser() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -75,8 +69,7 @@ public final class SearchUserDatabase {
         // the results of the search
         final List<User> users = new ArrayList<User>();
 
-        try
-        {
+        try {
             pstmt = con.prepareStatement(STATEMENT);
 
             rs = pstmt.executeQuery();
