@@ -5,7 +5,6 @@ var loggedInUser = document.getElementById("loggedInUser");
 var currentUser = loggedInUser.getAttribute("data-loggedInUser");
 var currentQuestion = loggedInUser.getAttribute("data-currentQuestion");
 
-
 /*REST URL*/
 var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/'+currentQuestion;
 var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/question/'+currentQuestion;
@@ -89,7 +88,6 @@ function visualizeAnswers(){
 
             //lets print all the answers
             for(var i =0; i< resourceList.length; i++){
-                console.log(resourceList[i].answer);
                 printSingleAnswer(resourceList[i].answer, 0);
             }
         },
@@ -104,7 +102,6 @@ function visualizeAnswers(){
 * whereToAppendId: ul element where do i append my new answer
 */
 function printSingleAnswer(answer, whereToAppendId){
-    //console.log(answer['text']);
 
     //always append to the unordered list with id 'id'+'ul'
     var baseAnswerList = document.getElementById(whereToAppendId+'ul');
@@ -241,7 +238,6 @@ function addNewAnswerForm(){
         contentType: "application/json; charset=utf-8",
         dataType   : "json",
         success: function(data) {
-            console.log(data.answer);
             printSingleAnswer(data.answer, 0);
             $("#addAnswerTextArea").val('');
 
@@ -261,7 +257,6 @@ function addNewAnswerForm(){
 */
 function deleteAnswer(id){
     var urlToDelete = "http://localhost:8080/web-app-project/rest/answer/"+id;
-    console.log(urlToDelete);
     $.ajax({
         type: "DELETE",
         url: urlToDelete,
@@ -311,7 +306,6 @@ function editAnswerAjax(){
         contentType: "application/json; charset=utf-8",
         dataType   : "json",
         success: function(data) {
-            console.log(data.answer);
             //This code should change the text in the list element
             var answerParagraph = $('#'+id).find('p').first();
             answerParagraph.text(data.answer["text"]);
@@ -336,7 +330,6 @@ function setReplyModalTarget(id){
 function replyAnswerAjax(){
     //get id setReplyModalTarget
     var parentID= $('#answerTextAreaModal').attr('data-reply-target');
-    console.log("parentID:" +parentID);
     var addAnswerText = $('#answerTextAreaModal').val();
 
     var currentdate = new Date();
@@ -366,7 +359,6 @@ function replyAnswerAjax(){
         contentType: "application/json; charset=utf-8",
         dataType   : "json",
         success: function(data) {
-            console.log(data.answer);
             printSingleAnswer(data.answer, parentID);
             $("#addAnswerTextArea").val('');
 

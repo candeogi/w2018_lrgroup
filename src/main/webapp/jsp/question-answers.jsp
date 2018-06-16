@@ -37,32 +37,14 @@ Since: 1.0
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 
-<!--TODO change response text in my url-->
-<!--body onload="loadDoc('response.txt', loadQuestion)"-->
-<body onload="loadAll()">
+<body>
 <!-- Header on top-->
-<header class="navbar bg-dark text-white">
-    <div class="justify-content-start">
-        <nav class="nav">
-            <a class="nav-link">
-                <i class="fas fa-question-circle"></i>
-            </a>
-            <a class="nav-link">AnswerDemo</a>
-        </nav>
-    </div>
-    <div class="justify-content-end">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Login
-        </button>
-        <button id="registerButton" type="button" class="btn btn-secondary">
-            Register
-        </button>
-    </div>
-</header><!--close header-->
+<c:import url="/jsp/include/header.jsp"/>
+<!--close header-->
 
 <div id="loggedInUser"
      data-loggedInUser="${sessionScope.loggedInUser}"
-     data-currentQuestion="1"
+     data-currentQuestion="${param.questionID}"
 ></div>
 <!-- Container Div -->
 <div class="container">
