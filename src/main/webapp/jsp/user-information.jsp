@@ -39,9 +39,7 @@
 <body>
 
 <c:import url="/jsp/include/header.jsp"/>
-<div style="position:absolute;right:22%;">
-    <button id="modifyButton" type="submit" class="btn btn-primary">Modify User</button>
-</div>
+
 <div class="container">
     <div class="row justify-content-between">
         <div class="col col-lg-10">
@@ -143,7 +141,7 @@
                     </td>
                 </tr>
             </table>--%>
-            <div class="divTable infoTable">
+            <div class="infoTable">
                 <div class="divTableBody">
                     <div class="divTableRow">
                         <div class="divTableCell"><p> Username:</p></div><div id="username-value" class="divTableCell"><p><c:out value="${user.username}"/></p></div></div>
@@ -161,6 +159,9 @@
             </div>
         </div>
 
+        <div>
+            <button id="prova" class="btn btn-primary">Modify User</button>
+        </div>
         <div id="photo-div" class="col align-self-end">
             <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="profileImg">
         </div>

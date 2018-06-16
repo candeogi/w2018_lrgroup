@@ -19,6 +19,8 @@
 --
 -- Insertion into the Category table
 --
+
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'No Category','Question without category ',DEFAULT);
 INSERT INTO lr_group.category  VALUES (DEFAULT ,'Dati Algoritmi 2','Corso Magistrale di Geppino Pucci ',DEFAULT);
 INSERT INTO lr_group.category  VALUES (DEFAULT ,'Analisi 2',' Corso Magistrale di Andrea D Agnolo ',DEFAULT);
 INSERT INTO lr_group.category  VALUES (DEFAULT ,'Web Application ',' Corso Magristrale di Ferro Nicola ',DEFAULT);

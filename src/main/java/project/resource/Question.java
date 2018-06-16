@@ -60,7 +60,7 @@ public class Question extends Resource
 	 */
 	public Question(final String IDUser, final String title, final String body, final Timestamp timestamp)
 	{
-		this(-1,IDUser, title,body,timestamp,null);
+		this(-1,IDUser, title,body,timestamp,timestamp);
 	}
 	
 	/**

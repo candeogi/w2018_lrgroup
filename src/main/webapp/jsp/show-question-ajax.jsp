@@ -92,7 +92,9 @@ Since: 1.0
 <script type="text/javascript" language="JavaScript" src="<c:url value='/js/ajax-question.js' />"></script>
 </body>
 
-<c:import url=  "/jsp/include/footer.jsp"/>
+<footer>
+    <c:import url="/jsp/include/footer.jsp"/>
+</footer>
 
 
 </html>

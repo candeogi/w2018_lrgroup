@@ -3,15 +3,16 @@
 $(document).ready(function () {
     visualizeWebsite();
     visualizeCertificate();
-    $("#modifyButton").click(function () {
-        modifyValue();
-    });
     $("#saveWebsite").click(function () {
         addWebsite();
     });
     $("#saveCertificate").click(function () {
         addCertificate();
     })
+    $("#prova").click(function () {
+        modifyValue();
+    })
+
 
 });
 
@@ -445,9 +446,11 @@ function modifyValue() {
     button1.appendChild(div);
 
 
-    $("#modifyButton").text("Confirm");
-    $("#modifyButton").unbind();
-    $("#modifyButton").click(function () {
+
+
+    $("#prova").text("Confirm");
+    $("#prova").unbind();
+    $("#prova").click(function () {
         saveValue();
     });
 }
@@ -500,9 +503,11 @@ function returnToVisualization(name, surname, birthday, description) {
 
     $('#photo-form').remove();
 
-    $("#modifyButton").unbind();
-    $("#modifyButton").text("Modify user");
-    $("#modifyButton").click(function () {
+
+
+    $("#prova").unbind();
+    $("#prova").text("Modify user");
+    $("#prova").click(function () {
         modifyValue();
     });
 

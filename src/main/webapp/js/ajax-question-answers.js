@@ -5,6 +5,7 @@ var loggedInUser = document.getElementById("loggedInUser");
 var currentUser = loggedInUser.getAttribute("data-loggedInUser");
 var currentQuestion = loggedInUser.getAttribute("data-currentQuestion");
 var isAdmin = (loggedInUser.getAttribute("data-isAdmin") === 'true');
+var questioneerID = ' ';
 
 /*REST URL*/
 var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/'+currentQuestion;
@@ -27,7 +28,38 @@ function initialPageLoad(){
         editAnswerAjax();
     });
 }
-/* USER MANAGEMENT */
+/*
+* User Management
+*/
+function visualizeQuestioneer(username){
+    questioneerID = username;
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/web-app-project/rest/user/id/'+username,
+        success: function(data){
+            var resourceList = data['resource-list'];
+            var user = resourceList[0].user;
+            $("#questioneer-name").text(user['name']+' '+user['surname']);
+            if(user['isAdmin'] === true){
+                $("#questioneer-badge").addClass('fas fa-certificate');
+                $("#questioneer-badge").css('color', 'green');
+            }else{
+                $("#questioneer-badge").addClass('fas fa-user');
+            }
+            $("#questioneer-regdate").text('Registered on '+user['registrationDate']);
+            $("#questioneer-photo").attr("src","data:image/jpeg;base64,"+user['photoProfile']);
+            //link to questioneer profile
+            var questioneerLinkToProfile = "http://localhost:8080/web-app-project/?p=user&u="+user['username'];
+            $("#questioneer-profilelink").attr("href", questioneerLinkToProfile);
+        },
+        error: function(jqXHR,textStatus,errorThrown){
+            alert("" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
+        }
+    });
+}
 /*
 * Visualize the Question at Start
 */
@@ -59,6 +91,8 @@ function visualizeQuestion(){
             //username - questioneer
             var questioneerUsername = document.getElementById('questioneer-name');
             questioneerUsername.appendChild(document.createTextNode(question['IDUser']));
+            visualizeQuestioneer(question['IDUser']);
+
         },
         error: function(){
             alert("Something went wrong on loading the question!");

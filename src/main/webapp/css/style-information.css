@@ -28,6 +28,7 @@ img {
 
 div.infoTable {
     text-align: left;
+    vertical-align: top;
 }
 .divTable.infoTable .divTableCell, .divTable.infoTable .divTableHead {
     padding: 3px 2px;
@@ -49,14 +50,17 @@ div.infoTable {
 .infoTable.outerTableFooter .tableFootStyle {
     padding: 3px 5px;
 }
-/* DivTable.com */
+
 .divTable{ display: table; }
-.divTableRow { display: table-row; }
+.divTableRow { display: table-row;}
 .divTableHeading { display: table-header-group;}
-.divTableCell, .divTableHead { display: table-cell;}
+.divTableCell, .divTableHead {display: table-cell;}
 .divTableHeading { display: table-header-group;}
 .divTableFoot { display: table-footer-group;}
 .divTableBody { display: table-row-group;}
 
-
-
+.header-item { grid-area: header; }
+.menu-item { grid-area: menu; }
+.main-item { grid-area: main; }
+.right-item { grid-area: right; }
+.footer-item { grid-area: footer; }
