@@ -71,7 +71,6 @@ public class CreateBelowDatabase {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setInt(1, rs.getInt("id"));
             pstmt.setInt(2, question.getID());
-
             pstmt.execute();
 
         } finally {

@@ -166,7 +166,7 @@ CREATE TABLE lr_group.Own(
     ON DELETE CASCADE ON UPDATE CASCADE
 
 );
- 
+
 CREATE TABLE lr_group.Certificate(
     id SERIAL,
     name VARCHAR(50) NOT NULL,
