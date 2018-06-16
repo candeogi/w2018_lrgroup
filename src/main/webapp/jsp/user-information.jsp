@@ -143,7 +143,7 @@
                     </td>
                 </tr>
             </table>--%>
-            <div class="divTable infoTable">
+            <div class="infoTable">
                 <div class="divTableBody">
                     <div class="divTableRow">
                         <div class="divTableCell"><p> Username:</p></div><div id="username-value" class="divTableCell"><p><c:out value="${user.username}"/></p></div></div>
