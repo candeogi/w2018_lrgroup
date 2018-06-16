@@ -36,6 +36,8 @@ public class CreateWebSiteDatabase {
     private final WebSite webSite;
 
     /**
+     * Creates a new object for creating a website.
+     *
      * @param con     the reference to the connection to the database
      * @param webSite the instance of Website to add  to the database
      */

@@ -19,7 +19,7 @@ package project.database;
 import java.sql.*;
 
 /**
- * Creates an answer in the database.
+ * Creates an answer upvote in the database.
  *
  * @author lrgroup
  * @author Alberto Pontini
@@ -49,7 +49,7 @@ public final class CreateAnswerUpvoteDatabase {
     private final String user;
 
     /**
-     * Creates a new object for creating an answer.
+     * Creates a new object for creating an answer upvote.
      *
      * @param con
      *            the connection to the database.

@@ -20,7 +20,7 @@ package project.database;
 import java.sql.*;
 
 /**
- * Creates an answer in the database.
+ * Creates an answer downvote in the database.
  *
  * @author lrgroup
  * @author Alberto Pontini
@@ -50,7 +50,7 @@ public final class CreateAnswerDownvoteDatabase {
     private final String user;
 
     /**
-     * Creates a new object for creating an answer.
+     * Creates a new object for creating an answer downvote.
      *
      * @param con      the connection to the database.
      * @param user     the user who voted the question.
@@ -64,7 +64,7 @@ public final class CreateAnswerDownvoteDatabase {
 
     /**
      * @return return true id the answer is correctly done
-     * Creates an upvote in the database.
+     * Creates an downvote in the database.
      * @throws SQLException if any error occurs while storing the answer.
      */
     public boolean createAnswerDownvote() throws SQLException {

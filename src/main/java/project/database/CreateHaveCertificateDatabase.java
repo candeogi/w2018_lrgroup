@@ -19,7 +19,7 @@ package project.database;
 import java.sql.*;
 
 /**
- * Create HaveCertificate.
+ * Creates HaveCertificate association in the database.
  *
  * @author lrgroup
  * @author Luca Rossi
@@ -54,6 +54,14 @@ public class CreateHaveCertificateDatabase {
     private final Date achievementDate;
 
 
+    /**
+     *
+     * @param con the reference to the connection to the database
+     * @param username username referring to user who owns certificate
+     * @param name name of the certificate
+     * @param organization organization which release certificate
+     * @param achievementDate achievement date
+     */
     public CreateHaveCertificateDatabase(final Connection con, String username, String name, String organization, Date achievementDate) {
         this.con = con;
         this.username = username;
@@ -63,7 +71,7 @@ public class CreateHaveCertificateDatabase {
     }
 
     /**
-     * Creates a answer in the database.
+     * Creates a HaveCertificate relationship in the database.
      *
      * @throws SQLException if any error occurs while storing the answer.
      */

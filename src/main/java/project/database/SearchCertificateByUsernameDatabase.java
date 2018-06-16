@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieves question by ID in the database.
+ * Searches certificate of an user in the database.
  *
  * @author lrgroup
  * @author Luca Rossi
@@ -51,6 +51,12 @@ public class SearchCertificateByUsernameDatabase {
     private final String username;
 
 
+    /**
+     * Creates a new object for searching certificate.
+     *
+     * @param con the connection to the database.
+     * @param username username of the user who owns certificate
+     */
     public SearchCertificateByUsernameDatabase(final Connection con, final String username) {
         this.con = con;
         this.username = username;
