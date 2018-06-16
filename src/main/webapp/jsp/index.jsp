@@ -62,8 +62,50 @@
 
 
         </div>
+        <c:choose>
+            <c:when test="${not empty sessionScope.loggedInUser}">
+                <div class="col-md-2">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addQuestionModal">Add Question
+                    </button>
+                </div>
 
-        <div class="col-md-4">
+                <div class="col-md-2">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search a Question" id="searchinqs">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit" id="searchBtn">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </c:when>
+            <c:when test="${empty sessionScope.loggedInUser}">
+                <div class="col-md-4">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search a Question" id="longSearchinqs">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit" id="longSearchBtn">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </c:when>
+        </c:choose>
+
+        <%--<div class="col-md-2">
+            <c:if test="${not empty sessionScope.loggedInUser}">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addQuestionModal">Add Question
+                </button>
+            </c:if>
+        </div>
+
+        <div class="col-md-2">
             <form>
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search a Question" id="searchinqs">
@@ -74,7 +116,8 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div>--%>
+
 
     </div>
     <!-- Buttons+Search Div -->
@@ -92,11 +135,8 @@
 
             </div><!-- close table div -->
         </div>
+
         <div class="col-md-4">
-            <c:if test="${not empty sessionScope.loggedInUser}">
-                <button class="btn btn-default" data-toggle="modal" data-target="#addQuestionModal">Add Question
-                </button>
-            </c:if>
             <img class="img-fluid adsbanner"
                  src="https://images-na.ssl-images-amazon.com/images/I/716MJHggVDL._UX342_.jpg" alt="Wowee">
         </div>

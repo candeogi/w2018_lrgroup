@@ -17,7 +17,7 @@
         <div class="col-md-8" style="float:left; width:80%;">
             <div class="table-responsive">
                 <table class="table table-hover">
-                    <thead>
+                    <thead style="background-color: lightgray">
                     <tr>
                         <th>ID</th><th>Title</th><th>Body</th><th>timestamp</th><th>lastModified</th><th>IDUser</th>
                     </tr>
