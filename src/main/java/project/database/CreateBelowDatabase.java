@@ -22,7 +22,7 @@ public class CreateBelowDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "" +
-            "INSERT INTO lr_group.below (category, question) " +
+            "INSERT INTO lr_group.below (idcategory, question) " +
             "VALUES (?, ?)";
 
     private static final String QUERY = "" +
@@ -38,19 +38,19 @@ public class CreateBelowDatabase {
      * The category and the question in the database
      */
     private final String category;
-    private final Question question;
+    private final int idQuestion;
 
     /**
      * Creates a new object for creating a category-question association.
      *
      * @param con      the connection to the database.
      * @param category the category in the database.
-     * @param question the question in the database
+     * @param idQuestion the question in the database
      */
-    public CreateBelowDatabase(final Connection con, final String category, final Question question) {
+    public CreateBelowDatabase(final Connection con, final String category, final int idQuestion) {
         this.con = con;
         this.category = category;
-        this.question = question;
+        this.idQuestion = idQuestion;
     }
 
     /**
@@ -67,12 +67,20 @@ public class CreateBelowDatabase {
             pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1,category);
             rs = pstmt.executeQuery();
+            if(rs.next()) {
 
-            pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, rs.getInt("id"));
-            pstmt.setInt(2, question.getID());
+                pstmt = con.prepareStatement(STATEMENT);
+                pstmt.setInt(1, rs.getInt("id"));
+                pstmt.setInt(2, idQuestion);
+                pstmt.execute();
+            }
+            else{
+                pstmt = con.prepareStatement(STATEMENT);
+                pstmt.setInt(1, 1);
+                pstmt.setInt(2, idQuestion);
+                pstmt.execute();
+            }
 
-            pstmt.execute();
 
         } finally {
             if (rs != null) {

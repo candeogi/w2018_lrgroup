@@ -18,9 +18,7 @@ package project.database;
 
 import project.resource.Question;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 /**
@@ -64,12 +62,14 @@ public final class CreateQuestionDatabase {
      *
      * @throws SQLException if any error occurs while storing the question.
      */
-    public void createQuestion() throws SQLException {
+    public int createQuestion() throws SQLException {
 
         PreparedStatement pstmt = null;
+        ResultSet keyres=null;
+        int ret=-1;
 
         try {
-            pstmt = con.prepareStatement(STATEMENT);
+            pstmt = con.prepareStatement(STATEMENT,Statement.RETURN_GENERATED_KEYS);
             //pstmt.setInt(1, question.getID());
             pstmt.setString(1, question.getTitle());
             pstmt.setString(2, question.getIDUser());
@@ -77,15 +77,25 @@ public final class CreateQuestionDatabase {
             pstmt.setTimestamp(4, question.getLastModified());
             pstmt.setString(5, question.getBody());
 
-            pstmt.execute();
+            pstmt.executeUpdate();
+
+            keyres =pstmt.getGeneratedKeys();
+            if(keyres.next()) {
+                ret=keyres.getInt(1);
+            }
 
         } finally {
+            if(keyres!=null){
+                keyres.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }
 
             con.close();
         }
+
+        return ret;
 
     }
 }

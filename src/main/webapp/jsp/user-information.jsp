@@ -39,9 +39,7 @@
 <body>
 
 <c:import url="/jsp/include/header.jsp"/>
-<div style="position:absolute;right:22%;">
-    <button id="modifyButton" type="submit" class="btn btn-primary">Modify User</button>
-</div>
+
 <div class="container">
     <div class="row justify-content-between">
         <div class="col col-lg-10">
@@ -161,6 +159,9 @@
             </div>
         </div>
 
+        <div>
+            <button id="prova" class="btn btn-primary">Modify User</button>
+        </div>
         <div id="photo-div" class="col align-self-end">
             <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="profileImg">
         </div>
