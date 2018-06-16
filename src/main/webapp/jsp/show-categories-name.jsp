@@ -56,4 +56,7 @@ Since: 1.0
 
 </c:if>
 </body>
+<footer>
+    <c:import url="/jsp/include/footer.jsp"/>
+</footer>
 </html>

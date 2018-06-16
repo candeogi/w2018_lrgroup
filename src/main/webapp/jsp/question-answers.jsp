@@ -144,4 +144,8 @@ Since: 1.0
     </div>
 </div>
 </body>
+
+<footer>
+    <c:import url="/jsp/include/footer.jsp"/>
+</footer>
 </html>

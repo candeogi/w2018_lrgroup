@@ -122,7 +122,9 @@
     <script type="text/javascript" src="js/test.js"></script>
     <script type="text/javascript" language="JavaScript" src="js/ajax-question.js"></script>
     </body>
-
+<footer>
     <c:import url="/jsp/include/footer.jsp"/>
+</footer>
+
 
 </html>
