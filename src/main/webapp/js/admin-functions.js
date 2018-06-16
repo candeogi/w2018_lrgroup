@@ -100,6 +100,13 @@ function userData(){
             alert('There was a problem with the request.');
         }
     }
+
+    fillForm();
+}
+/*
+ Function which fill placeholder
+ */
+function fillForm(){
     $('#formUser').find('[name="isAdmin"]').attr("disabled",false);
     $('#userupdatingID').text("You're updating " + username);
     $('#formUser').find('[name="email"]').val(email);
@@ -112,7 +119,6 @@ function userData(){
         $('#formUser').find('[name="isAdmin"]').attr("disabled",true);
     }
 }
-
 
 var httpRequest3;
 var urlcategory;
