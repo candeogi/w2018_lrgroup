@@ -59,7 +59,7 @@ public final class DeleteAnswerByIDDatabase {
 
     /**
      * Deletes a specific answer in the database.
-     * * @return true when the deleting is correctly done
+     * @return true when the deleting is correctly done
      *
      * @throws SQLException if any error occurs while deleting the answer.
      */

@@ -24,6 +24,13 @@ public class Certificate extends Resource {
     private final String organization;
     private final String dateCert;
 
+    /**
+     * Creates a new certificate
+     *
+     * @param ID id of the certificate
+     * @param name name of the certificate
+     * @param organization organization name which release the certificate
+     */
     public Certificate(int ID, String name, String organization) {
 
         this.ID = ID;
@@ -32,6 +39,14 @@ public class Certificate extends Resource {
         this.dateCert = null;
     }
 
+    /**
+     * Creates a new certificate
+     *
+     * @param ID id of the certificate
+     * @param name name of the certificate
+     * @param organization organization name which release the certificate
+     * @param date achievement date of the certificate
+     */
     public Certificate(int ID, String name, String organization , String date) {
         this.ID = ID;
         this.name = name;
@@ -39,18 +54,34 @@ public class Certificate extends Resource {
         this.dateCert = date;
     }
 
+    /**
+     * Returns the related certificate id
+     * @return the related certificate id
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * Returns the related certificate name
+     * @return the related certificate name
+     */
     public String getName() {
         return name;
     }
 
-    public String getDescription() {
+    /**
+     * Returns the related certificate organization
+     * @return the related certificate organization
+     */
+    public String getOrganization() {
         return organization;
     }
 
+    /**
+     * Returns the related certificate achievement date
+     * @return the related certificate achievement date
+     */
     public String getDate(){return dateCert;}
 
     /**

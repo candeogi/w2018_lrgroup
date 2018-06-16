@@ -166,6 +166,12 @@ public final class RestQuestion extends RestResource
 		}
 	}
 
+	/**
+	 * Counts votes of a question into the database.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
 	public void countQuestionVotes() throws IOException
 	{
 		int a;
@@ -203,6 +209,12 @@ public final class RestQuestion extends RestResource
 		}
 	}
 
+	/**
+	 * Deletes votes of a question into the database.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
 	public void deleteQuestionVote() throws IOException
 	{
 		boolean a;
@@ -488,7 +500,7 @@ public final class RestQuestion extends RestResource
 	}
 
 	/**
-	 * Searches question by category.
+	 * Searches question by keyword.
 	 *
 	 * @throws IOException
 	 *             if any error occurs in the client/server communication.

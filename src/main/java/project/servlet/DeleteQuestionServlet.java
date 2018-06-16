@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Deletes a new question from the database.
+ * Deletes a question from the database.
  *
  * @author lrgroup
  * @author Alberto Forti (alberto.forti@studenti.unipd.it)

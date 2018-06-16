@@ -43,7 +43,7 @@ public final class DeleteAnswerVoteDatabase {
     private final String user;
 
     /**
-     * Deletes a new object for creating an answer.
+     * Deletes a new object for deleting an answer vote.
      *
      * @param con      the connection to the database.
      * @param user     the user which vote hasto be deleted the question.
@@ -56,7 +56,7 @@ public final class DeleteAnswerVoteDatabase {
     }
 
     /**
-     * Deletes an upvote in the database.
+     * Deletes a vote in the database.
      *
      * @return true id the deleting is correctly done
      * @throws SQLException if any error occurs while storing the answer.

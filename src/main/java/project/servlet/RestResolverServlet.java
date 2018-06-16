@@ -704,7 +704,14 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         return true;
     }
 
-
+    /**
+     * Process the website-related resources.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @return TRUE if a resource is found, otherwise FALSE
+     * @throws IOException if any error occurs in the client/server communication.
+     */
     private boolean processWebsite(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         OutputStream out = res.getOutputStream();
@@ -754,6 +761,14 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         return true;
     }
 
+    /**
+     * Process the certificate-related resources.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @return TRUE if a resource is found, otherwise FALSE
+     * @throws IOException if any error occurs in the client/server communication.
+     */
     private boolean processCertificate(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         OutputStream out = res.getOutputStream();

@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Search answer by ID in the database
+ *
+ * @author lrgroup
  * @author Luca Rossi
  * @author Andrea Ziggiotto
  */

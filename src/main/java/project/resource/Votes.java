@@ -16,6 +16,13 @@ public class Votes extends Resource
     private final int idVoted;
     private final String type;
 
+    /**
+     * Creates a new vote
+     *
+     * @param type type of the vote
+     * @param votes number of votes (integer)
+     * @param idVoted id of the answer/question voted
+     */
     public Votes(String type, int votes, int idVoted)
     {
         this.type = type;
@@ -23,14 +30,26 @@ public class Votes extends Resource
         this.idVoted = idVoted;
     }
 
+    /**
+     * Returns the related vote type
+     * @return the related vote type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Returns the related vote number
+     * @return the related vote number
+     */
     public int getVotes() {
         return votes;
     }
 
+    /**
+     * Returns the related vote ID of the question/answer
+     * @return the related vote ID of the question/answer
+     */
     public int getIDVoted()
     {
         return idVoted;

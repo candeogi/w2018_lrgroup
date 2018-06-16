@@ -22,7 +22,7 @@ import java.sql.*;
 
 
 /**
- * Represents data about a category.
+ * Creates a certificate in the database.
  *
  * @author Luca Rossi
  * @author Davide Storato
@@ -47,6 +47,8 @@ public final class CreateCertificateDatabase {
     private final Certificate certificate;
 
     /**
+     * Creates a new object for creating a certificate.
+     *
      * @param con         the reference to the connection to the database
      * @param certificate the instance of the certificate to add to the database
      */
@@ -69,7 +71,7 @@ public final class CreateCertificateDatabase {
             pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1, certificate.getName());
-            pstmt.setString(2, certificate.getDescription());
+            pstmt.setString(2, certificate.getOrganization());
 
             pstmt.execute();
 

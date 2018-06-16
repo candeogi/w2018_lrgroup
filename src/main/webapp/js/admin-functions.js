@@ -15,6 +15,9 @@ var title;
 var body;
 window.onload=onLoadRequest;
 
+/*
+ Show user update modal
+ */
 $('#modal-update-user').on('show.bs.modal', function (e) {
     // get information to update quickly to modal view as loading begins
     var opener=e.relatedTarget;//this holds the element who called the modal
@@ -35,6 +38,9 @@ $('#modal-update-user').on('show.bs.modal', function (e) {
 
 });
 
+/*
+ Show question update modal
+ */
 $('#modal-update-question').on('show.bs.modal', function (e) {
     // get information to update quickly to modal view as loading begins
     var opener=e.relatedTarget;//this holds the element who called the modal
@@ -54,6 +60,9 @@ $('#modal-update-question').on('show.bs.modal', function (e) {
     httpRequest4.send();
 });
 
+/*
+ Set placeholder in the input box of the update question form
+ */
 function placeholderQs(){
     if (httpRequest4.readyState === XMLHttpRequest.DONE) {
         if (httpRequest4.status === 200) {
@@ -71,6 +80,9 @@ function placeholderQs(){
     $('#formQuestion').find('[name="body"]').val(body);
 }
 
+/*
+ Set placeholder in the input box of the update user form
+ */
 function userData(){
     if (httpRequest2.readyState === XMLHttpRequest.DONE) {
         if (httpRequest2.status === 200) {
@@ -88,10 +100,6 @@ function userData(){
             alert('There was a problem with the request.');
         }
     }
-    fillForm();
-}
-
-function fillForm(){
     $('#formUser').find('[name="isAdmin"]').attr("disabled",false);
     $('#userupdatingID').text("You're updating " + username);
     $('#formUser').find('[name="email"]').val(email);
@@ -105,9 +113,13 @@ function fillForm(){
     }
 }
 
+
 var httpRequest3;
 var urlcategory;
 
+/*
+ Callback function checking if category tab is opened
+ */
 $('#nav-tab-admin a').on('click', function (e) {
     e.preventDefault();
     $(this).tab('show');
@@ -119,7 +131,9 @@ $('#nav-tab-admin a').on('click', function (e) {
 })
 
 
-
+/*
+ Load category in category tab (wrapper)
+ */
 function loadCategory(){
     httpRequest3 = new XMLHttpRequest();
     urlcategory = 'http://localhost:8080/web-app-project/rest/category';
@@ -136,6 +150,10 @@ function loadCategory(){
 
     }
 
+    /*
+     Load category in category tab
+
+     */
     function writeCategory() {
         if (httpRequest3.readyState === XMLHttpRequest.DONE) {
 
@@ -219,7 +237,9 @@ function loadCategory(){
     }}
 
 
-
+/*
+ Function called on page load
+ */
 function onLoadRequest() {
 
     url = 'http://localhost:8080/web-app-project/rest/question';
@@ -235,6 +255,9 @@ function onLoadRequest() {
     httpRequest.send();
 }
 
+/*
+ Load all questions in the db
+ */
 function loadQsRequest() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
 

@@ -2,6 +2,9 @@ var httpRequest;
 var url;
 window.onload = onLoadRequest;
 
+/*
+ Callback function for loading category
+ */
 $('#switchQs a[href="#categoryQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     document.getElementById("listCategoryDropdown").classList.toggle("show");
@@ -17,10 +20,12 @@ $('#switchQs a[href="#categoryQs"]').on('click', function (event) {
     httpRequest.send();
 });
 
+/*
+ Callback function for selecting a specific question
+ */
 $('#tablequestionlist').on('click', '.clickable-row', function (e) {
     e.preventDefault(); // To prevent following the link (optional)
     var href = $(this).find("td").attr("id");
-    alert('Ciao ciao ' + href);
     var div = document.getElementById('divquestionlist');
     var table = document.getElementById('tablequestionlist');
     var form = document.createElement('form');
@@ -38,20 +43,11 @@ $('#tablequestionlist').on('click', '.clickable-row', function (e) {
 
     document.forms["myform"].submit();
     document.getElementById('tablequestionlist').innerHTML = "";
-    /*url = 'http://localhost:8080/web-app-project/jsp/question-answers.jsp';
-    httpRequest = new XMLHttpRequest();
-
-    if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-    }
-    httpRequest.onreadystatechange = prova;
-    httpRequest.open('POST', url);
-    httpRequest.send();*/
-
 });
 
-
+/*
+ Callback function which loads category name in the dropdown menu
+ */
 function categoryDropdown() {
 
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -94,6 +90,9 @@ function deletefilter() {
     document.getElementById("filternav").innerHTML = "";
 }
 
+/*
+ Callback function for selecting questions filtered by category
+ */
 $("#listCategoryDropdown").on('click', '.dropdown-item', function (e) {
     var menu = $(this).html();
     e.preventDefault(); // To prevent following the link (optional)
@@ -126,7 +125,9 @@ $("#listCategoryDropdown").on('click', '.dropdown-item', function (e) {
 
 });
 
-
+/*
+ Callback function for selecting popular question
+ */
 $('#switchQs a[href="#popularQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     url = 'http://localhost:8080/web-app-project/rest/question'; //TO-DO: popular question(ordered by upvote?)
@@ -142,6 +143,9 @@ $('#switchQs a[href="#popularQs"]').on('click', function (event) {
     httpRequest.send();
 });
 
+/*
+ Callback function for search input box
+ */
 $('#searchBtn').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     if (document.getElementById("searchinqs").value == "")
@@ -160,6 +164,9 @@ $('#searchBtn').on('click', function (event) {
     httpRequest.send();
 });
 
+/*
+ Callback function for select questions by logged user
+ */
 $('#switchQs a[href="#yourQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     url = 'http://localhost:8080/web-app-project/rest/question/user/' + document.getElementById('idUser').value;
@@ -175,6 +182,9 @@ $('#switchQs a[href="#yourQs"]').on('click', function (event) {
     httpRequest.send();
 });
 
+/*
+ Callback function for select questions by timestamp
+ */
 $('#switchQs a[href="#latestQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     url = 'http://localhost:8080/web-app-project/rest/question/latestQuestion';
@@ -191,6 +201,9 @@ $('#switchQs a[href="#latestQs"]').on('click', function (event) {
 });
 
 
+/*
+ Function called on page load
+ */
 function onLoadRequest() {
 
     url = 'http://localhost:8080/web-app-project/rest/question';
@@ -206,6 +219,9 @@ function onLoadRequest() {
     httpRequest.send();
 }
 
+/*
+ Load all questions in the db
+ */
 function loadQsRequest() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
@@ -341,6 +357,9 @@ function loadQsRequest() {
     }
 }
 
+/*
+ Callback function for adding a question
+ */
 $("#saveQuestion").click(function () {
 
     addQuestion();
