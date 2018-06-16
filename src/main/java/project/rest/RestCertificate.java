@@ -12,13 +12,30 @@ import java.sql.SQLException;
 import java.util.List;
 import java.io.*;
 
-
+/**
+ * Manages the REST API for the {@link Certificate} resource.
+ *
+ * @author lrgroup
+ */
 public class RestCertificate extends RestResource {
 
+    /**
+     * Creates a new REST resource for managing {@code Category} resources.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @param con the connection to the database.
+     */
     public RestCertificate(HttpServletRequest req, HttpServletResponse res, Connection con) {
         super(req, res, con);
     }
 
+    /**
+     * Searches certificate of an user into the database.
+     *
+     * @throws IOException
+     *             if any error occurs in the client/server communication.
+     */
     public void searchCertificateByUserName() throws IOException {
 
         List<Certificate> c = null;
@@ -50,7 +67,12 @@ public class RestCertificate extends RestResource {
         }
     }
 
-
+    /**
+     * Deletes certificate of an user into the database.
+     *
+     * @throws IOException
+     *             if any error occurs in the client/server communication.
+     */
     public void deleteHaveCertificateByUserName() throws IOException{
         Message message = null;
         try {

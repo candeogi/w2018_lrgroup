@@ -71,7 +71,7 @@ public final class CreateCertificateDatabase {
             pstmt = con.prepareStatement(STATEMENT, Statement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1, certificate.getName());
-            pstmt.setString(2, certificate.getDescription());
+            pstmt.setString(2, certificate.getOrganization());
 
             pstmt.execute();
 

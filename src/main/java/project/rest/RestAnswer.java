@@ -170,6 +170,12 @@ public final class RestAnswer extends RestResource
 		}
 	}
 
+	/**
+	 * Deletes an answer vote in the database.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
 	public void deleteAnswerVote() throws IOException
 	{
 		boolean a;
@@ -204,6 +210,12 @@ public final class RestAnswer extends RestResource
 		}
 	}
 
+	/**
+	 * Counts answer votes in the database.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
 	public void countAnswerVotes() throws IOException
 	{
 		int a;

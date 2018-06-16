@@ -13,12 +13,31 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Manages the REST API for the {@link Category} resource.
+ *
+ * @author lrgroup
+ */
 public class RestCategory extends RestResource {
+
+    /**
+     * Creates a new REST resource for managing {@code Category} resources.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @param con the connection to the database.
+     */
     public RestCategory(final HttpServletRequest req, final HttpServletResponse res, Connection con) {
         super(req, res, con);
 
     }
 
+    /**
+     * Searches category into the database.
+     *
+     * @throws IOException
+     *             if any error occurs in the client/server communication.
+     */
     public void searchCategory() throws IOException {
         List<Category> categories;
         Message message;
@@ -43,6 +62,12 @@ public class RestCategory extends RestResource {
 
     }
 
+    /**
+     * Adds category into the database.
+     *
+     * @throws IOException
+     *             if any error occurs in the client/server communication.
+     */
     public void addCategory() throws IOException {
         Message m = null;
         Category ans = null;
