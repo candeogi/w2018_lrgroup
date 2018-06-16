@@ -24,6 +24,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Retrieves questions by keyword in the database.
@@ -36,17 +37,24 @@ public final class SearchQuestionByKeywordDatabase {
     /**
      * The SQL statement to be executed
      */
+//    private static final String QUERY =
+//            "SELECT * " +
+//                    "FROM lr_group.Question " +
+//                    "WHERE title " +
+//                    "ILIKE ? ";
+
     private static final String QUERY =
             "SELECT * " +
                     "FROM lr_group.Question " +
-                    "WHERE title " +
-                    "ILIKE ? ";
+                    "WHERE lower(title) " +
+                    "SIMILAR TO ? ";
+
 
     /**
      * The connection to the database
      */
     private final Connection con;
-    private final String keyword;
+    private String keyword;
 
     /**
      * Creates a new object for questions retrieval.
@@ -69,6 +77,32 @@ public final class SearchQuestionByKeywordDatabase {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Question> questList = new ArrayList<>();
+
+        keyword = keyword.toLowerCase();
+
+        keyword = keyword.substring(1);
+        keyword = keyword.substring(0, keyword.length() - 1);
+        System.out.println(keyword);
+
+        String[] parts = keyword.split("%20");
+
+        if (parts.length > 0) {
+
+            keyword = "%(";
+
+            for (int i = 0; i < parts.length; i++) {
+
+                keyword += parts[i];
+                if (i == parts.length - 1) {
+                    keyword += ")%";
+                } else {
+                    keyword += "|";
+                }
+
+            }
+
+        }
+
 
         try {
             pstmt = con.prepareStatement(QUERY);
