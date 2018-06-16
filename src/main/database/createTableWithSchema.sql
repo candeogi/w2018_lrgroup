@@ -167,16 +167,6 @@ CREATE TABLE lr_group.Own(
 
 );
  
--- CREATE TABLE lr_group.HaveWebsite(
---     website VARCHAR(50) NOT NULL,
---     link VARCHAR(50) NOT NULL,
---  	type lr_group.webSiteType NOT NULL,
---     PRIMARY KEY(website,link),
---
---     FOREIGN KEY(website) REFERENCES lr_group.Website(name)
---     ON DELETE NO ACTION ON UPDATE CASCADE
--- );
-
 CREATE TABLE lr_group.Certificate(
     id SERIAL,
     name VARCHAR(50) NOT NULL,

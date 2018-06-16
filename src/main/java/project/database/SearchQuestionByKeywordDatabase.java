@@ -40,7 +40,7 @@ public final class SearchQuestionByKeywordDatabase {
             "SELECT * " +
                     "FROM lr_group.Question " +
                     "WHERE title " +
-                    "LIKE ? ";
+                    "ILIKE ? ";
 
     /**
      * The connection to the database
