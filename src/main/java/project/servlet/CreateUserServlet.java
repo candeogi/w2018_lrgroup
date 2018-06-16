@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletContext;
 
 
-
 /**
  * Creates a new user into the database. 
  *

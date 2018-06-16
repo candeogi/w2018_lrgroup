@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Represents data about a category.
+ * Creates data about a website.
  *
  * @author Luca Rossi
  * @author Davide Storato

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Represents data about a certificate
+ * Creates data about a certificate
  *
  * @author Luca Rossi
  * @author Davide Storato

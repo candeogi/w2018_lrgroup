@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Creates a user-website association in the database.
+ * Creates a user-certificate association in the database.
  *
  * @author lrgroup
  * @author Luca Rossi

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Deletes a new question from the database.
+ * Deletes an user from the database.
  *
  * @author lrgroup
  * @author Luca Rossi
