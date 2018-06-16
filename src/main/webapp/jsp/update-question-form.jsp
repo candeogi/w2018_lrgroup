@@ -69,5 +69,7 @@
     <button type="reset" class="btn btn-primary">Reset the form</button>
 </form>--%>
 </body>
-<c:import url="/jsp/include/footer.jsp"/>
+<footer>
+    <c:import url="/jsp/include/footer.jsp"/>
+</footer>
 </html>

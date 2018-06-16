@@ -162,13 +162,15 @@
         <%--<p><a href="<c:url value="/?p=update-question"/>">Update a question</a></p>--%>
 
 
-    </c:when>
-</c:choose>
-<!--Custom script test-->
-<%--<script type="text/javascript" src="js/test.js"></script>--%>
-<script type="text/javascript" language="JavaScript" src="js/ajax-question.js"></script>
-</body>
+            </c:when>
+        </c:choose>
+    <!--Custom script test-->
+    <script type="text/javascript" src="js/test.js"></script>
+    <script type="text/javascript" language="JavaScript" src="js/ajax-question.js"></script>
+    </body>
+<footer>
+    <c:import url="/jsp/include/footer.jsp"/>
+</footer>
 
-<c:import url="/jsp/include/footer.jsp"/>
 
 </html>

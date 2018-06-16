@@ -13,4 +13,7 @@
 		<hr/>
 		<c:import url="/jsp/include/show-message.jsp"/>
 	</body>
+	<footer>
+		<c:import url="/jsp/include/footer.jsp"/>
+	</footer>
 </html>

@@ -47,5 +47,7 @@
             <p>Not registered? <a href="<c:url value="/jsp/create-user-form.jsp"/>">Please reconsider your life decisions</a></p>
 
     </body>
-    <c:import url="/jsp/include/footer.jsp"/>
+    <footer>
+        <c:import url="/jsp/include/footer.jsp"/>
+    </footer>
 </html>

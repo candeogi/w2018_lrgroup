@@ -53,13 +53,16 @@ Since: 1.0
 
     <div id="question-container" class="question-container clearfix">
         <div class="card questioner-badge" style="width: 14rem;">
-            <a href="#">
+            <a id="questioneer-profilelink" href="#">
                 <img id="questioneer-photo" class="card-img-top"
-                     src="http://media.pn.am/media/issue/159/215/photo/159215.jpg" alt="Card image cap">
+                     src="" alt="Card image cap">
             </a>
             <div class="card-body">
-                <h5 id="questioneer-name" class="card-title"></h5>
-                <h6 id="questioneer-regdate" class="card-subtitle mb-2 text-muted"></h6>
+                <h5 class="card-title text-center">
+                    <i id="questioneer-badge"></i>
+                    <span id="questioneer-name"></span>
+                </h5>
+                <h6 id="questioneer-regdate" class="card-subtitle mb-2 text-muted text-center"></h6>
             </div>
         </div>
         <div class="question-panel">
@@ -144,4 +147,8 @@ Since: 1.0
     </div>
 </div>
 </body>
+
+<footer>
+    <c:import url="/jsp/include/footer.jsp"/>
+</footer>
 </html>

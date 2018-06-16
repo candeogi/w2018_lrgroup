@@ -21,4 +21,7 @@
 			<p><c:out value="${question.IDUser}" /></p>
 		</c:if>
 	</body>
+	<footer>
+		<c:import url="/jsp/include/footer.jsp"/>
+	</footer>
 </html>

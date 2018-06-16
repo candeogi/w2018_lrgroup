@@ -30,4 +30,7 @@
 		<button type="reset">Reset the form</button>
 	</form>
 	</body>
+	<footer>
+		<c:import url="/jsp/include/footer.jsp"/>
+	</footer>
 </html>
