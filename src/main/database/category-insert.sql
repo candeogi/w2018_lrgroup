@@ -24,3 +24,4 @@ INSERT INTO lr_group.category  VALUES (DEFAULT ,'Analisi 2',' Corso Magistrale d
 INSERT INTO lr_group.category  VALUES (DEFAULT ,'Web Application ',' Corso Magristrale di Ferro Nicola ',DEFAULT);
 INSERT INTO lr_group.category  VALUES (DEFAULT ,'Programmazione Java',' Domande riguardanti la programmazione Java ',DEFAULT);
 INSERT INTO lr_group.category  VALUES (DEFAULT ,'Interviste','Esempi di interviste da parte di aziende',DEFAULT);
+INSERT INTO lr_group.category  VALUES (DEFAULT ,'NoCategory','Generic category',DEFAULT);

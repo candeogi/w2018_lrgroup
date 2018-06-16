@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author lrgroup
  * @author Alberto Pontini (alberto.pontini@studenti.unipd.it)
  * @author Giovanni Candeo (giovanni.candeo.1@studenti.unipd.it)
+ * @author Luca Rossi
  */
 public final class CreateQuestionServlet extends SessionManagerServlet {
 
@@ -40,11 +41,11 @@ public final class CreateQuestionServlet extends SessionManagerServlet {
         // request parameters
         String title = null;
         String body = null;
+        String category = null;
         String IDUser;
 
         // model
         Question q = null;
-        Category c = null;
         Message m = null;
 
 
@@ -58,13 +59,12 @@ public final class CreateQuestionServlet extends SessionManagerServlet {
 
             // creates a new question from the request parameters
             q = new Question(IDUser, title, body, new Timestamp((Long) System.currentTimeMillis()));
-
-//            //TODO  remove
-//            c = new Category("Mufasa", "Re leone", false);
             // creates a new object for accessing the database and stores the question
             new CreateQuestionDatabase(getDataSource().getConnection(), q).createQuestion();
 
-//            new CreateBelowDatabase(getDataSource().getConnection(), c, q);
+            category = req.getParameter("category");
+
+            new CreateBelowDatabase(getDataSource().getConnection(), category, q).createCategoryQuestionAssociation();
 
         } catch (SQLException ex) {
             m = new Message("Cannot create the user: unexpected error while accessing the database.",

@@ -5,6 +5,7 @@ import project.resource.Question;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -24,6 +25,10 @@ public class CreateBelowDatabase {
             "INSERT INTO lr_group.below (category, question) " +
             "VALUES (?, ?)";
 
+    private static final String QUERY = "" +
+            "SELECT id FROM lr_group.Category " +
+            "WHERE name=? ";
+
     /**
      * The connection to the database
      */
@@ -32,7 +37,7 @@ public class CreateBelowDatabase {
     /**
      * The category and the question in the database
      */
-    private final Category category;
+    private final String category;
     private final Question question;
 
     /**
@@ -42,7 +47,7 @@ public class CreateBelowDatabase {
      * @param category the category in the database.
      * @param question the question in the database
      */
-    public CreateBelowDatabase(final Connection con, final Category category, final Question question) {
+    public CreateBelowDatabase(final Connection con, final String category, final Question question) {
         this.con = con;
         this.category = category;
         this.question = question;
@@ -56,15 +61,23 @@ public class CreateBelowDatabase {
     public void createCategoryQuestionAssociation() throws SQLException {
 
         PreparedStatement pstmt = null;
-
+        ResultSet rs = null;
         try {
+
+            pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1,category);
+            rs = pstmt.executeQuery();
+
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setString(1, category.getName());
+            pstmt.setInt(1, rs.getInt("id"));
             pstmt.setInt(2, question.getID());
 
             pstmt.execute();
 
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (pstmt != null) {
                 pstmt.close();
             }
