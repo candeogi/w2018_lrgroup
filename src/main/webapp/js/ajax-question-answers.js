@@ -4,6 +4,7 @@ Author: Giovanni Candeo
 var loggedInUser = document.getElementById("loggedInUser");
 var currentUser = loggedInUser.getAttribute("data-loggedInUser");
 var currentQuestion = loggedInUser.getAttribute("data-currentQuestion");
+var isAdmin = (loggedInUser.getAttribute("data-isAdmin") === 'true');
 
 /*REST URL*/
 var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/'+currentQuestion;
@@ -168,8 +169,10 @@ function printSingleAnswer(answer, whereToAppendId){
     small.appendChild(timestampText);
     small.appendChild(replyLink);
     replyLink.appendChild(document.createTextNode(' reply '));
-    small.appendChild(deleteLink);
-    deleteLink.appendChild(document.createTextNode(' delete '));
+    if(isAdmin) {
+        small.appendChild(deleteLink);
+        deleteLink.appendChild(document.createTextNode(' delete '));
+    }
     if(currentUser === answer['IDUser']){
         small.appendChild(editLink);
         editLink.appendChild(document.createTextNode(' edit '));

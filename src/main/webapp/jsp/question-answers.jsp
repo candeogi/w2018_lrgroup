@@ -45,6 +45,7 @@ Since: 1.0
 <div id="loggedInUser"
      data-loggedInUser="${sessionScope.loggedInUser}"
      data-currentQuestion="${param.questionID}"
+     data-isAdmin="${sessionScope.isAdmin}"
 ></div>
 <!-- Container Div -->
 <div class="container">
