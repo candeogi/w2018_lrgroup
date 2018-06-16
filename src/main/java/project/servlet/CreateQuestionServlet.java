@@ -76,6 +76,8 @@ public final class CreateQuestionServlet extends SessionManagerServlet {
         req.setAttribute("question", q);
         req.setAttribute("message", m);
 
+        res.setStatus(HttpServletResponse.SC_OK);
+
         // forwards the control to the create-user-result JSP
         req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);
     }
