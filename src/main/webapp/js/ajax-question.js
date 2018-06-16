@@ -352,8 +352,8 @@ var xhrQuestion;
 //This function is called when the user wants to add a new certificate
 function addQuestion() {
 
-    var title = $("#body-form").val();
-    var content = $("#title-form").val();
+    var content = $("#body-form").val();
+    var title = $("#title-form").val();
 
     xhrQuestion = new XMLHttpRequest();
     xhrQuestion.onreadystatechange = function () {
@@ -405,6 +405,7 @@ function categoryDropdownMod() {
         if (httpRequest1.status === 200) {
 
             var div = document.getElementById('divModalDrop');
+            div.innerText="";
 
             var jsonData = JSON.parse(httpRequest1.responseText);
             var resource = jsonData['resource-list'];

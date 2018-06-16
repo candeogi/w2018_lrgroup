@@ -47,12 +47,14 @@ public final class CreateQuestionServlet extends SessionManagerServlet {
         // model
         Question q = null;
         Message m = null;
+        int idQuestion=-1;
 
 
         try {
             // retrieves the request parameters
             title = req.getParameter("title");
             body = req.getParameter("body");
+            category = req.getParameter("category");
 
             // retrieves the user id (username) through the session parameter
             IDUser = (String) req.getSession().getAttribute("loggedInUser");
@@ -60,15 +62,23 @@ public final class CreateQuestionServlet extends SessionManagerServlet {
             // creates a new question from the request parameters
             q = new Question(IDUser, title, body, new Timestamp((Long) System.currentTimeMillis()));
             // creates a new object for accessing the database and stores the question
-            new CreateQuestionDatabase(getDataSource().getConnection(), q).createQuestion();
+            idQuestion=new CreateQuestionDatabase(getDataSource().getConnection(), q).createQuestion();
+        }catch (SQLException ex) {
+            m = new Message("Cannot create the question: unexpected error while accessing the database.",
+                    "E200", ex.getMessage());
+            m.toJSON(res.getOutputStream());
 
-            category = req.getParameter("category");
+        }
 
-            new CreateBelowDatabase(getDataSource().getConnection(), category, q).createCategoryQuestionAssociation();
+
+        try{
+
+            new CreateBelowDatabase(getDataSource().getConnection(), category, idQuestion).createCategoryQuestionAssociation();
 
         } catch (SQLException ex) {
-            m = new Message("Cannot create the user: unexpected error while accessing the database.",
+            m = new Message("Cannot create the below relation: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
+            m.toJSON(res.getOutputStream());
 
         }
 
