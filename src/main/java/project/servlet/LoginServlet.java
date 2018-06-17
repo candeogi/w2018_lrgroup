@@ -66,12 +66,14 @@ public final class LoginServlet extends AbstractDatabaseServlet
                 //m = new Message("Login success!");
                 session.setAttribute("loggedInUser",userlist.get(0).getUsername());
                 session.setAttribute("isAdmin",userlist.get(0).isAdmin());
+                session.setAttribute("photoProfile", userlist.get(0).getPhotoProfile());
             }
             else
             {
                 m = new Message("Login failed!", "SomeCode", "User/Password is not correct");
                 session.removeAttribute("loggedInUser");
                 session.removeAttribute("isAdmin");
+                session.removeAttribute("photoProfile");
             }
 
         }catch (SQLException ex) {

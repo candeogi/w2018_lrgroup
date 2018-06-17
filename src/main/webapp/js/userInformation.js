@@ -451,7 +451,7 @@ function modifyValue() {
 
     var button = document.createElement("button");
     button.setAttribute("type", "submit");
-    button.setAttribute("class", "btn btn-primary");
+    button.setAttribute("class", "btn btn-secondary");
     button.innerHTML = "Load";
 
     form.appendChild(input);

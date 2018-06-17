@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Registration Form</title>
+    <title>Any questions?</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -197,7 +197,7 @@
     <!--Custom script test-->
     <%--<script type="text/javascript" src="js/test.js"></script>--%>
     <script type="text/javascript" language="JavaScript" src="js/ajax-question.js"></script>
-    </body>
+</body>
 <footer>
     <c:import url="/jsp/include/footer.jsp"/>
 </footer>
