@@ -97,7 +97,8 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
         }
         else
         {
-            /*String questionUrl = req.getParameter("fromQuestion");
+            /*Code to redirect question, but question is not on nav servlet so i just go back to home
+            String questionUrl = req.getParameter("fromQuestion");
             if(questionUrl != null){
                 res.sendRedirect(req.getContextPath() + questionUrl);
             }*/
@@ -105,8 +106,10 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
             if(url != null)
                 res.sendRedirect(req.getContextPath() + "/?p=" + url);
             else{
-                req.setAttribute("update",true);
-                req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);}
+                //req.setAttribute("update",true);
+                //req.getRequestDispatcher("/jsp/create-question-result.jsp").forward(req, res);
+                res.sendRedirect(req.getContextPath() + "/");
+            }
 
         }
     }
