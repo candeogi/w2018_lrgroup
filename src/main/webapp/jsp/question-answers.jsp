@@ -51,8 +51,22 @@ Since: 1.0
 <div class="container">
 
 
-    <div id="question-container" class="question-container clearfix">
-        <div class="card questioner-badge" style="width: 14rem;">
+    <div id="question-container" class="question-container d-flex clearfix">
+        <div class="question-panel d-flex align-items-start flex-column">
+            <div class="question-heading">
+                <h4 id="question-title" class="question-title"></h4>
+                <h6 id="question-time" class="question-time text-muted"></h6>
+            </div>
+            <div id="question-body" class="question-body">
+                <p id="question-paragraph"></p>
+            </div>
+            <div id="question-footer" class="question-footer mt-auto">
+                <small id="question-lastmodified" class="text-muted"></small>
+            </div>
+            <div id="question-buttons">
+            </div>
+        </div>
+        <div class="card questioner-badge ml-auto align-items-end" style="width: 14rem;">
             <a id="questioneer-profilelink" href="#">
                 <img id="questioneer-photo" class="card-img-top"
                      src="" alt="Card image cap">
@@ -65,19 +79,6 @@ Since: 1.0
                 <h6 id="questioneer-regdate" class="card-subtitle mb-2 text-muted text-center"></h6>
             </div>
         </div>
-        <div class="question-panel">
-            <div class="question-heading">
-                <h4 id="question-title" class="question-title"></h4>
-                <h6 id="question-time" class="question-time text-muted"></h6>
-            </div>
-            <div id="question-body" class="question-body">
-                <p id="question-paragraph"></p>
-            </div>
-            <div class="question-footer">
-                <small id="question-lastmodified" class="text-muted"></small>
-            </div>
-        </div>
-
     </div>
     <!--end of question row-->
     <hr>
@@ -87,7 +88,7 @@ Since: 1.0
                 <label for="addAnswerTextArea">Answer this question</label>
                 <textarea class="form-control" id="addAnswerTextArea" rows="2"></textarea>
             </div>
-            <input id="addAnswerButton" type="button" class="btn btn-primary" value="Answer">
+            <input id="addAnswerButton" type="button" value="Answer" class="btn btn-primary">
         </form>
     </div>
     <hr>
