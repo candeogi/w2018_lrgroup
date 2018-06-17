@@ -25,7 +25,7 @@ $('#modal-update-user').on('show.bs.modal', function (e) {
     username = $(opener).attr('user-name');
     //set what we got to our form
     $('#formUser').find('[name="username"]').val(username);
-    url2 = 'rest/user/id/'+username;
+    url2 = 'http://localhost:8080/web-app-project/rest/user/id/'+username;
     httpRequest2 = new XMLHttpRequest();
     if (!httpRequest2) {
         alert('Giving up :( Cannot create an XMLHTTP instance');
@@ -49,7 +49,7 @@ $('#modal-update-question').on('show.bs.modal', function (e) {
     //set what we got to our form
     $('#formQuestion').find('[name="id"]').val(idquestion);
 
-    url3 = 'rest/question/id/'+idquestion;
+    url3 = 'http://localhost:8080/web-app-project/rest/question/id/'+idquestion;
     httpRequest4 = new XMLHttpRequest();
     if (!httpRequest4) {
         alert('Giving up :( Cannot create an XMLHTTP instance');
@@ -141,7 +141,7 @@ $('#nav-tab-admin a').on('click', function (e) {
  */
 function loadCategory(){
     httpRequest3 = new XMLHttpRequest();
-    urlcategory = 'rest/category';
+    urlcategory = 'http://localhost:8080/web-app-project/rest/category';
 
     if (!httpRequest3) {
         alert('Giving up :( Cannot create an XMLHttpRequest instance');
@@ -252,7 +252,7 @@ function onLoadRequest() {
     if (selectedTab != null) {
         $('#nav-tab-admin a[href="' + selectedTab + '"]').tab('show');}
 
-    url = 'rest/question';
+    url = 'http://localhost:8080/web-app-project/rest/question';
 
     httpRequest = new XMLHttpRequest();
 

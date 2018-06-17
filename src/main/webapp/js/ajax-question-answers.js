@@ -8,8 +8,8 @@ var isAdmin = (loggedInUser.getAttribute("data-isAdmin") === 'true');
 var questioneerID = ' ';
 
 /*REST URL*/
-var myQuestionRestUrl='rest/question/id/'+currentQuestion;
-var myAnswersRestUrl='rest/answer/question/'+currentQuestion;
+var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/'+currentQuestion;
+var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/question/'+currentQuestion;
 
 /*At start do this*/
 window.onload = initialPageLoad;
@@ -42,7 +42,7 @@ function visualizeQuestioneer(username){
     questioneerID = username;
     $.ajax({
         method: 'GET',
-        url: 'rest/user/id/'+username,
+        url: 'http://localhost:8080/web-app-project/rest/user/id/'+username,
         success: function(data){
             var resourceList = data['resource-list'];
             var user = resourceList[0].user;
@@ -56,14 +56,14 @@ function visualizeQuestioneer(username){
             $("#questioneer-regdate").text('Registered on '+user['registrationDate']);
             $("#questioneer-photo").attr("src","data:image/jpeg;base64,"+user['photoProfile']);
             //link to questioneer profile
-            var questioneerLinkToProfile = "/?p=user&u="+user['username'];
+            var questioneerLinkToProfile = "http://localhost:8080/web-app-project/?p=user&u="+user['username'];
             $("#questioneer-profilelink").attr("href", questioneerLinkToProfile);
         },
         error: function(jqXHR,textStatus,errorThrown){
-            /*alert("" +
+            alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);*/
+                " |errorThrown:"+errorThrown);
         }
     });
 }
@@ -265,7 +265,7 @@ function printSingleAnswer(answer, whereToAppendId){
 function visualizeAnswersToAnswer(idAnswer){
     $.ajax({
         method: 'GET',
-        url: 'rest/answer/parentAns/'+idAnswer,
+        url: 'http://localhost:8080/web-app-project/rest/answer/parentAns/'+idAnswer,
         success: function(data) {
             var resourceList = data['resource-list'];
 
@@ -305,7 +305,7 @@ function addNewAnswerForm(){
 
     $.ajax({
         method: "POST",
-        url: "./rest/answer/",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
         data: JSON.stringify({
             "answer":{
                 "text": addAnswerText,
@@ -339,7 +339,7 @@ function addNewAnswerForm(){
 * Delete answer
 */
 function deleteAnswer(id){
-    var urlToDelete = "rest/answer/"+id;
+    var urlToDelete = "http://localhost:8080/web-app-project/rest/answer/"+id;
     $.ajax({
         type: "DELETE",
         url: urlToDelete,
@@ -378,7 +378,7 @@ function editAnswerAjax(){
 
     $.ajax({
         method: "PUT",
-        url: "rest/answer/",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
         data: JSON.stringify({
             "answer":{
                 "ID": parseInt(id),
@@ -396,10 +396,10 @@ function editAnswerAjax(){
 
         },
         error: function(jqXHR,textStatus,errorThrown){
-            /*alert("" +
+            alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);*/
+                " |errorThrown:"+errorThrown);
         }
     });
 }
@@ -427,7 +427,7 @@ function replyAnswerAjax(){
 
     $.ajax({
         method: "POST",
-        url: "rest/answer/",
+        url: "http://localhost:8080/web-app-project/rest/answer/",
         data: JSON.stringify({
             "answer":{
                 "text": addAnswerText,
@@ -447,10 +447,10 @@ function replyAnswerAjax(){
 
         },
         error: function(jqXHR,textStatus,errorThrown){
-            /*alert("" +
+            alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);*/
+                " |errorThrown:"+errorThrown);
         }
     });
 }
@@ -486,7 +486,7 @@ function editQuestionAjax(){
 
     $.ajax({
         method: "PUT",
-        url: "./rest/question/",
+        url: "http://localhost:8080/web-app-project/rest/question/",
         data: JSON.stringify({
             "question":{
                 "ID": parseInt(currentQuestion),
