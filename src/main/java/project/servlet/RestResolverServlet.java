@@ -652,6 +652,29 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         }
                     }
                 }
+                else if (path.contains("byvote")) {
+                    path = path.substring(path.lastIndexOf("byvote") + 6);
+
+                    if (path.length() == 0 || path.equals("/")) {
+                        switch (method) {
+                            case "GET":
+                                new RestQuestion(req, res, getDataSource().getConnection()).searchQuestionOrderedByVotes();
+                                break;
+                            default:
+                                m = new Message("Unsupported operation for URI /question/byvotes.",
+                                        "E4A5", String.format("Requested operation %s.", method));
+                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                                m.toJSON(res.getOutputStream());
+                                break;
+                        }
+
+                    } else {
+                        m = new Message("Unsupported operation for URI /question/latestQuestion.",
+                                "E4A5", String.format("Requested operation %s.", method));
+                        res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                        m.toJSON(res.getOutputStream());
+                    }
+                }
 
             }
         } catch (Throwable t) {

@@ -132,7 +132,7 @@ $("#listCategoryDropdown").on('click', '.dropdown-item', function (e) {
 $('#switchQs a[href="#popularQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
-    url = 'http://localhost:8080/web-app-project/rest/question'; //TO-DO: popular question(ordered by upvote?)
+    url = 'http://localhost:8080/web-app-project/rest/question/byvote'; //TO-DO: popular question(ordered by upvote?)
     httpRequest = new XMLHttpRequest();
     deletefilter();
 
@@ -273,7 +273,7 @@ $('#switchQs a[href="#latestQs"]').on('click', function (event) {
  */
 function onLoadRequest() {
 
-    url = 'http://localhost:8080/web-app-project/rest/question';
+    url = 'http://localhost:8080/web-app-project/rest/question/byvote';
 
     httpRequest = new XMLHttpRequest();
 
@@ -464,7 +464,7 @@ function addQuestion() {
 function finalizeQuestion() {
     $('#addQuestionModal').modal('hide');
     //TODO call the method that retrieve question from server
-    $('#switchQs a[href="#popularQs"]').tab('show');
+    $('#switchQs a[href="#latestQs"]').tab('show');
     onLoadRequest();
 }
 

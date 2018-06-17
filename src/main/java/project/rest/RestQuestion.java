@@ -385,6 +385,51 @@ public final class RestQuestion extends RestResource
 	}
 
 	/**
+	 * Searches question ordered by votes.
+	 *
+	 * @throws IOException
+	 *             if any error occurs in the client/server communication.
+	 */
+	public void searchQuestionOrderedByVotes()  throws IOException
+	{
+
+		List<Question> ql  = null;
+		Message m = null;
+
+		try
+		{
+			// parse the URI path to extract the timestamp
+			String path = req.getRequestURI();
+			path = path.substring(path.lastIndexOf("byvote") + 6);
+
+			//final long timestamp = Long.parseLong(path.substring(1));
+
+
+			// creates a new object for accessing the database and search the question
+			ql = new SearchQuestionOrderByVotesDatabase(con).SearchQuestionOrderedByVotes();
+
+			if(ql != null)
+			{
+				res.setStatus(HttpServletResponse.SC_OK);
+				new ResourceList(ql).toJSON(res.getOutputStream());
+			}
+			else
+			{
+				// it should not happen
+				m = new Message("Cannot search question: unexpected error.", "E5A1", null);
+				res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				m.toJSON(res.getOutputStream());
+			}
+		}
+		catch (Throwable t)
+		{
+			m = new Message("Cannot search question: unexpected error.", "E5A1", t.getMessage());
+			res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			m.toJSON(res.getOutputStream());
+		}
+	}
+
+	/**
 	 * Lists all questions from the database
 	 *
 	 * @throws IOException
