@@ -26,7 +26,9 @@ CREATE TYPE lr_group.webSiteType AS ENUM (
     'BitBucket','Github','Linkedin','OwnSite'
 );
 
-CREATE EXTENSION pgcrypto WITH SCHEMA lr_group;
+CREATE EXTENSION pgcrypto WITH SCHEMA lr_group; /*
+comment this if loaded on Dbstud */
+
 
 /*creation of the user*/
 
