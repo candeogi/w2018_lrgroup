@@ -163,7 +163,15 @@
             <button id="modifyButton" class="btn btn-primary">Modify User</button>
         </div>
         <div id="photo-div" class="col align-self-end">
-            <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="profileImg">
+            <c:choose>
+                <c:when test="${sessionScope.photoProfile.equals('profilepath')}">
+                    <img src="<c:url value="/images/user.png"/>" alt="photo of the user" class="profileImg">
+                </c:when>
+                <c:when test="${!sessionScope.photoProfile.equals('profilepath')}">
+                    <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="profileImg">
+                </c:when>
+            </c:choose>
+
         </div>
     </div>
 
