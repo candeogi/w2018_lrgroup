@@ -87,7 +87,7 @@ Since: 1.0
                 <label for="addAnswerTextArea">Answer this question</label>
                 <textarea class="form-control" id="addAnswerTextArea" rows="2"></textarea>
             </div>
-            <input id="addAnswerButton" type="button" value="Answer">
+            <input id="addAnswerButton" type="button" class="btn btn-primary" value="Answer">
         </form>
     </div>
     <hr>

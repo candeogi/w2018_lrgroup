@@ -167,7 +167,7 @@
                            aria-describedby="emailHelp" placeholder="Insert the content ">
                 </div>
                 <div class="form-group">
-                    <div id="dropdownCat"class="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div id="dropdownCat" class="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <button class="btn btn-secondary dropdown-toggle" onclick="showCat()" type="button" id="dropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Category
                         </button>
@@ -201,6 +201,4 @@
 <footer>
     <c:import url="/jsp/include/footer.jsp"/>
 </footer>
-
-
 </html>
