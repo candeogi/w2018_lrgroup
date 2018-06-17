@@ -31,7 +31,7 @@ $('#tablequestionlist').on('click', '.clickable-row', function (e) {
     var form = document.createElement('form');
     form.setAttribute('id', 'myform');
     form.setAttribute('method', 'GET');
-    form.setAttribute('action', 'jsp/question-answers.jsp');
+    form.setAttribute('action', './jsp/question-answers.jsp');
 
     var input = document.createElement('input');
     input.setAttribute('type', 'hidden');
