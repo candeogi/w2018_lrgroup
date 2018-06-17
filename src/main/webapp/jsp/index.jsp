@@ -42,7 +42,7 @@
 
         <div class="col-md-8">
             <nav class="nav nav-pills justify-content-center" id="switchQs">
-                <a class="nav-link disabled" href="#searchedQs" data-toggle="tab">Search result</a>
+                <a class="nav-link" href="#searchedQs" data-toggle="tab">Search result</a>
                 <a class="nav-link active" href="#popularQs" data-toggle="tab">Popular Questions</a>
                 <c:if test="${not empty sessionScope.loggedInUser}">
                     <a class="nav-link" href="#yourQs" data-toggle="tab">Your Questions</a>

@@ -97,7 +97,10 @@ public final class UpdateQuestionServlet extends SessionManagerServlet
         }
         else
         {
-
+            /*String questionUrl = req.getParameter("fromQuestion");
+            if(questionUrl != null){
+                res.sendRedirect(req.getContextPath() + questionUrl);
+            }*/
             String url = req.getParameter("from");
             if(url != null)
                 res.sendRedirect(req.getContextPath() + "/?p=" + url);
