@@ -358,7 +358,7 @@ function loadQsRequest() {
                 var formdlt = document.createElement('form');
                 formdlt.setAttribute("method","POST");
                 formdlt.setAttribute("action","delete-question");
-                formdlt.setAttribute("id","formdltQs");
+                //formdlt.setAttribute("id","formdltQs");
 
                 var inputid = document.createElement('input');
                 inputid.setAttribute("type","hidden");
@@ -376,7 +376,7 @@ function loadQsRequest() {
                     var button_deleteq = document.createElement('button');
                     button_deleteq.type = "submit";
                     button_deleteq.className = "btn btn-danger";
-                    button_deleteq.id="deleteQsBtn";
+                    //button_deleteq.id="deleteQsBtn";
 
                     var icon_delete = document.createElement('i');
                     icon_delete.className = "far fa-trash-alt";
@@ -394,7 +394,7 @@ function loadQsRequest() {
 
                     var button_updateq = document.createElement('button');
                     button_updateq.type = "submit";
-                    button_updateq.id = "updateqsBtn";
+                    //button_updateq.id = "updateqsBtn";
                     button_updateq.className = "btn btn-warning";
                 button_updateq.setAttribute("data-target","#modal-update-question");
                 button_updateq.setAttribute("data-toggle","modal");

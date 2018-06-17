@@ -57,12 +57,12 @@
                                     </c:choose>
                                 </td>
                                 <td>
-                                    <form method="POST" action="<c:url value="/delete-user"/>" id="deleteForm">
+                                    <form method="POST" action="<c:url value="/delete-user"/>">
                                         <input type="hidden" name="from" value="${from}"/>
                                         <input type="hidden" name="username" value="${user.username}"/>
                                         <c:choose>
-                                            <c:when test="${sessionScope.isAdmin == true  and sessionScope.loggedInUser != user.username }">
-                                                <button type="submit" class="btn btn-primary btn-sm" id="deleteBtn">
+                                            <c:when test="${sessionScope.isAdmin == true  and sessionScope.loggedInUser != user.username and user.username != 'userDeleted' }">
+                                                <button type="submit" class="btn btn-primary btn-sm">
                                                     <i class="far fa-trash-alt"></i> Delete</button><br/>
                                             </c:when>
                                             <c:otherwise>
@@ -74,7 +74,7 @@
                                 </td>
                                 <td>
                                     <c:choose>
-                                            <c:when test="${sessionScope.isAdmin == true}">
+                                            <c:when test="${sessionScope.isAdmin == true and user.username != 'userDeleted' }">
                                                 <button type="button" class="btn btn-primary btn-sm"  user-name="<c:out value="${user.username}"/>" data-toggle="modal" data-target="#modal-update-user">
                                                     <i class="far fa-edit"></i>Update</button><br/>
                                             </c:when>
