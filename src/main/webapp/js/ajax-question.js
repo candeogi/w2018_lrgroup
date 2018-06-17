@@ -400,7 +400,7 @@ function addQuestion() {
 //When the adding of the certificate in the server is done, this function is called to updating the User Interface
 function finalizeQuestion() {
     $('#addQuestionModal').modal('hide');
-    //TODO call the method that retrieve question from server
+    location.reload();
 }
 
 
