@@ -80,13 +80,21 @@ function visualizeQuestion(){
             questionTime.appendChild(document.createTextNode("Sent by "+question['IDUser']+" on "+question['timestamp']));
             //question body
             var questionBody = document.getElementById('question-body');
-            var p = document.createElement('p')
-            p.appendChild(document.createTextNode(question['body']));
-            questionBody.appendChild(p);
+            var p = $('#question-paragraph');
+            p.text(question['body']);
             //question last modified TODO check last modified how it behaves
             if(question["lastModified"] !== ""){
                 var questionLastModified = document.getElementById('question-lastmodified');
                 questionLastModified.appendChild(document.createTextNode("Last modified on "+question['lastModified']));
+            }
+            if(currentUser === question['IDUser']) {
+                var editQLink = document.createElement('a');
+                editQLink.setAttribute('data-toggle', 'modal');
+                editQLink.setAttribute('data-target', '#editQuestionModal');
+                editQLink.setAttribute('onclick', 'setEditQModalTarget()');
+                editQLink.setAttribute('href', 'javascript:void(0);');
+                $('.question-footer').append(editQLink);
+                editQLink.appendChild(document.createTextNode(' edit '));
             }
             //username - questioneer
             var questioneerUsername = document.getElementById('questioneer-name');
@@ -408,3 +416,60 @@ function replyAnswerAjax(){
         }
     });
 }
+/*
+* Edit answer
+*/
+function setEditQModalTarget(){
+    //setting attribute to edit the right answer on editAnswerAjax
+    //$('#editTextAreaModal').attr('data-edit-target',id);
+    /*This code is to set up the textarea with the parent text*/
+    var questionPreviousText = $('#question-paragraph').text();
+    $('#editQTextAreaModal').val(questionPreviousText);
+    var questionPreviousTitle = $('#question-title').text();
+    $('#editQTitleModal').val(questionPreviousTitle);
+    $('#urlperilservlet').attr('value', 'question-answers.jsp?questionID='+currentQuestion);
+    $('#idperilservlet').attr('value', parseInt(currentQuestion));
+}
+/*
+//Rest not implemented yet
+function editQuestionAjax(){
+
+    var addQuestionText = $('#editQTextAreaModal').val()
+
+    var currentdate = new Date();
+    var timestamp = ""
+        + currentdate.getFullYear() + "-"
+        + (currentdate.getMonth()+1)  + "-"
+        + currentdate.getDate() + " "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds() +"."
+        + currentdate.getMilliseconds();
+
+    $.ajax({
+        method: "PUT",
+        url: "http://localhost:8080/web-app-project/rest/question/",
+        data: JSON.stringify({
+            "question":{
+                "ID": parseInt(currentQuestion),
+                "text": addQuestionText,
+                "lastModified": timestamp
+            }
+        }),
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json",
+        success: function(data) {
+            //This code should change the text in the paragraph element
+            var questionParagraph = $('#question-paragraph');
+            questionParagraph.text(data.question["text"]);
+            $("#editQTextAreaModal").val('');
+
+        },
+        error: function(jqXHR,textStatus,errorThrown){
+            alert("" +
+                " |jqXHR:"+jqXHR+
+                " |textStatus: "+textStatus+
+                " |errorThrown:"+errorThrown);
+        }
+    });
+}*/
