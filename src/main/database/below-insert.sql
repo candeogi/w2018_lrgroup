@@ -19,8 +19,8 @@
 --
 -- Insertion into the below table
 --
-INSERT INTO lr_group.below  VALUES (1,1);
-INSERT INTO lr_group.below  VALUES (2,2);
-INSERT INTO lr_group.below  VALUES (3,3);
-INSERT INTO lr_group.below  VALUES (4,4);
-INSERT INTO lr_group.below  VALUES (5,5);
+INSERT INTO lr_group.below  VALUES (2,1);
+INSERT INTO lr_group.below  VALUES (3,2);
+INSERT INTO lr_group.below  VALUES (4,3);
+INSERT INTO lr_group.below  VALUES (5,4);
+INSERT INTO lr_group.below  VALUES (6,5);
