@@ -128,12 +128,11 @@ var urlcategory;
  */
 $('#nav-tab-admin a').on('click', function (e) {
     e.preventDefault();
-    $(this).tab('show');
-    var value = e.target.getAttribute('href');
-    if(value == '#nav-category'){
-        loadCategory();
-    }
 
+    var value = e.target.getAttribute('href');
+    localStorage.setItem('selectedTab', value);
+
+    $(this).tab('show');
 })
 
 
@@ -247,6 +246,11 @@ function loadCategory(){
  Function called on page load
  */
 function onLoadRequest() {
+
+    loadCategory();
+    var selectedTab = localStorage.getItem('selectedTab');
+    if (selectedTab != null) {
+        $('#nav-tab-admin a[href="' + selectedTab + '"]').tab('show');}
 
     url = 'http://localhost:8080/web-app-project/rest/question';
 
