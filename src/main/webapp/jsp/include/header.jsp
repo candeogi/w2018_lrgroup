@@ -120,7 +120,7 @@ Since: 1.0
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">AnyQuestions.com</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -128,12 +128,12 @@ Since: 1.0
                 <div class="modal-body">
                     <form method="post" action="<c:url value="/login"/>" >
                         <div class="form-group">
-                            <label for="exampleInputUsername">Username</label>
+                            <label for="exampleInputUsername">Username: </label>
                             <input name="username" type="text" class="form-control" id="exampleInputUsername"
                                    aria-describedby="emailHelp" placeholder="Username">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
+                            <label for="exampleInputPassword1">Password: </label>
                             <input name="password" type="password" class="form-control" id="exampleInputPassword1"
                                    placeholder="Password">
                         </div>

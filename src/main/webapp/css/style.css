@@ -50,12 +50,6 @@ button#login_button:hover {
     display: block;
 }
 
-#website{
-
-
-}
-
-#certification{
-
-
+.modal-content {
+	color: #000;
 }
