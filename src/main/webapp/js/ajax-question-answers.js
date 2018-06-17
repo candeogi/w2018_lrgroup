@@ -60,10 +60,10 @@ function visualizeQuestioneer(username){
             $("#questioneer-profilelink").attr("href", questioneerLinkToProfile);
         },
         error: function(jqXHR,textStatus,errorThrown){
-            alert("" +
+            /*alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);
+                " |errorThrown:"+errorThrown);*/
         }
     });
 }
@@ -396,10 +396,10 @@ function editAnswerAjax(){
 
         },
         error: function(jqXHR,textStatus,errorThrown){
-            alert("" +
+            /*alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);
+                " |errorThrown:"+errorThrown);*/
         }
     });
 }
@@ -447,10 +447,10 @@ function replyAnswerAjax(){
 
         },
         error: function(jqXHR,textStatus,errorThrown){
-            alert("" +
+            /*alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);
+                " |errorThrown:"+errorThrown);*/
         }
     });
 }
