@@ -119,13 +119,13 @@ public final class UpdateUserServlet extends SessionManagerServlet {
         } else {
 
             res.setStatus(HttpServletResponse.SC_OK);
-           /* String url = req.getParameter("view");
+            String url = req.getParameter("view");
             getServletContext().log("view : " + url);
             if (url != null)
 
                 res.sendRedirect(req.getContextPath() + "/?p=" + url);
             else
-                res.sendRedirect(req.getContextPath() + "/?p=user&u=" + username);*/
+                res.sendRedirect(req.getContextPath() + "/?p=user&u=" + username);
         }
     }
 

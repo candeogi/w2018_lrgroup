@@ -54,7 +54,7 @@ Since: 1.0
 
             <c:choose>
                 <c:when test="${empty sessionScope.loggedInUser}">
-                    <a class="nav-link" href="<c:url value=""/>" data-toggle="modal" data-target="#modal-login"><i class="fas fa-question-circle"></i></a>
+                    <a class="nav-link"  data-toggle="modal" data-target="#modal-login"><i class="fas fa-question-circle"></i></a>
 
                 </c:when>
                 <c:when test="${not empty sessionScope.loggedInUser}">

@@ -193,20 +193,9 @@
 <p><a href="<c:url value="/jsp/show-question-ajax.jsp"/>">Show questions (via AJAX/REST)</a></p>--%>
 
 <c:import url="/jsp/include/show-message.jsp"/>
-<c:choose>
-    <c:when test="${empty sessionScope.loggedInUser}">
 
-    </c:when>
-    <c:when test="${not empty sessionScope.loggedInUser}">
-     <%--   <p><a href="<c:url value="/?p=show-user-questions"/>">Show my questions</a></p>
-        <p><a href="<c:url value="/?p=answer"/>">Answer to a Question</a></p>--%>
-sele        <%--<p><a href="<c:url value="/?p=update-question"/>">Update a question</a></p>--%>
-
-
-            </c:when>
-        </c:choose>
     <!--Custom script test-->
-    <script type="text/javascript" src="js/test.js"></script>
+    <%--<script type="text/javascript" src="js/test.js"></script>--%>
     <script type="text/javascript" language="JavaScript" src="js/ajax-question.js"></script>
     </body>
 <footer>
