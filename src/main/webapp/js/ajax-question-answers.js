@@ -83,18 +83,22 @@ function visualizeQuestion(){
             var p = $('#question-paragraph');
             p.text(question['body']);
             //question last modified TODO check last modified how it behaves
-            if(question["lastModified"] !== ""){
+            var lastModifiedTimeStamp = question["lastModified"];
+            if(lastModifiedTimeStamp == null) {
+            }else{
                 var questionLastModified = document.getElementById('question-lastmodified');
                 questionLastModified.appendChild(document.createTextNode("Last modified on "+question['lastModified']));
             }
+
             if(currentUser === question['IDUser']) {
-                var editQLink = document.createElement('a');
+                var editQLink = document.createElement('button');
+                editQLink.setAttribute('class', 'btn btn-secondary btn-sm');
                 editQLink.setAttribute('data-toggle', 'modal');
                 editQLink.setAttribute('data-target', '#editQuestionModal');
                 editQLink.setAttribute('onclick', 'setEditQModalTarget()');
                 editQLink.setAttribute('href', 'javascript:void(0);');
-                $('.question-footer').append(editQLink);
-                editQLink.appendChild(document.createTextNode(' edit '));
+                $('#question-buttons').append(editQLink);
+                editQLink.appendChild(document.createTextNode('Edit your question'));
             }
             //username - questioneer
             var questioneerUsername = document.getElementById('questioneer-name');
@@ -124,14 +128,14 @@ function visualizeAnswers(){
             //<div id="answerListDiv><ul class="answer-list">
             var answerListDiv = document.getElementById("answerListDiv");
             var baseAnswerList = document.createElement("ul");
-            baseAnswerList.id =0+'ul';
+            baseAnswerList.id =-1+'ul';
             baseAnswerList.className = 'answer-list';
             answerListDiv.appendChild(baseAnswerList);
 
 
             //lets print all the answers
             for(var i =0; i< resourceList.length; i++){
-                printSingleAnswer(resourceList[i].answer, 0);
+                printSingleAnswer(resourceList[i].answer, -1);
             }
         },
         error: function(){
@@ -196,12 +200,14 @@ function printSingleAnswer(answer, whereToAppendId){
     baseAnswerList.appendChild(answerListElement);
     answerListElement.appendChild(answerContainer);
     answerContainer.appendChild(answerContent);
+    /* TODO implement vote
     answerContent.appendChild(answerVote);
     //answer vote
     answerVote.appendChild(voteUpIcon);
     answerVote.appendChild(voteNumberDiv);
     voteNumberDiv.appendChild(voteNumber);
     answerVote.appendChild(voteDownIcon);
+    */
     //answer content
     answerContent.appendChild(answerBody);
     answerBody.appendChild(p);
@@ -283,7 +289,7 @@ function addNewAnswerForm(){
         contentType: "application/json; charset=utf-8",
         dataType   : "json",
         success: function(data) {
-            printSingleAnswer(data.answer, 0);
+            printSingleAnswer(data.answer, -1);
             $("#addAnswerTextArea").val('');
 
         },
