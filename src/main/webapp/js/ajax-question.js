@@ -188,7 +188,7 @@ $('#switchQs a[href="#searchedQs"]').on('click', function (event) {
 $('#searchBtn').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     if (document.getElementById("searchinqs").value == ""){
-        url = 'http://localhost:8080/web-app-project/rest/question';
+        url = 'http://localhost:8080/web-app-project/rest/question/byvote';
         $('#switchQs a[href="#popularQs"]').tab('show');}
     else{
         url = 'http://localhost:8080/web-app-project/rest/question/searchby/' + document.getElementById("searchinqs").value;
@@ -211,7 +211,7 @@ $('#searchBtn').on('click', function (event) {
 $('#longSearchBtn').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     if (document.getElementById("longSearchinqs").value == ""){
-        url = 'http://localhost:8080/web-app-project/rest/question';
+        url = 'http://localhost:8080/web-app-project/rest/question/byvote';
         $('#switchQs a[href="#popularQs"]').tab('show');}
     else{
         url = 'http://localhost:8080/web-app-project/rest/question/searchby/' + document.getElementById("longSearchinqs").value;

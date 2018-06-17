@@ -53,6 +53,9 @@ public final class DeleteQuestionByIDDatabase
                     "FROM lr_group.Question " +
                     "WHERE id=? "; //TODO query CASCADE?
 
+    private static final String QUERY_4 = "" +
+            "DELETE FROM lr_group.VoteQuestion " +
+            "WHERE question=?";
 
     /**
      * The connection to the database
@@ -93,6 +96,10 @@ public final class DeleteQuestionByIDDatabase
             rs = pstmt.executeUpdate();
 
             pstmt = con.prepareStatement(QUERY_2);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeUpdate();
+
+            pstmt = con.prepareStatement(QUERY_4);
             pstmt.setInt(1, id);
             rs = pstmt.executeUpdate();
 
