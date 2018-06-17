@@ -26,6 +26,12 @@ public final class CreateUserDatabase {
             "VALUES (?, ?, ?, ?, ?, lr_group.crypt(?,lr_group.gen_salt('bf',8)), ?, ?, ?, ?, FALSE )";
 
     /**
+     * STATEMENT FOR DBSTUD
+     * private static final String STATEMENT = "" +
+     *             "INSERT INTO lr_group.Utente (email, name, surname, username, photoProfile, password, isAdmin ,registrationDate, birthday, description, companyUser) " +
+     *             "VALUES (?, ?, ?, ?, ?, crypt(?,gen_salt('bf',8)), ?, ?, ?, ?, FALSE )";
+     */
+    /**
      * The connection to the database
      */
     private final Connection con;

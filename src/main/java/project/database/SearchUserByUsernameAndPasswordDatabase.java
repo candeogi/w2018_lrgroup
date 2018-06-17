@@ -47,6 +47,12 @@ public final class SearchUserByUsernameAndPasswordDatabase {
             "WHERE username=? and password=lr_group.crypt(?,password)";
 
     /**
+     * STATEMENT FOR DBSTUD
+     * private static final String STATEMENT = "" +
+            "SELECT * " +
+            "FROM lr_group.Utente " +
+            "WHERE username=? and password=crypt(?,password)";**/
+    /**
      * The connection to the database
      */
     private final Connection con;

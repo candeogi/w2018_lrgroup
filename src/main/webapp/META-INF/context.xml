@@ -42,5 +42,28 @@
           removeAbandonedTimeout="60"
           removeAbandoned="true"
 	/>
+    <!--
+       <Resource name="jdbc/lrgroup-webapp"
+          auth="Container"
+          type="javax.sql.DataSource"
+          factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+          driverClassName="org.postgresql.Driver"
+          url="jdbc:postgresql://dbstud.dei.unipd.it:5432/webapp1718"
+          username="webdb"
+          password="webdb"
+          testOnBorrow="true"
+          validationQuery="SELECT 1"
+          timeBetweenEvictionRunsMillis="30000"
+          maxActive="10"
+          minIdle="5"
+          maxWait="10000"
+          initialSize="2"
+          removeAbandonedTimeout="60"
+          removeAbandoned="true"
+	/>
+
+
+
+    -->
 
 </Context>
