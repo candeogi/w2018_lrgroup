@@ -86,7 +86,16 @@ Since: 1.0
             <c:when test="${(not empty sessionScope.loggedInUser) and (sessionScope.isAdmin == true)}">
                 <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />">
                     <!--<i class="far fa-user"></i>-->
-                    <img src="<c:url value="/images/user.png"/>" alt="avatar" class="avatar">
+                    <%--<img src="<c:url value="/images/user.png"/>" alt="avatar" class="avatar">--%>
+
+                    <c:choose>
+                        <c:when test="${sessionScope.photoProfile == 'profilepath'}">
+                            <img src="<c:url value="/images/user.png"/>" alt="avatar" class="avatar">
+                        </c:when>
+                        <c:when test="${sessionScope.photoProfile != 'profilepath'}">
+                            <img src="data:image/jpeg;base64,${sessionScope.photoProfile}" alt="avatar" class="avatar">
+                        </c:when>
+                    </c:choose>
 
                 </a>
                 <a href="<c:url value="/?p=admin-panel"/>">
@@ -108,7 +117,15 @@ Since: 1.0
                     </button>
                 </a>
                 <a href="<c:url value="/?p=user&u=${sessionScope.loggedInUser}" />">
-                    <img src="<c:url value="/images/user.png"/>" alt="avatar" class="avatar">
+                    <c:choose>
+                        <c:when test="${sessionScope.photoProfile.equals('profilepath')}">
+                            <img src="<c:url value="/images/user.png"/>" alt="avatar" class="avatar">
+                        </c:when>
+                        <c:when test="${!sessionScope.photoProfile.equals('profilepath')}">
+                            <img src="data:image/jpeg;base64,${sessionScope.photoProfile}" alt="avatar" class="avatar">
+                        </c:when>
+                    </c:choose>
+
                 </a>
             </c:when>
 

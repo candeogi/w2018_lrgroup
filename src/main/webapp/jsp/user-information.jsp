@@ -90,7 +90,7 @@
                 <div id="email-value" class="col-lg-auto">
                     <p><c:out value="${user.email}"/></p>
                 </div>
-            </div>
+            </div>--%>
             <table>
                 <tr>
                     <td><div><p>Username:</p></div></td>
@@ -135,13 +135,13 @@
                 <tr>
                     <td><div><p>Email address:</p></div></td>
                     <td>
-                        <div id="email-value" class="col-lg-auto">
+                        <div id="email-value" class="col-md-auto">
                             <p><c:out value="${user.email}"/></p>
                         </div>
                     </td>
                 </tr>
-            </table>--%>
-            <div class="infoTable">
+            </table>
+            <%--<div class="infoTable">
                 <div class="divTableBody">
                     <div class="divTableRow">
                         <div class="divTableCell"><p> Username:</p></div><div id="username-value" class="divTableCell"><p><c:out value="${user.username}"/></p></div></div>
@@ -156,7 +156,7 @@
                     <div class="divTableRow">
                         <div class="divTableCell"><p>Email address: </p></div><div id="email-value" class="divTableCell"><p><c:out value="${user.email}"/></p></div></div>
                 </div>
-            </div>
+            </div>--%>
         </div>
 
         <div>

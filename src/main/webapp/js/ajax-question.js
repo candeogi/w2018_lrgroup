@@ -96,7 +96,7 @@ function deletefilter() {
 $("#listCategoryDropdown").on('click', '.dropdown-item', function (e) {
     var menu = $(this).html();
     e.preventDefault(); // To prevent following the link (optional)
-    $('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
+    //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
     document.getElementById("listCategoryDropdown").classList.toggle("show", false);
     url = 'http://localhost:8080/web-app-project/rest/question/category/' + document.getElementById(menu).value;
     deletefilter();
@@ -131,8 +131,45 @@ $("#listCategoryDropdown").on('click', '.dropdown-item', function (e) {
  */
 $('#switchQs a[href="#popularQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
-    $('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
+    //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
     url = 'http://localhost:8080/web-app-project/rest/question'; //TO-DO: popular question(ordered by upvote?)
+    httpRequest = new XMLHttpRequest();
+    deletefilter();
+
+    if (!httpRequest) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    httpRequest.onreadystatechange = loadQsRequest;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+});
+
+/*
+ Callback function for selecting searched question
+ */
+$('#switchQs a[href="#searchedQs"]').on('click', function (event) {
+    event.preventDefault(); // To prevent following the link (optional)
+    //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
+    if(document.getElementById("searchinqs") == null){
+        if(document.getElementById("longSearchinqs").value == ""){
+            url = 'http://localhost:8080/web-app-project/rest/question';
+            $('#switchQs a[href="#popularQs"]').trigger('click');
+        }
+        else{
+            url = 'http://localhost:8080/web-app-project/rest/question/searchby/' + document.getElementById("longSearchinqs").value;
+        }
+    }
+    else{
+        if(document.getElementById("searchinqs").value == ""){
+            url = 'http://localhost:8080/web-app-project/rest/question';
+            $('#switchQs a[href="#popularQs"]').trigger('click');
+        }
+        else{
+            url = 'http://localhost:8080/web-app-project/rest/question/searchby/' + document.getElementById("searchinqs").value;
+        }
+    }
+
     httpRequest = new XMLHttpRequest();
     deletefilter();
 
@@ -150,13 +187,14 @@ $('#switchQs a[href="#popularQs"]').on('click', function (event) {
  */
 $('#searchBtn').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
-    if (document.getElementById("searchinqs").value == "")
+    if (document.getElementById("searchinqs").value == ""){
         url = 'http://localhost:8080/web-app-project/rest/question';
-    else
+        $('#switchQs a[href="#popularQs"]').tab('show');}
+    else{
         url = 'http://localhost:8080/web-app-project/rest/question/searchby/' + document.getElementById("searchinqs").value;
+        $('#switchQs a[href="#searchedQs"]').tab('show');}
     httpRequest = new XMLHttpRequest();
     deletefilter();
-    $('#switchQs a[href="#searchedQs"]').attr('class','nav-link active');
 
     if (!httpRequest) {
         alert('Giving up :( Cannot create an XMLHTTP instance');
@@ -168,11 +206,35 @@ $('#searchBtn').on('click', function (event) {
 });
 
 /*
+ Callback function for long search input box
+ */
+$('#longSearchBtn').on('click', function (event) {
+    event.preventDefault(); // To prevent following the link (optional)
+    if (document.getElementById("longSearchinqs").value == ""){
+        url = 'http://localhost:8080/web-app-project/rest/question';
+        $('#switchQs a[href="#popularQs"]').tab('show');}
+    else{
+        url = 'http://localhost:8080/web-app-project/rest/question/searchby/' + document.getElementById("longSearchinqs").value;
+        $('#switchQs a[href="#searchedQs"]').tab('show');}
+    httpRequest = new XMLHttpRequest();
+    deletefilter();
+
+    if (!httpRequest) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    httpRequest.onreadystatechange = loadQsRequest;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+});
+
+
+/*
  Callback function for select questions by logged user
  */
 $('#switchQs a[href="#yourQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
-    $('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
+    //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
     url = 'http://localhost:8080/web-app-project/rest/question/user/' + document.getElementById('idUser').value;
     httpRequest = new XMLHttpRequest();
     deletefilter();
@@ -191,7 +253,7 @@ $('#switchQs a[href="#yourQs"]').on('click', function (event) {
  */
 $('#switchQs a[href="#latestQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
-    $('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
+    //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
     url = 'http://localhost:8080/web-app-project/rest/question/latestQuestion';
     httpRequest = new XMLHttpRequest();
     deletefilter();

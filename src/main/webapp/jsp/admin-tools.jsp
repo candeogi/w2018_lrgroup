@@ -61,7 +61,7 @@
                                         <input type="hidden" name="from" value="${from}"/>
                                         <input type="hidden" name="username" value="${user.username}"/>
                                         <c:choose>
-                                            <c:when test="${sessionScope.isAdmin == true}">
+                                            <c:when test="${sessionScope.isAdmin == true  and sessionScope.loggedInUser != user.username }">
                                                 <button type="submit" class="btn btn-primary btn-sm" id="deleteBtn">
                                                     <i class="far fa-trash-alt"></i> Delete</button><br/>
                                             </c:when>
