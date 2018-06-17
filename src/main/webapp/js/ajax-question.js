@@ -8,7 +8,7 @@ window.onload = onLoadRequest;
 $('#switchQs a[href="#categoryQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     document.getElementById("listCategoryDropdown").classList.toggle("show");
-    url = './rest/category';
+    url = 'rest/category';
     httpRequest = new XMLHttpRequest();
 
     if (!httpRequest) {
@@ -31,7 +31,7 @@ $('#tablequestionlist').on('click', '.clickable-row', function (e) {
     var form = document.createElement('form');
     form.setAttribute('id', 'myform');
     form.setAttribute('method', 'GET');
-    form.setAttribute('action', './jsp/question-answers.jsp');
+    form.setAttribute('action', 'jsp/question-answers.jsp');
 
     var input = document.createElement('input');
     input.setAttribute('type', 'hidden');
@@ -98,7 +98,7 @@ $("#listCategoryDropdown").on('click', '.dropdown-item', function (e) {
     e.preventDefault(); // To prevent following the link (optional)
     //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
     document.getElementById("listCategoryDropdown").classList.toggle("show", false);
-    url = './rest/question/category/' + document.getElementById(menu).value;
+    url = 'rest/question/category/' + document.getElementById(menu).value;
     deletefilter();
 
     var link = document.createElement("a");
@@ -132,7 +132,7 @@ $("#listCategoryDropdown").on('click', '.dropdown-item', function (e) {
 $('#switchQs a[href="#popularQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
-    url = './rest/question/byvote'; //TO-DO: popular question(ordered by upvote?)
+    url = 'rest/question/byvote'; //TO-DO: popular question(ordered by upvote?)
     httpRequest = new XMLHttpRequest();
     deletefilter();
 
@@ -153,20 +153,20 @@ $('#switchQs a[href="#searchedQs"]').on('click', function (event) {
     //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
     if(document.getElementById("searchinqs") == null){
         if(document.getElementById("longSearchinqs").value == ""){
-            url = './rest/question';
+            url = 'rest/question';
             $('#switchQs a[href="#popularQs"]').trigger('click');
         }
         else{
-            url = './rest/question/searchby/' + document.getElementById("longSearchinqs").value;
+            url = 'rest/question/searchby/' + document.getElementById("longSearchinqs").value;
         }
     }
     else{
         if(document.getElementById("searchinqs").value == ""){
-            url = './rest/question';
+            url = 'rest/question';
             $('#switchQs a[href="#popularQs"]').trigger('click');
         }
         else{
-            url = './rest/question/searchby/' + document.getElementById("searchinqs").value;
+            url = 'rest/question/searchby/' + document.getElementById("searchinqs").value;
         }
     }
 
@@ -188,10 +188,10 @@ $('#switchQs a[href="#searchedQs"]').on('click', function (event) {
 $('#searchBtn').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     if (document.getElementById("searchinqs").value == ""){
-        url = './rest/question/byvote';
+        url = 'rest/question/byvote';
         $('#switchQs a[href="#popularQs"]').tab('show');}
     else{
-        url = './rest/question/searchby/' + document.getElementById("searchinqs").value;
+        url = 'rest/question/searchby/' + document.getElementById("searchinqs").value;
         $('#switchQs a[href="#searchedQs"]').tab('show');}
     httpRequest = new XMLHttpRequest();
     deletefilter();
@@ -211,10 +211,10 @@ $('#searchBtn').on('click', function (event) {
 $('#longSearchBtn').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     if (document.getElementById("longSearchinqs").value == ""){
-        url = './rest/question/byvote';
+        url = 'rest/question/byvote';
         $('#switchQs a[href="#popularQs"]').tab('show');}
     else{
-        url = './rest/question/searchby/' + document.getElementById("longSearchinqs").value;
+        url = 'rest/question/searchby/' + document.getElementById("longSearchinqs").value;
         $('#switchQs a[href="#searchedQs"]').tab('show');}
     httpRequest = new XMLHttpRequest();
     deletefilter();
@@ -235,7 +235,7 @@ $('#longSearchBtn').on('click', function (event) {
 $('#switchQs a[href="#yourQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
-    url = './rest/question/user/' + document.getElementById('idUser').value;
+    url = 'rest/question/user/' + document.getElementById('idUser').value;
     httpRequest = new XMLHttpRequest();
     deletefilter();
 
@@ -254,7 +254,7 @@ $('#switchQs a[href="#yourQs"]').on('click', function (event) {
 $('#switchQs a[href="#latestQs"]').on('click', function (event) {
     event.preventDefault(); // To prevent following the link (optional)
     //$('#switchQs a[href="#searchedQs"]').attr('class','nav-link disabled');
-    url = './rest/question/latestQuestion';
+    url = 'rest/question/latestQuestion';
     httpRequest = new XMLHttpRequest();
     deletefilter();
 
@@ -273,7 +273,7 @@ $('#switchQs a[href="#latestQs"]').on('click', function (event) {
  */
 function onLoadRequest() {
 
-    url = './rest/question/latestQuestion';
+    url = 'rest/question/latestQuestion';
 
     httpRequest = new XMLHttpRequest();
 
@@ -472,7 +472,7 @@ function finalizeQuestion() {
 var httpRequest1;
 function showCat() {
     document.getElementById("divModalDrop").classList.toggle("show");
-    url = './rest/category';
+    url = 'rest/category';
     httpRequest1 = new XMLHttpRequest();
 
     if (!httpRequest1) {

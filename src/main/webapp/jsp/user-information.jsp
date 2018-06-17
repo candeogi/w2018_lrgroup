@@ -176,8 +176,15 @@
             <c:when test="${user.username == sessionScope.loggedInUser}">
                 <div>
                     <button id="modifyButton" class="btn btn-primary">Modify User</button>
+                    <input type="hidden"  name="hid" value="logged">
                 </div>
             </c:when>
+            <c:when test="${user.username == sessionScope.loggedInUser}">
+                <div>
+                    <input type="hidden"  name="hid" value="not">
+                </div>
+            </c:when>
+
         </c:choose>
         <div id="photo-div" class="col align-self-end">
             <c:choose>

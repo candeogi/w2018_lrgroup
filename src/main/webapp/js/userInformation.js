@@ -100,6 +100,7 @@ function printResult() {
 
         if (xhr2.status === 200) {
 
+            var value = $("[name='hid']");
             var jsonResult = JSON.parse(xhr2.responseText);
 
             var website = jsonResult['resource-list'];
@@ -145,20 +146,23 @@ function printResult() {
                 td_address.appendChild(document.createTextNode(website[i]['website']['address']));
                 tr_row.appendChild(td_address);
 
-                var td_delete = document.createElement('td');
-                var button = document.createElement('button');
-                var trash = document.createElement('i');
-                trash.className = "far fa-trash-alt";
-                button.appendChild(trash);
-                button.className = "btn btn-primary";
-                td_delete.appendChild(button);
-                tr_row.appendChild(td_delete);
+                if (value.val() === 'logged') {
+                    var td_delete = document.createElement('td');
+                    var button = document.createElement('button');
+                    var trash = document.createElement('i');
+                    trash.className = "far fa-trash-alt";
+                    button.appendChild(trash);
+                    button.className = "btn btn-primary";
+                    td_delete.appendChild(button);
+                    tr_row.appendChild(td_delete);
+
+                    button.addEventListener("click", function () {
+                        rowToDelete = $(this).closest('tr').get(0);
+                        var nameWebsite = rowToDelete.childNodes[1].innerHTML;
+                        deleteWebsite(nameWebsite);
+                    });
+                }
                 tbody.appendChild(tr_row);
-                button.addEventListener("click", function () {
-                    rowToDelete = $(this).closest('tr').get(0);
-                    var nameWebsite = rowToDelete.childNodes[1].innerHTML;
-                    deleteWebsite(nameWebsite);
-                });
             }
 
             table.appendChild(tbody);
@@ -236,6 +240,7 @@ function printResultCertificate() {
 
         if (xhrCertificate.status === 200) {
 
+            var value = $("[name='hid']");
             var jsonResult = JSON.parse(xhrCertificate.responseText);
             var certificate = jsonResult['resource-list'];
             var table = document.getElementById("table-certificate");
@@ -289,22 +294,24 @@ function printResultCertificate() {
                 td_achievement.appendChild(document.createTextNode(newdate));
                 tr_row.appendChild(td_achievement);
 
-                var td_delete = document.createElement('td');
-                var button = document.createElement('button');
-                var trash = document.createElement('i');
-                trash.className = "far fa-trash-alt";
-                button.appendChild(trash);
-                button.className = "btn btn-primary";
-                td_delete.appendChild(button);
-                tr_row.appendChild(td_delete);
+                if (value.val() === 'logged') {
+                    var td_delete = document.createElement('td');
+                    var button = document.createElement('button');
+                    var trash = document.createElement('i');
+                    trash.className = "far fa-trash-alt";
+                    button.appendChild(trash);
+                    button.className = "btn btn-primary";
+                    td_delete.appendChild(button);
+                    tr_row.appendChild(td_delete);
+                    button.addEventListener("click", function () {
+                        rowToDeleteCert = $(this).closest('tr').get(0);
+                        var nameCert = rowToDeleteCert.childNodes[0].innerHTML;
+                        deleteCertificate(nameCert);
+                    });
+                }
                 tbody.appendChild(tr_row);
-                button.addEventListener("click", function () {
-                    rowToDeleteCert = $(this).closest('tr').get(0);
-                    var nameCert = rowToDeleteCert.childNodes[0].innerHTML;
-                    deleteCertificate(nameCert);
-                });
-            }
 
+            }
             table.appendChild(tbody);
 
         }
