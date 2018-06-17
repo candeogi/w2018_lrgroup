@@ -435,7 +435,7 @@ $("#saveQuestion").click(function () {
 
 var xhrQuestion;
 
-//This function is called when the user wants to add a new certificate
+//This function is called when the user wants to add a new question
 function addQuestion() {
 
     var content = $("#body-form").val();
@@ -454,15 +454,18 @@ function addQuestion() {
     xhrQuestion.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhrQuestion.onreadystatechange = finalizeQuestion;
     var information = "title=" + title + "&" + "body=" + content+"&"+"category="+selCategory;
+    var content = $("#body-form").val('');
+    var title = $("#title-form").val('');
     xhrQuestion.send(information);
-
 
 }
 
 //When the adding of the certificate in the server is done, this function is called to updating the User Interface
 function finalizeQuestion() {
     $('#addQuestionModal').modal('hide');
-    location.reload();
+    //TODO call the method that retrieve question from server
+    $('#switchQs a[href="#popularQs"]').tab('show');
+    onLoadRequest();
 }
 
 

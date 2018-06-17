@@ -124,7 +124,7 @@ var httpRequest3;
 var urlcategory;
 
 /*
- Callback function checking if category tab is opened
+ Callback function checking if tab is opened
  */
 $('#nav-tab-admin a').on('click', function (e) {
     e.preventDefault();
