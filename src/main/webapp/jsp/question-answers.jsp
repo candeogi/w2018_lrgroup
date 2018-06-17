@@ -81,20 +81,7 @@ Since: 1.0
         </div>
     </div>
     <!--end of question row-->
-
-    <!--
-    old add answer
-    <hr>
-    <div class="clearfix">
-        <form id="AddAnswerForm">
-            <div class="form-group">
-                <label for="addAnswerTextArea">Answer this question</label>
-                <textarea class="form-control" id="addAnswerTextArea" rows="2"></textarea>
-            </div>
-            <input id="addAnswerButton" type="button" value="Answer" class="btn btn-primary">
-        </form>
-    </div>
-    -->
+    
     <hr>
     <!--answer list below-->
     <div id="answerListDiv">
@@ -164,9 +151,6 @@ Since: 1.0
                 </button>
             </div>
             <div class="modal-body">
-                <!--<div class="form-group">
-                    <textarea class="form-control" rows="5" id="editQTextAreaModal"></textarea>
-                </div>-->
                 <form method="POST" action="<c:url value="/update-question"/>" id="formQuestion">
                     <input type="hidden" name="id" value="" id="idperilservlet">
                     <input type="hidden" name="fromQuestion" value="question-answers.jsp?questionID=1" id="urlperilservlet">
@@ -188,10 +172,6 @@ Since: 1.0
                 </form>
 
             </div>
-            <!--<div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="editQuestionModalButton" data-dismiss="modal">Edit</button>
-            </div>-->
         </div>
     </div>
 </div>
@@ -207,9 +187,6 @@ Since: 1.0
                 </button>
             </div>
             <div class="modal-body">
-                <!--<div class="form-group">
-                    <textarea class="form-control" rows="5" id="editQTextAreaModal"></textarea>
-                </div>-->
                 <p>Are you sure you want to delete this question ?</p>
                 <form method="POST" action="<c:url value="/delete-question"/>">
                     <input type="hidden" name="idquestion" value="" id="idperilservletdelete">
@@ -217,10 +194,6 @@ Since: 1.0
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </form>
             </div>
-            <!--<div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="editQuestionModalButton" data-dismiss="modal">Edit</button>
-            </div>-->
         </div>
     </div>
 </div>
