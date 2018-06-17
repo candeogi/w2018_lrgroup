@@ -273,7 +273,7 @@ $('#switchQs a[href="#latestQs"]').on('click', function (event) {
  */
 function onLoadRequest() {
 
-    url = 'http://localhost:8080/web-app-project/rest/question/byvote';
+    url = 'http://localhost:8080/web-app-project/rest/question/latestQuestion';
 
     httpRequest = new XMLHttpRequest();
 

@@ -209,7 +209,7 @@ Since: 1.0
                                    placeholder="Repeat Password">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputUsername">Name</label>
+                            <label for="exampleInputUsername">Birthday Date</label>
                             <input name="bdate" type="date" class="form-control" id="date-reg"
                                    aria-describedby="emailHelp">
                         </div>
