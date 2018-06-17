@@ -17,9 +17,10 @@ window.onload = initialPageLoad;
 function initialPageLoad(){
     visualizeQuestion();
     visualizeAnswers();
+    /* old add answer from text area
     $("#addAnswerButton").click(function () {
         addNewAnswerForm();
-    });
+    });*/
     $("#insertAnswerModal").click(function () {
         replyAnswerAjax();
     });
@@ -27,6 +28,12 @@ function initialPageLoad(){
     $("#editAnswerModalButton").click(function () {
         editAnswerAjax();
     });
+
+    $("#editAnswerModalButton").click(function () {
+        editAnswerAjax();
+    });
+
+
 }
 /*
 * User Management
@@ -89,16 +96,36 @@ function visualizeQuestion(){
                 var questionLastModified = document.getElementById('question-lastmodified');
                 questionLastModified.appendChild(document.createTextNode("Last modified on "+question['lastModified']));
             }
-
-            if(currentUser === question['IDUser']) {
+            if(currentUser === ""){//if logged i can answer
+            }else{
+                var replyLink = document.createElement('button');
+                replyLink.setAttribute('class', 'btn btn-primary');
+                replyLink.setAttribute('data-toggle', 'modal');
+                replyLink.setAttribute('data-target', '#addAnswerModal');
+                replyLink.setAttribute('onclick','setReplyModalTarget('+-1+')');
+                //replyLink.setAttribute('href','javascript:void(0);');
+                $('#question-buttons').append(replyLink);
+                replyLink.appendChild(document.createTextNode(' Answer '));
+            }
+            if(currentUser === question['IDUser']) { //if im the questioneer i can edit
                 var editQLink = document.createElement('button');
-                editQLink.setAttribute('class', 'btn btn-secondary btn-sm');
+                editQLink.setAttribute('class', 'btn btn-secondary');
                 editQLink.setAttribute('data-toggle', 'modal');
                 editQLink.setAttribute('data-target', '#editQuestionModal');
                 editQLink.setAttribute('onclick', 'setEditQModalTarget()');
-                editQLink.setAttribute('href', 'javascript:void(0);');
+                //editQLink.setAttribute('href', 'javascript:void(0);');
                 $('#question-buttons').append(editQLink);
-                editQLink.appendChild(document.createTextNode('Edit your question'));
+                editQLink.appendChild(document.createTextNode(' Edit '));
+            }
+            if(isAdmin || (currentUser === question['IDUser'])) { //if im the questioneer i can edit
+                var deleteLink = document.createElement('button');
+                deleteLink.setAttribute('class', 'btn btn-danger');
+                deleteLink.setAttribute('data-toggle', 'modal');
+                deleteLink.setAttribute('data-target', '#deleteQuestionModal');
+                deleteLink.setAttribute('onclick', 'setDeleteModalTarget()');
+                //deleteLink.setAttribute('href', 'javascript:void(0);');
+                $('#question-buttons').append(deleteLink);
+                deleteLink.appendChild(document.createTextNode(' Delete '));
             }
             //username - questioneer
             var questioneerUsername = document.getElementById('questioneer-name');
@@ -164,8 +191,9 @@ function printSingleAnswer(answer, whereToAppendId){
     answerVote.className = 'answer-vote align-self-start p-2';
     var answerBody = document.createElement("div");
     answerBody.className = 'answer-body align-self-center p-2';
+    //Place holder for vote up and down, voteUpIcon is a placeholder atm
     var voteUpIcon = document.createElement("i");
-    voteUpIcon.className = 'fas fa-chevron-up';
+    voteUpIcon.className = 'fas fa-angle-right';
     var voteNumberDiv = document.createElement("div");
     voteNumberDiv.className = 'text-center';
     var voteNumber = document.createTextNode('0'); //TODO placeholder implement votes
@@ -193,6 +221,7 @@ function printSingleAnswer(answer, whereToAppendId){
 
     //create custom timestamp
     var small = document.createElement('small');
+    small.setAttribute('class', 'text-muted')
     var timestampText = document.createTextNode('Sent on '+answer['timestamp']
         + ' by ' +answer['IDUser']+ '    ');
 
@@ -200,14 +229,14 @@ function printSingleAnswer(answer, whereToAppendId){
     baseAnswerList.appendChild(answerListElement);
     answerListElement.appendChild(answerContainer);
     answerContainer.appendChild(answerContent);
-    /* TODO implement vote
+    /* TODO implement vote */
     answerContent.appendChild(answerVote);
     //answer vote
     answerVote.appendChild(voteUpIcon);
-    answerVote.appendChild(voteNumberDiv);
-    voteNumberDiv.appendChild(voteNumber);
-    answerVote.appendChild(voteDownIcon);
-    */
+    //answerVote.appendChild(voteNumberDiv);
+    //voteNumberDiv.appendChild(voteNumber);
+    //answerVote.appendChild(voteDownIcon);
+
     //answer content
     answerContent.appendChild(answerBody);
     answerBody.appendChild(p);
@@ -215,8 +244,11 @@ function printSingleAnswer(answer, whereToAppendId){
 
     p.appendChild(answerTextBody);
     small.appendChild(timestampText);
-    small.appendChild(replyLink);
-    replyLink.appendChild(document.createTextNode(' reply '));
+    if(currentUser === "") {
+    }else{
+        small.appendChild(replyLink);
+        replyLink.appendChild(document.createTextNode(' reply '));
+    }
     if(isAdmin) {
         small.appendChild(deleteLink);
         deleteLink.appendChild(document.createTextNode(' delete '));
@@ -256,8 +288,7 @@ function visualizeAnswersToAnswer(idAnswer){
 }
 
 /*
-* Reply the question
-*/
+* OLD: Reply the question - works but its replaced with replyAnswerAjax
 function addNewAnswerForm(){
 
     var addAnswerText = $("#addAnswerTextArea").val();
@@ -303,6 +334,7 @@ function addNewAnswerForm(){
 
 
 }
+*/
 /*
 * Delete answer
 */
@@ -437,7 +469,7 @@ function setEditQModalTarget(){
     $('#idperilservlet').attr('value', parseInt(currentQuestion));
 }
 /*
-//Rest not implemented yet
+//Rest not implemented yet for the question modification
 function editQuestionAjax(){
 
     var addQuestionText = $('#editQTextAreaModal').val()
@@ -479,3 +511,9 @@ function editQuestionAjax(){
         }
     });
 }*/
+/*
+* Delete question setup
+ */
+function setDeleteModalTarget(){
+    $('#idperilservletdelete').attr('value', parseInt(currentQuestion));
+}

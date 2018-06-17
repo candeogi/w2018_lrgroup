@@ -63,7 +63,7 @@ Since: 1.0
             <div id="question-footer" class="question-footer mt-auto">
                 <small id="question-lastmodified" class="text-muted"></small>
             </div>
-            <div id="question-buttons">
+            <div id="question-buttons" class="btn-group" role="group">
             </div>
         </div>
         <div class="card questioner-badge ml-auto align-items-end" style="width: 14rem;">
@@ -81,6 +81,9 @@ Since: 1.0
         </div>
     </div>
     <!--end of question row-->
+
+    <!--
+    old add answer
     <hr>
     <div class="clearfix">
         <form id="AddAnswerForm">
@@ -91,6 +94,7 @@ Since: 1.0
             <input id="addAnswerButton" type="button" value="Answer" class="btn btn-primary">
         </form>
     </div>
+    -->
     <hr>
     <!--answer list below-->
     <div id="answerListDiv">
@@ -183,6 +187,35 @@ Since: 1.0
                     <button type="submit" class="btn btn-primary ">Update Question</button>
                 </form>
 
+            </div>
+            <!--<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="editQuestionModalButton" data-dismiss="modal">Edit</button>
+            </div>-->
+        </div>
+    </div>
+</div>
+<!-- Modal to Delete the Question-->
+<div class="modal " id="deleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="questionEditModalTitle">Delete question</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--<div class="form-group">
+                    <textarea class="form-control" rows="5" id="editQTextAreaModal"></textarea>
+                </div>-->
+                <p>Are you sure you want to delete this question ?</p>
+                <form method="POST" action="<c:url value="/delete-question"/>">
+                    <input type="hidden" name="idquestion" value="" id="idperilservletdelete">
+                    <button type="submit" class="btn btn-danger ">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </form>
             </div>
             <!--<div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
