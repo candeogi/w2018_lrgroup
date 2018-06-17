@@ -71,6 +71,7 @@ Since: 1.0
                 <h6 id="question-time" class="question-time text-muted"></h6>
             </div>
             <div id="question-body" class="question-body">
+                <p id="question-paragraph"></p>
             </div>
             <div class="question-footer">
                 <small id="question-lastmodified" class="text-muted"></small>
@@ -143,6 +144,49 @@ Since: 1.0
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="editAnswerModalButton" data-dismiss="modal">Edit</button>
             </div>
+        </div>
+    </div>
+</div>
+<!-- Modal for Edit Question-->
+<div class="modal " id="editQuestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="questionEditModalTitle">Edit your question</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--<div class="form-group">
+                    <textarea class="form-control" rows="5" id="editQTextAreaModal"></textarea>
+                </div>-->
+                <form method="POST" action="<c:url value="/update-question"/>" id="formQuestion">
+                    <input type="hidden" name="id" value="" id="idperilservlet">
+                    <input type="hidden" name="fromQuestion" value="question-answers.jsp?questionID=1" id="urlperilservlet">
+
+                    <div class="form-group">
+                        <label for="titleInput">Title</label>
+                        <input name="title" type="text" class="form-control" id="editQTitleModal"
+                               aria-describedby="titleHelp" placeholder="Title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bodyInput">Body</label>
+                        <textarea rows="4" cols="50" name="body" class="form-control" id="editQTextAreaModal"
+                                  aria-describedby="bodyHelp" placeholder="Body"></textarea>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary ">Update Question</button>
+                </form>
+
+            </div>
+            <!--<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="editQuestionModalButton" data-dismiss="modal">Edit</button>
+            </div>-->
         </div>
     </div>
 </div>
