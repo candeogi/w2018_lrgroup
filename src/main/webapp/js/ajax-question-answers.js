@@ -8,7 +8,7 @@ var isAdmin = (loggedInUser.getAttribute("data-isAdmin") === 'true');
 var questioneerID = ' ';
 
 var baseUrl=window.location.href.toString();
-baseUrl=baseUrl.substr(0,baseUrl.indexOf("web-app-project")+16);
+baseUrl=baseUrl.substr(0,baseUrl.indexOf("wa-project-lrgroup")+19);
 
 
 /*REST URL*/
