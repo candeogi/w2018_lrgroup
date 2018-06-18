@@ -188,10 +188,10 @@
         </c:choose>
         <div id="photo-div" class="col align-self-end">
             <c:choose>
-                <c:when test="${sessionScope.photoProfile.equals('profilepath')}">
+                <c:when test="${user.photoProfile.equals('profilepath')}">
                     <img src="<c:url value="/images/user.png"/>" alt="photo of the user" class="profileImg">
                 </c:when>
-                <c:when test="${!sessionScope.photoProfile.equals('profilepath')}">
+                <c:when test="${!user.photoProfile.equals('profilepath')}">
                     <img src="data:image/jpeg;base64,${user.photoProfile}" alt="photo of the user" class="profileImg">
                 </c:when>
             </c:choose>

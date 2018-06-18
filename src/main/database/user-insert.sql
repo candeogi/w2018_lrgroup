@@ -29,13 +29,13 @@ INSERT INTO lr_group.Utente VALUES ('lucarossi@gmail.com', 'luca', 'rossi', 'luc
                           lr_group.CRYPT('passtest', lr_group.gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO lr_group.Utente VALUES ('mauro@gmail.com', 'mauro', 'zoppo', 'maurozoppo', 'profilepath',
                           lr_group.CRYPT('passtest', lr_group.gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
-INSERT INTO lr_group.Utente VALUES ('davidestorato@gmail.com', 'davide', 'storato', 'davidestorato', 'profilepath',
+INSERT INTO lr_group.Utente VALUES ('dadostorato@gmail.com', 'davide', 'storato', 'dadostorato', 'profilepath',
                           lr_group.CRYPT('passtest', lr_group.gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO lr_group.Utente VALUES ('giovannicandeo@gmail.com', 'giovanni', 'candeo', 'giovannicandeo', 'profilepath',
                           lr_group.CRYPT('passtest', lr_group.gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO lr_group.Utente VALUES ('albertoforti@gmail.com', 'alberto', 'forti', 'albertoforti', 'profilepath',
                           lr_group.CRYPT('passtest', lr_group.gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
-INSERT INTO lr_group.Utente VALUES ('userDeleted@gmail.com', 'fake', 'user', 'userDeleted', 'profilepath',
+INSERT INTO lr_group.Utente VALUES ('userDeleted@gmail.com', 'fake', 'user', 'removed', 'profilepath',
                           lr_group.CRYPT('passtest', lr_group.gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO lr_group.Utente VALUES ('admin@gmail.com', 'Admin', 'Powerful', 'admin', 'profilepath',
 lr_group.CRYPT('admin', lr_group.gen_salt('bf',8) ), TRUE, '2017-1-1', '1994-1-1', 'randomtext');
@@ -50,7 +50,7 @@ INSERT INTO lr_group.Utente VALUES ('lucarossi@gmail.com', 'luca', 'rossi', 'luc
                           CRYPT('passtest', gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO lr_group.Utente VALUES ('mauro@gmail.com', 'mauro', 'zoppo', 'maurozoppo', 'profilepath',
                           CRYPT('passtest', gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
-INSERT INTO lr_group.Utente VALUES ('davidestorato@gmail.com', 'davide', 'storato', 'davidestorato', 'profilepath',
+INSERT INTO lr_group.Utente VALUES ('dadostorato@gmail.com', 'davide', 'storato', 'dadoFstorato', 'profilepath',
                           CRYPT('passtest', gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');
 INSERT INTO lr_group.Utente VALUES ('giovannicandeo@gmail.com', 'giovanni', 'candeo', 'giovannicandeo', 'profilepath',
                           CRYPT('passtest', gen_salt('bf',8)  ), FALSE, '2017-1-1', '1994-1-1', 'randomtext');

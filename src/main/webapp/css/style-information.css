@@ -25,6 +25,12 @@ img {
 .table{
     height: 50%;
 }
+#certification{
+    margin-bottom: 10%;
+}
+#website{
+    margin-bottom: 10%;
+}
 
 div.infoTable {
     text-align: left;
