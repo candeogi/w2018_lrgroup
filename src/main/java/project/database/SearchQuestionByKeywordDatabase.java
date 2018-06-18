@@ -60,6 +60,7 @@ public final class SearchQuestionByKeywordDatabase {
      * Creates a new object for questions retrieval.
      *
      * @param con the connection to the database.
+     * @param keyword the question searched
      */
     public SearchQuestionByKeywordDatabase(final Connection con, String keyword) {
         this.con = con;

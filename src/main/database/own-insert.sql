@@ -26,7 +26,7 @@ INSERT INTO lr_group.own  VALUES ('http://www.linkedin.com/lucarossi','lucarossi
 INSERT INTO lr_group.own  VALUES ('https://bitbucket.org/andreaziggio','andreaziggio');
 INSERT INTO lr_group.own  VALUES ('http://www.andreazggiotto.it','andreaziggio');
 INSERT INTO lr_group.own  VALUES ('http://www.github.com/maurozoppo','maurozoppo');
-INSERT INTO lr_group.own  VALUES ('https://github.com/dadostorato','dadostorato');
+INSERT INTO lr_group.own  VALUES ('https://github.com/davidestorato','davidestorato');
 INSERT INTO lr_group.own  VALUES ('http://www.bitbucket.com/albertoforti','albertoforti');
 INSERT INTO lr_group.own  VALUES ('http://www.albertoforti.it','albertoforti');
 INSERT INTO lr_group.own  VALUES ('http://www.albertopontini.it','albertopontini');
