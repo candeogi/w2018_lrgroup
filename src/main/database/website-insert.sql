@@ -21,7 +21,7 @@
 --
 INSERT INTO lr_group.website  VALUES ('https://bitbucket.org/lucarossi','BitBucket');
 INSERT INTO lr_group.website  VALUES ('https://bitbucket.org/andreaziggio','BitBucket');
-INSERT INTO lr_group.website  VALUES ('https://github.com/dadostorato','Github');
+INSERT INTO lr_group.website  VALUES ('https://github.com/davidestorato','Github');
 INSERT INTO lr_group.website  VALUES ('https://github.com/albertopontini','Github');
 INSERT INTO lr_group.website  VALUES ('http://www.andreazggiotto.it','OwnSite');
 INSERT INTO lr_group.website  VALUES ('http://www.albertopontini.it','OwnSite');
