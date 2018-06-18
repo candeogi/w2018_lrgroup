@@ -343,22 +343,22 @@ function addNewAnswerForm(){
 * Delete answer
 */
 function deleteAnswer(id){
-    var urlToDelete = baseUrl+"rest/answer/"+id;
+    var urlToDelete = baseUrl+"rest/answer/"+parseInt(id);
     $.ajax({
         type: "DELETE",
         url: urlToDelete,
         success: function() {
-            //doesnt work and goes on error but still deletes from db //TODO fix
+            //sometimes doesnt work and goes on error but still deletes from db //TODO fix
             //alert("hey its me working");
         },
         error: function(jqXHR,textStatus,errorThrown){
-            alert("" +
+            /*alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
                 " |errorThrown:"+errorThrown);
             console.log(jqXHR);
             console.log(textStatus);
-            console.log(errorThrown);
+            console.log(errorThrown);*/
         }
     });
     $('#'+id+'').hide();
@@ -451,10 +451,10 @@ function replyAnswerAjax(){
 
         },
         error: function(jqXHR,textStatus,errorThrown){
-            alert("" +
+            /*alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);
+                " |errorThrown:"+errorThrown);*/
         }
     });
 }
