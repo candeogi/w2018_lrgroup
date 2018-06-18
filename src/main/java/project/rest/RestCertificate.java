@@ -44,7 +44,7 @@ public class RestCertificate extends RestResource {
         try {
 
             String path = req.getRequestURI();
-            path = path.substring(path.lastIndexOf("user") + 4);
+            path = path.substring(path.indexOf("user") + 4);
 
             final String idUser = path.substring(1);
 
@@ -77,12 +77,12 @@ public class RestCertificate extends RestResource {
         Message message = null;
         try {
             String path = req.getRequestURI();
-            path = path.substring(path.lastIndexOf("user") + 5);
+            path = path.substring(path.indexOf("user") + 5);
             int indexSlash = path.indexOf("/");
 
 
             final String userID = path.substring(0, indexSlash);
-            path = path.substring(path.lastIndexOf("id") + 3);
+            path = path.substring(path.indexOf("id") + 3);
             final String id = path;
             int idN = Integer.parseInt(path);
             int result=(new DeleteHaveCertificateDatabase(con, userID, idN)).deleteCertificate();

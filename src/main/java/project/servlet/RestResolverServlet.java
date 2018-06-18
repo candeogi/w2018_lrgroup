@@ -182,11 +182,11 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
         try {
 
-            path = path.substring(path.lastIndexOf("answer") + 6);
+            path = path.substring(path.indexOf("answer") + 6);
 
             if (path.contains("question")) {
                 // /answer/question/{questionID}
-                path = path.substring(path.lastIndexOf("question") + 8);
+                path = path.substring(path.indexOf("question") + 8);
                 if (path.length() == 0 || path.equals("/")) {
 
                     m = new Message("Wrong format for URI /answer/question/{questionID}: no {questionID} specified.",
@@ -219,7 +219,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
             } else if (path.contains("parentAns")) {
                 // /answer/parentAns/{answerID}
-                path = path.substring(path.lastIndexOf("parentAns") + 9);
+                path = path.substring(path.indexOf("parentAns") + 9);
                 if (path.length() == 0 || path.equals("/")) {
                     m = new Message("Wrong format for URI /answer/parentAns/{answerID}: no {answerID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -243,7 +243,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
             } else if (path.contains("user")) {
                 // /answer/user/{userid}
-                path = path.substring(path.lastIndexOf("user") + 4);
+                path = path.substring(path.indexOf("user") + 4);
                 if (path.length() == 0 || path.equals("/")) {
                     m = new Message("Wrong format for URI /answer/user/{userID}: no {userID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -267,7 +267,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
             } else if (path.contains("upvote")) {
                 // /answer/upvote/{answerID}
-                path = path.substring(path.lastIndexOf("upvote") + 6);
+                path = path.substring(path.indexOf("upvote") + 6);
                 if (path.length() == 0 || path.equals("/")) {
                     m = new Message("Wrong format for URI /answer/upvote/{answerID}: no {answerID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -289,7 +289,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 }
             } else if (path.contains("downvote")) {
                 // /answer/downvote/{answerID}
-                path = path.substring(path.lastIndexOf("downvote") + 8);
+                path = path.substring(path.indexOf("downvote") + 8);
                 if (path.length() == 0 || path.equals("/")) {
                     m = new Message("Wrong format for URI /answer/downvote/{answerID}: no {answerID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -313,7 +313,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
             } else if (path.contains("novote")) {
                 // /answer/novote/{answerID}
-                path = path.substring(path.lastIndexOf("novote") + 6);
+                path = path.substring(path.indexOf("novote") + 6);
                 if (path.length() == 0 || path.equals("/")) {
                     m = new Message("Wrong format for URI /answer/novote/{answerID}: no {answerID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -336,7 +336,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
             } else if (path.contains("votes")) {
                 // /answer/votes/{answerID}
-                path = path.substring(path.lastIndexOf("votes") + 5);
+                path = path.substring(path.indexOf("votes") + 5);
                 if (path.length() == 0 || path.equals("/")) {
                     m = new Message("Wrong format for URI /answer/votes/{answerID}: no {answerID} specified.",
                             "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -409,7 +409,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
         try {
             // strip everything until after the /question
-            path = path.substring(path.lastIndexOf("question") + 8);
+            path = path.substring(path.indexOf("question") + 8);
 
             if (path.length() == 0 || path.equals("/")) {
                 switch (method) {
@@ -429,7 +429,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
                 if (path.contains("id")) {
                     //question/id/{ID}
-                    path = path.substring(path.lastIndexOf("id") + 2);
+                    path = path.substring(path.indexOf("id") + 2);
 
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/id/{ID}: no {ID} specified.",
@@ -465,7 +465,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
                 } else if (path.contains("user")) {
                     //question/user/{userID}
-                    path = path.substring(path.lastIndexOf("user") + 4);
+                    path = path.substring(path.indexOf("user") + 4);
 
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/user/{userID}: no {userID} specified.",
@@ -489,7 +489,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
                 } else if (path.contains("upvote")) {
                     // /question/upvote/{questionID}
-                    path = path.substring(path.lastIndexOf("upvote") + 6);
+                    path = path.substring(path.indexOf("upvote") + 6);
 
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/upvote/{questionID}: no {questionID} specified.",
@@ -513,7 +513,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
                 } else if (path.contains("category")) {
                     // /question/category/{category}
-                    path = path.substring(path.lastIndexOf("category") + 8);
+                    path = path.substring(path.indexOf("category") + 8);
 
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/category/{categoryID}: no {categoryID} specified.",
@@ -536,7 +536,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
                 } else if (path.contains("downvote")) {
                     // /question/downvote/{questionID}
-                    path = path.substring(path.lastIndexOf("downvote") + 8);
+                    path = path.substring(path.indexOf("downvote") + 8);
 
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/downvote/{questionID}: no {questionID} specified.",
@@ -561,7 +561,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                 } else if (path.contains("novote")) {
                     // /question/novote/{questionID}
 
-                    path = path.substring(path.lastIndexOf("novote") + 6);
+                    path = path.substring(path.indexOf("novote") + 6);
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/novote/{questionID}: no {questionID} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
@@ -584,7 +584,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     }
                 } else if (path.contains("votes")) {
                     // /question/novote/{questionID}
-                    path = path.substring(path.lastIndexOf("votes") + 5);
+                    path = path.substring(path.indexOf("votes") + 5);
 
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /question/votes/{questionID}: no {questionID} specified.",
@@ -608,7 +608,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     }
 
                 } else if (path.contains("latestQuestion")) {
-                    path = path.substring(path.lastIndexOf("latestQuestion") + 14);
+                    path = path.substring(path.indexOf("latestQuestion") + 14);
 
                     if (path.length() == 0 || path.equals("/")) {
                         switch (method) {
@@ -630,7 +630,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                         m.toJSON(res.getOutputStream());
                     }
                 } else if (path.contains("searchby")) {
-                    path = path.substring(path.lastIndexOf("searchby") + 8);
+                    path = path.substring(path.indexOf("searchby") + 8);
 
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Unsupported operation for URI /question/searchby.",
@@ -653,7 +653,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
                     }
                 }
                 else if (path.contains("byvote")) {
-                    path = path.substring(path.lastIndexOf("byvote") + 6);
+                    path = path.substring(path.indexOf("byvote") + 6);
 
                     if (path.length() == 0 || path.equals("/")) {
                         switch (method) {
@@ -700,7 +700,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         Message m = null;
         try {
             // strip everything until after the /category
-            path = path.substring(path.lastIndexOf("category") + 8);
+            path = path.substring(path.indexOf("category") + 8);
 
             if (path.length() == 0 || path.equals("/")) {
                 switch (method) {
@@ -748,7 +748,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
             if (path.contains("user")) {
 
-                path = path.substring(path.lastIndexOf("user") + 5);
+                path = path.substring(path.indexOf("user") + 5);
 
                 if (path.length() == 0 || path.equals("/")) {
                     message = new Message("Wrong format for URI /website/user/{ID}: no {ID} specified.",
@@ -801,10 +801,10 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
 
         try {
 
-            path = path.substring(path.lastIndexOf("certificate") + 11);
+            path = path.substring(path.indexOf("certificate") + 11);
 
             if (path.contains("user")) {
-                path = path.substring(path.lastIndexOf("user") + 4);
+                path = path.substring(path.indexOf("user") + 4);
 
                 if (path.length() == 0 || path.equals("/")) {
 
@@ -856,7 +856,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
         Message m = null;
         try {
             // strip everything until after the /user
-            path = path.substring(path.lastIndexOf("user") + 4);
+            path = path.substring(path.indexOf("user") + 4);
 
             if (path.length() == 0 || path.equals("/")) {
                 switch (method) {
@@ -873,7 +873,7 @@ public class RestResolverServlet extends AbstractDatabaseServlet {
             } else {
                 if (path.contains("id")) {
                     // /user/id/{username}
-                    path = path.substring(path.lastIndexOf("id") + 2);
+                    path = path.substring(path.indexOf("id") + 2);
                     if (path.length() == 0 || path.equals("/")) {
                         m = new Message("Wrong format for URI /user/id/{username}: no {username} specified.",
                                 "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));

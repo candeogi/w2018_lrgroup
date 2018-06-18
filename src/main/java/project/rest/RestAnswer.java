@@ -143,7 +143,7 @@ public final class RestAnswer extends RestResource
 
 
 			String path = req.getRequestURI();
-			path=path.substring(path.lastIndexOf("answer") +7);
+			path=path.substring(path.indexOf("answer") +7);
 
 			int idAnswer=Integer.parseInt(path);
 			a = new DeleteAnswerByIDDatabase(con, idAnswer).deleteAnswerByID();
@@ -184,7 +184,7 @@ public final class RestAnswer extends RestResource
 		try{
 
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("novote") + 6);
+			path = path.substring(path.indexOf("novote") + 6);
 
 			final int answerID = Integer.parseInt(path.substring(1));
 
@@ -225,7 +225,7 @@ public final class RestAnswer extends RestResource
 		try{
 
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("votes") + 5);
+			path = path.substring(path.indexOf("votes") + 5);
 
 			final int answerID = Integer.parseInt(path.substring(1));
 
@@ -268,7 +268,7 @@ public final class RestAnswer extends RestResource
 		try{
 
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("upvote") + 6);
+			path = path.substring(path.indexOf("upvote") + 6);
 
 			final int answerID = Integer.parseInt(path.substring(1));
 
@@ -309,7 +309,7 @@ public final class RestAnswer extends RestResource
 		try{
 
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("downvote") + 8);
+			path = path.substring(path.indexOf("downvote") + 8);
 
 			final int answerID = Integer.parseInt(path.substring(1));
 
@@ -351,7 +351,7 @@ public final class RestAnswer extends RestResource
 		{
 			// parse the URI path to extract the ID
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("question") +8);
+			path = path.substring(path.indexOf("question") +8);
 
 			final int questionID = Integer.parseInt(path.substring(1));
 
@@ -396,7 +396,7 @@ public final class RestAnswer extends RestResource
 		{
 			// parse the URI path to extract the ID
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("parentAns") +9);
+			path = path.substring(path.indexOf("parentAns") +9);
 
 			final int questionID = Integer.parseInt(path.substring(1));
 
@@ -440,7 +440,7 @@ public final class RestAnswer extends RestResource
 		{
 			// parse the URI path to extract the ID
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("user") +4);
+			path = path.substring(path.indexOf("user") +4);
 
 			final String userID = path.substring(1);
 

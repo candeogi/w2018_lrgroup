@@ -42,7 +42,7 @@ public class RestWebsite extends RestResource {
         Message message = null;
         try {
             String path = req.getRequestURI();
-            path = path.substring(path.lastIndexOf("user") + 5);
+            path = path.substring(path.indexOf("user") + 5);
 
             final String userID = path;
 
@@ -75,12 +75,12 @@ public class RestWebsite extends RestResource {
         Message message = null;
         try {
             String path = req.getRequestURI();
-            path = path.substring(path.lastIndexOf("user") + 5);
+            path = path.substring(path.indexOf("user") + 5);
             int indexSlash = path.indexOf("/");
 
 
             final String userID = path.substring(0, indexSlash);
-            path = path.substring(path.lastIndexOf("website") + 8);
+            path = path.substring(path.indexOf("website") + 8);
             final String websiteID = path;
 
             int result=(new DeleteWebsiteDatabase(con, userID, websiteID)).deleteWebsite();

@@ -141,7 +141,7 @@ public final class RestUser extends RestResource
         {
             // parse the URI path to extract the ID
             String path = req.getRequestURI();
-            path = path.substring(path.lastIndexOf("id") +2);
+            path = path.substring(path.indexOf("id") +2);
 
 
             // creates a new object for accessing the database and search the user

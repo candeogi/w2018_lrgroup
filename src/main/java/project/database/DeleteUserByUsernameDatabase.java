@@ -54,6 +54,8 @@ public final class DeleteUserByUsernameDatabase {
     private static final String STATEMENT1 = " UPDATE lr_group.Answer SET idUser = 'userDeleted' WHERE idUser=? ";
     private static final String STATEMENT2 = " DELETE FROM lr_group.HaveCertificate WHERE username=? ";
     private static final String STATEMENT3 = " DELETE FROM lr_group.Own WHERE username=? ";
+    private static final String STATEMENT4 = " DELETE FROM lr_group.votequestion WHERE idUser=? ";
+
     /**
      * The connection to the database
      */
@@ -99,6 +101,10 @@ public final class DeleteUserByUsernameDatabase {
             pstmt.executeUpdate();
 
             pstmt = con.prepareStatement(STATEMENT3);
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
+
+            pstmt = con.prepareStatement(STATEMENT4);
             pstmt.setString(1, username);
             pstmt.executeUpdate();
 

@@ -99,7 +99,7 @@ public final class RestQuestion extends RestResource
 		try{
 
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("upvote") + 6);
+			path = path.substring(path.indexOf("upvote") + 6);
 
 			final int questionID = Integer.parseInt(path.substring(1));
 
@@ -140,7 +140,7 @@ public final class RestQuestion extends RestResource
 		try{
 
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("downvote") + 8);
+			path = path.substring(path.indexOf("downvote") + 8);
 
 			final int questionID = Integer.parseInt(path.substring(1));
 
@@ -181,7 +181,7 @@ public final class RestQuestion extends RestResource
 		try{
 
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("votes") + 5);
+			path = path.substring(path.indexOf("votes") + 5);
 
 			final int questionID = Integer.parseInt(path.substring(1));
 			
@@ -223,7 +223,7 @@ public final class RestQuestion extends RestResource
 		try{
 
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("novote") + 6);
+			path = path.substring(path.indexOf("novote") + 6);
 
 			final int questionID = Integer.parseInt(path.substring(1));
 			
@@ -265,7 +265,7 @@ public final class RestQuestion extends RestResource
 		{
 			// parse the URI path to extract the ID
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("id") + 2);
+			path = path.substring(path.indexOf("id") + 2);
 
 			final int questionID = Integer.parseInt(path.substring(1));
 
@@ -310,7 +310,7 @@ public final class RestQuestion extends RestResource
 		{
 			// parse the URI path to extract the ID
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("user") + 4);
+			path = path.substring(path.indexOf("user") + 4);
 
 			final String idUser = path.substring(1);
 
@@ -355,7 +355,7 @@ public final class RestQuestion extends RestResource
 		{
 			// parse the URI path to extract the timestamp
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("timestamp") + 9);
+			path = path.substring(path.indexOf("timestamp") + 9);
 
 			//final long timestamp = Long.parseLong(path.substring(1));
 
@@ -400,7 +400,7 @@ public final class RestQuestion extends RestResource
 		{
 			// parse the URI path to extract the timestamp
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("byvote") + 6);
+			path = path.substring(path.indexOf("byvote") + 6);
 
 			//final long timestamp = Long.parseLong(path.substring(1));
 
@@ -477,7 +477,7 @@ public final class RestQuestion extends RestResource
 		{
 			// parse the URI path to extract the category
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("category") + 8);
+			path = path.substring(path.indexOf("category") + 8);
 
 			final int categoryID = Integer.parseInt(path.substring(1));
 
@@ -560,7 +560,7 @@ public final class RestQuestion extends RestResource
 		{
 			// parse the URI path to extract the category
 			String path = req.getRequestURI();
-			path = path.substring(path.lastIndexOf("searchby") + 8);
+			path = path.substring(path.indexOf("searchby") + 8);
 
 			// creates a new object for accessing the database and search the question
 			q = new SearchQuestionByKeywordDatabase(con, "%"+path.substring(1)+"%").searchQuestionByKeyword();
