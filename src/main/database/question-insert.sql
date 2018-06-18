@@ -27,5 +27,5 @@ INSERT INTO lr_group.question VALUES (DEFAULT, 'Homework web app', 'andreaziggio
                              '2017-1-1', 'Lo schema relazionale è necessario?');
 INSERT INTO lr_group.question VALUES (DEFAULT, 'JavaScript nullpointer?', 'maurozoppo', '2016-06-22 19:10:25-07',
                              '2017-1-1', 'Errore nel codice...');
-INSERT INTO lr_group.question VALUES (DEFAULT, 'Google assunzioni', 'davidestorato', '2016-06-22 19:10:25-07',
+INSERT INTO lr_group.question VALUES (DEFAULT, 'Google assunzioni', 'dadostorato', '2016-06-22 19:10:25-07',
                              '2017-1-1', 'Domande tipiche?');

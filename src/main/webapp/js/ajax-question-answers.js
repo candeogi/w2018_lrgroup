@@ -7,9 +7,13 @@ var currentQuestion = loggedInUser.getAttribute("data-currentQuestion");
 var isAdmin = (loggedInUser.getAttribute("data-isAdmin") === 'true');
 var questioneerID = ' ';
 
+var baseUrl=window.location.href.toString();
+baseUrl=baseUrl.substr(0,baseUrl.indexOf("web-app-project")+16);
+
+
 /*REST URL*/
-var myQuestionRestUrl='http://localhost:8080/web-app-project/rest/question/id/'+currentQuestion;
-var myAnswersRestUrl='http://localhost:8080/web-app-project/rest/answer/question/'+currentQuestion;
+var myQuestionRestUrl=baseUrl+'rest/question/id/'+currentQuestion;
+var myAnswersRestUrl=baseUrl+'rest/answer/question/'+currentQuestion;
 
 /*At start do this*/
 window.onload = initialPageLoad;
@@ -42,7 +46,7 @@ function visualizeQuestioneer(username){
     questioneerID = username;
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/web-app-project/rest/user/id/'+username,
+        url: baseUrl+'rest/user/id/'+username,
         success: function(data){
             var resourceList = data['resource-list'];
             var user = resourceList[0].user;
@@ -56,7 +60,7 @@ function visualizeQuestioneer(username){
             $("#questioneer-regdate").text('Registered on '+user['registrationDate']);
             $("#questioneer-photo").attr("src","data:image/jpeg;base64,"+user['photoProfile']);
             //link to questioneer profile
-            var questioneerLinkToProfile = "http://localhost:8080/web-app-project/?p=user&u="+user['username'];
+            var questioneerLinkToProfile = baseUrl+"?p=user&u="+user['username'];
             $("#questioneer-profilelink").attr("href", questioneerLinkToProfile);
         },
         error: function(jqXHR,textStatus,errorThrown){
@@ -265,7 +269,7 @@ function printSingleAnswer(answer, whereToAppendId){
 function visualizeAnswersToAnswer(idAnswer){
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/web-app-project/rest/answer/parentAns/'+idAnswer,
+        url: baseUrl+'rest/answer/parentAns/'+idAnswer,
         success: function(data) {
             var resourceList = data['resource-list'];
 
@@ -339,7 +343,7 @@ function addNewAnswerForm(){
 * Delete answer
 */
 function deleteAnswer(id){
-    var urlToDelete = "http://localhost:8080/web-app-project/rest/answer/"+id;
+    var urlToDelete = baseUrl+"rest/answer/"+id;
     $.ajax({
         type: "DELETE",
         url: urlToDelete,
@@ -348,13 +352,13 @@ function deleteAnswer(id){
             //alert("hey its me working");
         },
         error: function(jqXHR,textStatus,errorThrown){
-            /*alert("" +
+            alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
                 " |errorThrown:"+errorThrown);
             console.log(jqXHR);
             console.log(textStatus);
-            console.log(errorThrown);*/
+            console.log(errorThrown);
         }
     });
     $('#'+id+'').hide();
@@ -378,7 +382,7 @@ function editAnswerAjax(){
 
     $.ajax({
         method: "PUT",
-        url: "http://localhost:8080/web-app-project/rest/answer/",
+        url: baseUrl+"rest/answer/",
         data: JSON.stringify({
             "answer":{
                 "ID": parseInt(id),
@@ -427,7 +431,7 @@ function replyAnswerAjax(){
 
     $.ajax({
         method: "POST",
-        url: "http://localhost:8080/web-app-project/rest/answer/",
+        url: baseUrl+"rest/answer/",
         data: JSON.stringify({
             "answer":{
                 "text": addAnswerText,
@@ -447,10 +451,10 @@ function replyAnswerAjax(){
 
         },
         error: function(jqXHR,textStatus,errorThrown){
-            /*alert("" +
+            alert("" +
                 " |jqXHR:"+jqXHR+
                 " |textStatus: "+textStatus+
-                " |errorThrown:"+errorThrown);*/
+                " |errorThrown:"+errorThrown);
         }
     });
 }
@@ -486,7 +490,7 @@ function editQuestionAjax(){
 
     $.ajax({
         method: "PUT",
-        url: "http://localhost:8080/web-app-project/rest/question/",
+        url: "rest/question/",
         data: JSON.stringify({
             "question":{
                 "ID": parseInt(currentQuestion),
