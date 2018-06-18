@@ -35,6 +35,7 @@ public class CountAnswerVotesDatabase {
     /**
      * Counts votes for an answer in the database.
      *
+     * @return number of votes
      * @throws SQLException if any error occurs while creating the relation.
      */
 

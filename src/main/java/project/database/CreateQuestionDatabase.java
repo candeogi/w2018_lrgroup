@@ -59,7 +59,7 @@ public final class CreateQuestionDatabase {
 
     /**
      * Creates a question in the database.
-     *
+     * @return id of question created
      * @throws SQLException if any error occurs while storing the question.
      */
     public int createQuestion() throws SQLException {
