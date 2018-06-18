@@ -77,7 +77,7 @@ public final class DeleteUserByUsernameDatabase {
     /**
      * Deletes a specific user in the database.
      * *
-     *
+     * @return the amound of row deleted, should be 1
      * @throws SQLException if any error occurs while deleting the user.
      */
     public int DeleteUserByUsername() throws SQLException {
