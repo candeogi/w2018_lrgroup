@@ -16,7 +16,7 @@ Since: 1.0
     <meta name="description" content="Question and related answers view">
     <meta name="author" content="Giovanni Candeo">
 
-    <title>AnswerDemo</title>
+    <title>Question View</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
