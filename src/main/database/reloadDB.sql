@@ -12,4 +12,5 @@ DROP SCHEMA lr_group CASCADE;
 \i haveCertificate-insert.sql
 \i website-insert.sql
 \i own-insert.sql
+\i votequestion-insert.sql
 
